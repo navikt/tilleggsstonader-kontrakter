@@ -1,7 +1,6 @@
 val javaVersion = JavaLanguageVersion.of(17)
 
 group = "no.nav.tilleggsstonader.kontrakter"
-version = "1.0.0"
 
 plugins {
     kotlin("jvm") version "1.9.10"
