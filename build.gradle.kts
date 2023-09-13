@@ -1,9 +1,4 @@
 val javaVersion = JavaLanguageVersion.of(17)
-val tilleggsstønaderLibsVersion = "2023.09.04-15.58.86e7da46c21d"
-val tokenSupportVersion = "3.1.5"
-val wiremockVersion = "2.35.0"
-val mockkVersion = "1.13.7"
-val testcontainerVersion = "1.19.0"
 
 group = "no.nav.tilleggsstonader.kontrakter"
 version = "1.0.0"
