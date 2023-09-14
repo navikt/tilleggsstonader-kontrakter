@@ -21,6 +21,7 @@ data class Oppgave(
     val bnr: String? = null,
     val samhandlernr: String? = null,
     val aktoerId: String? = null,
+    val personident: String? = null,
     val orgnr: String? = null,
     val tilordnetRessurs: String? = null,
     val beskrivelse: String? = null,

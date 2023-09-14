@@ -14,7 +14,7 @@ data class FinnOppgaveResponseDto(
  * [enhetsmappe] finnes, men har ulike verdier i ulike miljøer
  */
 data class FinnOppgaveRequest(
-    val tema: Tema?,
+    val tema: Tema,
     val behandlingstema: Behandlingstema? = null,
     val behandlingstype: Behandlingstype? = null,
     val erUtenMappe: Boolean? = null,
