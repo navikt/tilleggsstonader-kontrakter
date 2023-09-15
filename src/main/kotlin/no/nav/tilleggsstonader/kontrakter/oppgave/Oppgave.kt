@@ -62,8 +62,12 @@ enum class IdentGruppe {
     SAMHANDLERNR,
 }
 
+// Disse burde oppdateres til de som er gjeldende for våre temaer, finnes på swagger på https://oppgave.dev.intern.nav.no/
+// ev bestille de som mangler
 enum class Oppgavetype(val value: String) {
     BehandleSak("BEH_SAK"),
+    BehandleHenvendelse("BEH_HENV"),
+    BehandleAvvistAdresse("BEH_AVV_ADR"),
     Journalføring("JFR"),
     GodkjenneVedtak("GOD_VED"),
     BehandleUnderkjentVedtak("BEH_UND_VED"),
