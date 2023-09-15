@@ -16,7 +16,7 @@ enum class Behandlingstema(@JsonValue val value: String) {
         @JvmStatic
         @JsonCreator
         fun fromValue(value: String): Behandlingstema {
-            return behandlingstemaMap[value] ?: throw error("Fant ikke Behandlingstema for value=$value")
+            return behandlingstemaMap[value] ?: error("Fant ikke Behandlingstema for value=$value")
         }
     }
 }

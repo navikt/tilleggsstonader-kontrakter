@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:enum-entry-name-case")
+
 package no.nav.tilleggsstonader.kontrakter.dokdist
 
 import no.nav.tilleggsstonader.kontrakter.felles.Fagsystem
@@ -28,8 +30,8 @@ enum class Distribusjonstidspunkt {
 }
 
 enum class AdresseType {
-    norskPostadresse, // ktlint-disable enum-entry-name-case
-    utenlandskPostadresse, // ktlint-disable enum-entry-name-case
+    norskPostadresse,
+    utenlandskPostadresse,
 }
 
 data class ManuellAdresse(
