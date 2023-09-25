@@ -30,13 +30,6 @@ data class ÅrMånedFelt(
     val verdi: YearMonth,
 )
 
-data class ListFelt<T>(
-    val label: String,
-    val verdi: List<T>,
-    val alternativer: List<String>? = null,
-    val svarid: List<T>? = null,
-)
-
 data class HeltallFelt(
     val label: String,
     val verdi: Int,
