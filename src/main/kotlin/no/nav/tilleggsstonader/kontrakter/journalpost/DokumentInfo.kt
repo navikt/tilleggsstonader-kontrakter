@@ -19,7 +19,7 @@ enum class Dokumentstatus {
 data class Dokumentvariant(
     val variantformat: Dokumentvariantformat,
     val filnavn: String? = null,
-    val saksbehandlerHarTilgang: Boolean
+    val saksbehandlerHarTilgang: Boolean,
 )
 
 enum class Dokumentvariantformat {
