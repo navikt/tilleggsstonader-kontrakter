@@ -1,6 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
 
 import no.nav.tilleggsstonader.kontrakter.felles.Hovedytelse
+import no.nav.tilleggsstonader.kontrakter.felles.Ident
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 
@@ -15,7 +16,7 @@ data class Aktivitet(
 )
 
 data class BarnMedBarnepass(
-    val ident: String,
+    val ident: Ident,
     val type: EnumFelt<TypeBarnepass>,
     val startetIFemte: EnumFelt<JaNei>?,
     val årsak: EnumFelt<ÅrsakBarnepass>?,
