@@ -16,7 +16,7 @@ data class Aktivitet(
 )
 
 data class BarnMedBarnepass(
-    val personIdent: String,
+    val ident: String,
     val type: EnumFelt<TypeBarnepass>,
     val startetIFemte: BooleanFelt?,
     val årsak: EnumFelt<ÅrsakBarnepass>?,
