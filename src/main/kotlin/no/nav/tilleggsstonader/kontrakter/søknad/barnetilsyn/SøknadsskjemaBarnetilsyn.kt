@@ -1,7 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
 
 import no.nav.tilleggsstonader.kontrakter.felles.Hovedytelse
-import no.nav.tilleggsstonader.kontrakter.søknad.BooleanFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 
@@ -18,7 +17,7 @@ data class Aktivitet(
 data class BarnMedBarnepass(
     val ident: String,
     val type: EnumFelt<TypeBarnepass>,
-    val startetIFemte: BooleanFelt?,
+    val startetIFemte: EnumFelt<JaNei>?,
     val årsak: EnumFelt<ÅrsakBarnepass>?,
 )
 
