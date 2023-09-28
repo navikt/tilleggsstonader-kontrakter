@@ -3,15 +3,9 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 import java.time.LocalDate
 import java.time.YearMonth
 
-data class BooleanFelt(
-    val label: String,
-    val verdi: Boolean,
-)
-
 data class TekstFelt(
     val label: String,
     val verdi: String,
-    val svarTekst: String? = null,
 )
 
 data class EnumFelt<T>(
