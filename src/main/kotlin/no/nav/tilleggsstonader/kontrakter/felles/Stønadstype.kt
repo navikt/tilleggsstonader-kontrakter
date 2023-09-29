@@ -1,5 +1,8 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
-enum class Stønadstype {
-    BARNETILSYN,
+/**
+ * @param tittel kan eks brukes i brev
+ */
+enum class Stønadstype(val tittel: String) {
+    BARNETILSYN("Barnetilsyn"),
 }
