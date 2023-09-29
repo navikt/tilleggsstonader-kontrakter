@@ -12,6 +12,14 @@ data class EnumFelt<T>(
     val label: String,
     val verdi: T,
     val svarTekst: String,
+    val alternativer: List<String>,
+)
+
+data class EnumFlereValgFelt<T>(
+    val label: String,
+    val verdier: List<T>,
+    val svarTekster: List<String>,
+    val alternativer: List<String>,
 )
 
 data class DatoFelt(
