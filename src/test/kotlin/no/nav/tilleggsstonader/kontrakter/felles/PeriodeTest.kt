@@ -129,7 +129,7 @@ internal class PeriodeTest {
                 .containsExactly(Pair(jan, verdi))
 
             assertThat(månedsperiode2.splitPerMåned { _, _ -> verdi })
-                .containsExactly(Pair(jan, 10), Pair(feb, 10), Pair(mars, 10))
+                .containsExactly(Pair(jan, verdi), Pair(feb, verdi), Pair(mars, verdi))
         }
     }
 
