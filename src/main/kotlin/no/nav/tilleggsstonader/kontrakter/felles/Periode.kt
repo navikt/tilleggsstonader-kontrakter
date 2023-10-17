@@ -40,7 +40,7 @@ interface Mergeable<R, T : Periode<R>> where R : Comparable<R>, R : Temporal {
  * Forventer at perioder er sorterte når man slår de sammen
  */
 fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean): List<P>
-    where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
+        where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
     return this.fold(mutableListOf()) { acc, entry ->
         val last = acc.lastOrNull()
         if (last != null && skalMerges(last, entry)) {
@@ -57,12 +57,12 @@ fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean): List<P>
  * Splitter en datoperiode till verdi per måned,
  * eks 05.01.2023 - 08.02.2023 blir listOf(Pair(jan, verdi), Pair(feb, verdi))
  */
-fun <P : Periode<LocalDate>, VAL> P.splitPerMåned(value: (P) -> VAL): List<Pair<YearMonth, VAL>> {
+fun <P : Periode<LocalDate>, VAL> P.splitPerMåned(value: (måned: YearMonth, periode: P) -> VAL): List<Pair<YearMonth, VAL>> {
     val perioder = mutableListOf<Pair<YearMonth, VAL>>()
     var dato = fom
-    val verdi = value(this)
     while (dato <= this.tom) {
         val årMåned = YearMonth.from(dato)
+        val verdi = value(årMåned, this)
         perioder.add(Pair(årMåned, verdi))
         dato = årMåned.atEndOfMonth().plusDays(1)
     }
@@ -74,11 +74,11 @@ fun <P : Periode<LocalDate>, VAL> P.splitPerMåned(value: (P) -> VAL): List<Pair
  * eks 01.2023 - 02.2023 blir listOf(Pair(jan, verdi), Pair(feb, verdi))
  */
 @JvmName("yearMonthSplitPerMåned")
-fun <P : Periode<YearMonth>, VAL> P.splitPerMåned(value: (P) -> VAL): List<Pair<YearMonth, VAL>> {
+fun <P : Periode<YearMonth>, VAL> P.splitPerMåned(value: (måned: YearMonth, periode: P) -> VAL): List<Pair<YearMonth, VAL>> {
     val perioder = mutableListOf<Pair<YearMonth, VAL>>()
     var dato = fom
-    val verdi = value(this)
     while (dato <= this.tom) {
+        val verdi = value(dato, this)
         perioder.add(Pair(dato, verdi))
         dato = dato.plusMonths(1)
     }
