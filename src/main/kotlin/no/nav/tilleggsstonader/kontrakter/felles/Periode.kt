@@ -40,7 +40,7 @@ interface Mergeable<R, T : Periode<R>> where R : Comparable<R>, R : Temporal {
  * Forventer at perioder er sorterte når man slår de sammen
  */
 fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean): List<P>
-        where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
+    where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
     return this.fold(mutableListOf()) { acc, entry ->
         val last = acc.lastOrNull()
         if (last != null && skalMerges(last, entry)) {

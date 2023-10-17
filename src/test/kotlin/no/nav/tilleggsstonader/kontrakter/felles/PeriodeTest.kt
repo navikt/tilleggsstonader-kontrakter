@@ -119,7 +119,7 @@ internal class PeriodeTest {
 
         @Test
         fun `skal splitte datoperiode per måned`() {
-            assertThat(datoperiode.splitPerMåned { _, _ ->  verdi })
+            assertThat(datoperiode.splitPerMåned { _, _ -> verdi })
                 .containsExactly(Pair(jan, verdi), Pair(feb, verdi))
         }
 
@@ -128,7 +128,7 @@ internal class PeriodeTest {
             assertThat(månedsperiode1.splitPerMåned { _, _ -> verdi })
                 .containsExactly(Pair(jan, verdi))
 
-            assertThat(månedsperiode2.splitPerMåned { _,_ -> verdi })
+            assertThat(månedsperiode2.splitPerMåned { _, _ -> verdi })
                 .containsExactly(Pair(jan, 10), Pair(feb, 10), Pair(mars, 10))
         }
     }
