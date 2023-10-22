@@ -38,7 +38,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.1.3"))
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.1.5"))
 
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-annotations")
