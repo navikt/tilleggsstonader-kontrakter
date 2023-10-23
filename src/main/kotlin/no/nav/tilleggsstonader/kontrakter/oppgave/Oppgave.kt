@@ -9,7 +9,7 @@ data class OppgaveResponse(val oppgaveId: Long)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Oppgave(
-    val id: Long? = null,
+    val id: Long,
     val identer: List<OppgaveIdentV2>? = null,
     val tildeltEnhetsnr: String? = null,
     val endretAvEnhetsnr: String? = null,
