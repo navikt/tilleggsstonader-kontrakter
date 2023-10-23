@@ -7,7 +7,8 @@ package no.nav.tilleggsstonader.kontrakter.felles
  */
 enum class Tema {
     TSO,
-    TSR;
+    TSR,
+    ;
 
     fun default(): Tema = TSO
 }
