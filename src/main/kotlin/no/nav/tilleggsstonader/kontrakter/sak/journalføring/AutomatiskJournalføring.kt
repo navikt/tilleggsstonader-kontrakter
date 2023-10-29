@@ -11,5 +11,5 @@ data class AutomatiskJournalføringRequest(
 
 data class AutomatiskJournalføringResponse(
     val fagsakId: UUID,
-    val behandlingId: UUID,
+    val behandlingId: UUID?,
 )
