@@ -6,7 +6,6 @@ import java.time.LocalDate
 data class OpprettOppgaveRequest(
     val ident: OppgaveIdentV2?,
     val enhetsnummer: String?,
-    val saksId: String?,
     val journalpostId: String? = null,
     val tema: Tema,
     val oppgavetype: Oppgavetype,
