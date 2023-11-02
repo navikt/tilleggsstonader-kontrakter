@@ -1,7 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.sak
 
 enum class DokumentBrevkode(val verdi: String) {
-    BARNETILSYN("NAV 15-00.02"), // TODO oppdater
+    BARNETILSYN("NAV 11-12.15"),
     ;
 
     companion object {
