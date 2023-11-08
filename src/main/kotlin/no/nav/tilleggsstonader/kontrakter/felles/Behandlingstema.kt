@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
 enum class Behandlingstema(@JsonValue val value: String) {
-    Tilleggsstønader("ab0300"),
+    TilsynBarn("ab0300"),
 
     @Deprecated("Skal ikke brukes. Bruk Tilleggsstønader")
     Barnetilsyn("ab0028"), // TODO denne tihører ENF
