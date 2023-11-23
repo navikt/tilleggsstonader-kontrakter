@@ -2,6 +2,7 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 
 import java.time.LocalDate
 import java.time.YearMonth
+import java.util.UUID
 
 data class TekstFelt(
     val label: String,
@@ -44,10 +45,10 @@ data class PeriodeFelt(
 )
 
 data class DokumentasjonFelt(
-    val id: String,
+    val type: Vedleggstype,
     val label: String,
     val harSendtInn: Boolean,
     val opplastedeVedlegg: List<Dokument> = emptyList(),
 )
 
-data class Dokument(val id: String, val navn: String)
+data class Dokument(val id: UUID, val navn: String)
