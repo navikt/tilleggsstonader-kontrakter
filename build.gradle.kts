@@ -1,4 +1,4 @@
-val javaVersion = JavaLanguageVersion.of(17)
+val javaVersion = JavaLanguageVersion.of(21)
 
 group = "no.nav.tilleggsstonader.kontrakter"
 
