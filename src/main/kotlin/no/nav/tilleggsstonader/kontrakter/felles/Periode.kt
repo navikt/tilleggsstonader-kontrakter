@@ -16,6 +16,10 @@ interface Periode<T> : Comparable<Periode<T>> where T : Comparable<T>, T : Tempo
         return !(this.tom < other.fom || this.fom > other.tom)
     }
 
+    fun inneholder(other: Periode<T>): Boolean {
+        return this.fom <= other.fom && this.tom >= other.tom
+    }
+
     override fun compareTo(other: Periode<T>): Int {
         return Comparator.comparing(Periode<T>::fom).thenComparing(Periode<T>::tom).compare(this, other)
     }
