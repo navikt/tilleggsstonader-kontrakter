@@ -107,7 +107,6 @@ internal class PeriodeTest {
             assertThat(periode1.inneholder(periode2)).isFalse()
             assertThat(periode2.inneholder(periode1)).isFalse()
         }
-
     }
 
     @Nested
