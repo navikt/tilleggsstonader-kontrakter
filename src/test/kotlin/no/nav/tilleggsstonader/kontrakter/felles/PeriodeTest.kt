@@ -77,6 +77,39 @@ internal class PeriodeTest {
     }
 
     @Nested
+    inner class Inneholder {
+        @Test
+        fun `periode 2 stater etter fom og slutter før fom`() {
+            val periode1 = Månedsperiode(jan, mars)
+            val periode2 = Månedsperiode(feb, feb)
+            assertThat(periode1.inneholder(periode2)).isTrue
+            assertThat(periode2.inneholder(periode1)).isFalse
+        }
+
+        @Test
+        fun `periode 2 stater samme måled som periode 1 og slutter samme måned som periode 1`() {
+            val periode1 = Månedsperiode(jan, mars)
+            assertThat(periode1.inneholder(periode1)).isTrue
+        }
+
+        @Test
+        fun `periode 2 starter før periode 1`() {
+            val periode1 = Månedsperiode(feb, mars)
+            val periode2 = Månedsperiode(jan, feb)
+            assertThat(periode1.inneholder(periode2)).isFalse()
+            assertThat(periode2.inneholder(periode1)).isFalse()
+        }
+
+        @Test
+        fun `periode 2 slutter etter periode 1`() {
+            val periode1 = Månedsperiode(jan, feb)
+            val periode2 = Månedsperiode(feb, mars)
+            assertThat(periode1.inneholder(periode2)).isFalse()
+            assertThat(periode2.inneholder(periode1)).isFalse()
+        }
+    }
+
+    @Nested
     inner class MergeSammenhengende {
         private val periodeJan = Månedsperiode(jan, jan, 1)
         private val periodeFeb = Månedsperiode(feb, feb, 1)
