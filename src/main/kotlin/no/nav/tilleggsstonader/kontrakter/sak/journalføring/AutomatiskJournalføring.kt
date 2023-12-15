@@ -8,8 +8,3 @@ data class AutomatiskJournalføringRequest(
     val journalpostId: String,
     val stønadstype: Stønadstype,
 )
-
-data class AutomatiskJournalføringResponse(
-    val fagsakId: UUID,
-    val behandlingId: UUID?,
-)
