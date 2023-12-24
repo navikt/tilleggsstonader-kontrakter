@@ -3,7 +3,7 @@ val javaVersion = JavaLanguageVersion.of(21)
 group = "no.nav.tilleggsstonader.kontrakter"
 
 plugins {
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "1.9.22"
     `maven-publish`
     `java-library`
     id("com.diffplug.spotless") version "6.23.3"
