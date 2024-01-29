@@ -6,8 +6,7 @@ data class ArenaStatusDto(
 )
 
 data class SakStatus(
-    val harSaker: Boolean,
-    val harÅpenSak: Boolean,
+    val harAktivSakUtenVedtak: Boolean,
 )
 
 data class VedtakStatus(
