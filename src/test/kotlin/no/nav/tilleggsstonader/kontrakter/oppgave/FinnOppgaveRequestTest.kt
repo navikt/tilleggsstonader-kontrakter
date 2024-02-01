@@ -12,7 +12,7 @@ class FinnOppgaveRequestTest {
         val finnOppgaveRequestString = """
             {
               "tema": "TSO",
-              "behandlingstema": "ab0028",
+              "behandlingstema": "ab0300",
               "behandlingstype": "NASJONAL",
               "erUtenMappe": false,
               "oppgavetype": "BehandleSak",
