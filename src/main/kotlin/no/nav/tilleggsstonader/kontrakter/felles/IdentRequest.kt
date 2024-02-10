@@ -1,6 +1,13 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
 /**
+ * Kan brukes for oppslag på ident, med post
+ */
+data class IdentRequest(
+    val ident: String,
+)
+
+/**
  * Kan brukes til oppslag på ident og gitt stønadstype
  */
 data class IdentStønadstype(

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.deser.YearMonthDeserializer
+import com.fasterxml.jackson.module.kotlin.addDeserializer
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -17,7 +18,7 @@ object ObjectMapperProvider {
             .registerModule(
                 JavaTimeModule()
                     .addDeserializer(
-                        YearMonth::class.java,
+                        YearMonth::class,
                         YearMonthDeserializer(DateTimeFormatter.ofPattern("u-MM")), // Denne trengs for å parse år over 9999 riktig.
                     ),
             )
