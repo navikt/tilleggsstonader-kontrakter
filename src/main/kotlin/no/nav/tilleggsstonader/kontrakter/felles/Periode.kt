@@ -26,7 +26,7 @@ interface Periode<T> : Comparable<Periode<T>> where T : Comparable<T>, T : Tempo
 }
 
 fun <T> List<Periode<T>>.erSortert(): Boolean where T : Comparable<T>, T : Temporal {
-    return zipWithNext().all { it.first < it.second }
+    return zipWithNext().all { it.first <= it.second }
 }
 
 fun <T> List<Periode<T>>.overlapper(): Boolean where T : Comparable<T>, T : Temporal {
