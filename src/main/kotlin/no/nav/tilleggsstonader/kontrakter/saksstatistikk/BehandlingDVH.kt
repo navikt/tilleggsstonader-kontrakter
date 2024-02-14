@@ -11,4 +11,5 @@ data class BehandlingDVH (
     val endretTid: ZonedDateTime, // Tidspunkt for siste endring på behandlingen. Ved første melding vil denne være lik registrertTid
     val tekniskTid: ZonedDateTime, // Tidspunktet da fagsystemet legger hendelsen på grensesnittet/topicen
     val sakYtelse: String, // Kode som angir hvilken ytelse/stønad behandlingen gjelder
+    val behandlingStatus: String, // Kode som angir hvilken status behandlingen har - typisk: opprettet, under behandling, avsluttet, etc
 )
