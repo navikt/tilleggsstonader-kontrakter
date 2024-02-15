@@ -3,6 +3,7 @@ package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
 import no.nav.tilleggsstonader.kontrakter.felles.Hovedytelse
 import no.nav.tilleggsstonader.kontrakter.søknad.DokumentasjonFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
+import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.TekstFelt
 
@@ -14,7 +15,7 @@ data class SøknadsskjemaBarnetilsyn(
 )
 
 data class HovedytelseAvsnitt(
-    val hovedytelse: EnumFelt<Hovedytelse>,
+    val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
 )
 
 data class AktivitetAvsnitt(
