@@ -16,6 +16,8 @@ data class SøknadsskjemaBarnetilsyn(
 
 data class HovedytelseAvsnitt(
     val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
+    val boddSammenhengende: EnumFelt<JaNei>?,
+    val planleggerBoINorgeNeste12mnd: EnumFelt<JaNei>?,
 )
 
 data class AktivitetAvsnitt(
