@@ -53,7 +53,7 @@ enum class Rettighet(
     TILSYN_FAMILIEMEDLEMMER("TSOTILFAM", "Tilsyn av familiemedlemmer tilleggsstønad"),
     ;
 
-    val stønadstype get(): Stønadstype = type ?: error("Har ikke lagt inn mapping av stønadstype for $type")
+    val stønadstype get(): Stønadstype = type ?: error("Har ikke lagt inn mapping av stønadstype for $this")
 
     companion object {
 
