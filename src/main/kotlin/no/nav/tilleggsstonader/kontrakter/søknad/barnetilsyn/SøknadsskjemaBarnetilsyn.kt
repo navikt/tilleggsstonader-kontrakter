@@ -44,4 +44,5 @@ enum class TypeBarnepass {
 enum class ÅrsakBarnepass {
     TRENGER_MER_PASS_ENN_JEVNALDRENDE,
     MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
+    INGEN_AV_DISSE,
 }
