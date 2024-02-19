@@ -16,6 +16,8 @@ data class SøknadsskjemaBarnetilsyn(
 
 data class HovedytelseAvsnitt(
     val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
+    val boddSammenhengende: EnumFelt<JaNei>?,
+    val planleggerBoINorgeNeste12mnd: EnumFelt<JaNei>?,
 )
 
 data class AktivitetAvsnitt(
@@ -42,4 +44,5 @@ enum class TypeBarnepass {
 enum class ÅrsakBarnepass {
     TRENGER_MER_PASS_ENN_JEVNALDRENDE,
     MYE_BORTE_ELLER_UVANLIG_ARBEIDSTID,
+    INGEN_AV_DISSE,
 }
