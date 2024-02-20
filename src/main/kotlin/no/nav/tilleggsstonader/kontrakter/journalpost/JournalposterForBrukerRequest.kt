@@ -4,7 +4,8 @@ import no.nav.tilleggsstonader.kontrakter.felles.Tema
 
 data class JournalposterForBrukerRequest(
     val brukerId: Bruker,
-    val antall: Int,
-    val tema: List<Tema>? = null,
-    val journalposttype: List<Journalposttype>? = null,
+    val tema: List<Tema> = emptyList(),
+    val journalposttype: List<Journalposttype> = emptyList(),
+    val journalstatus: List<Journalstatus> = emptyList(),
+    val antall: Int = 200,
 )
