@@ -53,6 +53,7 @@ data class DokumentasjonFelt(
     val label: String,
     val harSendtInn: Boolean,
     val opplastedeVedlegg: List<Dokument> = emptyList(),
+    val barnId: String? = null,
 )
 
 data class Dokument(val id: UUID, val navn: String)
