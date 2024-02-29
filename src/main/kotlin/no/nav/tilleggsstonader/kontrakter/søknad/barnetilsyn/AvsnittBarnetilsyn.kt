@@ -1,18 +1,14 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
 
 import no.nav.tilleggsstonader.kontrakter.felles.Hovedytelse
-import no.nav.tilleggsstonader.kontrakter.søknad.DokumentasjonFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.TekstFelt
 
-data class SøknadsskjemaBarnetilsyn(
-    val hovedytelse: HovedytelseAvsnitt,
-    val aktivitet: AktivitetAvsnitt,
-    val barn: BarnAvsnitt,
-    val dokumentasjon: List<DokumentasjonFelt>,
-)
+// TODO slett når sak og søknad er merget
+@Deprecated("Flyttet", ReplaceWith("no.nav.tilleggsstonader.kontrakter.søknad.SøknadsskjemaBarnetilsyn"))
+typealias SøknadsskjemaBarnetilsyn = no.nav.tilleggsstonader.kontrakter.søknad.SøknadsskjemaBarnetilsyn
 
 data class HovedytelseAvsnitt(
     val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
