@@ -9,4 +9,4 @@ data class SøknadsskjemaBarnetilsyn(
     val aktivitet: AktivitetAvsnitt,
     val barn: BarnAvsnitt,
     override val dokumentasjon: List<DokumentasjonFelt>,
-): Skjema
+) : Skjema
