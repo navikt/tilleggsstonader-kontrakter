@@ -3,6 +3,7 @@ package no.nav.tilleggsstonader.kontrakter.oppgave
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import no.nav.tilleggsstonader.kontrakter.felles.Tema
+import java.time.LocalDate
 
 data class OppgaveResponse(val oppgaveId: Long)
 
@@ -32,8 +33,8 @@ data class Oppgave(
     val behandlingstype: String? = null,
     val versjon: Int? = null,
     val mappeId: Long? = null,
-    val fristFerdigstillelse: String? = null,
-    val aktivDato: String? = null,
+    val fristFerdigstillelse: LocalDate? = null,
+    val aktivDato: LocalDate? = null,
     val opprettetTidspunkt: String? = null,
     val opprettetAv: String? = null,
     val endretAv: String? = null,
