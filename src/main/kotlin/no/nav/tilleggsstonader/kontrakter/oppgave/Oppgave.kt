@@ -7,6 +7,8 @@ import java.time.LocalDate
 
 data class OppgaveResponse(val oppgaveId: Long)
 
+data class OppdatertOppgaveResponse(val oppgaveId: Long, val versjon: Int)
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Oppgave(
@@ -43,7 +45,9 @@ data class Oppgave(
     val prioritet: OppgavePrioritet? = null,
     val status: StatusEnum? = null,
     private var metadata: MutableMap<String, String>? = null,
-)
+) {
+    fun versjonEllerFeil(): Int = versjon ?: error("Mangler versjon på oppgave=$id")
+}
 
 enum class StatusEnum {
     OPPRETTET,
