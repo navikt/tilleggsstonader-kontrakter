@@ -3,8 +3,11 @@ package no.nav.tilleggsstonader.kontrakter.oppgave
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import no.nav.tilleggsstonader.kontrakter.felles.Tema
+import java.time.LocalDate
 
 data class OppgaveResponse(val oppgaveId: Long)
+
+data class OppdatertOppgaveResponse(val oppgaveId: Long, val versjon: Int)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -32,8 +35,8 @@ data class Oppgave(
     val behandlingstype: String? = null,
     val versjon: Int? = null,
     val mappeId: Long? = null,
-    val fristFerdigstillelse: String? = null,
-    val aktivDato: String? = null,
+    val fristFerdigstillelse: LocalDate? = null,
+    val aktivDato: LocalDate? = null,
     val opprettetTidspunkt: String? = null,
     val opprettetAv: String? = null,
     val endretAv: String? = null,
@@ -42,7 +45,9 @@ data class Oppgave(
     val prioritet: OppgavePrioritet? = null,
     val status: StatusEnum? = null,
     private var metadata: MutableMap<String, String>? = null,
-)
+) {
+    fun versjonEllerFeil(): Int = versjon ?: error("Mangler versjon på oppgave=$id")
+}
 
 enum class StatusEnum {
     OPPRETTET,
