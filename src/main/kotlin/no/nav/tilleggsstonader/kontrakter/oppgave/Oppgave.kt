@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import no.nav.tilleggsstonader.kontrakter.felles.Tema
 import java.time.LocalDate
+import java.util.Optional
 
 data class OppgaveResponse(val oppgaveId: Long)
 
@@ -13,6 +14,7 @@ data class OppdatertOppgaveResponse(val oppgaveId: Long, val versjon: Int)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Oppgave(
     val id: Long,
+    val versjon: Int,
     val identer: List<OppgaveIdentV2>? = null,
     val tildeltEnhetsnr: String? = null,
     val endretAvEnhetsnr: String? = null,
@@ -33,8 +35,7 @@ data class Oppgave(
     val behandlingstema: String? = null,
     val oppgavetype: String? = null,
     val behandlingstype: String? = null,
-    val versjon: Int? = null,
-    val mappeId: Long? = null,
+    val mappeId: Optional<Long>? = null,
     val fristFerdigstillelse: LocalDate? = null,
     val aktivDato: LocalDate? = null,
     val opprettetTidspunkt: String? = null,
