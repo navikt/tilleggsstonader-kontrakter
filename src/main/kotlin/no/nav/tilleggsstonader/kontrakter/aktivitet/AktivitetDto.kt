@@ -11,9 +11,9 @@ data class AktivitetDto(
     val antallDagerPerUke: Int?,
     val prosentDeltakelse: Float?,
     val arrangør: String?,
-    val kilde: Kilde
+    val kilde: Kilde,
 )
 
 enum class Kilde {
-    ARENA
+    ARENA,
 }
