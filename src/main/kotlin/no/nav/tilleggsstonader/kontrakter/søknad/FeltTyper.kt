@@ -51,7 +51,6 @@ data class PeriodeFelt(
 data class DokumentasjonFelt(
     val type: Vedleggstype,
     val label: String,
-    val harSendtInn: Boolean,
     val opplastedeVedlegg: List<Dokument> = emptyList(),
     val barnId: String? = null,
 )
