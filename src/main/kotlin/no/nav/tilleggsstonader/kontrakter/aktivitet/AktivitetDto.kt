@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.aktivitet
 
+import java.math.BigDecimal
 import java.time.LocalDate
 
 /**
@@ -12,8 +13,11 @@ data class AktivitetArenaDto(
     val type: String,
     val typeNavn: String,
     val status: StatusAktivitet?,
+    val statusArena: String?,
     val antallDagerPerUke: Int?,
-    val prosentDeltakelse: Float?,
+    val prosentDeltakelse: BigDecimal?,
+    val erStønadsberettiget: Boolean?,
+    val erUtdanning: Boolean?,
     val arrangør: String?,
     val kilde: Kilde,
 )
