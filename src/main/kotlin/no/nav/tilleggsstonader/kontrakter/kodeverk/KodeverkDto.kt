@@ -39,14 +39,18 @@ fun KodeverkDto.hentGjeldende(
     return betydning?.beskrivelser?.get(språk.kode)?.term
 }
 
-fun KodeverkDto.mapTerm(): Map<String, String> {
+/**
+ * Mapper [KodeverkDto] til en Map<term, tekst> der term er koden
+ * [term] er et navnet på feltet fra kodeverk
+ */
+fun KodeverkDto.mapTerm(språk: KodeverkSpråk): Map<String, String> {
     return betydninger.mapValues {
         if (it.value.isEmpty()) {
             ""
         } else if (it.value.size != 1) {
-            this.hentGjeldende(it.key) ?: ""
+            this.hentGjeldende(it.key, språk = språk) ?: ""
         } else {
-            it.value.singleOrNull()?.beskrivelser?.get(KodeverkSpråk.BOKMÅL.kode)?.term ?: ""
+            it.value.singleOrNull()?.beskrivelser?.get(språk.kode)?.term ?: ""
         }
     }
 }
