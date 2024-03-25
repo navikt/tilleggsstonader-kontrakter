@@ -27,7 +27,7 @@ class KodeverkTest {
             "NOR" to "NorgeTerm",
             "SWE" to "",
         )
-        assertThat(kodeverkDto.mapTerm()).isEqualTo(expected)
+        assertThat(kodeverkDto.mapTerm(KodeverkSpråk.BOKMÅL)).isEqualTo(expected)
     }
 
     @Test
@@ -47,6 +47,6 @@ class KodeverkTest {
             ),
         )
         val kodeverkDto = KodeverkDto(betydninger)
-        assertThat(kodeverkDto.mapTerm()["NOR"]).isEqualTo("Gjeldende")
+        assertThat(kodeverkDto.mapTerm(KodeverkSpråk.BOKMÅL)["NOR"]).isEqualTo("Gjeldende")
     }
 }
