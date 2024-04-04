@@ -10,7 +10,7 @@ data class ArbeidOgOpphold(
     val jobberIAnnetLand: EnumFelt<JaNei>?,
     val jobbAnnetLand: SelectFelt<String>?,
 
-    val harPengestøtteAnnetLand: EnumFlereValgFelt<MottarPengestøtteTyper>?,
+    val harPengestøtteAnnetLand: EnumFlereValgFelt<TypePengestøtte>?,
     val pengestøtteAnnetLand: SelectFelt<String>?,
 
     val harOppholdUtenforNorgeSiste12mnd: EnumFelt<JaNei>?,
@@ -26,7 +26,7 @@ data class OppholdUtenforNorge(
     val tom: DatoFelt,
 )
 
-enum class MottarPengestøtteTyper {
+enum class TypePengestøtte {
     SYKEPENGER,
     PENSJON,
     ANNEN_PENGESTØTTE,
