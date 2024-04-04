@@ -8,8 +8,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.TekstFelt
 
 data class HovedytelseAvsnitt(
     val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
-    val boddSammenhengende: EnumFelt<JaNei>?,
-    val planleggerBoINorgeNeste12mnd: EnumFelt<JaNei>?,
+    val arbeidOgOpphold: ArbeidOgOpphold?,
 )
 
 data class AktivitetAvsnitt(
