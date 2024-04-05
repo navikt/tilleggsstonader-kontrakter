@@ -8,7 +8,12 @@ import no.nav.tilleggsstonader.kontrakter.søknad.TekstFelt
 
 data class HovedytelseAvsnitt(
     val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
-    val arbeidOgOpphold: ArbeidOgOpphold?,
+    @Deprecated("Erstatt med arbeidOgOpphold")
+    val boddSammenhengende: EnumFelt<JaNei>? = null,
+    @Deprecated("Erstatt med arbeidOgOpphold")
+    val planleggerBoINorgeNeste12mnd: EnumFelt<JaNei>? = null,
+    // TODO fjern default null når deprecates fjernes
+    val arbeidOgOpphold: ArbeidOgOpphold? = null,
 )
 
 data class AktivitetAvsnitt(
