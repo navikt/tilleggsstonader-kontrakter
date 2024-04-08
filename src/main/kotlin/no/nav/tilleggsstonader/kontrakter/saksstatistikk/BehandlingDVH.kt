@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.ZonedDateTime
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-data class BehandlingDVH (
+data class BehandlingDVH(
     val behandlingId: Long, // Fagsystemets eksterne behandlings-ID
     val personIdent: String, // PersonIdent tilknyttet søker eller hovedaktør for ytelsen
     val registrertTid: ZonedDateTime, // Tidspunkt da behandlingen først oppstod eller ble registrert i fagsystemet
@@ -36,10 +36,6 @@ data class BehandlingDVH (
     val kravMottatt: ZonedDateTime? = null, // Dato for når krav eller informasjon om at man må opprette revurdering ble mottatt
     val revurderingOpplysningskilde: String? = null, // Opplysningskilde til hvorfor det må gjøres en revurdering, eks MODIA
     val revurderingÅrsak: String? = null, // Årsak til revurdering, eks ENDRING_I_INNTEKT
-    val avslagAarsak: String? = null // Eks: VILKÅR_IKKE_OPPFYLT, BARN_OVER_ÅTTE_ÅR, STØNADSTID_OPPBRUKT, MANGLENDE_OPPLYSNINGER, MINDRE_INNTEKTSENDRINGER
-
-
-
-
+    val avslagAarsak: String? = null, // Eks: VILKÅR_IKKE_OPPFYLT, BARN_OVER_ÅTTE_ÅR, STØNADSTID_OPPBRUKT, MANGLENDE_OPPLYSNINGER, MINDRE_INNTEKTSENDRINGER
 
 )
