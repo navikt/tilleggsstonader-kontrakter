@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/actions/setup-gradle@v3
         with:
           arguments: build -PskipLint
 
@@ -51,7 +51,7 @@ jobs:
       #    echo "::set-output name=CHANGELOG::$text"
 
       - name: Create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: Release ${{ env.RELEASE_TAG }}
           tag_name: ${{ env.RELEASE_TAG }}
@@ -59,7 +59,7 @@ jobs:
           prerelease: false
 
       - name: Publish
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
