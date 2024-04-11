@@ -6,11 +6,14 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 enum class Vedleggstype(val tittel: String) { // TODO språk?
     // Pass av barn
     UTGIFTER_PASS_SFO_AKS_BARNEHAGE("Dokumentasjon av utgifter for pass av barn"),
-    UTGIFTER_PASS_ANNET("Dokumentasjon av utgifter for pass av barn"),
+    UTGIFTER_PASS_PRIVAT("Dokumentasjon av utgifter til privat pass"),
 
     // Årsak ekstra pass
     SKRIFTLIG_UTTALELSE_HELSEPERSONELL("Dokumentasjon av uttalelse fra helsepersonell"),
     TILTAKSSTED_ELLER_UTDANNINGSSTED("Dokumentasjon fra tiltakssted eller utdanningssted"),
+
+    @Deprecated("Bruk UTGIFTER_PASS_PRIVAT")
+    UTGIFTER_PASS_ANNET("Dokumentasjon av utgifter for pass av barn"),
 
     @Deprecated("Bruk SKRIFTLIG_UTTALELSE_HELSEPERSONELL/TILTAKSSTED_ELLER_UTDANNINGSSTED")
     EKSTRA_PASS_BEHOV("Dokumentasjon på behov for ekstra pass av barn"),

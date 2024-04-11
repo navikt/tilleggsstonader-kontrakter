@@ -34,6 +34,9 @@ data class BarnMedBarnepass(
 
 enum class TypeBarnepass {
     BARNEHAGE_SFO_AKS,
+    PRIVAT,
+
+    @Deprecated("Bruk PRIVAT_PASS")
     ANDRE,
 }
 
