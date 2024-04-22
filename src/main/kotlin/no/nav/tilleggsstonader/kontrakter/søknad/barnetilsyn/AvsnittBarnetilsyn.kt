@@ -17,8 +17,19 @@ data class HovedytelseAvsnitt(
 )
 
 data class AktivitetAvsnitt(
+    val aktivitet: EnumFlereValgFelt<String>? = null,
+    val annenAktivitet: EnumFelt<AnnenAktivitetType>? = null,
+    val lønnetAktivitet: EnumFelt<JaNei>? = null,
+    @Deprecated("Denne skal ikke brukes noe lengre")
     val utdanning: EnumFelt<JaNei>,
 )
+
+enum class AnnenAktivitetType {
+    TILTAK,
+    UTDANNING,
+    ARBEIDSSØKER,
+    INGEN_AKTIVITET,
+}
 
 data class BarnAvsnitt(
     val barnMedBarnepass: List<BarnMedBarnepass>,

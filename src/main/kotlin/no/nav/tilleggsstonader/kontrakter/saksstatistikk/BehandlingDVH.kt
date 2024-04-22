@@ -41,7 +41,7 @@ data class BehandlingDVH(
     val avsender: String? = null, // Angir fagsystemets eget navn
 
     // TODO: Implementer dette feltet sammen med team Sak. Det er litt usikkerhet rundt hvordan vi skal implementere nøstede vilkårsvurderinger.
-    val vilkårsprøving: List<VilkårsprøvingDVH>,  // Liste med aktuelle vilkår, og resultat av vilkårsprøving. Brukes også for å utlede årsak til avslag. Innhold i liste: VilkårID, Beskrivelse/navn, resultat
+    val vilkårsprøving: List<VilkårsprøvingDVH>, // Liste med aktuelle vilkår, og resultat av vilkårsprøving. Brukes også for å utlede årsak til avslag. Innhold i liste: VilkårID, Beskrivelse/navn, resultat
 
     // Felter som vi sender hvis vi kan, men som vi fjerner hvis vi finner ut at de ikke er relevante (eller alltid null) for oss.
     val venteAarsak: String? = null, // Kode som angir årsak til venting/utsettelse av saksbehandlings prosesser - typisk: venter på utland, venter på inntektsmelding etc.
@@ -51,9 +51,9 @@ data class BehandlingDVH(
     val kravMottatt: ZonedDateTime? = null, // Dato for når krav eller informasjon om at man må opprette revurdering ble mottatt
     val behandlingÅrsak: String? = null, // Årsak til opprettet behandling - typisk klage, nye opplysninger, sanksjon, søknad, migrering, g-omregning, korrigering og papirsøknad
     val versjon: String? = null, // "Kode som hvilken versjonen av koden dataene er generert med bakgrunn på. Kan godt være relatert til Git repoet. Alltid null hos EF. Send hvis ikke for mye stress å implementere.
-    )
+)
 
-data class VilkårsprøvingDVH (
+data class VilkårsprøvingDVH(
     val vilkårId: String,
     val beskrivelse: String,
     val resultat: String,
