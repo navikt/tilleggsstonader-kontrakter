@@ -17,11 +17,14 @@ data class HovedytelseAvsnitt(
 )
 
 data class AktivitetAvsnitt(
-    val aktivitet: EnumFlereValgFelt<String>? = null,
+    // TODO fjern default null når deprecates fjernes
+    val aktiviteter: EnumFlereValgFelt<String>? = null,
+    // TODO fjern default null når deprecates fjernes
     val annenAktivitet: EnumFelt<AnnenAktivitetType>? = null,
+    // TODO fjern default null når deprecates fjernes
     val lønnetAktivitet: EnumFelt<JaNei>? = null,
     @Deprecated("Denne skal ikke brukes noe lengre")
-    val utdanning: EnumFelt<JaNei>,
+    val utdanning: EnumFelt<JaNei>? = null,
 )
 
 enum class AnnenAktivitetType {
