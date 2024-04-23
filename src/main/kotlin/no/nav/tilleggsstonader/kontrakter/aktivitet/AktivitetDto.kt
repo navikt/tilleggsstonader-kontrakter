@@ -22,10 +22,6 @@ data class AktivitetArenaDto(
     val kilde: Kilde,
 )
 
-// Dette er bare en test på at pre-push commit-hook fungerer
-
-
-
 enum class Kilde {
     ARENA,
 }
