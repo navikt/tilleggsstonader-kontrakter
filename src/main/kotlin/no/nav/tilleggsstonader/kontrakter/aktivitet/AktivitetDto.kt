@@ -26,9 +26,6 @@ data class AktivitetArenaDto(
 
 
 
-
-
-
 enum class Kilde {
     ARENA,
 }
