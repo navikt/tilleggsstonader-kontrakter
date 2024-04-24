@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
+// Følgende felter er med i felleskontrakten til Team Sak. Vi bør etterstrebe å sende så mange av dem som mulig.
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class BehandlingDVH(
-    // Følgende felter er med i felleskontrakten til Team Sak. Vi bør etterstrebe å sende så mange av dem som mulig.
     val behandlingId: String, // Fagsystemets eksterne behandlings-ID
     val behandlingUuid: String, // Behandlingens UUID - for oss trolig lik behandlingId
     val relatertBehandlingId: String? = null, // Hvis behandlingen har oppsått med bakgrunn i en annen, skal den foregående behandlingen refereres til her
@@ -33,7 +33,7 @@ data class BehandlingDVH(
     val saksbehandler: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
     val ansvarligBeslutter: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6, men kun om det skulle hatt verdi] Ved krav om totrinnskontroll skal dette feltet innholde ansvarlig beslutter sin ID
     val ansvarligEnhet: String, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
-    val totrinnsbehandling: Boolean, // Hvis det er utført totrinnskontroll skal denne være true
+    val totrinnsbehandling: TotrinnsbehandlingStatusDvh = TotrinnsbehandlingStatusDvh.IKKE_GJENNOMFØRT,
     val datoForsteUtbetaling: ZonedDateTime? = null, // Hvis systemet eller bruker har et forhold til når ytelsen normalt skal utbetales (planlagt uttak, ønsket oppstart etc)
     val avsender: String? = null, // Angir fagsystemets eget navn
 
@@ -55,3 +55,9 @@ data class VilkårsprøvingDVH(
     val beskrivelse: String,
     val resultat: String,
 )
+
+enum class TotrinnsbehandlingStatusDvh {
+    GODKJENT,
+    UNDERKJENT,
+    IKKE_GJENNOMFØRT,
+}
