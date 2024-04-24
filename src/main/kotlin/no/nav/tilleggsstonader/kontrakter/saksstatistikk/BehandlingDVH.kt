@@ -35,9 +35,6 @@ data class BehandlingDVH(
     val ansvarligEnhet: String, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
     val totrinnsbehandling: Boolean, // Hvis det er utført totrinnskontroll skal denne være true
     val datoForsteUtbetaling: ZonedDateTime? = null, // Hvis systemet eller bruker har et forhold til når ytelsen normalt skal utbetales (planlagt uttak, ønsket oppstart etc)
-    val tilbakekrevBeløp: String? = null, // Gjelder kun behandlingstype tilbakreving. Beløp til innkreving
-    val funksjonellPeriodeFom: LocalDate? = null, // Gjelder kun behandlingstype tilbakreving. Tidspunkt som representerer start på periode som feilutbetalingen gjelder
-    val funksjonellPeriodeTom: LocalDate? = null, // Gjelder kun behandlingstype tilbakreving. Tidspunkt som representerer slutten av perioden som feilutbetalingen gjelder
     val avsender: String? = null, // Angir fagsystemets eget navn
 
     // TODO: Implementer dette feltet sammen med team Sak. Det er litt usikkerhet rundt hvordan vi skal implementere nøstede vilkårsvurderinger.
