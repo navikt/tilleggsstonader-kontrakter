@@ -13,8 +13,8 @@ data class BehandlingDVH(
     val sakId: String, // Saksnummer som følger behandlingen for NAV globalt
     val saksnummer: String, // Saksnummer som følger behandlingen for NAV globalt
     val aktorId: String, // PersonIdent tilknyttet søker eller hovedaktør for ytelsen
-    val mottattTid: LocalDateTime? = null, // Tidspunktet da behandlingen oppstår (eks søknadstidspunkt, inntektsmelding, etc). Det er ønskelig å måle brukers opplevde ventetid. Ved elektronisk kontakt regner vi med at denne er lik registrertTid
-    val registrertTid: LocalDateTime? = null, // Tidspunkt da behandlingen først oppstod eller ble registrert i fagsystemet
+    val mottattTid: LocalDateTime, // Tidspunktet da behandlingen oppstår (eks søknadstidspunkt, inntektsmelding, etc). Det er ønskelig å måle brukers opplevde ventetid. Ved elektronisk kontakt regner vi med at denne er lik registrertTid
+    val registrertTid: LocalDateTime, // Tidspunkt da behandlingen først oppstod eller ble registrert i fagsystemet
     val ferdigBehandletTid: LocalDateTime? = null, // Tidspunkt når behandling ble avsluttet, enten avbrutt, henlagt, vedtak innvilget/avslått, etc
     val vedtakTid: LocalDateTime? = null, // Tidspunktet for når vedtaket ble fattet - hvis saken ble vedtatt
     val utbetaltTid: LocalDate? = null, // Tidspunkt for første utbetaling av ytelse. Tilsvarer datoForsteUtbetaling i EF sin implemenetasjon
@@ -23,17 +23,17 @@ data class BehandlingDVH(
     val tekniskTid: LocalDateTime, // Tidspunktet da fagsystemet legger hendelsen på grensesnittet/topicen
     val papirSøknad: String? = null, // Flagg som angir om opprinnelsen til søknaden er fra et papirskjema.
     val sakYtelse: String, // Kode som angir hvilken ytelse/stønad behandlingen gjelder
-    val sakUtland: String? = null, // Nasjonal/Utland - Kode som angir hvor vidt saken er for utland eller nasjonal å anses. Se begrepskatalogen: https://jira.adeo.no/browse/BEGREP-1611#
+    val sakUtland: String, // Nasjonal/Utland - Kode som angir hvor vidt saken er for utland eller nasjonal å anses. Se begrepskatalogen: https://jira.adeo.no/browse/BEGREP-1611#
     val behandlingType: String, // Kode som angir hvilken type behandling det er snakk om - typisk: søknad, revurdering, tilbakekreving, klage, etc.
     val behandlingStatus: String, // Kode som angir hvilken status behandlingen har - typisk: opprettet, under behandling, avsluttet, etc
     val behandlingResultat: String? = null, // Kode som angir resultatet på behandling - typisk: avbrutt, innvilget, delvis innvilget, henlagt av tekniske hensyn, etc
     val resultatBegrunnelse: String? = null, // Kode som angir en begrunnelse til resultat - typisk: vilkårsprøvingen feilet, dublett, teknisk avvik, etc
     val behandlingMetode: String? = null, // Kode som angir om saken er behandlet manuelt eller automatisk (hvis fagsystemet opererer med en slik verdi).
     val opprettetAv: String, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som opprettet behandlingen. Hvis det er en servicebruker så sende denne
-    val saksbehandler: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
+    val saksbehandler: String, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
     val ansvarligBeslutter: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6, men kun om det skulle hatt verdi] Ved krav om totrinnskontroll skal dette feltet innholde ansvarlig beslutter sin ID
     val ansvarligEnhet: String, // [Feltet er geo-lokaliserende og skal oppgis saom -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
-    val avsender: String? = null, // Angir fagsystemets eget navn
+    val avsender: String, // Angir fagsystemets eget navn
     val totrinnsbehandling: Boolean, // Flagg som viser om totrinnsbehandling har blitt gjennomført
 
     // TODO: Implementer dette feltet sammen med team Sak. Det er litt usikkerhet rundt hvordan vi skal implementere nøstede vilkårsvurderinger.
