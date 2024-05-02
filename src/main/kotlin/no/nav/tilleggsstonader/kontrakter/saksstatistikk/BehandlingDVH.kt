@@ -34,6 +34,7 @@ data class BehandlingDVH(
     val ansvarligBeslutter: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6, men kun om det skulle hatt verdi] Ved krav om totrinnskontroll skal dette feltet innholde ansvarlig beslutter sin ID
     val ansvarligEnhet: String, // [Feltet er geo-lokaliserende og skal oppgis saom -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
     val avsender: String? = null, // Angir fagsystemets eget navn
+    val totrinnsbehandling: Boolean, // Flagg som viser om totrinnsbehandling har blitt gjennomført
 
     // TODO: Implementer dette feltet sammen med team Sak. Det er litt usikkerhet rundt hvordan vi skal implementere nøstede vilkårsvurderinger.
     val vilkårsprøving: List<VilkårsprøvingDVH>, // Liste med aktuelle vilkår, og resultat av vilkårsprøving. Brukes også for å utlede årsak til avslag. Innhold i liste: VilkårID, Beskrivelse/navn, resultat
@@ -53,9 +54,3 @@ data class VilkårsprøvingDVH(
     val beskrivelse: String,
     val resultat: String,
 )
-
-enum class TotrinnsbehandlingStatusDvh {
-    GODKJENT,
-    UNDERKJENT,
-    IKKE_GJENNOMFØRT,
-}
