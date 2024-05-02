@@ -2,7 +2,7 @@ package no.nav.tilleggsstonader.kontrakter.saksstatistikk
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.LocalDate
-import java.time.ZonedDateTime
+import java.time.LocalDateTime
 
 // Følgende felter er med i felleskontrakten til Team Sak. Vi bør etterstrebe å sende så mange av dem som mulig.
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -13,14 +13,14 @@ data class BehandlingDVH(
     val sakId: String, // Saksnummer som følger behandlingen for NAV globalt
     val saksnummer: String, // Saksnummer som følger behandlingen for NAV globalt
     val aktorId: String, // PersonIdent tilknyttet søker eller hovedaktør for ytelsen
-    val mottattTid: ZonedDateTime? = null, // Tidspunktet da behandlingen oppstår (eks søknadstidspunkt, inntektsmelding, etc). Det er ønskelig å måle brukers opplevde ventetid. Ved elektronisk kontakt regner vi med at denne er lik registrertTid
-    val registrertTid: ZonedDateTime? = null, // Tidspunkt da behandlingen først oppstod eller ble registrert i fagsystemet
-    val ferdigBehandletTid: ZonedDateTime? = null, // Tidspunkt når behandling ble avsluttet, enten avbrutt, henlagt, vedtak innvilget/avslått, etc
-    val vedtakTid: ZonedDateTime? = null, // Tidspunktet for når vedtaket ble fattet - hvis saken ble vedtatt
+    val mottattTid: LocalDateTime? = null, // Tidspunktet da behandlingen oppstår (eks søknadstidspunkt, inntektsmelding, etc). Det er ønskelig å måle brukers opplevde ventetid. Ved elektronisk kontakt regner vi med at denne er lik registrertTid
+    val registrertTid: LocalDateTime? = null, // Tidspunkt da behandlingen først oppstod eller ble registrert i fagsystemet
+    val ferdigBehandletTid: LocalDateTime? = null, // Tidspunkt når behandling ble avsluttet, enten avbrutt, henlagt, vedtak innvilget/avslått, etc
+    val vedtakTid: LocalDateTime? = null, // Tidspunktet for når vedtaket ble fattet - hvis saken ble vedtatt
     val utbetaltTid: LocalDate? = null, // Tidspunkt for første utbetaling av ytelse. Tilsvarer datoForsteUtbetaling i EF sin implemenetasjon
-    val endretTid: ZonedDateTime? = null, // Tidspunkt for siste endring på behandlingen. Ved første melding vil denne være lik registrertTid
+    val endretTid: LocalDateTime, // Tidspunkt for siste endring på behandlingen. Ved første melding vil denne være lik registrertTid
     val forventetOppstartTid: LocalDate? = null, // Hvis systemet eller bruker har et forhold til når ytelsen normalt skal utbetales (planlagt uttak, ønsket oppstart etc).
-    val tekniskTid: ZonedDateTime, // Tidspunktet da fagsystemet legger hendelsen på grensesnittet/topicen
+    val tekniskTid: LocalDateTime, // Tidspunktet da fagsystemet legger hendelsen på grensesnittet/topicen
     val papirSøknad: String? = null, // Flagg som angir om opprinnelsen til søknaden er fra et papirskjema.
     val sakYtelse: String, // Kode som angir hvilken ytelse/stønad behandlingen gjelder
     val sakUtland: String? = null, // Nasjonal/Utland - Kode som angir hvor vidt saken er for utland eller nasjonal å anses. Se begrepskatalogen: https://jira.adeo.no/browse/BEGREP-1611#
@@ -32,9 +32,8 @@ data class BehandlingDVH(
     val opprettetAv: String, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som opprettet behandlingen. Hvis det er en servicebruker så sende denne
     val saksbehandler: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
     val ansvarligBeslutter: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6, men kun om det skulle hatt verdi] Ved krav om totrinnskontroll skal dette feltet innholde ansvarlig beslutter sin ID
-    val ansvarligEnhet: String, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
-    val totrinnsbehandling: TotrinnsbehandlingStatusDvh = TotrinnsbehandlingStatusDvh.IKKE_GJENNOMFØRT, // Status på totrinnskontrollen. GODKJENT, UNDERKJENT eller IKKE_GJENNOMFØRT,
-    val datoForsteUtbetaling: ZonedDateTime? = null, // Hvis systemet eller bruker har et forhold til når ytelsen normalt skal utbetales (planlagt uttak, ønsket oppstart etc)
+    val ansvarligEnhet: String, // [Feltet er geo-lokaliserende og skal oppgis saom -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
+    val datoForsteUtbetaling: LocalDateTime? = null, // Hvis systemet eller bruker har et forhold til når ytelsen normalt skal utbetales (planlagt uttak, ønsket oppstart etc)
     val avsender: String? = null, // Angir fagsystemets eget navn
 
     // TODO: Implementer dette feltet sammen med team Sak. Det er litt usikkerhet rundt hvordan vi skal implementere nøstede vilkårsvurderinger.
@@ -45,7 +44,7 @@ data class BehandlingDVH(
     val behandlingBegrunnelse: String? = null, // EF sender dette
     val revurderingOpplysningskilde: String? = null, // Opplysningskilde til hvorfor det må gjøres en revurdering, eks MODIA
     val revurderingÅrsak: String? = null, // Årsak til revurdering, eks ENDRING_I_INNTEKT
-    val kravMottatt: ZonedDateTime? = null, // Dato for når krav eller informasjon om at man må opprette revurdering ble mottatt
+    val kravMottatt: LocalDateTime? = null, // Dato for når krav eller informasjon om at man må opprette revurdering ble mottatt
     val behandlingÅrsak: String? = null, // Årsak til opprettet behandling - typisk klage, nye opplysninger, sanksjon, søknad, migrering, g-omregning, korrigering og papirsøknad
     val versjon: String? = null, // "Kode som hvilken versjonen av koden dataene er generert med bakgrunn på. Kan godt være relatert til Git repoet. Alltid null hos EF. Send hvis ikke for mye stress å implementere.
 )
