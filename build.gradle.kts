@@ -1,4 +1,5 @@
 val javaVersion = JavaLanguageVersion.of(21)
+val tilleggsstønaderLibsVersion = "2024.05.08-08.38.544e65c0c5a6"
 
 group = "no.nav.tilleggsstonader.kontrakter"
 
@@ -49,6 +50,9 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core")
+
+    // Tillegggsstønader libs
+    implementation("no.nav.tilleggsstonader-libs:util:$tilleggsstønaderLibsVersion")
 }
 
 kotlin {
