@@ -12,4 +12,5 @@ data class SakStatus(
 data class VedtakStatus(
     val harVedtak: Boolean,
     val harAktivtVedtak: Boolean,
+    val harVedtakUtenUtfall: Boolean,
 )
