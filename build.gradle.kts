@@ -4,7 +4,7 @@ val tilleggsstønaderLibsVersion = "2024.05.08-08.38.544e65c0c5a6"
 group = "no.nav.tilleggsstonader.kontrakter"
 
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "1.9.24"
     `maven-publish`
     `java-library`
     id("com.diffplug.spotless") version "6.25.0"
@@ -40,7 +40,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.2.4"))
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.2.5"))
 
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-annotations")
