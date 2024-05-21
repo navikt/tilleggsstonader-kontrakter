@@ -30,8 +30,10 @@ class FinnOppgaveRequestTest {
               "aktivFomDato": "2000-10-31",
               "aktivTomDato": "2000-10-31",
               "mappeId": 12345,
-              "limit": 10,
-              "offset": 0
+              "limit" : 10,
+              "offset" : 0,
+              "sorteringsrekkefolge" : "ASC",
+              "sorteringsfelt" : "FRIST"
             }
         """.trimIndent()
 
