@@ -33,6 +33,20 @@ data class FinnOppgaveRequest(
     val aktivFomDato: LocalDate? = null,
     val aktivTomDato: LocalDate? = null,
     val mappeId: Long? = null,
-    val limit: Long? = null,
-    val offset: Long? = null,
+    val limit: Long,
+    val offset: Long,
+    val sorteringsrekkefolge: Sorteringsrekkefølge = Sorteringsrekkefølge.ASC, // TODO fjern default når den er tatt in bruk
+    val sorteringsfelt: Sorteringsfelt = Sorteringsfelt.FRIST, // TODO fjern default når den er tatt in bruk
 )
+
+enum class Sorteringsrekkefølge {
+    ASC,
+    DESC,
+}
+
+enum class Sorteringsfelt {
+    OPPRETTET_TIDSPUNKT,
+    AKTIV_DATO,
+    FRIST,
+    ENDRET_TIDSPUNKT,
+}
