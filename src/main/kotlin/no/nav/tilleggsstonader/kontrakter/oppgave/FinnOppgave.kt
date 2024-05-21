@@ -33,10 +33,10 @@ data class FinnOppgaveRequest(
     val aktivFomDato: LocalDate? = null,
     val aktivTomDato: LocalDate? = null,
     val mappeId: Long? = null,
-    val limit: Long,
-    val offset: Long,
-    val sorteringsrekkefolge: Sorteringsrekkefølge = Sorteringsrekkefølge.ASC, // TODO fjern default når den er tatt in bruk
-    val sorteringsfelt: Sorteringsfelt = Sorteringsfelt.FRIST, // TODO fjern default når den er tatt in bruk
+    val limit: Long = 150,
+    val offset: Long = 0,
+    val sorteringsrekkefolge: Sorteringsrekkefølge = Sorteringsrekkefølge.ASC,
+    val sorteringsfelt: Sorteringsfelt = Sorteringsfelt.FRIST,
 )
 
 enum class Sorteringsrekkefølge {
