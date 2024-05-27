@@ -12,6 +12,9 @@ updates:
       backend:
         patterns:
           - "*"
+    ignore:
+      - dependency-name: "org.jetbrains.kotlin:kotlin-gradle-plugin"
+        versions: ["2.0.0"]
 
   - package-ecosystem: github-actions
     directory: "/"
