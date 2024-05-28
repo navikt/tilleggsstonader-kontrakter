@@ -3,27 +3,21 @@ package no.nav.tilleggsstonader.kontrakter.ytelse
 import java.time.LocalDate
 
 /**
- * TODO slett default verdier når den er tatt i bruk av consumer
- * @param typer definierer hvilke typer som skal hentes
+ * @param typer definerer hvilke typer som skal hentes
  */
 data class YtelsePerioderRequest(
     val ident: String,
-    val fom: LocalDate = LocalDate.now(),
-    val tom: LocalDate = LocalDate.now(),
-    val typer: List<TypeYtelsePeriode> = TypeYtelsePeriode.entries,
+    val fom: LocalDate,
+    val tom: LocalDate,
+    val typer: List<TypeYtelsePeriode>,
 )
 
 /**
- * TODO slett [arbeidsavklaringspenger]
- * TODO slett [ensligForsørger]
- * TODO slett default emptylist
- * Når perioder og hentetInformasjon er tatt i bruk
+ * @param hentetInformasjon populeres med alle typer som man har sendt med i requesten
  */
 data class YtelsePerioderDto(
-    val arbeidsavklaringspenger: PerioderArbeidsavklaringspenger,
-    val ensligForsørger: PerioderEnsligForsørger,
-    val perioder: List<YtelsePeriode> = emptyList(),
-    val hentetInformasjon: List<HentetInformasjon> = emptyList(),
+    val perioder: List<YtelsePeriode>,
+    val hentetInformasjon: List<HentetInformasjon>,
 )
 
 data class YtelsePeriode(
