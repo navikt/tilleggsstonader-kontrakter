@@ -23,7 +23,7 @@ data class YtelsePerioderDto(
 data class YtelsePeriode(
     val type: TypeYtelsePeriode,
     val fom: LocalDate,
-    val tom: LocalDate,
+    val tom: LocalDate?,
 )
 
 data class HentetInformasjon(
@@ -39,4 +39,5 @@ enum class StatusHentetInformasjon {
 enum class TypeYtelsePeriode {
     AAP,
     ENSLIG_FORSØRGER,
+    OMSTILLINGSSTØNAD,
 }
