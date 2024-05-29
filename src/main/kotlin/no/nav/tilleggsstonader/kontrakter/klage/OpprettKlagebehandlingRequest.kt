@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.klage
 
+import no.nav.tilleggsstonader.kontrakter.felles.Fagsystem
 import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 import java.time.LocalDate
 
