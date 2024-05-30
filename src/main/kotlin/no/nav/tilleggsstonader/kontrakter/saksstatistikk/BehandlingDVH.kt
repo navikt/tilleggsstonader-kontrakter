@@ -36,6 +36,9 @@ data class BehandlingDVH(
     val avsender: String, // Angir fagsystemets eget navn
     val totrinnsbehandling: Boolean, // Flagg som viser om totrinnsbehandling har blitt gjennomført
 
+    val relatertEksternBehandlingId: String? = null, //BReferanse for å håndtere at klage behandles utenfor saksbehandlingsløsningen
+    val relatertFagsystemType: String? = null, //Gir DVH informasjon om hva system og behandlingstype som er opprinnelig for behandling som klages på, verdier som sendes er: f.eks søknad, tilbakekrevning, revudering
+
     // TODO: Implementer dette feltet sammen med team Sak. Det er litt usikkerhet rundt hvordan vi skal implementere nøstede vilkårsvurderinger.
     val vilkårsprøving: List<VilkårsprøvingDVH>, // Liste med aktuelle vilkår, og resultat av vilkårsprøving. Brukes også for å utlede årsak til avslag. Innhold i liste: VilkårID, Beskrivelse/navn, resultat
 
