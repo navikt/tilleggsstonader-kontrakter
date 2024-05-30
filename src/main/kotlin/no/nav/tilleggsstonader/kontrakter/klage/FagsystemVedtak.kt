@@ -7,13 +7,4 @@ data class FagsystemVedtak(
     val behandlingstype: String,
     val resultat: String,
     val vedtakstidspunkt: LocalDateTime,
-    val fagsystemType: FagsystemType,
-    val regelverk: Regelverk?,
 )
-
-enum class FagsystemType {
-    ORDNIÆR, // brukes for behandlinger fra ef-sak/ba-sak
-    TILBAKEKREVING,
-    SANKSJON_1_MND,
-    UTESTENGELSE,
-}
