@@ -17,13 +17,13 @@ interface BehandlingsstatistikkDvh {
     val tekniskTid: LocalDateTime // Tidspunktet da fagsystemet legger hendelsen på grensesnittet/topicen
     val sakYtelse: String // Kode som angir hvilken ytelse/stønad behandlingen gjelder
     val sakUtland: String? // Nasjonal/Utland - Kode som angir hvor vidt saken er for utland eller nasjonal å anses. Se begrepskatalogen: https://jira.adeo.no/browse/BEGREP-1611#
-    val behandlingType: String// Kode som angir hvilken type behandling det er snakk om - typisk: søknad, revurdering, tilbakekreving, klage, etc.
-    val behandlingStatus: String// Kode som angir hvilken status behandlingen har - typisk: opprettet, under behandling, avsluttet, etc
+    val behandlingType: String // Kode som angir hvilken type behandling det er snakk om - typisk: søknad, revurdering, tilbakekreving, klage, etc.
+    val behandlingStatus: String // Kode som angir hvilken status behandlingen har - typisk: opprettet, under behandling, avsluttet, etc
     val behandlingMetode: String? // Kode som angir om saken er behandlet manuelt eller automatisk (hvis fagsystemet opererer med en slik verdi).
-    val opprettetAv: String// [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som opprettet behandlingen. Hvis det er en servicebruker så sende denne
-    val saksbehandler: String// [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
-    val ansvarligEnhet: String// [Feltet er geo-lokaliserende og skal oppgis saom -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
-    val avsender: String// Angir fagsystemets eget navn
+    val opprettetAv: String // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som opprettet behandlingen. Hvis det er en servicebruker så sende denne
+    val saksbehandler: String // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
+    val ansvarligEnhet: String // [Feltet er geo-lokaliserende og skal oppgis saom -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
+    val avsender: String // Angir fagsystemets eget navn
     val versjon: String? // "Kode som hvilken versjonen av koden dataene er generert med bakgrunn på. Kan godt være relatert til Git repoet. Alltid null hos EF. Send hvis ikke for mye stress å implementere.
 }
 
