@@ -51,7 +51,6 @@ data class BehandlingKlageDvh(
     val relatertFagsystemType: String? = null, // Fagsystemet sin eksterne behandlingId, hvis klagen er koblet til en behandling
 ) : BehandlingsstatistikkDvh
 
-// Følgende felter er med i felleskontrakten til Team Sak. Vi bør etterstrebe å sende så mange av dem som mulig.
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class BehandlingDVH(
     override val behandlingId: String,
