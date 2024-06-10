@@ -5,7 +5,6 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 interface BehandlingsstatistikkDvh {
-    // Fellesfelter her
     val behandlingId: String // Fagsystemets eksterne behandlings-ID
     val behandlingUuid: String // Behandlingens UUID - for oss trolig lik behandlingId
     val saksnummer: String // Saksnummer som følger behandlingen
