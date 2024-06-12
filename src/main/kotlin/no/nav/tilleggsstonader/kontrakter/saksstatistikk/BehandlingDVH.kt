@@ -8,6 +8,7 @@ interface BehandlingsstatistikkDvh {
     val behandlingId: String // Fagsystemets eksterne behandlings-ID
     val behandlingUuid: String // Behandlingens UUID - for oss trolig lik behandlingId
     val saksnummer: String // Saksnummer som følger behandlingen
+    val sakId: String // UUID til saken som følger behandlingen
     val aktorId: String // PersonIdent tilknyttet søker eller hovedaktør for ytelsen
     val mottattTid: LocalDateTime // Tidspunktet da behandlingen oppstår (eks søknadstidspunkt, inntektsmelding, etc). Det er ønskelig å måle brukers opplevde ventetid. Ved elektronisk kontakt regner vi med at denne er lik registrertTid
     val registrertTid: LocalDateTime // Tidspunkt da behandlingen først oppstod eller ble registrert i fagsystemet
@@ -20,6 +21,7 @@ interface BehandlingsstatistikkDvh {
     val behandlingStatus: String // Kode som angir hvilken status behandlingen har - typisk: opprettet, under behandling, avsluttet, etc
     val behandlingMetode: String? // Kode som angir om saken er behandlet manuelt eller automatisk (hvis fagsystemet opererer med en slik verdi).
     val opprettetAv: String // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som opprettet behandlingen. Hvis det er en servicebruker så sende denne
+    val kravMottatt: LocalDate? // Dato for når krav eller informasjon om at man må opprette revurdering ble mottatt
     val saksbehandler: String // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
     val ansvarligEnhet: String // [Feltet er geo-lokaliserende og skal oppgis saom -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
     val behandlingResultat: String? // Kode som angir resultatet på behandling - typisk: avbrutt, innvilget, delvis innvilget, henlagt av tekniske hensyn, etc
@@ -32,12 +34,14 @@ data class BehandlingKlageDvh(
     override val behandlingId: String,
     override val behandlingUuid: String,
     override val saksnummer: String,
+    override val sakId: String,
     override val aktorId: String,
     override val mottattTid: LocalDateTime,
     override val registrertTid: LocalDateTime,
     override val ferdigBehandletTid: LocalDateTime?,
     override val endretTid: LocalDateTime,
     override val tekniskTid: LocalDateTime,
+    override val kravMottatt: LocalDate?,
     override val sakYtelse: String,
     override val sakUtland: String?,
     override val behandlingType: String,
@@ -60,6 +64,7 @@ data class BehandlingDVH(
     override val behandlingId: String,
     override val behandlingUuid: String,
     override val saksnummer: String,
+    override val sakId: String,
     override val aktorId: String,
     override val mottattTid: LocalDateTime,
     override val registrertTid: LocalDateTime,
@@ -71,6 +76,7 @@ data class BehandlingDVH(
     override val behandlingType: String,
     override val behandlingStatus: String,
     override val behandlingMetode: String?,
+    override val kravMottatt: LocalDate?,
     override val opprettetAv: String,
     override val saksbehandler: String,
     override val ansvarligEnhet: String,
@@ -80,7 +86,6 @@ data class BehandlingDVH(
     override val versjon: String?,
 
     val relatertBehandlingId: String? = null, // Hvis behandlingen har oppsått med bakgrunn i en annen, skal den foregående behandlingen refereres til her
-    val sakId: String, // UUID til saken som følger behandlingen
     val vedtakTid: LocalDateTime? = null, // Tidspunktet for når vedtaket ble fattet - hvis saken ble vedtatt
     val utbetaltTid: LocalDate? = null, // Tidspunkt for første utbetaling av ytelse. Tilsvarer datoForsteUtbetaling i EF sin implemenetasjon
     val forventetOppstartTid: LocalDate? = null, // Hvis systemet eller bruker har et forhold til når ytelsen normalt skal utbetales (planlagt uttak, ønsket oppstart etc).
@@ -95,7 +100,6 @@ data class BehandlingDVH(
     val behandlingBegrunnelse: String? = null, // EF sender dette
     val revurderingOpplysningskilde: String? = null, // Opplysningskilde til hvorfor det må gjøres en revurdering, eks MODIA
     val revurderingÅrsak: String? = null, // Årsak til revurdering, eks ENDRING_I_INNTEKT
-    val kravMottatt: LocalDate? = null, // Dato for når krav eller informasjon om at man må opprette revurdering ble mottatt
     val behandlingÅrsak: String? = null, // Årsak til opprettet behandling - typisk klage, nye opplysninger, sanksjon, søknad, migrering, g-omregning, korrigering og papirsøknad
 ) : BehandlingsstatistikkDvh
 
