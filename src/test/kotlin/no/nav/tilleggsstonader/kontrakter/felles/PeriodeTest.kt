@@ -62,6 +62,20 @@ internal class PeriodeTest {
         }
 
         @Test
+        fun `periode 1 starter før periode 2 og slutter etter`() {
+            val periode1 = Månedsperiode(jan, mars)
+            val periode2 = Månedsperiode(feb, feb)
+            assertThat(listOf(periode1, periode2).overlapper()).isTrue
+        }
+
+        @Test
+        fun `periode 1 starter etter periode 2 og slutter flr`() {
+            val periode1 = Månedsperiode(feb, feb)
+            val periode2 = Månedsperiode(jan, mars)
+            assertThat(listOf(periode1, periode2).overlapper()).isTrue
+        }
+
+        @Test
         fun `periode 2 er etter periode 1`() {
             val periode1 = Månedsperiode(jan, feb)
             val periode2 = Månedsperiode(mars, april)
