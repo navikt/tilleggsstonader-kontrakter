@@ -30,6 +30,7 @@ interface BehandlingsstatistikkDvh {
     val versjon: String? // "Kode som hvilken versjonen av koden dataene er generert med bakgrunn på. Kan godt være relatert til Git repoet. Alltid null hos EF. Send hvis ikke for mye stress å implementere.
 }
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class BehandlingKlageDvh(
     override val behandlingId: String,
     override val behandlingUuid: String,
