@@ -11,6 +11,11 @@ data class FagsystemVedtak(
     val regelverk: Regelverk?,
 )
 
+enum class Regelverk {
+    NASJONAL,
+    EØS,
+}
+
 enum class FagsystemType {
     ORDNIÆR, // brukes for behandlinger fra TS-sak
     TILBAKEKREVING,
