@@ -51,8 +51,8 @@ data class BehandlingKlageDvh(
     override val avsender: String,
     override val versjon: String?,
 
-    val relatertEksternBehandlingId: String? = null, // Påklaget behandling sin fagsystemtype, eks ORDINÆR eller TILBAKEKREVING
-    val relatertFagsystemType: String? = null, // Fagsystemet sin eksterne behandlingId, hvis klagen er koblet til en behandling
+    val relatertEksternBehandlingId: String? = null, // Fagsystemet sin eksterne behandlingId, hvis klagen er koblet til en behandling
+    val relatertFagsystemType: String? = null, // Påklaget behandling sin fagsystemtype, eks ORDINÆR eller TILBAKEKREVING
 ) : BehandlingsstatistikkDvh
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
