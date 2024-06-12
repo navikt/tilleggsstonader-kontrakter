@@ -22,6 +22,8 @@ interface BehandlingsstatistikkDvh {
     val opprettetAv: String // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som opprettet behandlingen. Hvis det er en servicebruker så sende denne
     val saksbehandler: String // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6] Saksbehandler-ID som sist var involvert i behandlingen
     val ansvarligEnhet: String // [Feltet er geo-lokaliserende og skal oppgis saom -5 hvis noen personer tilknyttet behandlingen er kode 6] Hvilken org enhet som nå har ansvar for saken. Dette kan være samme som opprettetEnhet. Avslåtte klager i vedtaksinstans skal ha riktig KA-enhet her
+    val behandlingResultat: String? // Kode som angir resultatet på behandling - typisk: avbrutt, innvilget, delvis innvilget, henlagt av tekniske hensyn, etc
+    val resultatBegrunnelse: String? // Kode som angir en begrunnelse til resultat - typisk: vilkårsprøvingen feilet, dublett, teknisk avvik, etc
     val avsender: String // Angir fagsystemets eget navn
     val versjon: String? // "Kode som hvilken versjonen av koden dataene er generert med bakgrunn på. Kan godt være relatert til Git repoet. Alltid null hos EF. Send hvis ikke for mye stress å implementere.
 }
@@ -44,6 +46,8 @@ data class BehandlingKlageDvh(
     override val opprettetAv: String,
     override val saksbehandler: String,
     override val ansvarligEnhet: String,
+    override val behandlingResultat: String? = null,
+    override val resultatBegrunnelse: String? = null,
     override val avsender: String,
     override val versjon: String?,
 
@@ -70,6 +74,8 @@ data class BehandlingDVH(
     override val opprettetAv: String,
     override val saksbehandler: String,
     override val ansvarligEnhet: String,
+    override val behandlingResultat: String? = null,
+    override val resultatBegrunnelse: String? = null,
     override val avsender: String,
     override val versjon: String?,
 
@@ -79,8 +85,6 @@ data class BehandlingDVH(
     val utbetaltTid: LocalDate? = null, // Tidspunkt for første utbetaling av ytelse. Tilsvarer datoForsteUtbetaling i EF sin implemenetasjon
     val forventetOppstartTid: LocalDate? = null, // Hvis systemet eller bruker har et forhold til når ytelsen normalt skal utbetales (planlagt uttak, ønsket oppstart etc).
     val papirSøknad: String? = null, // Flagg som angir om opprinnelsen til søknaden er fra et papirskjema.
-    val behandlingResultat: String? = null, // Kode som angir resultatet på behandling - typisk: avbrutt, innvilget, delvis innvilget, henlagt av tekniske hensyn, etc
-    val resultatBegrunnelse: String? = null, // Kode som angir en begrunnelse til resultat - typisk: vilkårsprøvingen feilet, dublett, teknisk avvik, etc
     val ansvarligBeslutter: String? = null, // [Feltet er geo-lokaliserende og skal oppgis som -5 hvis noen personer tilknyttet behandlingen er kode 6, men kun om det skulle hatt verdi] Ved krav om totrinnskontroll skal dette feltet innholde ansvarlig beslutter sin ID
     val totrinnsbehandling: Boolean, // Flagg som viser om totrinnsbehandling har blitt gjennomført
 
