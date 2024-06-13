@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.time.LocalDate
 
 /**
- * @param type fra arena er ikke mappet til [TypeAktivitet] fordi [TypeAktivitet] ikke er komplett
+ * @param type fra arena er ikke mappet til [TypeAktivitet] fordi [TypeAktivitet] kanskje ikke er komplett
  */
 data class AktivitetArenaDto(
     val id: String,
