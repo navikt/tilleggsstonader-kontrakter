@@ -9,8 +9,8 @@ data class FagsystemVedtak(
     val behandlingstype: String,
     val resultat: String,
     val vedtakstidspunkt: LocalDateTime,
-    val fagsystemType: FagsystemType? = null, // TODO optional fjernes når sak og klage er oppdatert med nye kontrakter
-    val regelverk: Regelverk? = null, // TODO null fjernes når sak og klage er oppdatert med nye kontraker
+    val fagsystemType: FagsystemType,
+    val regelverk: Regelverk,
 )
 
 enum class Regelverk {
