@@ -1,10 +1,10 @@
 val javaVersion = JavaLanguageVersion.of(21)
-val tilleggsstønaderLibsVersion = "2024.05.08-08.38.544e65c0c5a6"
+val tilleggsstønaderLibsVersion = "2024.05.30-12.20.051501b667a0"
 
 group = "no.nav.tilleggsstonader.kontrakter"
 
 plugins {
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "2.0.0"
     `maven-publish`
     `java-library`
     id("com.diffplug.spotless") version "6.25.0"
@@ -40,7 +40,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.3.0"))
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.3.1"))
 
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-annotations")
