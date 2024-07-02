@@ -1,10 +1,10 @@
+@file:Suppress("unused")
+
 package no.nav.tilleggsstonader.kontrakter.klage
 
 import java.time.LocalDateTime
-import java.util.UUID
 
 data class FagsystemVedtak(
-    val behandlingId: UUID,
     val eksternBehandlingId: String,
     val behandlingstype: String,
     val resultat: String,
