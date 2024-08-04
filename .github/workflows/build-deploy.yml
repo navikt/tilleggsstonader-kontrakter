@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - uses: gradle/actions/setup-gradle@v3
+      - uses: gradle/actions/setup-gradle@v4
         with:
           arguments: build -PskipLint
 
@@ -65,7 +65,7 @@ jobs:
           prerelease: false
 
       - name: Publish
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
