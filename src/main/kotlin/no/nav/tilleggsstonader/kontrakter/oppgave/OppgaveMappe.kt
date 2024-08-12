@@ -13,7 +13,7 @@ data class FinnMappeResponseDto(
 )
 
 data class MappeDto(
-    val id: Int,
+    val id: Long,
     val navn: String,
     val enhetsnr: String,
     val tema: String? = null,
