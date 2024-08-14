@@ -20,6 +20,15 @@ data class YtelsePerioderDto(
     val hentetInformasjon: List<HentetInformasjon>,
 )
 
+/**
+ * @param aapAktivitetsfase kan være
+ * * Under arbeidsavklaring
+ * * Sykepengeerstatning
+ * * Ikke spesif. aktivitetsfase
+ * * Vurdering for uføre
+ * * Arbeidsutprøving
+ * * Ferdig avklart
+ */
 data class YtelsePeriode(
     val type: TypeYtelsePeriode,
     val fom: LocalDate,
