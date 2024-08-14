@@ -21,22 +21,16 @@ data class YtelsePerioderDto(
 )
 
 /**
- * @param aapAktivitetsfase kan være
- * * Under arbeidsavklaring
- * * Sykepengeerstatning
- * * Ikke spesif. aktivitetsfase
- * * Vurdering for uføre
- * * Arbeidsutprøving
- * * Ferdig avklart
+ * @param aapErFerdigAvklart hvis aktivitetsfasen == 'Ferdig avklart', man har då ikke rett på tilsyn barn
  */
 data class YtelsePeriode(
     val type: TypeYtelsePeriode,
     val fom: LocalDate,
     val tom: LocalDate?,
-    val aapAktivitetsfase: String? = null,
+    val aapErFerdigAvklart: Boolean? = null,
 ) {
     init {
-        if (type != TypeYtelsePeriode.AAP && aapAktivitetsfase != null) {
+        if (type != TypeYtelsePeriode.AAP && aapErFerdigAvklart != null) {
             error("Kan ikke sette 'aapAktivitetsfase' for $type")
         }
     }
