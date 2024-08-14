@@ -24,7 +24,14 @@ data class YtelsePeriode(
     val type: TypeYtelsePeriode,
     val fom: LocalDate,
     val tom: LocalDate?,
-)
+    val aapAktivitetsfase: String? = null,
+) {
+    init {
+        if (type != TypeYtelsePeriode.AAP && aapAktivitetsfase != null) {
+            error("Kan ikke sette 'aapAktivitetsfase' for $type")
+        }
+    }
+}
 
 data class HentetInformasjon(
     val type: TypeYtelsePeriode,
