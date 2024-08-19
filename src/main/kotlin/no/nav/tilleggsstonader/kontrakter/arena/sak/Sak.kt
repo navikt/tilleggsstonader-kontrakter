@@ -10,7 +10,7 @@ enum class Målgruppe(override val kodeArena: String, val navn: String) : KodeAr
     GJENLEVENDE_UTDANNING("GJENEKUTD", "Gjenlevende ektefelle under utdanning"),
     DAGPENGER("MOTDAGPEN", "Mottaker av dagpenger"),
     TILTAKSPENGER("MOTTILTPEN", "Mottaker av tiltakspenger"),
-    NEDSATT__ARBEIDSEVNE("NEDSARBEVN", "Person med nedsatt arbeidsevne pga. sykdom"),
+    NEDSATT_ARBEIDSEVNE("NEDSARBEVN", "Person med nedsatt arbeidsevne pga. sykdom"),
     TIDLIGERE_FAMILIEPLEIER_UTDANNING("TIDLFAMPL", "Tidligere familiepleier under utdanning"),
 }
 
