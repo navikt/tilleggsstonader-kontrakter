@@ -2,19 +2,18 @@ package no.nav.tilleggsstonader.kontrakter.brevmottaker
 
 import java.util.*
 
-data class BrevmottakerPerson(
+data class BrevmottakerPersonDto(
     val id: UUID,
     val personIdent: String,
     val navn: String,
     val mottakerRolle: MottakerRolle,
 )
 
-data class BrevmottakerOrganisasjon(
+data class BrevmottakerOrganisasjonDto(
     val id: UUID,
     val organisasjonsnummer: String,
     val organisasjonsnavn: String,
     val navnHosOrganisasjon: String,
-    val mottakerRolle: MottakerRolle,
 )
 
 enum class MottakerRolle {
