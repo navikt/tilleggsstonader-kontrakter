@@ -5,4 +5,5 @@ package no.nav.tilleggsstonader.kontrakter.felles
  */
 enum class Stønadstype(val tittel: String) {
     BARNETILSYN("Barnetilsyn"),
+    LÆREMIDLER("Læremidler"),
 }

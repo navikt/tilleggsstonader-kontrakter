@@ -15,4 +15,5 @@ enum class Tema {
 
 fun Stønadstype.tilTema(): Tema = when (this) {
     Stønadstype.BARNETILSYN -> Tema.TSO
+    Stønadstype.LÆREMIDLER -> Tema.TSO
 }
