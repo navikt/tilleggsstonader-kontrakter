@@ -5,7 +5,7 @@ import java.util.*
 data class BrevmottakerPersonDto(
     val id: UUID,
     val personIdent: String,
-    val navn: String,
+    val navn: String?,
     val mottakerRolle: MottakerRolle,
 )
 
