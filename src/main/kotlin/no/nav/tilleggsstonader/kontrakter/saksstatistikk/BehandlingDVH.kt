@@ -1,6 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.saksstatistikk
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -109,3 +110,16 @@ data class VilkårsprøvingDVH(
     val beskrivelse: String,
     val resultat: String,
 )
+
+/*
+ * Saksbehandlingsstatistikken trenger informasjon om behandlingen gjelder "Mobilitetsfremmende stønad", "Tilleggsstønad" eller "Tilleggsstønad arbeidssøkere".
+ */
+enum class SakYterlseDvh {
+    TILLEGG_BARNETILSYN; // For pass av barn er kun "Tilleggsstønad" relevant
+
+    companion object {
+        fun fraStøndstype(stønadstype: Stønadstype) = when (stønadstype) {
+            Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
+        }
+    }
+}
