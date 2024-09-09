@@ -119,10 +119,8 @@ enum class SakYterlseDvh {
     TILLEGG_BARNETILSYN, // For pass av barn er kun "Tilleggsstønad" relevant
     ;
 
-    companion object {
-        fun fraStøndstype(stønadstype: Stønadstype) = when (stønadstype) {
-            Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
-            Stønadstype.LÆREMIDLER -> TODO()
-        }
+    fun fraStønadstype(stønadstype: Stønadstype) = when (stønadstype) {
+        Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
+        Stønadstype.LÆREMIDLER -> TODO()
     }
 }
