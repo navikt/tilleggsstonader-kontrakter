@@ -16,7 +16,7 @@ interface BehandlingsstatistikkDvh {
     val ferdigBehandletTid: LocalDateTime? // Tidspunkt når behandling ble avsluttet, enten avbrutt, henlagt, vedtak innvilget/avslått, etc
     val endretTid: LocalDateTime // Tidspunkt for siste endring på behandlingen. Ved første melding vil denne være lik registrertTid
     val tekniskTid: LocalDateTime // Tidspunktet da fagsystemet legger hendelsen på grensesnittet/topicen
-    val sakYtelse: String // Kode som angir hvilken ytelse/stønad behandlingen gjelder
+    val sakYtelse: SakYterlseDvh // Kode som angir hvilken ytelse/stønad behandlingen gjelder
     val sakUtland: String? // Nasjonal/Utland - Kode som angir hvor vidt saken er for utland eller nasjonal å anses. Se begrepskatalogen: https://jira.adeo.no/browse/BEGREP-1611#
     val behandlingType: String // Kode som angir hvilken type behandling det er snakk om - typisk: søknad, revurdering, tilbakekreving, klage, etc.
     val behandlingStatus: String // Kode som angir hvilken status behandlingen har - typisk: opprettet, under behandling, avsluttet, etc
@@ -44,7 +44,7 @@ data class BehandlingKlageDvh(
     override val endretTid: LocalDateTime,
     override val tekniskTid: LocalDateTime,
     override val kravMottatt: LocalDate?,
-    override val sakYtelse: String,
+    override val sakYtelse: SakYterlseDvh,
     override val sakUtland: String?,
     override val behandlingType: String,
     override val behandlingStatus: String,
@@ -73,7 +73,7 @@ data class BehandlingDVH(
     override val ferdigBehandletTid: LocalDateTime?,
     override val endretTid: LocalDateTime,
     override val tekniskTid: LocalDateTime,
-    override val sakYtelse: String,
+    override val sakYtelse: SakYterlseDvh,
     override val sakUtland: String?,
     override val behandlingType: String,
     override val behandlingStatus: String,
@@ -112,14 +112,17 @@ data class VilkårsprøvingDVH(
 )
 
 /*
- * Saksbehandlingsstatistikken trenger informasjon om behandlingen gjelder "Mobilitetsfremmende stønad", "Tilleggsstønad" eller "Tilleggsstønad arbeidssøkere".
+ * Saksbehandlingsstatistikken trenger informasjon om behandlingen gjelder "Mobilitetsfremmende stønad",
+ * "Tilleggsstønad" eller "Tilleggsstønad arbeidssøkere".
  */
 enum class SakYterlseDvh {
-    TILLEGG_BARNETILSYN; // For pass av barn er kun "Tilleggsstønad" relevant
+    TILLEGG_BARNETILSYN, // For pass av barn er kun "Tilleggsstønad" relevant
+    ;
 
     companion object {
         fun fraStøndstype(stønadstype: Stønadstype) = when (stønadstype) {
             Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
+            Stønadstype.LÆREMIDLER -> TODO()
         }
     }
 }
