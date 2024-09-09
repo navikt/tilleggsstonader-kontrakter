@@ -30,8 +30,11 @@ fun <T> List<Periode<T>>.erSortert(): Boolean where T : Comparable<T>, T : Tempo
 }
 
 fun <T> List<Periode<T>>.overlapper(): Boolean where T : Comparable<T>, T : Temporal {
-    return this.sortedBy { it.fom }.zipWithNext().any { it.first.overlapper(it.second) }
+    return førsteOverlappendePeriode() != null
 }
+
+fun <T> List<Periode<T>>.førsteOverlappendePeriode(): Pair<Periode<T>, Periode<T>>? where T : Comparable<T>, T : Temporal =
+    this.sortedBy { it.fom }.zipWithNext().firstOrNull { it.first.overlapper(it.second) }
 
 /**
  * Interface for å slå sammen 2 perioder

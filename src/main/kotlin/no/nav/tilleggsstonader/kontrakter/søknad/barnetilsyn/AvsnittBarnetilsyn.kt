@@ -8,23 +8,13 @@ import no.nav.tilleggsstonader.kontrakter.søknad.TekstFelt
 
 data class HovedytelseAvsnitt(
     val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
-    @Deprecated("Erstatt med arbeidOgOpphold")
-    val boddSammenhengende: EnumFelt<JaNei>? = null,
-    @Deprecated("Erstatt med arbeidOgOpphold")
-    val planleggerBoINorgeNeste12mnd: EnumFelt<JaNei>? = null,
-    // TODO fjern default null når deprecates fjernes
-    val arbeidOgOpphold: ArbeidOgOpphold? = null,
+    val arbeidOgOpphold: ArbeidOgOpphold?,
 )
 
 data class AktivitetAvsnitt(
-    // TODO fjern default null når deprecates fjernes
-    val aktiviteter: EnumFlereValgFelt<String>? = null,
-    // TODO fjern default null når deprecates fjernes
-    val annenAktivitet: EnumFelt<AnnenAktivitetType>? = null,
-    // TODO fjern default null når deprecates fjernes
-    val lønnetAktivitet: EnumFelt<JaNei>? = null,
-    @Deprecated("Denne skal ikke brukes noe lengre")
-    val utdanning: EnumFelt<JaNei>? = null,
+    val aktiviteter: EnumFlereValgFelt<String>?,
+    val annenAktivitet: EnumFelt<AnnenAktivitetType>?,
+    val lønnetAktivitet: EnumFelt<JaNei>?,
 )
 
 enum class AnnenAktivitetType {
@@ -49,9 +39,6 @@ data class BarnMedBarnepass(
 enum class TypeBarnepass {
     BARNEHAGE_SFO_AKS,
     PRIVAT,
-
-    @Deprecated("Bruk PRIVAT_PASS")
-    ANDRE,
 }
 
 enum class ÅrsakBarnepass {

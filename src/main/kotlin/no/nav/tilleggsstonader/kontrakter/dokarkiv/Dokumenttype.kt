@@ -8,8 +8,15 @@ enum class Dokumenttype {
     BARNETILSYN_VEDTAKSBREV,
     BARNETILSYN_FRITTSTÅENDE_BREV,
     BARNETILSYN_INTERNT_VEDTAK,
+
+    LÆREMIDLER_SØKNAD,
+    LÆREMIDLER_SØKNAD_VEDLEGG,
+    LÆREMIDLER_VEDTAKSBREV,
+    LÆREMIDLER_FRITTSTÅENDE_BREV,
+    LÆREMIDLER_INTERNT_VEDTAK,
 }
 
 fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype = when (this) {
     Stønadstype.BARNETILSYN -> Dokumenttype.BARNETILSYN_INTERNT_VEDTAK
+    Stønadstype.LÆREMIDLER -> Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK
 }
