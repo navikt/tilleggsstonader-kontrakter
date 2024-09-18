@@ -11,4 +11,8 @@ enum class Vedleggstype(val tittel: String) { // TODO språk?
     // Årsak ekstra pass
     SKRIFTLIG_UTTALELSE_HELSEPERSONELL("Dokumentasjon av uttalelse fra helsepersonell"),
     TILTAKSSTED_ELLER_UTDANNINGSSTED("Dokumentasjon fra tiltakssted eller utdanningssted"),
+
+    // Læremidler
+    DOKUMENTASJON_FUNKSJONSNEDSETTELSE("Dokumentasjon funksjonsnedsettelse"),
+    UTGIFTER_FUNKSJONSNEDSETTELSE("Utgifter funksjonsnedsettelse"),
 }
