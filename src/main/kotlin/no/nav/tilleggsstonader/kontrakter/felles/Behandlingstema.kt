@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue
 
 enum class Behandlingstema(@JsonValue val value: String) {
     TilsynBarn("ab0300"),
-
+    Læremidler("ab0292"),
     Feilutbetaling("ab0006"),
     Tilbakebetaling("ab0007"),
     Klage("ae0058"),
