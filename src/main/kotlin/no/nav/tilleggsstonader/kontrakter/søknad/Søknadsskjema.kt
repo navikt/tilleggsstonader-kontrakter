@@ -3,7 +3,7 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import java.time.LocalDateTime
 
-class Søknadsskjema<T : Skjema>(
+data class Søknadsskjema<T : Skjema>(
     val ident: String,
     val mottattTidspunkt: LocalDateTime,
     val språk: Språkkode,
