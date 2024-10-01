@@ -111,9 +111,6 @@ data class VilkårsprøvingDVH(
     val resultat: String,
 )
 
-@Deprecated("Bruk ", replaceWith = ReplaceWith("SakYtelseDvh"))
-typealias SakYterlseDvh = SakYtelseDvh
-
 /*
  * Saksbehandlingsstatistikken trenger informasjon om behandlingen gjelder "Mobilitetsfremmende stønad",
  * "Tilleggsstønad" eller "Tilleggsstønad arbeidssøkere".
