@@ -16,7 +16,7 @@ interface BehandlingsstatistikkDvh {
     val ferdigBehandletTid: LocalDateTime? // Tidspunkt når behandling ble avsluttet, enten avbrutt, henlagt, vedtak innvilget/avslått, etc
     val endretTid: LocalDateTime // Tidspunkt for siste endring på behandlingen. Ved første melding vil denne være lik registrertTid
     val tekniskTid: LocalDateTime // Tidspunktet da fagsystemet legger hendelsen på grensesnittet/topicen
-    val sakYtelse: SakYterlseDvh // Kode som angir hvilken ytelse/stønad behandlingen gjelder
+    val sakYtelse: SakYtelseDvh // Kode som angir hvilken ytelse/stønad behandlingen gjelder
     val sakUtland: String? // Nasjonal/Utland - Kode som angir hvor vidt saken er for utland eller nasjonal å anses. Se begrepskatalogen: https://jira.adeo.no/browse/BEGREP-1611#
     val behandlingType: String // Kode som angir hvilken type behandling det er snakk om - typisk: søknad, revurdering, tilbakekreving, klage, etc.
     val behandlingStatus: String // Kode som angir hvilken status behandlingen har - typisk: opprettet, under behandling, avsluttet, etc
@@ -44,7 +44,7 @@ data class BehandlingKlageDvh(
     override val endretTid: LocalDateTime,
     override val tekniskTid: LocalDateTime,
     override val kravMottatt: LocalDate?,
-    override val sakYtelse: SakYterlseDvh,
+    override val sakYtelse: SakYtelseDvh,
     override val sakUtland: String?,
     override val behandlingType: String,
     override val behandlingStatus: String,
@@ -73,7 +73,7 @@ data class BehandlingDVH(
     override val ferdigBehandletTid: LocalDateTime?,
     override val endretTid: LocalDateTime,
     override val tekniskTid: LocalDateTime,
-    override val sakYtelse: SakYterlseDvh,
+    override val sakYtelse: SakYtelseDvh,
     override val sakUtland: String?,
     override val behandlingType: String,
     override val behandlingStatus: String,
@@ -111,19 +111,26 @@ data class VilkårsprøvingDVH(
     val resultat: String,
 )
 
+@Deprecated("Bruk ", replaceWith = ReplaceWith("SakYtelseDvh"))
+typealias SakYterlseDvh = SakYtelseDvh
+
 /*
  * Saksbehandlingsstatistikken trenger informasjon om behandlingen gjelder "Mobilitetsfremmende stønad",
  * "Tilleggsstønad" eller "Tilleggsstønad arbeidssøkere".
  */
-enum class SakYterlseDvh {
+enum class SakYtelseDvh {
     TILLEGG_BARNETILSYN, // For pass av barn er kun "Tilleggsstønad" relevant
+    TILLEGG_LÆREMIDLER, // For læremidler er kun "Tilleggsstønad" relevant
     ;
 
     companion object {
+        // REDUNDANT_ELSE_IN_WHEN sånn at man kan legge inn ny stønadstype i kontrakter uten å oppdatere alle when
+        @Suppress("REDUNDANT_ELSE_IN_WHEN")
         @JvmStatic
         fun fraStønadstype(stønadstype: Stønadstype) = when (stønadstype) {
             Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
-            Stønadstype.LÆREMIDLER -> TODO()
+            Stønadstype.LÆREMIDLER -> TILLEGG_LÆREMIDLER
+            else -> error("Har ikke mappet $stønadstype for ${BehandlingDVH::class.simpleName}")
         }
     }
 }
