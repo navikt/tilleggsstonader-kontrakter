@@ -28,10 +28,14 @@ data class YtelsePeriode(
     val fom: LocalDate,
     val tom: LocalDate?,
     val aapErFerdigAvklart: Boolean? = null,
+    val ensligForsørgerStønadstype: EnsligForsørgerStønadstype? = null,
 ) {
     init {
         if (type != TypeYtelsePeriode.AAP && aapErFerdigAvklart != null) {
             error("Kan ikke sette 'aapAktivitetsfase' for $type")
+        }
+        if (type != TypeYtelsePeriode.ENSLIG_FORSØRGER && ensligForsørgerStønadstype != null) {
+            error("Kan ikke sette 'ensligForsørgerStønadstype' for $type")
         }
     }
 }
@@ -50,4 +54,9 @@ enum class TypeYtelsePeriode {
     AAP,
     ENSLIG_FORSØRGER,
     OMSTILLINGSSTØNAD,
+}
+
+enum class EnsligForsørgerStønadstype {
+    OVERGANGSSTØNAD,
+    SKOLEPENGER,
 }
