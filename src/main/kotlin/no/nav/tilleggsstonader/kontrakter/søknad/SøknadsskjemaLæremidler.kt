@@ -1,6 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.søknad
 
-import no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn.HovedytelseAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.HovedytelseAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.laeremidler.UtdanningAvsnitt
 
 data class SøknadsskjemaLæremidler(
