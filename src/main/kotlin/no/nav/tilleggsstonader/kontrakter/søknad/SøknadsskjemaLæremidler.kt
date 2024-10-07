@@ -1,7 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.søknad
 
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.HovedytelseAvsnitt
-import no.nav.tilleggsstonader.kontrakter.søknad.laeremidler.UtdanningAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.læremidler.UtdanningAvsnitt
 
 data class SøknadsskjemaLæremidler(
     val hovedytelse: HovedytelseAvsnitt,

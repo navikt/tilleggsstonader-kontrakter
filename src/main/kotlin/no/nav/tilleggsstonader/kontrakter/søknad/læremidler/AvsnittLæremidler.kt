@@ -1,4 +1,4 @@
-package no.nav.tilleggsstonader.kontrakter.søknad.laeremidler
+package no.nav.tilleggsstonader.kontrakter.søknad.læremidler
 
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
