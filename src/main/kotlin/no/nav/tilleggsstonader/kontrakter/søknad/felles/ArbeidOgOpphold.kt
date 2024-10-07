@@ -1,4 +1,4 @@
-package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
+package no.nav.tilleggsstonader.kontrakter.søknad.felles
 
 import no.nav.tilleggsstonader.kontrakter.søknad.DatoFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
