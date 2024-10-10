@@ -13,6 +13,6 @@ enum class Vedleggstype(val tittel: String) { // TODO språk?
     TILTAKSSTED_ELLER_UTDANNINGSSTED("Dokumentasjon fra tiltakssted eller utdanningssted"),
 
     // Læremidler
-    DOKUMENTASJON_FUNKSJONSNEDSETTELSE("Dokumentasjon funksjonsnedsettelse"),
-    UTGIFTER_FUNKSJONSNEDSETTELSE("Utgifter funksjonsnedsettelse"),
+    DOKUMENTASJON_FUNKSJONSNEDSETTELSE("Dokumentasjon på funksjonsnedsettelse"),
+    UTGIFTER_LÆREMIDLER("Dokumentasjon på utgifter til læremidler"),
 }
