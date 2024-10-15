@@ -3,10 +3,10 @@ package no.nav.tilleggsstonader.kontrakter.arena.vedtak
 import no.nav.tilleggsstonader.kontrakter.arena.KodeArena
 import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 
-enum class UtfallVedtak {
-    NEI,
-    JA,
-    AVBRUTT,
+enum class UtfallVedtak(val navn: String) {
+    NEI("Nei"),
+    JA("Ja"),
+    AVBRUTT("Avbrutt"),
 }
 
 enum class StatusVedtak(override val kodeArena: String, val navn: String) : KodeArena {
