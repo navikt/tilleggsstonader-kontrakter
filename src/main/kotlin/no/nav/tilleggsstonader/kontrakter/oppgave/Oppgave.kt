@@ -100,6 +100,7 @@ enum class Behandlingstype(val value: String) {
     NASJONAL("ae0118"),
     EØS("ae0120"),
     Tilbakekreving("ae0161"),
+    Klage("ae0058")
 }
 
 enum class OppgavePrioritet {
