@@ -29,6 +29,7 @@ data class AktivitetDto(
 )
 
 data class VedtakDto(
+    val sakId: Int,
     val type: String,
     val status: String,
     val rettighet: String,
