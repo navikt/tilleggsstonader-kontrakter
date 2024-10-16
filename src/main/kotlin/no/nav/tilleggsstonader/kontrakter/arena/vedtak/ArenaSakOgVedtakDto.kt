@@ -7,7 +7,7 @@ import java.time.LocalDate
  * Hvert vedtak er koblet til en sak og kan hentes fra map over saker.
  * Saker er en separat del fordi en sak kan være koblet til flere vedtak
  */
-data class SakOgVedtakDto(
+data class ArenaSakOgVedtakDto(
     val vedtak: List<VedtakDto>,
     val saker: Map<Int, SakDto>,
 )
