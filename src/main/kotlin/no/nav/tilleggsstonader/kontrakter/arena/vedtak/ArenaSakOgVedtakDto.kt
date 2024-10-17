@@ -43,6 +43,7 @@ data class VedtakDto(
     val datoInnstillt: LocalDate?,
     val utfall: String?,
     val vedtakfakta: List<VedtakfaktaDto>,
+    val vilkårsvurderinger: List<VilkårsvurderingDto>,
     val datoMottatt: LocalDate?,
     val saksbehandler: String?,
     val beslutter: String?,
@@ -55,5 +56,6 @@ data class VedtakfaktaDto(
 
 data class VilkårsvurderingDto(
     val type: String,
-
+    val status: String,
+    val vurdertAv: String?,
 )
