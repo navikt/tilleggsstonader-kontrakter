@@ -55,7 +55,7 @@ data class VedtakfaktaDto(
 )
 
 data class VilkårsvurderingDto(
-    val type: String,
-    val status: String,
+    val vilkår: String,
+    val vurdering: String,
     val vurdertAv: String?,
 )
