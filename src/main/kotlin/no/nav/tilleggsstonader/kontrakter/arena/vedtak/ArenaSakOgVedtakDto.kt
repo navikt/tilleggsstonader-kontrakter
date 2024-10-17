@@ -21,6 +21,9 @@ data class AktivitetDto(
     val aktivitetId: Int,
     val type: String,
     val status: String,
+    val fom: LocalDate?,
+    val tom: LocalDate?,
+
     val beskrivelse: String?,
     val gjelderUtdanning: Boolean,
 
@@ -40,9 +43,17 @@ data class VedtakDto(
     val datoInnstillt: LocalDate?,
     val utfall: String?,
     val vedtakfakta: List<VedtakfaktaDto>,
+    val datoMottatt: LocalDate?,
+    val saksbehandler: String?,
+    val beslutter: String?,
 )
 
 data class VedtakfaktaDto(
     val type: String,
     val verdi: String?,
+)
+
+data class VilkårsvurderingDto(
+    val type: String,
+
 )
