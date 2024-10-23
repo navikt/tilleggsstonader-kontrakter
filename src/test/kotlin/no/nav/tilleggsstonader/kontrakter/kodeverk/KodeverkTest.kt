@@ -1,12 +1,11 @@
 package no.nav.tilleggsstonader.kontrakter.kodeverk
 
-import no.nav.tilleggsstonader.libs.utils.osloDateNow
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 class KodeverkTest {
-    val dato = osloDateNow()
+    val dato = LocalDate.now()
 
     @Test
     internal fun `KodeverkDto mapTerm mapper nykkel til term`() {
