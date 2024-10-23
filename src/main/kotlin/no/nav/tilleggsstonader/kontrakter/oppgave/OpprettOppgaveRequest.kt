@@ -1,7 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.oppgave
 
 import no.nav.tilleggsstonader.kontrakter.felles.Tema
-import no.nav.tilleggsstonader.libs.utils.osloDateNow
 import java.time.LocalDate
 
 data class OpprettOppgaveRequest(
@@ -13,7 +12,7 @@ data class OpprettOppgaveRequest(
     val behandlingstema: String?,
     val tilordnetRessurs: String? = null,
     val fristFerdigstillelse: LocalDate,
-    val aktivFra: LocalDate = osloDateNow(),
+    val aktivFra: LocalDate = LocalDate.now(),
     val beskrivelse: String,
     val prioritet: OppgavePrioritet = OppgavePrioritet.NORM,
     val behandlingstype: String? = null,

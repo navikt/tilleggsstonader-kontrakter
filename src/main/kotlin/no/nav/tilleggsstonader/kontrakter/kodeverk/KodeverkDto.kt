@@ -1,6 +1,5 @@
 package no.nav.tilleggsstonader.kontrakter.kodeverk
 
-import no.nav.tilleggsstonader.libs.utils.osloDateNow
 import java.time.LocalDate
 
 data class KodeverkDto(val betydninger: Map<String, List<BetydningDto>>)
@@ -28,7 +27,7 @@ private fun LocalDate.mellom(fra: LocalDate, til: LocalDate) =
  */
 fun KodeverkDto.hentGjeldende(
     kode: String,
-    gjeldendeDato: LocalDate = osloDateNow(),
+    gjeldendeDato: LocalDate = LocalDate.now(),
     språk: KodeverkSpråk = KodeverkSpråk.BOKMÅL,
     sisteGjeldende: Boolean = false,
 ): String? {
