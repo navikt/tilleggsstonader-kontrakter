@@ -35,6 +35,34 @@ class PeriodeKtTest {
         }
     }
 
+    @Nested
+    inner class OverlapperEllerPåfølgesAv {
+
+        @Test
+        fun `datoer overlapper`() {
+            val datoperiode = Datoperiode(LocalDate.now(), LocalDate.now())
+            val datoperiode2 = Datoperiode(LocalDate.now(), LocalDate.now().plusDays(1))
+            assertThat(datoperiode.overlapperEllerPåfølgesAv(datoperiode)).isTrue
+            assertThat(datoperiode.overlapperEllerPåfølgesAv(datoperiode2)).isTrue
+        }
+
+        @Test
+        fun `datoer hverken overlapper eller påfølges av`() {
+            val datoperiode = Datoperiode(LocalDate.now(), LocalDate.now())
+            val datoperiode2 = Datoperiode(LocalDate.now().plusDays(2), LocalDate.now().plusDays(2))
+            assertThat(datoperiode.overlapperEllerPåfølgesAv(datoperiode2)).isFalse
+        }
+
+        @Test
+        fun `dato påfølges hvis tom plus en dag er lik fom`() {
+            val datoperiode = Datoperiode(LocalDate.now(), LocalDate.now())
+            val datoperiode2 = Datoperiode(LocalDate.now().plusDays(1), LocalDate.now().plusDays(1))
+            val datoperiode3 = Datoperiode(LocalDate.now().plusDays(1), LocalDate.now().plusDays(2))
+            assertThat(datoperiode.overlapperEllerPåfølgesAv(datoperiode2)).isTrue
+            assertThat(datoperiode.påfølgesAv(datoperiode3)).isTrue
+        }
+    }
+
     private data class Datoperiode(
         override val fom: LocalDate,
         override val tom: LocalDate,

@@ -44,6 +44,8 @@ interface Mergeable<R, T : Periode<R>> where R : Comparable<R>, R : Temporal {
 }
 
 fun Periode<LocalDate>.påfølgesAv(other: Periode<LocalDate>) = this.tom.plusDays(1) == other.fom
+fun Periode<LocalDate>.overlapperEllerPåfølgesAv(other: Periode<LocalDate>) =
+    this.overlapper(other) || this.tom.plusDays(1) == other.fom
 
 /**
  * Forventer at perioder er sorterte når man slår de sammen
