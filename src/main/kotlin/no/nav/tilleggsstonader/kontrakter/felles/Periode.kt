@@ -52,10 +52,10 @@ fun Periode<LocalDate>.overlapperEllerPåfølgesAv(other: Periode<LocalDate>) =
  */
 fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean): List<P>
     where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
-    return mergeSammenhenggende(skalMerges) { p1, p2 -> p1.merge(p2) }
+    return mergeSammenhengende(skalMerges) { p1, p2 -> p1.merge(p2) }
 }
 
-fun <T, P> List<P>.mergeSammenhenggende(skalMerges: (P, P) -> Boolean, merge: (P, P) -> P): List<P>
+fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean, merge: (P, P) -> P): List<P>
     where P : Periode<T>, T : Comparable<T>, T : Temporal {
     return this.fold(mutableListOf()) { acc, entry ->
         val last = acc.lastOrNull()
