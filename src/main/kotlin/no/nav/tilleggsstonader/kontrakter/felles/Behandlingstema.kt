@@ -9,6 +9,7 @@ enum class Behandlingstema(@JsonValue val value: String) {
     Feilutbetaling("ab0006"),
     Tilbakebetaling("ab0007"),
     Klage("ae0058"),
+    BarnetilsynEF("ab0028"),
     ;
 
     companion object {
