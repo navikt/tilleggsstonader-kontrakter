@@ -152,7 +152,7 @@ enum class TypeAktivitet(val gruppe: GruppeAktivitet, val beskrivelse: String, v
     BT10(GruppeAktivitet.IAA, "Basistjeneste 10 - Økonomiske virkemidler", false),
     BT11(GruppeAktivitet.IAA, "Basistjeneste 11 - Annet", false),
     DGLOK(GruppeAktivitet.VEIL, "informasjonsmøte om dagpenger", false),
-    DIGIOPPARB(GruppeAktivitet.TLTAK, "Digitalt oppfølgingstiltak for arbeidsledige (jobbklubb)", true),
+    DIGIOPPARB(GruppeAktivitet.TLTAK, "Digitalt jobbsøkerkurs for arbeidsledige (jobbklubb)", true),
     DILOK(GruppeAktivitet.VEIL, "Lokal - Informasjon om DP Individuelt", false),
     DIVTILT(GruppeAktivitet.TLTAK, "Diverse tiltak", false),
     EDEL(GruppeAktivitet.EGEN, "Deltidsjobb", false),
