@@ -9,6 +9,7 @@ plugins {
     id("com.diffplug.spotless") version "6.25.0"
     id("com.github.ben-manes.versions") version "0.51.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    id("org.cyclonedx.bom") version "1.10.0"
 }
 
 repositories {
@@ -91,4 +92,8 @@ publishing {
             }
         }
     }
+}
+
+tasks.cyclonedxBom {
+    setIncludeConfigs(listOf("runtimeClasspath", "compileClasspath"))
 }
