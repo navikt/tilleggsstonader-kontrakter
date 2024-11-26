@@ -23,5 +23,5 @@ data class BrevmottakerOrganisasjonDto(
 enum class MottakerRolle {
     BRUKER,
     VERGE,
-    FULLMAKT,
+    FULLMEKTIG,
 }
