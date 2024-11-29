@@ -5,6 +5,8 @@ import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.EnumSource
 
 class RettighetTest {
 
@@ -15,6 +17,16 @@ class RettighetTest {
 
         assertThat(Rettighet.LÆREMIDLER.stønadstype).isEqualTo(Stønadstype.LÆREMIDLER)
         assertThat(Rettighet.LÆREMIDLER.stønadstype).isEqualTo(Stønadstype.LÆREMIDLER)
+    }
+
+    @ParameterizedTest
+    @EnumSource(Stønadstype::class)
+    fun `husk å definiere hvilken rettighet som skal mappes til når man legger inn en støandstype`(stønadstype: Stønadstype) {
+        val finnesMapping = Rettighet.entries.any { it.type == stønadstype }
+
+        assertThat(finnesMapping)
+            .withFailMessage { "Må mappe stønadstype til Rettighet for at Arena skal kunne låse personen for nye vedtak" }
+            .isTrue()
     }
 
     @Test

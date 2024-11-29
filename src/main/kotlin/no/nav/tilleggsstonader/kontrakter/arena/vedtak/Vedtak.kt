@@ -28,7 +28,7 @@ enum class TypeVedtak(override val kodeArena: String, val navn: String) : KodeAr
 enum class Rettighet(
     override val kodeArena: String,
     val navn: String,
-    private val type: Stønadstype? = null,
+    internal val type: Stønadstype? = null,
 ) : KodeArena {
     BOUTGIFTER_ARBEIDSSØKERE("TSRBOUTG", "Boutgifter arbeidssøkere"),
     BOUTGIFTER("TSOBOUTG", "Boutgifter tilleggsstønad"),
