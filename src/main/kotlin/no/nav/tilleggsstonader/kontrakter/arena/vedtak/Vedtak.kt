@@ -36,8 +36,8 @@ enum class Rettighet(
     DAGLIG_REISE("TSODAGREIS", "Daglig reise tilleggsstønad"),
     FLYTTING_ARBEIDSSSØKERE("TSRFLYTT", "Flytting arbeidssøkere"),
     FLYTTING("TSOFLYTT", "Flytting tilleggsstønad"),
-    LÆREMIDLER_ARBEIDSSSØKERE("TSRLMIDLER", "Læremidler arbeidssøkere"),
-    LÆREMIDLER("TSOLMIDLER", "Læremidler tilleggsstønad"),
+    LÆREMIDLER_ARBEIDSSSØKERE("TSRLMIDLER", "Læremidler arbeidssøkere", Stønadstype.LÆREMIDLER),
+    LÆREMIDLER("TSOLMIDLER", "Læremidler tilleggsstønad", Stønadstype.LÆREMIDLER),
     REISE_OBLIGATORISK_SAMLING_ARBEIDSSSØKERE("TSRREISOBL", "Reise til obligatorisk samling arbeidssøkere"),
     REISE_OBLIGATORISK_SAMLING("TSOREISOBL", "Reise til obligatorisk samling tilleggsstønad"),
     REISE_AKTIVITET_HJEMREISE_ARBEIDSSSØKERE(
