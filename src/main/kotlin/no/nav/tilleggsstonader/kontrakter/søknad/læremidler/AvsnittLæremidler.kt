@@ -7,7 +7,9 @@ import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 data class UtdanningAvsnitt(
     val aktiviteter: EnumFlereValgFelt<String>? = null,
     val annenUtdanning: EnumFelt<AnnenUtdanningType>? = null,
+    @Deprecated("Spørsmålet skal fjernes")
     val mottarUtstyrsstipend: EnumFelt<JaNei>? = null,
+    val erLærlingEllerLiknende: EnumFelt<JaNei>? = null,
     val harFunksjonsnedsettelse: EnumFelt<JaNei>,
 )
 
