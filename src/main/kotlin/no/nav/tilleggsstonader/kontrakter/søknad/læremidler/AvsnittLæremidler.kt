@@ -10,6 +10,7 @@ data class UtdanningAvsnitt(
     @Deprecated("Spørsmålet skal fjernes")
     val mottarUtstyrsstipend: EnumFelt<JaNei>? = null,
     val erLærlingEllerLiknende: EnumFelt<JaNei>? = null,
+    val harTidligereFullførtVgs: EnumFelt<JaNei>? = null,
     val harFunksjonsnedsettelse: EnumFelt<JaNei>,
 )
 
