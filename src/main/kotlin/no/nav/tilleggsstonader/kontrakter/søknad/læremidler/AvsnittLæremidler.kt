@@ -15,7 +15,8 @@ data class UtdanningAvsnitt(
 )
 
 enum class AnnenUtdanningType {
-    VIDEREGÅENDE_FORKURS,
+    VIDEREGÅENDE,
+    FORKURS,
     FAGSKOLE_HØGSKOLE_UNIVERSITET,
     KURS_LIKNENDE,
     INGEN_UTDANNING,
