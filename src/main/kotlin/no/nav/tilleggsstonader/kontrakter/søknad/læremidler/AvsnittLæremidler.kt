@@ -9,9 +9,22 @@ data class UtdanningAvsnitt(
     val annenUtdanning: EnumFelt<AnnenUtdanningType>? = null,
     @Deprecated("Spørsmålet skal fjernes")
     val mottarUtstyrsstipend: EnumFelt<JaNei>? = null,
+    @Deprecated("Spørsmålet skal samles i harRettTilUtstyrsstipend")
+    val erLærlingEllerLiknende: EnumFelt<JaNei>? = null,
+    @Deprecated("Spørsmålet skal samles i harRettTilUtstyrsstipend")
+    val harTidligereFullførtVgs: EnumFelt<JaNei>? = null,
+    val harRettTilUtstyrsstipend: HarRettTilUtstyrsstipend? = null,
+    val harFunksjonsnedsettelse: EnumFelt<JaNei>,
+)
+
+data class HarRettTilUtstyrsstipend(
     val erLærlingEllerLiknende: EnumFelt<JaNei>? = null,
     val harTidligereFullførtVgs: EnumFelt<JaNei>? = null,
-    val harFunksjonsnedsettelse: EnumFelt<JaNei>,
+)
+
+data class HarRettTilUtstyrsstipendDto(
+    val erLærlingEllerLiknende: JaNei?,
+    val harTidligereFullførtVgs: JaNei?,
 )
 
 enum class AnnenUtdanningType {
