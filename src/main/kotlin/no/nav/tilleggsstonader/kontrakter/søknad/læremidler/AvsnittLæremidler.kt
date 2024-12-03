@@ -15,6 +15,8 @@ data class UtdanningAvsnitt(
 )
 
 enum class AnnenUtdanningType {
+    @Deprecated("Skal deles opp i videoregående og forkurs")
+    VIDEREGÅENDE_FORKURS,
     VIDEREGÅENDE,
     FORKURS,
     FAGSKOLE_HØGSKOLE_UNIVERSITET,
