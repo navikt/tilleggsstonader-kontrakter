@@ -22,11 +22,6 @@ data class HarRettTilUtstyrsstipend(
     val harTidligereFullførtVgs: EnumFelt<JaNei>? = null,
 )
 
-data class HarRettTilUtstyrsstipendDto(
-    val erLærlingEllerLiknende: JaNei?,
-    val harTidligereFullførtVgs: JaNei?,
-)
-
 enum class AnnenUtdanningType {
     @Deprecated("Skal deles opp i videoregående og forkurs")
     VIDEREGÅENDE_FORKURS,
