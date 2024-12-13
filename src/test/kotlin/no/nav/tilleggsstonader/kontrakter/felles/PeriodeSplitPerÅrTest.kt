@@ -1,7 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
@@ -12,7 +11,6 @@ class PeriodeSplitPerÅrTest {
     private val FØRSTE_JAN_2025 = LocalDate.of(2025, 1, 1)
     private val SISTE_DES_2025 = LocalDate.of(2025, 12, 31)
     private val FØRSTE_JAN_2026 = LocalDate.of(2026, 1, 1)
-
 
     @Test
     fun `skal ikke splitte periode som er innenfor et og samme år`() {
@@ -27,7 +25,7 @@ class PeriodeSplitPerÅrTest {
         assertThat(datoperiode.splitPerÅr { fom, tom -> datoperiode.copy(fom = fom, tom = tom) })
             .containsExactly(
                 Datoperiode(FØRSTE_JAN_2024, SISTE_DES_2024),
-                Datoperiode(FØRSTE_JAN_2025, FØRSTE_JAN_2025)
+                Datoperiode(FØRSTE_JAN_2025, FØRSTE_JAN_2025),
             )
     }
 
@@ -38,7 +36,7 @@ class PeriodeSplitPerÅrTest {
         assertThat(datoperiode.splitPerÅr { fom, tom -> datoperiode.copy(fom = fom, tom = tom) })
             .containsExactly(
                 Datoperiode(FØRSTE_JAN_2024, SISTE_DES_2024),
-                Datoperiode(FØRSTE_JAN_2025, tom)
+                Datoperiode(FØRSTE_JAN_2025, tom),
             )
     }
 
@@ -50,7 +48,7 @@ class PeriodeSplitPerÅrTest {
             .containsExactly(
                 Datoperiode(FØRSTE_JAN_2024, SISTE_DES_2024),
                 Datoperiode(FØRSTE_JAN_2025, SISTE_DES_2025),
-                Datoperiode(FØRSTE_JAN_2026, tom)
+                Datoperiode(FØRSTE_JAN_2026, tom),
             )
     }
 }

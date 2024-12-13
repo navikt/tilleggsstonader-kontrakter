@@ -27,12 +27,12 @@ interface Periode<T> : Comparable<Periode<T>> where T : Comparable<T>, T : Tempo
 
 data class Datoperiode(
     override val fom: LocalDate,
-    override val tom: LocalDate
+    override val tom: LocalDate,
 ) : Periode<LocalDate>
 
 data class Månedsperiode(
     override val fom: YearMonth,
-    override val tom: YearMonth
+    override val tom: YearMonth,
 ) : Periode<YearMonth>
 
 fun <T> List<Periode<T>>.erSortert(): Boolean where T : Comparable<T>, T : Temporal {
@@ -61,12 +61,12 @@ fun Periode<LocalDate>.overlapperEllerPåfølgesAv(other: Periode<LocalDate>) =
  * Forventer at perioder er sorterte når man slår de sammen
  */
 fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean): List<P>
-        where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
+    where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
     return mergeSammenhengende(skalMerges) { p1, p2 -> p1.merge(p2) }
 }
 
 fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean, merge: (P, P) -> P): List<P>
-        where P : Periode<T>, T : Comparable<T>, T : Temporal {
+    where P : Periode<T>, T : Comparable<T>, T : Temporal {
     return this.fold(mutableListOf()) { acc, entry ->
         val last = acc.lastOrNull()
         if (last != null && skalMerges(last, entry)) {
@@ -119,15 +119,47 @@ fun <P : Periode<LocalDate>> P.splitPerÅr(medNyPeriode: (fom: LocalDate, tom: L
     val perioder = mutableListOf<P>()
     var gjeldeneFom = fom
     while (gjeldeneFom <= tom) {
-        val nyTom = minOf(gjeldeneFom.sisteDagenIÅret(), tom)
+        val nyTom = minOf(gjeldeneFom.sisteDagIÅret(), tom)
         perioder.add(medNyPeriode(gjeldeneFom, nyTom))
-        gjeldeneFom = gjeldeneFom.førsteDagenNesteÅr()
+        gjeldeneFom = gjeldeneFom.førsteDagNesteÅr()
     }
     return perioder
 }
 
-fun LocalDate.sisteDagenIÅret() = LocalDate.of(year, 12, 31)
-fun LocalDate.førsteDagenNesteÅr() = LocalDate.of(year + 1, 1, 1)
+/**
+ * Splitter en periode i løpende måneder. Med det menes at perioden splittes opp fra dagens dato
+ * eks 05.01.2024-29.02.24 blir listOf( P(fom=05.01.2024,tom=04.02.2024), P(fom=05.02.2024,tom=29.02.2024) )
+ */
+fun <P : Periode<LocalDate>, VAL> P.splitPerLøpendeMåneder(medNyPeriode: (fom: LocalDate, tom: LocalDate) -> VAL): List<VAL> {
+    val perioder = mutableListOf<VAL>()
+    var gjeldendeFom = fom
+    while (gjeldendeFom <= tom) {
+        val nyTom = minOf(gjeldendeFom.sisteDagenILøpendeMåned(), tom)
+
+        perioder.add(medNyPeriode(gjeldendeFom, nyTom))
+
+        gjeldendeFom = nyTom.plusDays(1)
+    }
+    return perioder
+}
+
+/**
+ * Finner dato i neste måned ut fra dagens dato.
+ * Dersom dag i måned i nåværende måned er høyere enn antall dager i neste måned brukes siste dagen i neste måned
+ */
+fun LocalDate.sisteDagenILøpendeMåned(): LocalDate {
+    val nesteMåned = this.plusMonths(1)
+    return if (this.dayOfMonth >= nesteMåned.lengthOfMonth()) {
+        nesteMåned.tilSisteDagIMåneden()
+    } else {
+        nesteMåned.minusDays(1)
+    }
+}
+
+fun LocalDate.tilFørsteDagIMåneden() = YearMonth.from(this).atDay(1)
+fun LocalDate.tilSisteDagIMåneden() = YearMonth.from(this).atEndOfMonth()
+fun LocalDate.sisteDagIÅret() = LocalDate.of(year, 12, 31)
+fun LocalDate.førsteDagNesteÅr() = LocalDate.of(year + 1, 1, 1)
 
 /**
  * Returnere alle datoer i en periode.
