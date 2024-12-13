@@ -149,10 +149,13 @@ fun <P : Periode<LocalDate>, VAL> P.splitPerLøpendeMåneder(medNyPeriode: (fom:
  */
 fun LocalDate.sisteDagenILøpendeMåned(): LocalDate {
     val nesteMåned = this.plusMonths(1)
-    return if (this.dayOfMonth >= nesteMåned.lengthOfMonth()) {
-        nesteMåned.tilSisteDagIMåneden()
-    } else {
+    val nyttDatoErSisteDagINesteMåned by lazy {
+        this.month != nesteMåned.month && nesteMåned.dayOfMonth == nesteMåned.lengthOfMonth()
+    }
+    return if (this.dayOfMonth < nesteMåned.lengthOfMonth() || nyttDatoErSisteDagINesteMåned) {
         nesteMåned.minusDays(1)
+    } else {
+        nesteMåned.tilSisteDagIMåneden()
     }
 }
 

@@ -61,14 +61,29 @@ class PeriodeSplitPerLøpendeMånederTest {
             )
     }
 
+    // 29 dager i februar i 2024
     @Test
     fun `fra sluttet på måneden`() {
         val datoperiode = Datoperiode(SISTE_JAN_2024, SISTE_APRIL_2024)
         assertThat(datoperiode.splitPerLøpendeMåneder { fom, tom -> datoperiode.copy(fom = fom, tom = tom) })
             .containsExactly(
-                Datoperiode(SISTE_JAN_2024, SISTE_FEB_2024),
-                Datoperiode(FØRSTE_MARS_2024, SISTE_MARS_2024),
-                Datoperiode(FØRSTE_APRIL_2024, SISTE_APRIL_2024),
+                Datoperiode(SISTE_JAN_2024, SISTE_FEB_2024.minusDays(1)),
+                Datoperiode(SISTE_FEB_2024, LocalDate.of(2024, 3, 28)),
+                Datoperiode(LocalDate.of(2024, 3, 29), LocalDate.of(2024, 4, 28)),
+                Datoperiode(LocalDate.of(2024, 4, 29), SISTE_APRIL_2024),
+            )
+    }
+
+    // 28 dager i februar i 2025
+    // må inkludere en dag for februar også for å utbetale et beløp som gjelder for februar og
+    @Test
+    fun `siste dagen i januar skal ikke spise opp februar`() {
+        val datoperiode = Datoperiode(LocalDate.of(2025, 1, 28), LocalDate.of(2025, 3, 31))
+        assertThat(datoperiode.splitPerLøpendeMåneder { fom, tom -> datoperiode.copy(fom = fom, tom = tom) })
+            .containsExactly(
+                Datoperiode(LocalDate.of(2025, 1, 28), LocalDate.of(2025, 2, 27)),
+                Datoperiode(LocalDate.of(2025, 2, 28), LocalDate.of(2025, 3, 27)),
+                Datoperiode(LocalDate.of(2025, 3, 28), LocalDate.of(2025, 3, 31)),
             )
     }
 
