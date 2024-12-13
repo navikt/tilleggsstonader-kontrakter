@@ -127,7 +127,7 @@ fun <P : Periode<LocalDate>> P.splitPerÅr(medNyPeriode: (fom: LocalDate, tom: L
 }
 
 /**
- * Splitter en periode i løpende måneder. Med det menes at perioden splittes opp fra dagens dato
+ * Splitter en periode i løpende måneder. Løpende måned er fra dagens dato og en måned frem i tiden.
  * eks 05.01.2024-29.02.24 blir listOf( P(fom=05.01.2024,tom=04.02.2024), P(fom=05.02.2024,tom=29.02.2024) )
  */
 fun <P : Periode<LocalDate>, VAL> P.splitPerLøpendeMåneder(medNyPeriode: (fom: LocalDate, tom: LocalDate) -> VAL): List<VAL> {
@@ -144,7 +144,7 @@ fun <P : Periode<LocalDate>, VAL> P.splitPerLøpendeMåneder(medNyPeriode: (fom:
 }
 
 /**
- * Finner dato i neste måned ut fra dagens dato.
+ * Finner dato i neste måned ut fra dagens dato. Løpende måned er fra dagens dato og en måned frem i tiden.
  * Dersom dag i måned i nåværende måned er høyere enn antall dager i neste måned brukes siste dagen i neste måned
  */
 fun LocalDate.sisteDagenILøpendeMåned(): LocalDate {
