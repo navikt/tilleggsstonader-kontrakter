@@ -25,6 +25,16 @@ interface Periode<T> : Comparable<Periode<T>> where T : Comparable<T>, T : Tempo
     }
 }
 
+data class Datoperiode(
+    override val fom: LocalDate,
+    override val tom: LocalDate,
+) : Periode<LocalDate>
+
+data class Månedsperiode(
+    override val fom: YearMonth,
+    override val tom: YearMonth,
+) : Periode<YearMonth>
+
 fun <T> List<Periode<T>>.erSortert(): Boolean where T : Comparable<T>, T : Temporal {
     return zipWithNext().all { it.first <= it.second }
 }
@@ -100,6 +110,26 @@ fun <P : Periode<YearMonth>, VAL> P.splitPerMåned(value: (måned: YearMonth, pe
     }
     return perioder
 }
+
+/**
+ * Splitter en periode per år
+ * eks 01.01.2024-02.02.2025 blir listOf( P(fom=01.01.2024,tom=31.12.2024), P(fom=01.01.2025,tom=02.02.2025) )
+ */
+fun <P : Periode<LocalDate>> P.splitPerÅr(medNyPeriode: (fom: LocalDate, tom: LocalDate) -> P): List<P> {
+    val perioder = mutableListOf<P>()
+    var gjeldeneFom = fom
+    while (gjeldeneFom <= tom) {
+        val nyTom = minOf(gjeldeneFom.sisteDagIÅret(), tom)
+        perioder.add(medNyPeriode(gjeldeneFom, nyTom))
+        gjeldeneFom = gjeldeneFom.førsteDagNesteÅr()
+    }
+    return perioder
+}
+
+fun LocalDate.tilFørsteDagIMåneden() = YearMonth.from(this).atDay(1)
+fun LocalDate.tilSisteDagIMåneden() = YearMonth.from(this).atEndOfMonth()
+fun LocalDate.sisteDagIÅret() = LocalDate.of(year, 12, 31)
+fun LocalDate.førsteDagNesteÅr() = LocalDate.of(year + 1, 1, 1)
 
 /**
  * Returnere alle datoer i en periode.
