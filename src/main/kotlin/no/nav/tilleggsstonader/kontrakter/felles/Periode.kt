@@ -28,12 +28,20 @@ interface Periode<T> : Comparable<Periode<T>> where T : Comparable<T>, T : Tempo
 data class Datoperiode(
     override val fom: LocalDate,
     override val tom: LocalDate,
-) : Periode<LocalDate>
+) : Periode<LocalDate>, Mergeable<LocalDate, Datoperiode> {
+    override fun merge(other: Datoperiode): Datoperiode {
+        return this.copy(fom = minOf(this.fom, other.fom), tom = maxOf(this.tom, other.tom))
+    }
+}
 
 data class Månedsperiode(
     override val fom: YearMonth,
     override val tom: YearMonth,
-) : Periode<YearMonth>
+) : Periode<YearMonth>, Mergeable<YearMonth, Månedsperiode> {
+    override fun merge(other: Månedsperiode): Månedsperiode {
+        return this.copy(fom = minOf(this.fom, other.fom), tom = maxOf(this.tom, other.tom))
+    }
+}
 
 fun <T> List<Periode<T>>.erSortert(): Boolean where T : Comparable<T>, T : Temporal {
     return zipWithNext().all { it.first <= it.second }
