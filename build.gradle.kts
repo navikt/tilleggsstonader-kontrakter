@@ -3,7 +3,7 @@ val javaVersion = JavaLanguageVersion.of(21)
 group = "no.nav.tilleggsstonader.kontrakter"
 
 plugins {
-    kotlin("jvm") version "2.0.21"
+    kotlin("jvm") version "2.1.0"
     `maven-publish`
     `java-library`
     id("com.diffplug.spotless") version "6.25.0"
@@ -40,7 +40,7 @@ configurations.all {
 }
 
 dependencies {
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.3.5"))
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.4.1"))
 
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-annotations")
