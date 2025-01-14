@@ -121,10 +121,10 @@ fun <P : Periode<YearMonth>, VAL> P.splitPerMåned(value: (måned: YearMonth, pe
 
 /**
  * Splitter en periode per år
- * eks 01.01.2024-02.02.2025 blir listOf( P(fom=01.01.2024,tom=31.12.2024), P(fom=01.01.2025,tom=02.02.2025) )
+ * eks 01.01.2024-02.02.2025 blir listOf( R(fom=01.01.2024,tom=31.12.2024), R(fom=01.01.2025,tom=02.02.2025) )
  */
-fun <P : Periode<LocalDate>> P.splitPerÅr(medNyPeriode: (fom: LocalDate, tom: LocalDate) -> P): List<P> {
-    val perioder = mutableListOf<P>()
+fun <P : Periode<LocalDate>, R : Periode<LocalDate>> P.splitPerÅr(medNyPeriode: (fom: LocalDate, tom: LocalDate) -> R): List<R> {
+    val perioder = mutableListOf<R>()
     var gjeldeneFom = fom
     while (gjeldeneFom <= tom) {
         val nyTom = minOf(gjeldeneFom.sisteDagIÅret(), tom)
