@@ -25,12 +25,20 @@ interface Periode<T> : Comparable<Periode<T>> where T : Comparable<T>, T : Tempo
     }
 }
 
+interface KopierPeriode<T> where T : Periode<LocalDate> {
+    fun medPeriode(fom: LocalDate, tom: LocalDate): T
+}
+
 data class Datoperiode(
     override val fom: LocalDate,
     override val tom: LocalDate,
-) : Periode<LocalDate>, Mergeable<LocalDate, Datoperiode> {
+) : Periode<LocalDate>, Mergeable<LocalDate, Datoperiode>, KopierPeriode<Datoperiode> {
     override fun merge(other: Datoperiode): Datoperiode {
         return this.copy(fom = minOf(this.fom, other.fom), tom = maxOf(this.tom, other.tom))
+    }
+
+    override fun medPeriode(fom: LocalDate, tom: LocalDate): Datoperiode {
+        return this.copy(fom = fom, tom = tom)
     }
 }
 
