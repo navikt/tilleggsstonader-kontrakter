@@ -180,7 +180,7 @@ enum class TypeAktivitet(val gruppe: GruppeAktivitet, val beskrivelse: String, v
     FORSAMOENK(GruppeAktivitet.TLTAK, "Forsøk AMO enkeltplass", true),
     FORSAMOGRU(GruppeAktivitet.TLTAK, "Forsøk AMO gruppe", false),
     FORSFAGENK(GruppeAktivitet.TLTAK, "Forsøk fag- og yrkesopplæring enkeltplass", true),
-    FORSFAGGRU(GruppeAktivitet.TLTAK, "Forsøk fag- og yrkesopplæring gruppe", false),
+    FORSFAGGRU(GruppeAktivitet.TLTAK, "Forsøk fag- og yrkesopplæring gruppe", true), // overstyrer false fra Arena
     FORSHOYUTD(GruppeAktivitet.TLTAK, "Forsøk høyere utdanning", true),
     FORSOPPLEV(GruppeAktivitet.TLTAK, "Forsøk opplæringstiltak av lengre varighet", true),
     FRIMELD(GruppeAktivitet.ADMO, "Friskmelding", false),
