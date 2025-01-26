@@ -8,6 +8,8 @@ import java.time.LocalDate
 
 class AvkortKtTest {
     val datoperiode = Datoperiode(LocalDate.of(2025, 1, 2), LocalDate.of(2025, 1, 3))
+    val datoperioder = listOf(datoperiode)
+    val medTomFn: (Datoperiode, LocalDate) -> Datoperiode = { periode, nyttTom -> periode.copy(tom = nyttTom) }
 
     @Nested
     inner class AvkortFraOgMed {
@@ -27,6 +29,42 @@ class AvkortKtTest {
             assertThat(datoperiode.avkortFraOgMed(LocalDate.of(2025, 1, 4))).isEqualTo(datoperiode)
 
             assertThat(datoperiode.avkortFraOgMed(LocalDate.of(2025, 1, 5))).isEqualTo(datoperiode)
+        }
+    }
+
+    @Nested
+    inner class AvkortFraOgMedMedResultat {
+        @Test
+        fun `nyTom er før periode - skal returnere tom liste`() {
+            val avkortet = datoperioder.avkortFraOgMed(LocalDate.of(2025, 1, 1), medTomFn)
+
+            assertThat(avkortet.perioder).isEmpty()
+            assertThat(avkortet.harAvkortetPeriode).isFalse()
+        }
+
+        @Test
+        fun `nyTom er i periode - skal avkorte periode`() {
+            val avkortet = datoperioder.avkortFraOgMed(LocalDate.of(2025, 1, 2), medTomFn)
+
+            assertThat(avkortet.perioder.single())
+                .isEqualTo(Datoperiode(LocalDate.of(2025, 1, 2), LocalDate.of(2025, 1, 2)))
+            assertThat(avkortet.harAvkortetPeriode).isTrue()
+        }
+
+        @Test
+        fun `nyTom er lik forrige tom - har ikke splittet periode`() {
+            val avkortet = datoperioder.avkortFraOgMed(LocalDate.of(2025, 1, 3), medTomFn)
+
+            assertThat(avkortet.perioder).isEqualTo(datoperioder)
+            assertThat(avkortet.harAvkortetPeriode).isFalse()
+        }
+
+        @Test
+        fun `nyTom er lik eller etter periode - skal ikke avkorte periode`() {
+            val avkortet = datoperioder.avkortFraOgMed(LocalDate.of(2025, 1, 4), medTomFn)
+
+            assertThat(avkortet.perioder).isEqualTo(datoperioder)
+            assertThat(avkortet.harAvkortetPeriode).isFalse()
         }
     }
 }
