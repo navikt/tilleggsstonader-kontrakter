@@ -6,10 +6,10 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class FinnOppgaveRequestTest {
-
     @Test
     fun `Kan konvertere fra json til FinnOppgaveRequest`() {
-        val finnOppgaveRequestString = """
+        val finnOppgaveRequestString =
+            """
             {
               "tema": "TSO",
               "behandlingstema": "ab0300",
@@ -35,7 +35,7 @@ class FinnOppgaveRequestTest {
               "sorteringsrekkefolge" : "ASC",
               "sorteringsfelt" : "FRIST"
             }
-        """.trimIndent()
+            """.trimIndent()
 
         val request = objectMapper.readValue<FinnOppgaveRequest>(finnOppgaveRequestString)
         val requestJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(request)

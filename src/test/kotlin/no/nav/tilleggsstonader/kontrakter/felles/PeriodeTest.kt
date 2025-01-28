@@ -7,7 +7,6 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 internal class PeriodeTest {
-
     val jan = YearMonth.of(2023, 1)
     val feb = YearMonth.of(2023, 2)
     val mars = YearMonth.of(2023, 3)
@@ -16,7 +15,6 @@ internal class PeriodeTest {
 
     @Nested
     inner class ErSortert {
-
         @Test
         fun `kun en periode er sortert`() {
             val periode1 = Månedsperiode(jan, mars)
@@ -156,7 +154,6 @@ internal class PeriodeTest {
 
     @Nested
     inner class SplitPerMåned {
-
         private val verdi = 1
 
         private val datoperiode = Datoperiode(jan.atDay(5), feb.atEndOfMonth(), verdi)
@@ -190,9 +187,8 @@ internal class PeriodeTest {
         override val fom: YearMonth,
         override val tom: YearMonth,
         val verdi: Int = 0,
-    ) : Periode<YearMonth>, Mergeable<YearMonth, Månedsperiode> {
-        override fun merge(other: Månedsperiode): Månedsperiode {
-            return this.copy(tom = other.tom)
-        }
+    ) : Periode<YearMonth>,
+        Mergeable<YearMonth, Månedsperiode> {
+        override fun merge(other: Månedsperiode): Månedsperiode = this.copy(tom = other.tom)
     }
 }

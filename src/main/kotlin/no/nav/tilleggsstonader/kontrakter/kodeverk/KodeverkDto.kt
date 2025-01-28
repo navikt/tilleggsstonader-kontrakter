@@ -2,7 +2,9 @@ package no.nav.tilleggsstonader.kontrakter.kodeverk
 
 import java.time.LocalDate
 
-data class KodeverkDto(val betydninger: Map<String, List<BetydningDto>>)
+data class KodeverkDto(
+    val betydninger: Map<String, List<BetydningDto>>,
+)
 
 data class BetydningDto(
     val gyldigFra: LocalDate,
@@ -15,12 +17,16 @@ data class BeskrivelseDto(
     val tekst: String,
 )
 
-enum class KodeverkSpråk(val kode: String) {
+enum class KodeverkSpråk(
+    val kode: String,
+) {
     BOKMÅL("nb"),
 }
 
-private fun LocalDate.mellom(fra: LocalDate, til: LocalDate) =
-    this.isEqual(fra) || this.isEqual(til) || (this.isAfter(fra) && this.isBefore(til))
+private fun LocalDate.mellom(
+    fra: LocalDate,
+    til: LocalDate,
+) = this.isEqual(fra) || this.isEqual(til) || (this.isAfter(fra) && this.isBefore(til))
 
 /**
  * @param sisteGjeldende henter siste gjeldende verdi for en gitt kode hvis den mangler for gitt dato
@@ -43,14 +49,17 @@ fun KodeverkDto.hentGjeldende(
  * Mapper [KodeverkDto] til en Map<term, tekst> der term er koden
  * [term] er et navnet på feltet fra kodeverk
  */
-fun KodeverkDto.mapTerm(språk: KodeverkSpråk): Map<String, String> {
-    return betydninger.mapValues {
+fun KodeverkDto.mapTerm(språk: KodeverkSpråk): Map<String, String> =
+    betydninger.mapValues {
         if (it.value.isEmpty()) {
             ""
         } else if (it.value.size != 1) {
             this.hentGjeldende(it.key, språk = språk) ?: ""
         } else {
-            it.value.singleOrNull()?.beskrivelser?.get(språk.kode)?.term ?: ""
+            it.value
+                .singleOrNull()
+                ?.beskrivelser
+                ?.get(språk.kode)
+                ?.term ?: ""
         }
     }
-}

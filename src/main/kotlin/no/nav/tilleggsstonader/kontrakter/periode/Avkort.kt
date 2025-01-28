@@ -10,15 +10,14 @@ import java.time.LocalDate
  * Hvis perioden begynner etter nytt tom skal ikke perioden beholdes
  */
 fun <T> T.avkortFraOgMed(maksTom: LocalDate): T?
-    where T : Periode<LocalDate>, T : KopierPeriode<T> {
-    return if (maksTom < this.fom) {
+    where T : Periode<LocalDate>, T : KopierPeriode<T> =
+    if (maksTom < this.fom) {
         null
     } else if (this.tom <= maksTom) {
         this
     } else {
         this.medPeriode(this.fom, minOf(this.tom, maksTom))
     }
-}
 
 fun <T> List<T>.avkortFraOgMed(fraOgMed: LocalDate): List<T>
     where T : Periode<LocalDate>, T : KopierPeriode<T> =

@@ -20,7 +20,8 @@ enum class Dokumenttype {
     LÆREMIDLER_KLAGE_INTERNT_VEDTAK,
 }
 
-fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype = when (this) {
-    Stønadstype.BARNETILSYN -> Dokumenttype.BARNETILSYN_INTERNT_VEDTAK
-    Stønadstype.LÆREMIDLER -> Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK
-}
+fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype =
+    when (this) {
+        Stønadstype.BARNETILSYN -> Dokumenttype.BARNETILSYN_INTERNT_VEDTAK
+        Stønadstype.LÆREMIDLER -> Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK
+    }

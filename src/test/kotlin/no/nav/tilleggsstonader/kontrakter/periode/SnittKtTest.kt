@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 class SnittKtTest {
-
     @Test
     fun `datoer er like`() {
         val datoperiode = Datoperiode(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 3))
@@ -64,7 +63,6 @@ class SnittKtTest {
 
     @Nested
     inner class IkkeSnitt {
-
         @Test
         fun `ikke snitt hvis periode 2 begynner før periode 1`() {
             val datoperiode = Datoperiode(LocalDate.of(2025, 1, 2), LocalDate.of(2025, 1, 3))

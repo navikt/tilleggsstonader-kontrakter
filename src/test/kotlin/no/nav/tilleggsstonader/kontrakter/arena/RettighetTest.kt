@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 
 class RettighetTest {
-
     @Test
     fun `skal mappe rettighet til stønadstype`() {
         assertThat(Rettighet.TILSYN_BARN.stønadstype).isEqualTo(Stønadstype.BARNETILSYN)

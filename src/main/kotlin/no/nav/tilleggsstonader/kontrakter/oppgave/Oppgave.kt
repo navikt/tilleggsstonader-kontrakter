@@ -6,9 +6,14 @@ import no.nav.tilleggsstonader.kontrakter.felles.Tema
 import java.time.LocalDate
 import java.util.Optional
 
-data class OppgaveResponse(val oppgaveId: Long)
+data class OppgaveResponse(
+    val oppgaveId: Long,
+)
 
-data class OppdatertOppgaveResponse(val oppgaveId: Long, val versjon: Int)
+data class OppdatertOppgaveResponse(
+    val oppgaveId: Long,
+    val versjon: Int,
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -58,7 +63,10 @@ enum class StatusEnum {
     FEILREGISTRERT,
 }
 
-data class OppgaveIdentV2(val ident: String?, val gruppe: IdentGruppe?)
+data class OppgaveIdentV2(
+    val ident: String?,
+    val gruppe: IdentGruppe?,
+)
 
 enum class IdentGruppe {
     AKTOERID,
@@ -70,7 +78,9 @@ enum class IdentGruppe {
 
 // Disse burde oppdateres til de som er gjeldende for våre temaer, finnes på swagger på https://oppgave.dev.intern.nav.no/
 // ev bestille de som mangler
-enum class Oppgavetype(val value: String) {
+enum class Oppgavetype(
+    val value: String,
+) {
     BehandleSak("BEH_SAK"),
     BehandleHenvendelse("BEH_HENV"),
     BehandleAvvistAdresse("BEH_AVV_ADR"),
@@ -95,7 +105,9 @@ enum class Oppgavetype(val value: String) {
     VurderSvar("VUR_SVAR"),
 }
 
-enum class Behandlingstype(val value: String) {
+enum class Behandlingstype(
+    val value: String,
+) {
     Utland("ae0106"),
     NASJONAL("ae0118"),
     EØS("ae0120"),

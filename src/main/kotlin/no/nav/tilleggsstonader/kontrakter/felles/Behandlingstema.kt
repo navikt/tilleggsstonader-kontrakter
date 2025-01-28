@@ -3,7 +3,9 @@ package no.nav.tilleggsstonader.kontrakter.felles
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
-enum class Behandlingstema(@JsonValue val value: String) {
+enum class Behandlingstema(
+    @JsonValue val value: String,
+) {
     TilsynBarn("ab0300"),
     Læremidler("ab0292"),
     Feilutbetaling("ab0006"),
@@ -15,8 +17,6 @@ enum class Behandlingstema(@JsonValue val value: String) {
 
         @JvmStatic
         @JsonCreator
-        fun fromValue(value: String): Behandlingstema {
-            return behandlingstemaMap[value] ?: error("Fant ikke Behandlingstema for value=$value")
-        }
+        fun fromValue(value: String): Behandlingstema = behandlingstemaMap[value] ?: error("Fant ikke Behandlingstema for value=$value")
     }
 }

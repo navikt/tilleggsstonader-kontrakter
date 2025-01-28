@@ -6,10 +6,8 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 class PeriodeKtTest {
-
     @Nested
     inner class PåfølgesAv {
-
         @Test
         fun `dato påfølges ikke hvis de er overlappende`() {
             val datoperiode = Datoperiode(LocalDate.now(), LocalDate.now())
@@ -37,7 +35,6 @@ class PeriodeKtTest {
 
     @Nested
     inner class OverlapperEllerPåfølgesAv {
-
         @Test
         fun `datoer overlapper`() {
             val datoperiode = Datoperiode(LocalDate.now(), LocalDate.now())

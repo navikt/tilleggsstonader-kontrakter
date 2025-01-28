@@ -3,7 +3,10 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 /**
  * @param tittel brukes som tittel for vedlegget i dokarkiv, sånn at det vises i gosys
  */
-enum class Vedleggstype(val tittel: String) { // TODO språk?
+enum class Vedleggstype(
+    val tittel: String,
+) {
+    // TODO språk?
     // Pass av barn
     UTGIFTER_PASS_SFO_AKS_BARNEHAGE("Dokumentasjon av utgifter for pass av barn"),
     UTGIFTER_PASS_PRIVAT("Dokumentasjon av utgifter til privat pass"),

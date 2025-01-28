@@ -61,4 +61,7 @@ data class DokumentasjonFelt(
     val barnId: String? = null,
 )
 
-data class Dokument(val id: UUID, val navn: String)
+data class Dokument(
+    val id: UUID,
+    val navn: String,
+)

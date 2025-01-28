@@ -23,10 +23,8 @@ data class AktivitetDto(
     val status: String,
     val fom: LocalDate?,
     val tom: LocalDate?,
-
     val beskrivelse: String?,
     val gjelderUtdanning: Boolean,
-
     val typekode: String,
     val statuskode: String,
 )

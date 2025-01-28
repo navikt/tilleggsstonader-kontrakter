@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 class AvkortKtTest {
-
     val datoperiode = Datoperiode(LocalDate.of(2025, 1, 2), LocalDate.of(2025, 1, 3))
 
     @Nested

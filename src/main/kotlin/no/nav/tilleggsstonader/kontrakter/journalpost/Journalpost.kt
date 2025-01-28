@@ -20,11 +20,13 @@ data class Journalpost(
     val eksternReferanseId: String? = null,
     val utsendingsinfo: Utsendingsinfo? = null,
 ) {
-
     val datoMottatt = relevanteDatoer?.firstOrNull { it.datotype == "DATO_REGISTRERT" }?.dato
 }
 
-data class RelevantDato(val dato: LocalDateTime, val datotype: String)
+data class RelevantDato(
+    val dato: LocalDateTime,
+    val datotype: String,
+)
 
 data class Bruker(
     val id: String,

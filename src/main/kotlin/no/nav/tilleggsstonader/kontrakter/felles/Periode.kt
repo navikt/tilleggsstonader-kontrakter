@@ -5,59 +5,53 @@ import java.time.YearMonth
 import java.time.temporal.Temporal
 
 interface Periode<T> : Comparable<Periode<T>> where T : Comparable<T>, T : Temporal {
-
     val fom: T
     val tom: T
+
     fun validatePeriode() {
         require(tom >= fom) { "Til-og-med før fra-og-med: $fom > $tom" }
     }
 
-    fun overlapper(other: Periode<T>): Boolean {
-        return !(this.tom < other.fom || this.fom > other.tom)
-    }
+    fun overlapper(other: Periode<T>): Boolean = !(this.tom < other.fom || this.fom > other.tom)
 
-    fun inneholder(other: Periode<T>): Boolean {
-        return this.fom <= other.fom && this.tom >= other.tom
-    }
+    fun inneholder(other: Periode<T>): Boolean = this.fom <= other.fom && this.tom >= other.tom
 
-    override fun compareTo(other: Periode<T>): Int {
-        return Comparator.comparing(Periode<T>::fom).thenComparing(Periode<T>::tom).compare(this, other)
-    }
+    override fun compareTo(other: Periode<T>): Int =
+        Comparator.comparing(Periode<T>::fom).thenComparing(Periode<T>::tom).compare(this, other)
 }
 
 interface KopierPeriode<T> where T : Periode<LocalDate> {
-    fun medPeriode(fom: LocalDate, tom: LocalDate): T
+    fun medPeriode(
+        fom: LocalDate,
+        tom: LocalDate,
+    ): T
 }
 
 data class Datoperiode(
     override val fom: LocalDate,
     override val tom: LocalDate,
-) : Periode<LocalDate>, Mergeable<LocalDate, Datoperiode>, KopierPeriode<Datoperiode> {
-    override fun merge(other: Datoperiode): Datoperiode {
-        return this.copy(fom = minOf(this.fom, other.fom), tom = maxOf(this.tom, other.tom))
-    }
+) : Periode<LocalDate>,
+    Mergeable<LocalDate, Datoperiode>,
+    KopierPeriode<Datoperiode> {
+    override fun merge(other: Datoperiode): Datoperiode = this.copy(fom = minOf(this.fom, other.fom), tom = maxOf(this.tom, other.tom))
 
-    override fun medPeriode(fom: LocalDate, tom: LocalDate): Datoperiode {
-        return this.copy(fom = fom, tom = tom)
-    }
+    override fun medPeriode(
+        fom: LocalDate,
+        tom: LocalDate,
+    ): Datoperiode = this.copy(fom = fom, tom = tom)
 }
 
 data class Månedsperiode(
     override val fom: YearMonth,
     override val tom: YearMonth,
-) : Periode<YearMonth>, Mergeable<YearMonth, Månedsperiode> {
-    override fun merge(other: Månedsperiode): Månedsperiode {
-        return this.copy(fom = minOf(this.fom, other.fom), tom = maxOf(this.tom, other.tom))
-    }
+) : Periode<YearMonth>,
+    Mergeable<YearMonth, Månedsperiode> {
+    override fun merge(other: Månedsperiode): Månedsperiode = this.copy(fom = minOf(this.fom, other.fom), tom = maxOf(this.tom, other.tom))
 }
 
-fun <T> List<Periode<T>>.erSortert(): Boolean where T : Comparable<T>, T : Temporal {
-    return zipWithNext().all { it.first <= it.second }
-}
+fun <T> List<Periode<T>>.erSortert(): Boolean where T : Comparable<T>, T : Temporal = zipWithNext().all { it.first <= it.second }
 
-fun <T> List<Periode<T>>.overlapper(): Boolean where T : Comparable<T>, T : Temporal {
-    return førsteOverlappendePeriode() != null
-}
+fun <T> List<Periode<T>>.overlapper(): Boolean where T : Comparable<T>, T : Temporal = førsteOverlappendePeriode() != null
 
 fun <T> List<Periode<T>>.førsteOverlappendePeriode(): Pair<Periode<T>, Periode<T>>? where T : Comparable<T>, T : Temporal =
     this.sortedBy { it.fom }.zipWithNext().firstOrNull { it.first.overlapper(it.second) }
@@ -70,20 +64,24 @@ interface Mergeable<R, T : Periode<R>> where R : Comparable<R>, R : Temporal {
 }
 
 fun Periode<LocalDate>.påfølgesAv(other: Periode<LocalDate>) = this.tom.plusDays(1) == other.fom
-fun Periode<LocalDate>.overlapperEllerPåfølgesAv(other: Periode<LocalDate>) =
-    this.overlapper(other) || this.tom.plusDays(1) == other.fom
+
+fun Periode<LocalDate>.overlapperEllerPåfølgesAv(other: Periode<LocalDate>) = this.overlapper(other) || this.tom.plusDays(1) == other.fom
 
 /**
  * Forventer at perioder er sorterte når man slår de sammen
  */
-fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean): List<P>
-    where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> {
-    return mergeSammenhengende(skalMerges) { p1, p2 -> p1.merge(p2) }
-}
+fun <T, P> List<P>.mergeSammenhengende(
+    skalMerges: (P, P) -> Boolean,
+): List<P>
+    where P : Periode<T>, T : Comparable<T>, T : Temporal, P : Mergeable<T, P> =
+    mergeSammenhengende(skalMerges) { p1, p2 -> p1.merge(p2) }
 
-fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean, merge: (P, P) -> P): List<P>
-    where P : Periode<T>, T : Comparable<T>, T : Temporal {
-    return this.fold(mutableListOf()) { acc, entry ->
+fun <T, P> List<P>.mergeSammenhengende(
+    skalMerges: (P, P) -> Boolean,
+    merge: (P, P) -> P,
+): List<P>
+    where P : Periode<T>, T : Comparable<T>, T : Temporal =
+    this.fold(mutableListOf()) { acc, entry ->
         val last = acc.lastOrNull()
         if (last != null && skalMerges(last, entry)) {
             acc.removeLast()
@@ -93,7 +91,6 @@ fun <T, P> List<P>.mergeSammenhengende(skalMerges: (P, P) -> Boolean, merge: (P,
         }
         acc
     }
-}
 
 /**
  * Splitter en datoperiode till verdi per måned,
@@ -143,8 +140,11 @@ fun <P : Periode<LocalDate>, R : Periode<LocalDate>> P.splitPerÅr(medNyPeriode:
 }
 
 fun LocalDate.tilFørsteDagIMåneden() = YearMonth.from(this).atDay(1)
+
 fun LocalDate.tilSisteDagIMåneden() = YearMonth.from(this).atEndOfMonth()
+
 fun LocalDate.sisteDagIÅret() = LocalDate.of(year, 12, 31)
+
 fun LocalDate.førsteDagNesteÅr() = LocalDate.of(year + 1, 1, 1)
 
 /**

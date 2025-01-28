@@ -9,10 +9,8 @@ import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 data class ArbeidOgOpphold(
     val jobberIAnnetLand: EnumFelt<JaNei>?,
     val jobbAnnetLand: SelectFelt<String>?,
-
     val harPengestøtteAnnetLand: EnumFlereValgFelt<TypePengestøtte>?,
     val pengestøtteAnnetLand: SelectFelt<String>?,
-
     val harOppholdUtenforNorgeSiste12mnd: EnumFelt<JaNei>?,
     val oppholdUtenforNorgeSiste12mnd: List<OppholdUtenforNorge>,
     val harOppholdUtenforNorgeNeste12mnd: EnumFelt<JaNei>?,

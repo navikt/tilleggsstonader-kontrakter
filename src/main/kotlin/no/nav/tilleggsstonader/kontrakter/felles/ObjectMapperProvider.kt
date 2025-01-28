@@ -12,7 +12,6 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 object ObjectMapperProvider {
-
     val objectMapper: ObjectMapper = // Jackson2ObjectMapperBuilder.json().build()
         ObjectMapper()
             .registerKotlinModule()
@@ -23,8 +22,7 @@ object ObjectMapperProvider {
                         YearMonth::class,
                         YearMonthDeserializer(DateTimeFormatter.ofPattern("u-MM")), // Denne trengs for å parse år over 9999 riktig.
                     ),
-            )
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            ).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 }

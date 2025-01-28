@@ -3,13 +3,18 @@ package no.nav.tilleggsstonader.kontrakter.arena.vedtak
 import no.nav.tilleggsstonader.kontrakter.arena.KodeArena
 import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 
-enum class UtfallVedtak(val navn: String) {
+enum class UtfallVedtak(
+    val navn: String,
+) {
     NEI("Nei"),
     JA("Ja"),
     AVBRUTT("Avbrutt"),
 }
 
-enum class StatusVedtak(override val kodeArena: String, val navn: String) : KodeArena {
+enum class StatusVedtak(
+    override val kodeArena: String,
+    val navn: String,
+) : KodeArena {
     GODKJENT("GODKJ", "Godkjent"),
     REGISTRERT("REGIS", "Registrert"),
     OPPRETTET("OPPRE", "Opprettet"),
@@ -19,7 +24,10 @@ enum class StatusVedtak(override val kodeArena: String, val navn: String) : Kode
     MOTTATT("MOTAT", "Mottatt"),
 }
 
-enum class TypeVedtak(override val kodeArena: String, val navn: String) : KodeArena {
+enum class TypeVedtak(
+    override val kodeArena: String,
+    val navn: String,
+) : KodeArena {
     ENDRING("E", "Endring"),
     NY_RETTIGHET("O", "Ny rettighet"),
     STANS("S", "Stans"),
@@ -56,11 +64,10 @@ enum class Rettighet(
     val stønadstype get(): Stønadstype = type ?: error("Har ikke lagt inn mapping av stønadstype for $this")
 
     companion object {
-
         val rettighetPaKodeArena = entries.associateBy { it.kodeArena }
-        fun fraKodeArena(kodeArena: String): Rettighet {
-            return rettighetPaKodeArena[kodeArena]
+
+        fun fraKodeArena(kodeArena: String): Rettighet =
+            rettighetPaKodeArena[kodeArena]
                 ?: error("Finner ikke mapping for $kodeArena")
-        }
     }
 }

@@ -13,7 +13,8 @@ enum class Tema {
     fun default(): Tema = TSO
 }
 
-fun Stønadstype.tilTema(): Tema = when (this) {
-    Stønadstype.BARNETILSYN -> Tema.TSO
-    Stønadstype.LÆREMIDLER -> Tema.TSO
-}
+fun Stønadstype.tilTema(): Tema =
+    when (this) {
+        Stønadstype.BARNETILSYN -> Tema.TSO
+        Stønadstype.LÆREMIDLER -> Tema.TSO
+    }

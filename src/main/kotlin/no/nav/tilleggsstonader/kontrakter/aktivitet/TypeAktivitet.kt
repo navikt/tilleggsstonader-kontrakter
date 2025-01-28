@@ -9,7 +9,11 @@ package no.nav.tilleggsstonader.kontrakter.aktivitet
  *
  * Denne mappingen gjør det mulig å hente ut aktiviteter som kun tilhører gruppen TILTAK som er det som de ønsker å vise
  */
-enum class TypeAktivitet(val gruppe: GruppeAktivitet, val beskrivelse: String, val rettTilStønad: Boolean) {
+enum class TypeAktivitet(
+    val gruppe: GruppeAktivitet,
+    val beskrivelse: String,
+    val rettTilStønad: Boolean,
+) {
     AAPLOK(GruppeAktivitet.VEIL, "informasjonsmøte om arbeidsavklaringspenger", false),
     ABIST(GruppeAktivitet.TLTAK, "Arbeid med Bistand (AB)", true),
     ABOPPF(GruppeAktivitet.TLTAK, "Arbeid med bistand A oppfølging", false),
