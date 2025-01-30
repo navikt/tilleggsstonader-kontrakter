@@ -15,6 +15,7 @@ data class KlagebehandlingDto(
     val vedtaksdato: LocalDateTime?,
     val klageinstansResultat: List<KlageinstansResultatDto> = emptyList(),
     val henlagtÅrsak: HenlagtÅrsak? = null,
+    val henlagtBegrunnelse: String? = null,
 )
 
 data class KlageinstansResultatDto(
