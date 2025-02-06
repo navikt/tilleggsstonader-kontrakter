@@ -12,6 +12,26 @@ class AvkortKtTest {
     val medTomFn: (Datoperiode, LocalDate) -> Datoperiode = { periode, nyttTom -> periode.copy(tom = nyttTom) }
 
     @Nested
+    inner class AvkortPerioderFør {
+        @Test
+        fun `dato er før eller lik periode - skal returnere perioden`() {
+            assertThat(datoperiode.avkortPerioderFør(LocalDate.of(2025, 1, 1))).isEqualTo(datoperiode)
+            assertThat(datoperiode.avkortPerioderFør(LocalDate.of(2025, 1, 2))).isEqualTo(datoperiode)
+        }
+
+        @Test
+        fun `dato er etter periode - skal returnere null`() {
+            assertThat(datoperiode.avkortPerioderFør(LocalDate.of(2025, 1, 4))).isNull()
+        }
+
+        @Test
+        fun `dato er en del av tidligere periode, skal avkorte frem til dato`() {
+            assertThat(datoperiode.avkortPerioderFør(LocalDate.of(2025, 1, 3)))
+                .isEqualTo(Datoperiode(LocalDate.of(2025, 1, 3), LocalDate.of(2025, 1, 3)))
+        }
+    }
+
+    @Nested
     inner class AvkortFraOgMed {
         @Test
         fun `nyTom er før periode - skal returnere null`() {

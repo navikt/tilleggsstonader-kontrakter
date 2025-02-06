@@ -5,7 +5,25 @@ import no.nav.tilleggsstonader.kontrakter.felles.Periode
 import java.time.LocalDate
 
 /**
- * Avkorter periode med nytt tom
+ * Avkorter perioder før [minFom]
+ * Hvis en periode er løper før minFom får den nytt fom
+ * Hvis perioden slutter før [minFom] skal ikke perioden beholdes
+ */
+fun <T> T.avkortPerioderFør(minFom: LocalDate): T?
+        where T : Periode<LocalDate>, T : KopierPeriode<T> =
+    if (this.tom < minFom) {
+        null
+    } else if (this.fom >= minFom) {
+        this
+    } else {
+        this.medPeriode(maxOf(this.fom, minFom), this.tom)
+    }
+
+fun <T> List<T>.avkortPerioderFør(fraOgMed: LocalDate): List<T> where T : Periode<LocalDate>, T : KopierPeriode<T> =
+    this.mapNotNull { it.avkortFraOgMed(fraOgMed) }
+
+/**
+ * Avkorter perioder etter [maksTom]
  * Hvis en periode løper lengre enn nytt tom, får perioden nytt tom
  * Hvis perioden begynner etter nytt tom skal ikke perioden beholdes
  */
@@ -19,8 +37,8 @@ fun <T> T.avkortFraOgMed(maksTom: LocalDate): T?
         this.medPeriode(this.fom, minOf(this.tom, maksTom))
     }
 
-fun <T> List<T>.avkortFraOgMed(fraOgMed: LocalDate): List<T> where T : Periode<LocalDate>, T : KopierPeriode<T> =
-    this.mapNotNull { it.avkortFraOgMed(fraOgMed) }
+fun <T> List<T>.avkortFraOgMed(maksTom: LocalDate): List<T> where T : Periode<LocalDate>, T : KopierPeriode<T> =
+    this.mapNotNull { it.avkortFraOgMed(maksTom) }
 
 fun <T> List<T>.avkortFraOgMed(
     maksTom: LocalDate,
