@@ -9,9 +9,11 @@ import java.time.LocalDate
  * Hvis en periode er løper før minFom får den nytt fom
  * Hvis perioden slutter før [minFom] skal ikke perioden beholdes
  */
-fun <T> T.avkortPerioderFør(minFom: LocalDate): T?
+fun <T> T.avkortPerioderFør(minFom: LocalDate?): T?
         where T : Periode<LocalDate>, T : KopierPeriode<T> =
-    if (this.tom < minFom) {
+    if (minFom == null) {
+        this
+    } else if (this.tom < minFom) {
         null
     } else if (this.fom >= minFom) {
         this
@@ -19,8 +21,8 @@ fun <T> T.avkortPerioderFør(minFom: LocalDate): T?
         this.medPeriode(maxOf(this.fom, minFom), this.tom)
     }
 
-fun <T> List<T>.avkortPerioderFør(fraOgMed: LocalDate): List<T> where T : Periode<LocalDate>, T : KopierPeriode<T> =
-    this.mapNotNull { it.avkortFraOgMed(fraOgMed) }
+fun <T> List<T>.avkortPerioderFør(fraOgMed: LocalDate?): List<T> where T : Periode<LocalDate>, T : KopierPeriode<T> =
+    this.mapNotNull { it.avkortPerioderFør(fraOgMed) }
 
 /**
  * Avkorter perioder etter [maksTom]

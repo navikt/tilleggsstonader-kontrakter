@@ -29,6 +29,11 @@ class AvkortKtTest {
             assertThat(datoperiode.avkortPerioderFør(LocalDate.of(2025, 1, 3)))
                 .isEqualTo(Datoperiode(LocalDate.of(2025, 1, 3), LocalDate.of(2025, 1, 3)))
         }
+
+        @Test
+        fun `hele perioden skal beholdes hvis dato er null`() {
+            assertThat(datoperiode.avkortPerioderFør(null)).isEqualTo(datoperiode)
+        }
     }
 
     @Nested
