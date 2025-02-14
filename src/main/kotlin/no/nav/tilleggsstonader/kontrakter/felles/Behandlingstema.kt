@@ -26,4 +26,5 @@ fun Stønadstype.tilBehandlingstema(): Behandlingstema =
     when (this) {
         Stønadstype.BARNETILSYN -> Behandlingstema.TilsynBarn
         Stønadstype.LÆREMIDLER -> Behandlingstema.Læremidler
+        Stønadstype.BOUTGIFTER -> Behandlingstema.Boutgifter
     }

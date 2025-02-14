@@ -16,4 +16,8 @@ enum class Stønadstype(
         visningsnavn = "støtte til læremidler",
         grunnlagAntallMånederBakITiden = 6,
     ),
+    BOUTGIFTER(
+        visningsnavn = "støtte til bolig eller overnatting",
+        grunnlagAntallMånederBakITiden = 6,
+    ),
 }

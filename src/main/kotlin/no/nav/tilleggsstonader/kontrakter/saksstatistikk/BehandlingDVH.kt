@@ -171,17 +171,16 @@ data class VilkårsprøvingDVH(
 enum class SakYtelseDvh {
     TILLEGG_BARNETILSYN, // For pass av barn er kun "Tilleggsstønad" relevant
     TILLEGG_LÆREMIDLER, // For læremidler er kun "Tilleggsstønad" relevant
+    TILLEGG_BOUTGIFTER, // For læremidler er kun "Tilleggsstønad" relevant
     ;
 
     companion object {
-        // REDUNDANT_ELSE_IN_WHEN sånn at man kan legge inn ny stønadstype i kontrakter uten å oppdatere alle when
-        @Suppress("REDUNDANT_ELSE_IN_WHEN")
         @JvmStatic
         fun fraStønadstype(stønadstype: Stønadstype) =
             when (stønadstype) {
                 Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
                 Stønadstype.LÆREMIDLER -> TILLEGG_LÆREMIDLER
-                else -> error("Har ikke mappet $stønadstype for ${BehandlingDVH::class.simpleName}")
+                Stønadstype.BOUTGIFTER -> TILLEGG_BOUTGIFTER
             }
     }
 }
