@@ -61,7 +61,7 @@ enum class Rettighet(
     TILSYN_FAMILIEMEDLEMMER("TSOTILFAM", "Tilsyn av familiemedlemmer tilleggsstønad"),
     ;
 
-    val stønadstypeEllerFeil get(): Stønadstype = stønadstype ?: error("Har ikke lagt inn mapping av stønadstype for $this")
+    fun stønadstypeEllerFeil(): Stønadstype = stønadstype ?: error("Har ikke lagt inn mapping av stønadstype for $this")
 
     companion object {
         private val rettighetPaKodeArena = entries.associateBy { it.kodeArena }
