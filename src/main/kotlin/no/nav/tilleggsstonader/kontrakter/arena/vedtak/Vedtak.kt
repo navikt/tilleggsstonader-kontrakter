@@ -38,8 +38,8 @@ enum class Rettighet(
     val navn: String,
     val stønadstype: Stønadstype? = null,
 ) : KodeArena {
-    BOUTGIFTER_ARBEIDSSØKERE("TSRBOUTG", "Boutgifter arbeidssøkere"),
-    BOUTGIFTER("TSOBOUTG", "Boutgifter tilleggsstønad"),
+    BOUTGIFTER_ARBEIDSSØKERE("TSRBOUTG", "Boutgifter arbeidssøkere", Stønadstype.BOUTGIFTER),
+    BOUTGIFTER("TSOBOUTG", "Boutgifter tilleggsstønad", Stønadstype.BOUTGIFTER),
     DAGLIG_REISE_ARBEIDSSØKERE("TSRDAGREIS", "Daglig reise arbeidssøkere"),
     DAGLIG_REISE("TSODAGREIS", "Daglig reise tilleggsstønad"),
     FLYTTING_ARBEIDSSSØKERE("TSRFLYTT", "Flytting arbeidssøkere"),

@@ -5,6 +5,7 @@ enum class DokumentBrevkode(
 ) {
     BARNETILSYN("NAV 11-12.15"),
     LÆREMIDLER("NAV 11-12.16"),
+    BOUTGIFTER("NAV 11-12.19"),
     ;
 
     companion object {
