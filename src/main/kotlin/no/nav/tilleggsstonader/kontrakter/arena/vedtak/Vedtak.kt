@@ -36,7 +36,7 @@ enum class TypeVedtak(
 enum class Rettighet(
     override val kodeArena: String,
     val navn: String,
-    internal val type: Stønadstype? = null,
+    val stønadstype: Stønadstype? = null,
 ) : KodeArena {
     BOUTGIFTER_ARBEIDSSØKERE("TSRBOUTG", "Boutgifter arbeidssøkere"),
     BOUTGIFTER("TSOBOUTG", "Boutgifter tilleggsstønad"),
@@ -61,13 +61,21 @@ enum class Rettighet(
     TILSYN_FAMILIEMEDLEMMER("TSOTILFAM", "Tilsyn av familiemedlemmer tilleggsstønad"),
     ;
 
-    val stønadstype get(): Stønadstype = type ?: error("Har ikke lagt inn mapping av stønadstype for $this")
+    val stønadstypeEllerFeil get(): Stønadstype = stønadstype ?: error("Har ikke lagt inn mapping av stønadstype for $this")
 
     companion object {
-        val rettighetPaKodeArena = entries.associateBy { it.kodeArena }
+        private val rettighetPaKodeArena = entries.associateBy { it.kodeArena }
 
         fun fraKodeArena(kodeArena: String): Rettighet =
             rettighetPaKodeArena[kodeArena]
                 ?: error("Finner ikke mapping for $kodeArena")
+
+        private val rettigheterPerStønadstype =
+            entries
+                .mapNotNull { rettighet -> rettighet.stønadstype?.let { it to rettighet } }
+                .groupBy({ it.first }, { it.second })
+
+        fun fraStønadstype(stønadstype: Stønadstype): List<Rettighet> =
+            rettigheterPerStønadstype[stønadstype] ?: error("Finner ikke mapping for $stønadstype")
     }
 }
