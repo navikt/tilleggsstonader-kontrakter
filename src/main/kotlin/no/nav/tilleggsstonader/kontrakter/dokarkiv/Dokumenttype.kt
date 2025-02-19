@@ -18,6 +18,14 @@ enum class Dokumenttype {
     LÆREMIDLER_INTERNT_VEDTAK,
     LÆREMIDLER_KLAGE_VEDTAKSBREV,
     LÆREMIDLER_KLAGE_INTERNT_VEDTAK,
+
+    // BOUTGIFTER_SØKNAD, // foreløoig ingen
+    // BOUTGIFTER_SØKNAD_VEDLEGG,
+    BOUTGIFTER_VEDTAKSBREV,
+    BOUTGIFTER_FRITTSTÅENDE_BREV,
+    BOUTGIFTER_INTERNT_VEDTAK,
+    BOUTGIFTER_KLAGE_VEDTAKSBREV,
+    BOUTGIFTER_KLAGE_INTERNT_VEDTAK,
 }
 
 data class Dokumentyper(
@@ -53,10 +61,21 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     klageVedtaksbrev = Dokumenttype.LÆREMIDLER_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.LÆREMIDLER_KLAGE_INTERNT_VEDTAK,
                 )
+            Stønadstype.BOUTGIFTER ->
+                Dokumentyper(
+                    søknad = null,
+                    søknadVedlegg = null,
+                    vedtaksbrev = Dokumenttype.BOUTGIFTER_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.BOUTGIFTER_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.BOUTGIFTER_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.BOUTGIFTER_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.BOUTGIFTER_KLAGE_INTERNT_VEDTAK,
+                )
         }
 
 fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype =
     when (this) {
         Stønadstype.BARNETILSYN -> Dokumenttype.BARNETILSYN_INTERNT_VEDTAK
         Stønadstype.LÆREMIDLER -> Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK
+        Stønadstype.BOUTGIFTER -> Dokumenttype.BOUTGIFTER_INTERNT_VEDTAK
     }
