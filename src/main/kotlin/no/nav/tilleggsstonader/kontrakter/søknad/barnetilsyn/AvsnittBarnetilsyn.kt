@@ -26,8 +26,13 @@ data class BarnMedBarnepass(
     val navn: TekstFelt,
     val ident: TekstFelt,
     val type: EnumFelt<TypeBarnepass>,
+    val utgifter: Utgifter,
     val startetIFemte: EnumFelt<JaNei>?,
     val årsak: EnumFelt<ÅrsakBarnepass>?,
+)
+
+data class Utgifter(
+    val harUtgifterTilPass: EnumFelt<JaNei>,
 )
 
 enum class TypeBarnepass {
