@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
 
+import no.nav.tilleggsstonader.kontrakter.søknad.DatoFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
@@ -26,13 +27,15 @@ data class BarnMedBarnepass(
     val navn: TekstFelt,
     val ident: TekstFelt,
     val type: EnumFelt<TypeBarnepass>,
-    val utgifter: Utgifter,
+    val utgifter: Utgifter?,
     val startetIFemte: EnumFelt<JaNei>?,
     val årsak: EnumFelt<ÅrsakBarnepass>?,
 )
 
 data class Utgifter(
     val harUtgifterTilPass: EnumFelt<JaNei>,
+    val fom: DatoFelt?,
+    val tom: DatoFelt?,
 )
 
 enum class TypeBarnepass {
