@@ -27,7 +27,7 @@ data class BarnMedBarnepass(
     val navn: TekstFelt,
     val ident: TekstFelt,
     val type: EnumFelt<TypeBarnepass>,
-    val utgifter: Utgifter?,
+    val utgifter: Utgifter? = null, // fjern default null når denne er tatt i bruk rundt om
     val startetIFemte: EnumFelt<JaNei>?,
     val årsak: EnumFelt<ÅrsakBarnepass>?,
 )
