@@ -11,7 +11,11 @@ enum class Tema {
     TSR,
     ;
 
-    fun default(): Tema = TSO
+    companion object {
+        fun gjelderTemaTilleggsstønader(tema: String?) =
+            TSO.name.equals(tema, ignoreCase = true) ||
+                TSR.name.equals(tema, ignoreCase = true)
+    }
 }
 
 fun Stønadstype.tilTema(): Tema =
