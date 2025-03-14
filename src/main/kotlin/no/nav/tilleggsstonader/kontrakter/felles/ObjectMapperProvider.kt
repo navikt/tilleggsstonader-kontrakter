@@ -12,17 +12,27 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 object ObjectMapperProvider {
-    val objectMapper: ObjectMapper = // Jackson2ObjectMapperBuilder.json().build()
+    val javaTimeModule =
+        JavaTimeModule()
+            .addDeserializer(
+                YearMonth::class,
+                YearMonthDeserializer(DateTimeFormatter.ofPattern("u-MM")), // Denne trengs for å parse år over 9999 riktig.
+            )
+
+    private fun lagObjectMapper() =
         ObjectMapper()
             .registerKotlinModule()
             .registerModule(Jdk8Module())
-            .registerModule(
-                JavaTimeModule()
-                    .addDeserializer(
-                        YearMonth::class,
-                        YearMonthDeserializer(DateTimeFormatter.ofPattern("u-MM")), // Denne trengs for å parse år over 9999 riktig.
-                    ),
-            ).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .registerModule(javaTimeModule)
             .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)
+
+    val objectMapper: ObjectMapper =
+        lagObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+
+    val objectMapperFailOnUnknownProperties =
+        lagObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true)
 }
