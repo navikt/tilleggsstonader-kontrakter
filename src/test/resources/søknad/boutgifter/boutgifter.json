@@ -1,0 +1,66 @@
+{
+  "language": "nb-NO",
+  "data": {
+    "data": {
+      "jegBekrefterAtJegVilSvareSaRiktigSomJegKan1": true,
+      "dineOpplysninger": {
+        "fornavn": "HURTIG",
+        "etternavn": "PLEIE",
+        "identitet": {
+          "identitetsnummer": "25518735813"
+        },
+        "adresse": {
+          "gyldigFraOgMed": "2020-08-01",
+          "adresse": "Grindbråtan 64A",
+          "postnummer": "1484",
+          "bySted": "HAKADAL",
+          "landkode": "NOR",
+          "land": {
+            "label": "Norge",
+            "value": "NO"
+          }
+        }
+      },
+      "aktiviteterOgMaalgruppe": {
+        "aktivitet": {
+          "aktivitetId": "ingenAktivitet",
+          "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
+        }
+      },
+      "mottarDuEllerHarDuNyligSoktOmNoeAvDette": {
+        "arbeidsavklaringspengerAap": true,
+        "overgangsstonadTilEnsligMorEllerFar": false,
+        "gjenlevendepensjonEtterlattepensjonOmstillingsstonad": false,
+        "uforetrygd": false,
+        "tiltakspenger": false,
+        "dagpenger": false,
+        "sykepenger": false,
+        "kvalifiseringsstonad": false,
+        "mottarIngenPengestotteFraNavMenMittLokaleNavKontorHarVurdertAtJegHarNedsattArbeidsevneSomGjorDetVanskeligereForMegAJobbe": false,
+        "ingenAvAlternativenePasserForMeg": false
+      },
+      "hvilkenArbeidsrettetAktivitetHarDu": {
+        "tiltakArbeidsrettetUtredning": true,
+        "utdanningGodkjentAvNav": false,
+        "harIngenArbeidsrettetAktivitet": false
+      },
+      "hvilkeUtgifterSokerDuOmAFaStotteTil": "fastUtgift",
+      "harDuUtgifterTilBoligBadePaHjemstedetOgAktivitetssted": "nyBolig",
+      "harDuHoyereUtgifterTilBoligPaDittNyttBosted": "ja",
+      "mottarBostotte": "nei",
+      "harDuSaerligStoreUtgifterBoligPaGrunnAvEnFunksjonsnedsettelse": "nei"
+    },
+    "metadata": {
+      "timezone": "Europe/Oslo",
+      "offset": 60,
+      "origin": "https://skjemadelingslenke.ekstern.dev.nav.no",
+      "referrer": "https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111219",
+      "browserName": "Netscape",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+      "pathName": "/fyllut/nav111219/page6",
+      "onLine": true
+    },
+    "state": "submitted",
+    "_vnote": ""
+  }
+}
