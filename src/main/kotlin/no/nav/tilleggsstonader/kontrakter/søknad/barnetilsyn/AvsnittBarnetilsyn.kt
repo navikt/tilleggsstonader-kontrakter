@@ -33,7 +33,7 @@ data class BarnMedBarnepass(
 )
 
 data class Utgifter(
-    val harUtgifterTilPass: EnumFelt<JaNei>,
+    val harUtgifterTilPassHelePerioden: EnumFelt<JaNei>,
     val fom: DatoFelt?,
     val tom: DatoFelt?,
 )
