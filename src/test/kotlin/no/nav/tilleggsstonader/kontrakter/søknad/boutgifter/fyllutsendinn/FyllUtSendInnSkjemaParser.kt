@@ -28,7 +28,7 @@ import java.util.Locale
  * * Print eksempel-json [printEksempelJson]
  * * Print data classes [printDataClasses] og kopier til [SkjemaBoutgifter]
  */
-//@Disabled
+@Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
         objectMapper
@@ -295,11 +295,20 @@ private class KotlinDataClassMapper(
                 "AktiviteterOgMålgruppe"
             }
             // Radiopanel har 1 svar, {key: svar}
-            type == "radiopanel" -> "String"
+            type == "radiopanel" -> {
+                if (values!!.all { it.value == "ja" || it.value == "nei" }) {
+                    enumdefinisjoner.add("JaNei" to values.map { it.value }.toSet())
+                    "JaNeiType"
+                } else {
+                    val type = "${key}Type"
+                    leggTilEnumDefinisjon(type)
+                    type
+                }
+            }
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
             type == "selectboxes" -> {
                 val type = "${key}Type"
-                enumdefinisjoner.add(type.klassenavn() to values!!.map { it.value }.toSet())
+                leggTilEnumDefinisjon(type)
                 "Map<${type.klassenavn()}, Boolean>"
             }
 
@@ -318,6 +327,10 @@ private class KotlinDataClassMapper(
 
             else -> error("Har ikke mapping for $this")
         }
+
+    private fun SkjemaKomponent.leggTilEnumDefinisjon(type: String) {
+        enumdefinisjoner.add(type.klassenavn() to values!!.map { it.value }.toSet())
+    }
 
     private fun SkjemaKomponent.leggTilDataClassMapping(klassenavn: String) {
         klassedefinisjoner.add(klassenavn.klassenavn() to genererDataClasses().toMap())

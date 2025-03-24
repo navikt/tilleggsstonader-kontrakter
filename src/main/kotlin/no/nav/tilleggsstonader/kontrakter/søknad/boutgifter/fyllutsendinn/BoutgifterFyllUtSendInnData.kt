@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:enum-entry-name-case")
+
 package no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
@@ -15,17 +17,17 @@ data class BoutgifterFyllUtSendInnData(
 @JsonIgnoreProperties("dineOpplysninger", "jegBekrefterAtJegVilSvareSaRiktigSomJegKan", ignoreUnknown = false)
 data class SkjemaBoutgifter(
     val hovedytelse: Map<HovedytelseType, Boolean>,
-    val harNedsattArbeidsevne: String?,
+    val harNedsattArbeidsevne: JaNeiType?,
     val arbeidOgOpphold: ArbeidOgOpphold?,
     val aktiviteter: Aktiviteter,
     val boligEllerOvernatting: BoligEllerOvernatting,
 )
 
 data class BoligEllerOvernatting(
-    val typeUtgifter: String,
+    val typeUtgifter: TypeUtgifterType,
     val fasteUtgifter: FasteUtgifter?,
     val samling: Samling?,
-    val harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse: String,
+    val harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse: JaNeiType,
 )
 
 data class Samling(
@@ -35,20 +37,20 @@ data class Samling(
 data class PeriodeForSamling(
     val fom: LocalDate,
     val tom: LocalDate,
-    val trengteEkstraOvernatting: String,
+    val trengteEkstraOvernatting: JaNeiType,
     val utgifterTilOvernatting: Int,
 )
 
 data class FasteUtgifter(
-    val harUtgifterTilBoligToSteder: String,
-    val harLeieinntekterSomDekkerUtgifteneTilBoligenPaHjemstedet: String?,
-    val harHoyereUtgifterPaNyttBosted: String?,
-    val mottarBostotte: String?,
+    val harUtgifterTilBoligToSteder: HarUtgifterTilBoligToStederType,
+    val harLeieinntekterSomDekkerUtgifteneTilBoligenPaHjemstedet: JaNeiType?,
+    val harHoyereUtgifterPaNyttBosted: JaNeiType?,
+    val mottarBostotte: JaNeiType?,
 )
 
 data class Aktiviteter(
     val aktiviteterOgMaalgruppe: AktiviteterOgMålgruppe,
-    val arbeidsrettetAktivitet: String?,
+    val arbeidsrettetAktivitet: ArbeidsrettetAktivitetType?,
 )
 
 data class AktiviteterOgMålgruppe(
@@ -74,13 +76,13 @@ data class Periode(
 )
 
 data class ArbeidOgOpphold(
-    val jobberIAnnetLand: String,
+    val jobberIAnnetLand: JaNeiType,
     val jobbAnnetLand: Landvelger?,
-    val harPengestotteAnnetLand: String,
+    val harPengestotteAnnetLand: JaNeiType,
     val pengestotteAnnetLand: Landvelger?,
-    val harOppholdUtenforNorgeSiste12mnd: String,
+    val harOppholdUtenforNorgeSiste12mnd: JaNeiType,
     val oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge?,
-    val harOppholdUtenforNorgeNeste12mnd: String?,
+    val harOppholdUtenforNorgeNeste12mnd: JaNeiType?,
     val oppholdUtenforNorgeNeste12mnd: OppholdUtenforNorge?,
 )
 
@@ -108,6 +110,11 @@ enum class HovedytelseType {
     ingenAvAlternativenePasserForMeg,
 }
 
+enum class JaNeiType {
+    ja,
+    nei,
+}
+
 enum class ArsakOppholdUtenforNorgeType {
     jobbet,
     studerte,
@@ -117,4 +124,18 @@ enum class ArsakOppholdUtenforNorgeType {
     annet,
 }
 
+enum class ArbeidsrettetAktivitetType {
+    tiltakArbeidsrettetUtredning,
+    utdanningGodkjentAvNav,
+    harIngenArbeidsrettetAktivitet,
+}
 
+enum class TypeUtgifterType {
+    fastUtgift,
+    midlertidigUtgift,
+}
+
+enum class HarUtgifterTilBoligToStederType {
+    ekstraBolig,
+    nyBolig,
+}
