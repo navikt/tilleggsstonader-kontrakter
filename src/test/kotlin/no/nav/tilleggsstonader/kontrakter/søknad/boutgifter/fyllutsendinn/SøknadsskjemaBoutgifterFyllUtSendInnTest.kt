@@ -87,18 +87,31 @@ class SøknadsskjemaBoutgifterFyllUtSendInnTest {
             val jsonMap = objectMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
             val data = jsonMap.get("data") as ObjectNode
             val innerData = data.get("data") as ObjectNode
-            val hovedytelse = innerData.get("hovedytelse") as ObjectNode
-            hovedytelse.put("ukjentFelt", "test")
+            val aktiviteter = innerData.get("aktiviteter") as ObjectNode
+            aktiviteter.put("ukjentFelt", "test")
             val oppdatertJson = objectMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
 
-            assertThat(Hovedytelse::class.annotations).isEmpty()
+            assertThat(Aktiviteter::class.annotations).isEmpty()
 
             assertThatThrownBy {
                 objectMapperFailOnUnknownProperties
                     .readValue<SøknadsskjemaBoutgifterFyllUtSendInn>(oppdatertJson)
-            }.hasMessageContaining(
-                "Unrecognized field \"ukjentFelt\"",
-            )
+            }.hasMessageContaining("Unrecognized field \"ukjentFelt\"")
+        }
+
+        @Test
+        fun `ukjent enum value feile`() {
+            val jsonMap = objectMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
+            val data = jsonMap.get("data") as ObjectNode
+            val innerData = data.get("data") as ObjectNode
+            val hovedytelse = innerData.get("hovedytelse") as ObjectNode
+            hovedytelse.put("ukjentFelt", "true")
+            val oppdatertJson = objectMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
+
+            assertThatThrownBy {
+                objectMapperFailOnUnknownProperties
+                    .readValue<SøknadsskjemaBoutgifterFyllUtSendInn>(oppdatertJson)
+            }.hasMessageContaining("Cannot deserialize Map key of type")
         }
     }
 

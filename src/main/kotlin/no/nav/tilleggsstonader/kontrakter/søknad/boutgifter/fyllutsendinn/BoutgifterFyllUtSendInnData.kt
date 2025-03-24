@@ -14,7 +14,7 @@ data class BoutgifterFyllUtSendInnData(
  */
 @JsonIgnoreProperties("dineOpplysninger", "jegBekrefterAtJegVilSvareSaRiktigSomJegKan", ignoreUnknown = false)
 data class SkjemaBoutgifter(
-    val hovedytelse: Hovedytelse,
+    val hovedytelse: Map<HovedytelseType, Boolean>,
     val harNedsattArbeidsevne: String?,
     val arbeidOgOpphold: ArbeidOgOpphold?,
     val aktiviteter: Aktiviteter,
@@ -86,17 +86,8 @@ data class ArbeidOgOpphold(
 
 data class OppholdUtenforNorge(
     val land: Landvelger,
-    val arsakOppholdUtenforNorge: ArsakOppholdUtenforNorge,
+    val arsakOppholdUtenforNorge: Map<ArsakOppholdUtenforNorgeType, Boolean>,
     val periode: Periode,
-)
-
-data class ArsakOppholdUtenforNorge(
-    val jobbet: Boolean,
-    val studerte: Boolean,
-    val fikkMedisinskBehandling: Boolean,
-    val varPaFerie: Boolean,
-    val besokteFamilie: Boolean,
-    val annet: Boolean,
 )
 
 data class Landvelger(
@@ -104,15 +95,26 @@ data class Landvelger(
     val label: String,
 )
 
-data class Hovedytelse(
-    val arbeidsavklaringspenger: Boolean,
-    val overgangsstonad: Boolean,
-    val gjenlevendepensjon: Boolean,
-    val uforetrygd: Boolean,
-    val tiltakspenger: Boolean,
-    val dagpenger: Boolean,
-    val sykepenger: Boolean,
-    val kvalifiseringsstonad: Boolean,
-    val mottarIngenPengestotte: Boolean,
-    val ingenAvAlternativenePasserForMeg: Boolean,
-)
+enum class HovedytelseType {
+    arbeidsavklaringspenger,
+    overgangsstonad,
+    gjenlevendepensjon,
+    uforetrygd,
+    tiltakspenger,
+    dagpenger,
+    sykepenger,
+    kvalifiseringsstonad,
+    mottarIngenPengestotte,
+    ingenAvAlternativenePasserForMeg,
+}
+
+enum class ArsakOppholdUtenforNorgeType {
+    jobbet,
+    studerte,
+    fikkMedisinskBehandling,
+    varPaFerie,
+    besokteFamilie,
+    annet,
+}
+
+

@@ -28,7 +28,7 @@ import java.util.Locale
  * * Print eksempel-json [printEksempelJson]
  * * Print data classes [printDataClasses] og kopier til [SkjemaBoutgifter]
  */
-@Disabled
+//@Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
         objectMapper
@@ -226,6 +226,7 @@ private class KotlinDataClassMapper(
     private val components: List<SkjemaKomponent>,
 ) {
     val klassedefinisjoner = mutableListOf<Pair<String, Map<String, String>>>()
+    val enumdefinisjoner = mutableListOf<Pair<String, Set<String>>>()
 
     fun printKotlinDataClasses() {
         generer()
@@ -243,6 +244,14 @@ private class KotlinDataClassMapper(
                 println("  val $key: ${value.storFørsteBokstav()},")
             }
             println(")")
+            println("")
+        }
+        enumdefinisjoner.distinct().forEach {
+            println("enum class ${it.first}{")
+            it.second.forEach { value ->
+                println("  $value,")
+            }
+            println("}")
             println("")
         }
     }
@@ -289,8 +298,9 @@ private class KotlinDataClassMapper(
             type == "radiopanel" -> "String"
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
             type == "selectboxes" -> {
-                klassedefinisjoner.add(key.klassenavn() to values!!.associate { it.value to "Boolean" })
-                key
+                val type = "${key}Type"
+                enumdefinisjoner.add(type.klassenavn() to values!!.map { it.value }.toSet())
+                "Map<${type.klassenavn()}, Boolean>"
             }
 
             type == "currency" -> "Int"
