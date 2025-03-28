@@ -28,7 +28,7 @@ import java.util.Locale
  * * Print eksempel-json [printEksempelJson]
  * * Print data classes [printDataClasses] og kopier til [SkjemaBoutgifter]
  */
-@Disabled
+//@Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
         objectMapper
@@ -99,8 +99,10 @@ class FyllUtSendInnSkjemaParser {
         if (response.statusCode() == 200) {
             println("Skriver response til skjema.json")
             try {
-                val parsedJson = objectMapper.readTree(response.body())
+                val parsedJson = objectMapper.readValue<FyllUtSendInnSkjema>(response.body())
                 FileUtil.skrivTilFil("søknad/boutgifter/skjema.json", om.writeValueAsString(parsedJson))
+                // Printer hela skjemat i console
+                println(om.writeValueAsString(objectMapper.readTree(response.body())))
             } catch (e: Exception) {
                 println(response.body())
                 throw e
@@ -112,6 +114,9 @@ class FyllUtSendInnSkjemaParser {
 }
 
 private data class FyllUtSendInnSkjema(
+    val name: String,
+    val revision: String,
+    val skjemanummer: String,
     val components: List<SkjemaKomponent>,
 ) {
     fun relevanteKomponenter(): List<SkjemaKomponent> = components.filterNot { ignorerteKeys.contains(it.key) }
@@ -130,6 +135,7 @@ private data class FyllUtSendInnSkjema(
 private data class SkjemaKomponent(
     val key: String,
     val type: String?,
+    val tree: Boolean?,
     val components: List<SkjemaKomponent>?,
     val values: List<Value>?,
     val inputType: Any?,
@@ -213,6 +219,7 @@ private class JsonStrukturGenerator(
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
             type == "selectboxes" -> values!!.associate { it.value to true }
             type == "currency" -> 100
+            type == "number" -> 100
             type == "navDatepicker" -> "2025-01-01"
             type == "textfield" -> "EksempelSvar"
             else -> error("Har ikke mapping for $this")
@@ -313,6 +320,7 @@ private class KotlinDataClassMapper(
             }
 
             type == "currency" -> "Int"
+            type == "number" -> "Int"
             type == "textfield" -> "String"
             type == "navDatepicker" -> "LocalDate"
             type == "landvelger" -> {
