@@ -28,7 +28,7 @@ import java.util.Locale
  * * Print eksempel-json [printEksempelJson]
  * * Print data classes [printDataClasses] og kopier til [SkjemaBoutgifter]
  */
-@Disabled
+//@Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
         objectMapper
@@ -63,17 +63,9 @@ class FyllUtSendInnSkjemaParser {
         ConditionalsValidering.printUgyldigeConditionals(skjema.relevanteKomponenter())
     }
 
-    @Test
-    fun `print alle customConditional`() {
-        fun SkjemaKomponent.print() {
-            if (!customConditional.isNullOrBlank()) {
-                println("key=$key customConditional=$customConditional")
-            }
-            components?.forEach { it.print() }
-        }
-        skjema.components.forEach { it.print() }
-    }
-
+    /**
+     * Printer alle conditionals for betinget visning
+     */
     @Test
     fun `print alle conditionals`() {
         fun SkjemaKomponent.print() {
@@ -85,6 +77,28 @@ class FyllUtSendInnSkjemaParser {
         skjema.components.forEach { it.print() }
     }
 
+    /**
+     * Printer alle custom conditionals for avansert betinget visning
+     */
+    @Test
+    fun `print alle customConditional`() {
+        fun SkjemaKomponent.print() {
+            if (!customConditional.isNullOrBlank()) {
+                println("key=$key customConditional=$customConditional")
+            }
+            components?.forEach { it.print() }
+        }
+        skjema.components.forEach { it.print() }
+    }
+
+    /**
+     * Henter og lagrer skjema fra skjemabyggeren (bygget på https://form.io/)
+     * Skriver kun definierte felt i [FyllUtSendInnSkjema] til fil.
+     * Skriver ut hela skjemat i console i tilfelle det er noen andre felt som kan være interessante
+     *
+     * Filtrer vekk personopplysninger då den delen ikke er så interessant då den er ifylt automatisk
+     * Personopplysninger ignoreres i [SkjemaBoutgifter] då man ignorerer "dineOpplysninger" som grupperer personopplysninger
+     */
     @Test
     fun hentSkjema() {
         assertThat(FileUtil.SKAL_SKRIVE_TIL_FIL).isTrue()
@@ -99,8 +113,13 @@ class FyllUtSendInnSkjemaParser {
         if (response.statusCode() == 200) {
             println("Skriver response til skjema.json")
             try {
-                val parsedJson = objectMapper.readTree(response.body())
+                val ignorerteKeys = setOf("personopplysninger", "veiledning")
+                val parsedJson = objectMapper.readValue<FyllUtSendInnSkjema>(response.body())
+                    .let { it.copy(components = it.components.filterNot { it.key in ignorerteKeys }) }
+
                 FileUtil.skrivTilFil("søknad/boutgifter/skjema.json", om.writeValueAsString(parsedJson))
+                // Printer hela skjemat i console
+                println(om.writeValueAsString(objectMapper.readTree(response.body())))
             } catch (e: Exception) {
                 println(response.body())
                 throw e
@@ -111,41 +130,66 @@ class FyllUtSendInnSkjemaParser {
     }
 }
 
+/**
+ * Definisjon av skjema
+ */
 private data class FyllUtSendInnSkjema(
+    val name: String,
+    val revision: String,
+    val skjemanummer: String,
     val components: List<SkjemaKomponent>,
 ) {
-    fun relevanteKomponenter(): List<SkjemaKomponent> = components.filterNot { ignorerteKeys.contains(it.key) }
+
+    /**
+     * Når man skal skrive ut eksempel og dataklasser trenger man ikke å ha med vedlegg då de ikke er med i json-skjema
+     * Vedleggen har dog betingede visninger som kan være relevante å kontrollere
+     */
+    fun relevanteKomponenter(): List<SkjemaKomponent> = components.filterNot { it.key in ignorerteKeys }
 
     companion object {
-        val ignorerteKeys =
-            setOf(
-                "vedlegg",
-                "personopplysninger",
-                "veiledning",
-            )
+        val ignorerteKeys = setOf("vedlegg")
     }
 }
 
+/**
+ * @param nøkkel på en komponent
+ * @param components er komponenter under denne komponenten
+ * @param values er liste med alternativer i tilfelle det er en checkbox-group
+ *
+ * @param conditional er betinget visning, eks hvis denne delen kun skal vises hvis man svart ja på en annen komponent
+ * @param customConditional er avansert betinget visning, lik [conditional] men skrives som "show = data.hovedytelse.tiltakspenger === true;"
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 private data class SkjemaKomponent(
     val key: String,
     val type: String?,
+    val tree: Boolean?,
     val components: List<SkjemaKomponent>?,
     val values: List<Value>?,
     val inputType: Any?,
-    val conditional: Conditional,
     val multiple: Boolean,
+    val conditional: Conditional,
     val customConditional: String?,
 ) {
     fun skalIgnoreres() = type == "alertstripe" || type == "htmlelement"
 
     fun erPåkrevd(): Boolean = conditional.isRequired() && customConditional.isNullOrBlank()
 
+    /**
+     * Brukes som alternativ i tilfelle det er en checkbox-group
+     * @param label visningstekst, eks "Arbeidsavklaringspenger (AAP)"
+     * @param value verdi på valg, eks "aap"
+     */
     data class Value(
         val label: String,
         val value: String, // key
     )
 
+    /**
+     * Betinger visning, brukes hvis en komponent skal vises basert på et annet valg
+     * @param eq verdi på annet spørsmål, eks "jaPaHjemstedet"
+     * @param whenStr peker til annet spørsmål, eks "boligEllerOvernatting.fasteUtgifter.delerDuUtgifterTilBoligMedAndre"
+     */
     data class Conditional(
         val eq: String,
         @JsonProperty("when")
@@ -156,7 +200,7 @@ private data class SkjemaKomponent(
 }
 
 /**
- * Genererer jsonstruktur for fyllUt-schema
+ * Genererer eksempel på json for skjema
  */
 private class JsonStrukturGenerator(
     private val components: List<SkjemaKomponent>,
@@ -185,20 +229,7 @@ private class JsonStrukturGenerator(
         when {
             // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
             key == "aktiviteterOgMaalgruppe" -> {
-                val periode = mapOf("fom" to "2025-01-01", "tom" to "2025-01-01")
-                val aktivitet =
-                    mapOf(
-                        "aktivitetId" to "123",
-                        "periode" to periode,
-                        "maalgruppe" to
-                            mapOf(
-                                "maalgruppetype" to "NEDSARBEVN",
-                                "gyldighetsperiode" to periode,
-                                "maalgruppenavn" to "maalgruppenavn",
-                            ),
-                        "text" to "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om",
-                    )
-                mapOf("aktivitet" to aktivitet)
+                mapOf("aktivitet" to jsonStrukturAktivitet())
             }
             // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
             type == "landvelger" -> mapOf("value" to "AF", "label" to "Afghanistan")
@@ -212,11 +243,26 @@ private class JsonStrukturGenerator(
             type == "radiopanel" -> values!!.first().value
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
             type == "selectboxes" -> values!!.associate { it.value to true }
-            type == "currency" -> 100
+            inputType == "numeric" -> 100
             type == "navDatepicker" -> "2025-01-01"
             type == "textfield" -> "EksempelSvar"
             else -> error("Har ikke mapping for $this")
         }
+
+    private fun jsonStrukturAktivitet(): Map<String, Any> {
+        val periode = mapOf("fom" to "2025-01-01", "tom" to "2025-01-01")
+        return mapOf(
+            "aktivitetId" to "123",
+            "periode" to periode,
+            "maalgruppe" to
+                    mapOf(
+                        "maalgruppetype" to "NEDSARBEVN",
+                        "gyldighetsperiode" to periode,
+                        "maalgruppenavn" to "maalgruppenavn",
+                    ),
+            "text" to "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om",
+        )
+    }
 }
 
 /**
@@ -225,8 +271,8 @@ private class JsonStrukturGenerator(
 private class KotlinDataClassMapper(
     private val components: List<SkjemaKomponent>,
 ) {
-    val klassedefinisjoner = mutableListOf<Pair<String, Map<String, String>>>()
-    val enumdefinisjoner = mutableListOf<Pair<String, Set<String>>>()
+    private val klassedefinisjoner = mutableListOf<Klassedefinisjon>()
+    private val enumdefinisjoner = mutableListOf<Enumdefinisjon>()
 
     fun printKotlinDataClasses() {
         generer()
@@ -234,29 +280,33 @@ private class KotlinDataClassMapper(
     }
 
     private fun generer() {
-        klassedefinisjoner.add("SkjemaBoutgifter" to components.flatMap { it.genererDataClasses() }.toMap())
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "SkjemaBoutgifter",
+                felter = components.flatMap { it.genererDataClasses() })
+        )
     }
 
     private fun print() {
         klassedefinisjoner.reversed().distinct().forEach {
-            println("data class ${it.first}(")
-            it.second.forEach { (key, value) ->
-                println("  val $key: ${value.storFørsteBokstav()},")
+            println("data class ${it.navn}(")
+            it.felter.forEach {
+                println("  val ${it.felt}: ${it.type.storFørsteBokstav()},")
             }
             println(")")
             println("")
         }
         enumdefinisjoner.distinct().forEach {
-            println("enum class ${it.first}{")
-            it.second.forEach { value ->
-                println("  $value,")
+            println("enum class ${it.navn}{")
+            it.verdier.forEach { verdi ->
+                println("  $verdi,")
             }
             println("}")
             println("")
         }
     }
 
-    private fun SkjemaKomponent.genererDataClasses(): List<Pair<String, String>> {
+    private fun SkjemaKomponent.genererDataClasses(): List<Felt> {
         require(components != null) {
             "Feiler mapComponents for $this"
         }
@@ -266,38 +316,21 @@ private class KotlinDataClassMapper(
                 if (component.type == "navSkjemagruppe") {
                     component.genererDataClasses()
                 } else {
-                    listOf(component.key to component.felttype(component.mapKlassNavnOgFelter()))
+                    listOf(Felt(felt = component.key, type = component.felttype(component.mapKlassNavnOgFelter())))
                 }
             }
     }
 
     private fun SkjemaKomponent.mapKlassNavnOgFelter(): String =
         when {
-            // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
             key == "aktiviteterOgMaalgruppe" -> {
-                val aktivitet =
-                    mapOf(
-                        "aktivitetId" to "String",
-                        "text" to "String",
-                        "periode" to "Periode?",
-                        "maalgruppe" to "Målgruppe?",
-                    )
-                val målgruppe =
-                    mapOf(
-                        "maalgruppetype" to "String",
-                        "gyldighetsperiode" to "Periode",
-                        "maalgruppenavn" to "String",
-                    )
-                klassedefinisjoner.add("Periode" to mapOf("fom" to "LocalDate", "tom" to "LocalDate"))
-                klassedefinisjoner.add("Målgruppe" to målgruppe)
-                klassedefinisjoner.add("Aktivitet" to aktivitet)
-                klassedefinisjoner.add("AktiviteterOgMålgruppe" to mapOf("aktivitet" to "Aktivitet"))
+                leggTilKlassedefinisjonerForAktiviteterOgMålgruppe()
                 "AktiviteterOgMålgruppe"
             }
             // Radiopanel har 1 svar, {key: svar}
             type == "radiopanel" -> {
                 if (values!!.all { it.value == "ja" || it.value == "nei" }) {
-                    enumdefinisjoner.add("JaNei" to values.map { it.value }.toSet())
+                    enumdefinisjoner.add(Enumdefinisjon(navn = "JaNei", verdier = values.map { it.value }))
                     "JaNeiType"
                 } else {
                     val type = "${key}Type"
@@ -312,35 +345,72 @@ private class KotlinDataClassMapper(
                 "Map<${type.klassenavn()}, Boolean>"
             }
 
-            type == "currency" -> "Int"
+            inputType == "numeric" -> "Int"
             type == "textfield" -> "String"
             type == "navDatepicker" -> "LocalDate"
             type == "landvelger" -> {
-                klassedefinisjoner.add("Landvelger" to mapOf("value" to "String", "label" to "String"))
+                klassedefinisjoner.add(
+                    Klassedefinisjon(
+                        navn = "Landvelger",
+                        felter = listOf(Felt(felt = "value", type = "String"), Felt(felt = "label", type = "String"))
+                    )
+                )
                 "Landvelger"
             }
-
             type == "datagrid" || type == "container" || type == "navSkjemagruppe" -> {
                 this.leggTilDataClassMapping(key)
                 key
             }
-
             else -> error("Har ikke mapping for $this")
         }
 
+    /**
+     * Legger til AktiviteterOgMålgruppe med egne definisjoner av Skjemagruppe då denne ikke er definiert i skjema
+     */
+    private fun leggTilKlassedefinisjonerForAktiviteterOgMålgruppe() {
+        val felterAktivitet =
+            listOf(
+                Felt(felt = "aktivitetId", type = "String"),
+                Felt(felt = "text", type = "String"),
+                Felt(felt = "periode", type = "Periode?"),
+                Felt(felt = "maalgruppe", type = "Målgruppe?"),
+            )
+        val felterMålgruppe =
+            listOf(
+                Felt(felt = "maalgruppetype", type = "String"),
+                Felt(felt = "gyldighetsperiode", type = "Periode"),
+                Felt(felt = "maalgruppenavn", type = "String"),
+            )
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "Periode",
+                listOf(Felt(felt = "fom", type = "LocalDate"), Felt(felt = "tom", type = "LocalDate"))
+            )
+        )
+        klassedefinisjoner.add(Klassedefinisjon(navn = "Målgruppe", felter = felterMålgruppe))
+        klassedefinisjoner.add(Klassedefinisjon(navn = "Aktivitet", felter = felterAktivitet))
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "AktiviteterOgMålgruppe",
+                felter = listOf(Felt(felt = "aktivitet", type = "Aktivitet"))
+            )
+        )
+    }
+
     private fun SkjemaKomponent.leggTilEnumDefinisjon(type: String) {
-        enumdefinisjoner.add(type.klassenavn() to values!!.map { it.value }.toSet())
+        enumdefinisjoner.add(Enumdefinisjon(navn = type.klassenavn(), verdier =  values!!.map { it.value }))
     }
 
     private fun SkjemaKomponent.leggTilDataClassMapping(klassenavn: String) {
-        klassedefinisjoner.add(klassenavn.klassenavn() to genererDataClasses().toMap())
+        klassedefinisjoner.add(Klassedefinisjon(navn = klassenavn.klassenavn(), felter = genererDataClasses()))
     }
 
     private fun String.klassenavn(): String =
         when (this.lowercase()) {
             "OppholdUtenforNorgeSiste12mnd".lowercase(),
             "OppholdUtenforNorgeNeste12mnd".lowercase(),
-            -> "OppholdUtenforNorge"
+                -> "OppholdUtenforNorge"
+
             else -> this
         }.storFørsteBokstav()
 
@@ -357,7 +427,23 @@ private class KotlinDataClassMapper(
         return type
     }
 
-    private fun String.storFørsteBokstav() = replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+    private fun String.storFørsteBokstav() =
+        replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+
+    private data class Klassedefinisjon(
+        val navn: String,
+        val felter: List<Felt>
+    )
+
+    private data class Felt(
+        val felt: String,
+        val type: String,
+    )
+
+    private data class Enumdefinisjon(
+        val navn: String,
+        val verdier: List<String>
+    )
 }
 
 /**
@@ -371,7 +457,7 @@ private object ConditionalsValidering {
     ) {
         fun inneholderKey(key: String): Boolean =
             parent?.component?.components?.any { it.key == key } == true ||
-                parent?.inneholderKey(key) == true
+                    parent?.inneholderKey(key) == true
     }
 
     fun printUgyldigeConditionals(components: List<SkjemaKomponent>) {

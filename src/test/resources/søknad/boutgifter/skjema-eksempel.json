@@ -87,7 +87,17 @@
     "typeUtgifter" : "fastUtgift",
     "fasteUtgifter" : {
       "harUtgifterTilBoligToSteder" : "ekstraBolig",
-      "harLeieinntekterSomDekkerUtgifteneTilBoligenPaHjemstedet" : "ja",
+      "delerDuUtgifterTilBoligMedAndre" : {
+        "jaPaHjemstedet" : true,
+        "jaPaAktivitetssted" : true,
+        "nei" : true
+      },
+      "tall" : 100,
+      "hvorMye" : 100,
+      "delerDuUtgifteneTilBoligMedAndre" : "ja",
+      "hvorMyeErDinAndelAv" : 100,
+      "harLeieinntekter" : "ja",
+      "hvorMyeHarDuILeieinntekterIGjennomsnittPerManed" : 100,
       "harHoyereUtgifterPaNyttBosted" : "ja",
       "mottarBostotte" : "ja"
     },
