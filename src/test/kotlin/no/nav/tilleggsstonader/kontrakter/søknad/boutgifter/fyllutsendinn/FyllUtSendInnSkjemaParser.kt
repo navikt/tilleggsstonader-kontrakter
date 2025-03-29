@@ -162,6 +162,7 @@ private data class FyllUtSendInnSkjema(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 private data class SkjemaKomponent(
     val key: String,
+    val label: String?,
     val type: String?,
     val tree: Boolean?,
     val components: List<SkjemaKomponent>?,
@@ -170,6 +171,7 @@ private data class SkjemaKomponent(
     val multiple: Boolean,
     val conditional: Conditional,
     val customConditional: String?,
+    val validate: Validate?,
 ) {
     fun skalIgnoreres() = type == "alertstripe" || type == "htmlelement"
 
@@ -197,6 +199,13 @@ private data class SkjemaKomponent(
     ) {
         fun isRequired() = this.eq == ""
     }
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    data class Validate(
+        val min: Any?,
+        val max: Any?,
+        val custom: String?,
+    )
 }
 
 /**
@@ -330,7 +339,7 @@ private class KotlinDataClassMapper(
             // Radiopanel har 1 svar, {key: svar}
             type == "radiopanel" -> {
                 if (values!!.all { it.value == "ja" || it.value == "nei" }) {
-                    enumdefinisjoner.add(Enumdefinisjon(navn = "JaNei", verdier = values.map { it.value }))
+                    enumdefinisjoner.add(Enumdefinisjon(navn = "JaNeiType", verdier = values.map { it.value }))
                     "JaNeiType"
                 } else {
                     val type = "${key}Type"
