@@ -64,7 +64,7 @@ class FyllUtSendInnSkjemaParser {
     }
 
     /**
-     * Printer alle conditionals
+     * Printer alle conditionals for betinget visning
      */
     @Test
     fun `print alle conditionals`() {
@@ -77,6 +77,9 @@ class FyllUtSendInnSkjemaParser {
         skjema.components.forEach { it.print() }
     }
 
+    /**
+     * Printer alle custom conditionals for avansert betinget visning
+     */
     @Test
     fun `print alle customConditional`() {
         fun SkjemaKomponent.print() {
@@ -110,8 +113,9 @@ class FyllUtSendInnSkjemaParser {
         if (response.statusCode() == 200) {
             println("Skriver response til skjema.json")
             try {
+                val ignorerteKeys = setOf("personopplysninger", "veiledning")
                 val parsedJson = objectMapper.readValue<FyllUtSendInnSkjema>(response.body())
-                    .let { it.copy(components = it.components.filterNot { it.key == "personopplysninger" }) }
+                    .let { it.copy(components = it.components.filterNot { it.key in ignorerteKeys }) }
 
                 FileUtil.skrivTilFil("søknad/boutgifter/skjema.json", om.writeValueAsString(parsedJson))
                 // Printer hela skjemat i console
@@ -126,21 +130,24 @@ class FyllUtSendInnSkjemaParser {
     }
 }
 
+/**
+ * Definisjon av skjema
+ */
 private data class FyllUtSendInnSkjema(
     val name: String,
     val revision: String,
     val skjemanummer: String,
     val components: List<SkjemaKomponent>,
 ) {
-    fun relevanteKomponenter(): List<SkjemaKomponent> = components.filterNot { ignorerteKeys.contains(it.key) }
+
+    /**
+     * Når man skal skrive ut eksempel og dataklasser trenger man ikke å ha med vedlegg då de ikke er med i json-skjema
+     * Vedleggen har dog betingede visninger som kan være relevante å kontrollere
+     */
+    fun relevanteKomponenter(): List<SkjemaKomponent> = components.filterNot { it.key in ignorerteKeys }
 
     companion object {
-        val ignorerteKeys =
-            setOf(
-                "vedlegg",
-                "personopplysninger",
-                "veiledning",
-            )
+        val ignorerteKeys = setOf("vedlegg")
     }
 }
 
