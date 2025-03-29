@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "197",
+  "revision" : "198",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "veiledning",
@@ -9,139 +9,49 @@
     "components" : [ {
       "key" : "veiledningstekst1",
       "type" : "htmlelement",
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
       },
-      "multiple" : false,
       "customConditional" : ""
     }, {
       "key" : "accordion",
       "type" : "accordion",
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
       },
-      "multiple" : false,
       "customConditional" : ""
     }, {
       "key" : "htmlelement1",
       "type" : "htmlelement",
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
-      },
-      "multiple" : false
+      }
     }, {
       "key" : "jegBekrefterAtJegVilSvareSaRiktigSomJegKan",
       "type" : "navCheckbox",
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
       },
-      "multiple" : false,
       "customConditional" : ""
     } ],
+    "multiple" : false,
     "conditional" : {
       "eq" : "",
       "when" : null,
       "isRequired" : true
     },
-    "multiple" : false,
-    "customConditional" : ""
-  }, {
-    "key" : "personopplysninger",
-    "type" : "panel",
-    "tree" : false,
-    "components" : [ {
-      "key" : "dineOpplysninger",
-      "type" : "container",
-      "tree" : true,
-      "components" : [ {
-        "key" : "fornavn",
-        "type" : "firstName",
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "multiple" : false
-      }, {
-        "key" : "etternavn",
-        "type" : "surname",
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "multiple" : false
-      }, {
-        "key" : "identitet",
-        "type" : "identity",
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "multiple" : false
-      }, {
-        "key" : "adresse",
-        "type" : "navAddress",
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "multiple" : false,
-        "customConditional" : "show = row.identitet.harDuFodselsnummer === \"nei\" || (row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer)"
-      }, {
-        "key" : "adresseVarighet",
-        "type" : "addressValidity",
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "multiple" : false,
-        "customConditional" : "show = row.adresse.borDuINorge === \"nei\" || (row.adresse.borDuINorge === \"ja\" && row.adresse.vegadresseEllerPostboksadresse)"
-      }, {
-        "key" : "alertstripe",
-        "type" : "alertstripe",
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "multiple" : false,
-        "customConditional" : "show = row.identitet.harDuFodselsnummer === \"ja\""
-      }, {
-        "key" : "alertstripePrefill",
-        "type" : "alertstripe",
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "multiple" : false,
-        "customConditional" : "show = row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer"
-      } ],
-      "conditional" : {
-        "eq" : "",
-        "when" : null,
-        "isRequired" : true
-      },
-      "multiple" : false
-    } ],
-    "conditional" : {
-      "eq" : "",
-      "when" : null,
-      "isRequired" : true
-    },
-    "multiple" : false,
     "customConditional" : ""
   }, {
     "key" : "dinSituasjonPanel",
@@ -182,12 +92,12 @@
         "value" : "ingenAvAlternativenePasserForMeg"
       } ],
       "inputType" : "radio",
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
       },
-      "multiple" : false,
       "customConditional" : ""
     }, {
       "key" : "harNedsattArbeidsevne",
@@ -199,22 +109,22 @@
         "label" : "Nei",
         "value" : "nei"
       } ],
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
       },
-      "multiple" : false,
       "customConditional" : "show = (data.hovedytelse.tiltakspenger === true || \ndata.hovedytelse.kvalifiseringsstonad === true || \ndata.hovedytelse.dagpenger\n === true || \ndata.hovedytelse.sykepenger\n === true || \n data.hovedytelse.ingenAvAlternativenePasserForMeg === true) \n && \n (data.hovedytelse.arbeidsavklaringspenger === false && \n data.hovedytelse.overgangsstonad === false && \n data.hovedytelse.gjenlevendepensjon === false &&\n data.hovedytelse.mottarIngenPengestotte === false &&\n data.hovedytelse.uforetrygd === false) \n ;\n"
     }, {
       "key" : "alertstripe",
       "type" : "alertstripe",
+      "multiple" : false,
       "conditional" : {
         "eq" : "nei",
         "when" : "harNedsattArbeidsevne",
         "isRequired" : false
       },
-      "multiple" : false,
       "customConditional" : ""
     }, {
       "key" : "arbeidOgOpphold",
@@ -227,12 +137,12 @@
         "components" : [ {
           "key" : "htmlelement",
           "type" : "htmlelement",
+          "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "jobberIAnnetLand",
           "type" : "radiopanel",
@@ -243,21 +153,21 @@
             "label" : "Nei",
             "value" : "nei"
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "jobbAnnetLand",
           "type" : "landvelger",
+          "multiple" : false,
           "conditional" : {
             "eq" : "ja",
             "when" : "arbeidOgOpphold.jobberIAnnetLand",
             "isRequired" : false
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "harPengestotteAnnetLand",
           "type" : "radiopanel",
@@ -268,21 +178,21 @@
             "label" : "Nei",
             "value" : "nei"
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "pengestotteAnnetLand",
           "type" : "landvelger",
+          "multiple" : false,
           "conditional" : {
             "eq" : "ja",
             "when" : "arbeidOgOpphold.harPengestotteAnnetLand",
             "isRequired" : false
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "harOppholdUtenforNorgeSiste12mnd",
           "type" : "radiopanel",
@@ -293,12 +203,12 @@
             "label" : "Nei",
             "value" : "nei"
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "oppholdUtenforNorgeSiste12mnd",
           "type" : "container",
@@ -306,12 +216,12 @@
           "components" : [ {
             "key" : "land",
             "type" : "landvelger",
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           }, {
             "key" : "arsakOppholdUtenforNorge",
             "type" : "selectboxes",
@@ -335,12 +245,12 @@
               "value" : "annet"
             } ],
             "inputType" : "radio",
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           }, {
             "key" : "periode",
             "type" : "container",
@@ -348,35 +258,35 @@
             "components" : [ {
               "key" : "fom",
               "type" : "navDatepicker",
+              "multiple" : false,
               "conditional" : {
                 "eq" : "",
                 "when" : null,
                 "isRequired" : true
-              },
-              "multiple" : false
+              }
             }, {
               "key" : "tom",
               "type" : "navDatepicker",
+              "multiple" : false,
               "conditional" : {
                 "eq" : "",
                 "when" : null,
                 "isRequired" : true
-              },
-              "multiple" : false
+              }
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "ja",
             "when" : "arbeidOgOpphold.harOppholdUtenforNorgeSiste12mnd",
             "isRequired" : false
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "harOppholdUtenforNorgeNeste12mnd",
           "type" : "radiopanel",
@@ -387,12 +297,12 @@
             "label" : "Nei",
             "value" : "nei"
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "ja",
             "when" : "arbeidOgOpphold.harOppholdUtenforNorgeSiste12mnd",
             "isRequired" : false
-          },
-          "multiple" : false
+          }
         }, {
           "key" : "oppholdUtenforNorgeNeste12mnd",
           "type" : "container",
@@ -400,12 +310,12 @@
           "components" : [ {
             "key" : "land",
             "type" : "landvelger",
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           }, {
             "key" : "arsakOppholdUtenforNorge",
             "type" : "selectboxes",
@@ -429,12 +339,12 @@
               "value" : "annet"
             } ],
             "inputType" : "radio",
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           }, {
             "key" : "periode",
             "type" : "container",
@@ -442,57 +352,57 @@
             "components" : [ {
               "key" : "fom",
               "type" : "navDatepicker",
+              "multiple" : false,
               "conditional" : {
                 "eq" : "",
                 "when" : null,
                 "isRequired" : true
-              },
-              "multiple" : false
+              }
             }, {
               "key" : "tom",
               "type" : "navDatepicker",
+              "multiple" : false,
               "conditional" : {
                 "eq" : "",
                 "when" : null,
                 "isRequired" : true
-              },
-              "multiple" : false
+              }
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "ja",
             "when" : "arbeidOgOpphold.harOppholdUtenforNorgeNeste12mnd",
             "isRequired" : false
-          },
-          "multiple" : false
+          }
         } ],
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
-        },
-        "multiple" : false
+        }
       } ],
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
       },
-      "multiple" : false,
       "customConditional" : "show = (data.hovedytelse.tiltakspenger === true || \ndata.hovedytelse.kvalifiseringsstonad === true || \ndata.hovedytelse.mottarIngenPengestotte\n === true || \n data.hovedytelse.ingenAvAlternativenePasserForMeg === true) \n && \n (data.hovedytelse.arbeidsavklaringspenger === false && \n data.hovedytelse.overgangsstonad === false && \n data.hovedytelse.gjenlevendepensjon === false && \n data.hovedytelse.uforetrygd === false && \n  data.hovedytelse.dagpenger === false &&\n data.hovedytelse.sykepenger === false) \n ;"
     } ],
+    "multiple" : false,
     "conditional" : {
       "eq" : "",
       "when" : null,
       "isRequired" : true
     },
-    "multiple" : false,
     "customConditional" : ""
   }, {
     "key" : "arbeidsrettetAktivitetPanel",
@@ -509,19 +419,19 @@
         "components" : [ {
           "key" : "aktivitet",
           "type" : "activities",
+          "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
-          },
-          "multiple" : false
+          }
         } ],
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
-        },
-        "multiple" : false
+        }
       }, {
         "key" : "arbeidsrettetAktivitet",
         "type" : "radiopanel",
@@ -535,38 +445,38 @@
           "label" : "Har ingen arbeidsrettet aktivitet",
           "value" : "harIngenArbeidsrettetAktivitet"
         } ],
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
         },
-        "multiple" : false,
         "customConditional" : "show = data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId === \"ingenAktivitet\";"
       }, {
         "key" : "alertstripe",
         "type" : "alertstripe",
+        "multiple" : false,
         "conditional" : {
           "eq" : "harIngenArbeidsrettetAktivitet",
           "when" : "aktiviteter.arbeidsrettetAktivitet",
           "isRequired" : false
         },
-        "multiple" : false,
         "customConditional" : ""
       } ],
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
       },
-      "multiple" : false,
       "customConditional" : ""
     } ],
+    "multiple" : false,
     "conditional" : {
       "eq" : "",
       "when" : null,
       "isRequired" : true
     },
-    "multiple" : false,
     "customConditional" : ""
   }, {
     "key" : "boligEllerOvernattingPanel",
@@ -586,12 +496,12 @@
           "label" : "Utgifter til overnatting i forbindelse med eksamen, opptaksprøve eller studiesamling",
           "value" : "midlertidigUtgift"
         } ],
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
         },
-        "multiple" : false,
         "customConditional" : ""
       }, {
         "key" : "fasteUtgifter",
@@ -611,12 +521,12 @@
               "label" : "Nei, jeg har flyttet og har utgifter til bolig ett sted",
               "value" : "nyBolig"
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "delerDuUtgifterTilBoligMedAndre",
@@ -632,34 +542,34 @@
               "value" : "nei"
             } ],
             "inputType" : "radio",
+            "multiple" : false,
             "conditional" : {
               "eq" : "ekstraBolig",
               "when" : "boligEllerOvernatting.fasteUtgifter.harUtgifterTilBoligToSteder",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "tall",
             "type" : "number",
             "inputType" : "numeric",
+            "multiple" : false,
             "conditional" : {
               "eq" : "jaPaHjemstedet",
               "when" : "boligEllerOvernatting.fasteUtgifter.delerDuUtgifterTilBoligMedAndre",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "hvorMye",
             "type" : "number",
             "inputType" : "numeric",
+            "multiple" : false,
             "conditional" : {
               "eq" : "jaPaAktivitetssted",
               "when" : "boligEllerOvernatting.fasteUtgifter.delerDuUtgifterTilBoligMedAndre",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "delerDuUtgifteneTilBoligMedAndre",
@@ -671,23 +581,23 @@
               "label" : "Nei",
               "value" : "nei"
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "nyBolig",
               "when" : "boligEllerOvernatting.fasteUtgifter.harUtgifterTilBoligToSteder",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "hvorMyeErDinAndelAv",
             "type" : "number",
             "inputType" : "numeric",
+            "multiple" : false,
             "conditional" : {
               "eq" : "ja",
               "when" : "boligEllerOvernatting.fasteUtgifter.delerDuUtgifteneTilBoligMedAndre",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "harLeieinntekter",
@@ -699,23 +609,23 @@
               "label" : "Nei",
               "value" : "nei"
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "ekstraBolig",
               "when" : "boligEllerOvernatting.fasteUtgifter.harUtgifterTilBoligToSteder",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "hvorMyeHarDuILeieinntekterIGjennomsnittPerManed",
             "type" : "number",
             "inputType" : "numeric",
+            "multiple" : false,
             "conditional" : {
               "eq" : "ja",
               "when" : "boligEllerOvernatting.fasteUtgifter.harLeieinntekter",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "harHoyereUtgifterPaNyttBosted",
@@ -727,22 +637,22 @@
               "label" : "Nei",
               "value" : "nei"
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "nyBolig",
               "when" : "boligEllerOvernatting.fasteUtgifter.harUtgifterTilBoligToSteder",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "alertstripe1",
             "type" : "alertstripe",
+            "multiple" : false,
             "conditional" : {
               "eq" : "nei",
               "when" : "boligEllerOvernatting.fasteUtgifter.harHoyereUtgifterPaNyttBosted",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "mottarBostotte",
@@ -754,37 +664,37 @@
               "label" : "Nei",
               "value" : "nei"
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "nyBolig",
               "when" : "boligEllerOvernatting.fasteUtgifter.harUtgifterTilBoligToSteder",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "alertstripe2",
             "type" : "alertstripe",
+            "multiple" : false,
             "conditional" : {
               "eq" : "ja",
               "when" : "boligEllerOvernatting.fasteUtgifter.mottarBostotte",
               "isRequired" : false
             },
-            "multiple" : false,
             "customConditional" : ""
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
-          },
-          "multiple" : false
+          }
         } ],
+        "multiple" : false,
         "conditional" : {
           "eq" : "fastUtgift",
           "when" : "boligEllerOvernatting.typeUtgifter",
           "isRequired" : false
         },
-        "multiple" : false,
         "customConditional" : ""
       }, {
         "key" : "samling",
@@ -797,21 +707,21 @@
           "components" : [ {
             "key" : "fom",
             "type" : "navDatepicker",
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           }, {
             "key" : "tom",
             "type" : "navDatepicker",
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           }, {
             "key" : "trengteEkstraOvernatting",
             "type" : "radiopanel",
@@ -822,37 +732,37 @@
               "label" : "Nei",
               "value" : "nei"
             } ],
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
             },
-            "multiple" : false,
             "customConditional" : ""
           }, {
             "key" : "utgifterTilOvernatting",
             "type" : "currency",
             "inputType" : "numeric",
+            "multiple" : false,
             "conditional" : {
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "multiple" : false
+            }
           } ],
+          "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
-          },
-          "multiple" : false
+          }
         } ],
+        "multiple" : false,
         "conditional" : {
           "eq" : "midlertidigUtgift",
           "when" : "boligEllerOvernatting.typeUtgifter",
           "isRequired" : false
         },
-        "multiple" : false,
         "customConditional" : ""
       }, {
         "key" : "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse",
@@ -864,27 +774,27 @@
           "label" : "Nei",
           "value" : "nei"
         } ],
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
         },
-        "multiple" : false,
         "customConditional" : ""
       } ],
+      "multiple" : false,
       "conditional" : {
         "eq" : "",
         "when" : null,
         "isRequired" : true
-      },
-      "multiple" : false
+      }
     } ],
+    "multiple" : false,
     "conditional" : {
       "eq" : "",
       "when" : null,
       "isRequired" : true
     },
-    "multiple" : false,
     "customConditional" : ""
   }, {
     "key" : "vedlegg",
@@ -897,28 +807,28 @@
       "components" : [ {
         "key" : "bekreftelsePaAlleSamlingeneDuSkalDeltaPa",
         "type" : "attachment",
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
-        },
-        "multiple" : false
+        }
       }, {
         "key" : "dokumentasjonUtgifterOvernattingSamlingEksamenOpptaksprove",
         "type" : "attachment",
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
-        },
-        "multiple" : false
+        }
       } ],
+      "multiple" : false,
       "conditional" : {
         "eq" : "midlertidigUtgift",
         "when" : "boligEllerOvernatting.typeUtgifter",
         "isRequired" : false
       },
-      "multiple" : false,
       "customConditional" : ""
     }, {
       "key" : "dokumentasjonFasteUtgifter",
@@ -927,56 +837,56 @@
       "components" : [ {
         "key" : "dokumentasjonAvBoutgifterNyBolig",
         "type" : "attachment",
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
-        },
-        "multiple" : false
+        }
       }, {
         "key" : "dokumentasjonAvBoutgifterPaHjemstedetDitt",
         "type" : "attachment",
+        "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
-        },
-        "multiple" : false
+        }
       } ],
+      "multiple" : false,
       "conditional" : {
         "eq" : "fastUtgift",
         "when" : "boligEllerOvernatting.typeUtgifter",
         "isRequired" : false
       },
-      "multiple" : false,
       "customConditional" : ""
     }, {
       "key" : "dokumentasjonPaLeieinntekter",
       "type" : "attachment",
+      "multiple" : false,
       "conditional" : {
         "eq" : "ja",
         "when" : "boligEllerOvernatting.fasteUtgifter.harLeieinntekter",
         "isRequired" : false
       },
-      "multiple" : false,
       "customConditional" : ""
     }, {
       "key" : "dokumentasjonAvMedisinskeForholdSomPavirkerUtgifteneDinePaAktivitetsstedet",
       "type" : "attachment",
+      "multiple" : false,
       "conditional" : {
         "eq" : "ja",
         "when" : "boligEllerOvernatting.harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse",
         "isRequired" : false
       },
-      "multiple" : false,
       "customConditional" : ""
     } ],
+    "multiple" : false,
     "conditional" : {
       "eq" : "",
       "when" : null,
       "isRequired" : true
     },
-    "multiple" : false,
     "customConditional" : ""
   } ]
 }
