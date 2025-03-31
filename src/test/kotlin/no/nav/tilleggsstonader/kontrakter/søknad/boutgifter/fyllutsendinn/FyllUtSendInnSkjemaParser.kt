@@ -28,7 +28,7 @@ import java.util.Locale
  * * Print eksempel-json [printEksempelJson]
  * * Print data classes [printDataClasses] og kopier til [SkjemaBoutgifter]
  */
-//@Disabled
+@Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
         objectMapper
@@ -114,8 +114,10 @@ class FyllUtSendInnSkjemaParser {
             println("Skriver response til skjema.json")
             try {
                 val ignorerteKeys = setOf("personopplysninger", "veiledning")
-                val parsedJson = objectMapper.readValue<FyllUtSendInnSkjema>(response.body())
-                    .let { it.copy(components = it.components.filterNot { it.key in ignorerteKeys }) }
+                val parsedJson =
+                    objectMapper
+                        .readValue<FyllUtSendInnSkjema>(response.body())
+                        .let { it.copy(components = it.components.filterNot { it.key in ignorerteKeys }) }
 
                 FileUtil.skrivTilFil("søknad/boutgifter/skjema.json", om.writeValueAsString(parsedJson))
                 // Printer hela skjemat i console
@@ -139,7 +141,6 @@ private data class FyllUtSendInnSkjema(
     val skjemanummer: String,
     val components: List<SkjemaKomponent>,
 ) {
-
     /**
      * Når man skal skrive ut eksempel og dataklasser trenger man ikke å ha med vedlegg då de ikke er med i json-skjema
      * Vedleggen har dog betingede visninger som kan være relevante å kontrollere
@@ -163,6 +164,7 @@ private data class FyllUtSendInnSkjema(
 private data class SkjemaKomponent(
     val key: String,
     val label: String?,
+    val content: String?,
     val type: String?,
     val tree: Boolean?,
     val components: List<SkjemaKomponent>?,
@@ -264,11 +266,11 @@ private class JsonStrukturGenerator(
             "aktivitetId" to "123",
             "periode" to periode,
             "maalgruppe" to
-                    mapOf(
-                        "maalgruppetype" to "NEDSARBEVN",
-                        "gyldighetsperiode" to periode,
-                        "maalgruppenavn" to "maalgruppenavn",
-                    ),
+                mapOf(
+                    "maalgruppetype" to "NEDSARBEVN",
+                    "gyldighetsperiode" to periode,
+                    "maalgruppenavn" to "maalgruppenavn",
+                ),
             "text" to "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om",
         )
     }
@@ -292,7 +294,8 @@ private class KotlinDataClassMapper(
         klassedefinisjoner.add(
             Klassedefinisjon(
                 navn = "SkjemaBoutgifter",
-                felter = components.flatMap { it.genererDataClasses() })
+                felter = components.flatMap { it.genererDataClasses() },
+            ),
         )
     }
 
@@ -361,8 +364,8 @@ private class KotlinDataClassMapper(
                 klassedefinisjoner.add(
                     Klassedefinisjon(
                         navn = "Landvelger",
-                        felter = listOf(Felt(felt = "value", type = "String"), Felt(felt = "label", type = "String"))
-                    )
+                        felter = listOf(Felt(felt = "value", type = "String"), Felt(felt = "label", type = "String")),
+                    ),
                 )
                 "Landvelger"
             }
@@ -393,21 +396,21 @@ private class KotlinDataClassMapper(
         klassedefinisjoner.add(
             Klassedefinisjon(
                 navn = "Periode",
-                listOf(Felt(felt = "fom", type = "LocalDate"), Felt(felt = "tom", type = "LocalDate"))
-            )
+                listOf(Felt(felt = "fom", type = "LocalDate"), Felt(felt = "tom", type = "LocalDate")),
+            ),
         )
         klassedefinisjoner.add(Klassedefinisjon(navn = "Målgruppe", felter = felterMålgruppe))
         klassedefinisjoner.add(Klassedefinisjon(navn = "Aktivitet", felter = felterAktivitet))
         klassedefinisjoner.add(
             Klassedefinisjon(
                 navn = "AktiviteterOgMålgruppe",
-                felter = listOf(Felt(felt = "aktivitet", type = "Aktivitet"))
-            )
+                felter = listOf(Felt(felt = "aktivitet", type = "Aktivitet")),
+            ),
         )
     }
 
     private fun SkjemaKomponent.leggTilEnumDefinisjon(type: String) {
-        enumdefinisjoner.add(Enumdefinisjon(navn = type.klassenavn(), verdier =  values!!.map { it.value }))
+        enumdefinisjoner.add(Enumdefinisjon(navn = type.klassenavn(), verdier = values!!.map { it.value }))
     }
 
     private fun SkjemaKomponent.leggTilDataClassMapping(klassenavn: String) {
@@ -418,7 +421,7 @@ private class KotlinDataClassMapper(
         when (this.lowercase()) {
             "OppholdUtenforNorgeSiste12mnd".lowercase(),
             "OppholdUtenforNorgeNeste12mnd".lowercase(),
-                -> "OppholdUtenforNorge"
+            -> "OppholdUtenforNorge"
 
             else -> this
         }.storFørsteBokstav()
@@ -436,12 +439,11 @@ private class KotlinDataClassMapper(
         return type
     }
 
-    private fun String.storFørsteBokstav() =
-        replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+    private fun String.storFørsteBokstav() = replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
     private data class Klassedefinisjon(
         val navn: String,
-        val felter: List<Felt>
+        val felter: List<Felt>,
     )
 
     private data class Felt(
@@ -451,7 +453,7 @@ private class KotlinDataClassMapper(
 
     private data class Enumdefinisjon(
         val navn: String,
-        val verdier: List<String>
+        val verdier: List<String>,
     )
 }
 
@@ -466,7 +468,7 @@ private object ConditionalsValidering {
     ) {
         fun inneholderKey(key: String): Boolean =
             parent?.component?.components?.any { it.key == key } == true ||
-                    parent?.inneholderKey(key) == true
+                parent?.inneholderKey(key) == true
     }
 
     fun printUgyldigeConditionals(components: List<SkjemaKomponent>) {

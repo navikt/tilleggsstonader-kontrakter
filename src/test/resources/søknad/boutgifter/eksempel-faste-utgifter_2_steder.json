@@ -24,24 +24,40 @@
       "aktiviteter": {
         "aktiviteterOgMaalgruppe": {
           "aktivitet": {
-            "aktivitetId": "ingenAktivitet",
-            "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
+            "aktivitetId": "134120740",
+            "maalgruppe": {
+              "maalgruppetype": "NEDSARBEVN",
+              "gyldighetsperiode": {
+                "fom": "2025-03-01",
+                "tom": "2025-05-31"
+              },
+              "maalgruppenavn": "Person med nedsatt arbeidsevne pga. sykdom"
+            },
+            "periode": {
+              "fom": "2025-03-11",
+              "tom": "2025-09-30"
+            },
+            "text": "Arbeidstrening: 11. mars 2025 - 30. september 2025"
           }
         }
       },
       "boligEllerOvernatting": {
-        "typeUtgifter": "midlertidigUtgift",
-        "samling": {
-          "periodeForSamling": [
-            {
-              "utgifterTilOvernatting": 3000,
-              "fom": "2025-03-05",
-              "tom": "2025-03-14",
-              "trengteEkstraOvernatting": "ja"
-            }
-          ]
+        "typeUtgifter": "fastUtgift",
+        "fasteUtgifter": {
+          "harUtgifterTilBoligToSteder": "ekstraBolig",
+          "utgifterFlereSteder": {
+            "delerBoutgifter": {
+              "jaPaHjemstedet": true,
+              "jaPaAktivitetssted": true,
+              "nei": false
+            },
+            "andelUtgifterBoligHjemsted": 2000,
+            "andelUtgifterBoligAktivitetssted": 4000,
+            "harLeieinntekter": "ja",
+            "leieinntekterPerManed": 3000
+          }
         },
-        "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "nei"
+        "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "ja"
       },
       "hovedytelse": {
         "arbeidsavklaringspenger": true,

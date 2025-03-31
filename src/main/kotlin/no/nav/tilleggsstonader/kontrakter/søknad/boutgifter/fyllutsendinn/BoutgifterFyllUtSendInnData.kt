@@ -48,14 +48,14 @@ data class FasteUtgifter(
 )
 
 data class UtgifterNyBolig(
-    val delerUtgifteneTilBoligMedAndre: JaNeiType,
+    val delerBoutgifter: JaNeiType,
     val andelUtgifterBolig: Int?,
     val harHoyereUtgifterPaNyttBosted: JaNeiType,
     val mottarBostotte: JaNeiType?,
 )
 
 data class UtgifterFlereSteder(
-    val delerDuUtgifterTilBoligMedAndre: Map<DelerDuUtgifterTilBoligMedAndreType, Boolean>,
+    val delerBoutgifter: Map<DelerBoutgifterType, Boolean>,
     val andelUtgifterBoligHjemsted: Int?,
     val andelUtgifterBoligAktivitetssted: Int?,
     val harLeieinntekter: JaNeiType,
@@ -111,7 +111,7 @@ data class Landvelger(
     val label: String,
 )
 
-enum class HovedytelseType{
+enum class HovedytelseType {
     arbeidsavklaringspenger,
     overgangsstonad,
     gjenlevendepensjon,
@@ -124,12 +124,12 @@ enum class HovedytelseType{
     ingenAvAlternativenePasserForMeg,
 }
 
-enum class JaNeiType{
+enum class JaNeiType {
     ja,
     nei,
 }
 
-enum class ArsakOppholdUtenforNorgeType{
+enum class ArsakOppholdUtenforNorgeType {
     jobbet,
     studerte,
     fikkMedisinskBehandling,
@@ -138,26 +138,24 @@ enum class ArsakOppholdUtenforNorgeType{
     annet,
 }
 
-enum class ArbeidsrettetAktivitetType{
+enum class ArbeidsrettetAktivitetType {
     tiltakArbeidsrettetUtredning,
     utdanningGodkjentAvNav,
     harIngenArbeidsrettetAktivitet,
 }
 
-enum class TypeUtgifterType{
+enum class TypeUtgifterType {
     fastUtgift,
     midlertidigUtgift,
 }
 
-enum class HarUtgifterTilBoligToStederType{
+enum class HarUtgifterTilBoligToStederType {
     ekstraBolig,
     nyBolig,
 }
 
-enum class DelerDuUtgifterTilBoligMedAndreType{
+enum class DelerBoutgifterType {
     jaPaHjemstedet,
     jaPaAktivitetssted,
     nei,
 }
-
-

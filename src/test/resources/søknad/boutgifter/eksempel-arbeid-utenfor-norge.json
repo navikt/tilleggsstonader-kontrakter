@@ -45,7 +45,14 @@
         "typeUtgifter": "fastUtgift",
         "fasteUtgifter": {
           "harUtgifterTilBoligToSteder": "ekstraBolig",
-          "harLeieinntekterSomDekkerUtgifteneTilBoligenPaHjemstedet": "nei"
+          "utgifterFlereSteder": {
+            "delerBoutgifter": {
+              "jaPaHjemstedet": false,
+              "jaPaAktivitetssted": false,
+              "nei": true
+            },
+            "harLeieinntekter": "nei"
+          }
         },
         "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "ja"
       },
@@ -115,7 +122,7 @@
     },
     "metadata": {
       "timezone": "Europe/Oslo",
-      "offset": 60,
+      "offset": 120,
       "origin": "https://skjemadelingslenke.ekstern.dev.nav.no",
       "referrer": "https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111219/paabegynt?sub=digital",
       "browserName": "Netscape",

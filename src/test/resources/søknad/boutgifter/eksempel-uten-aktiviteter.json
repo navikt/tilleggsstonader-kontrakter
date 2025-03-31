@@ -4,16 +4,16 @@
     "data": {
       "jegBekrefterAtJegVilSvareSaRiktigSomJegKan": true,
       "dineOpplysninger": {
-        "fornavn": "HURTIG",
-        "etternavn": "PLEIE",
+        "fornavn": "FORNUFTIG",
+        "etternavn": "SØNNAVIND",
         "identitet": {
-          "identitetsnummer": "25518735813"
+          "identitetsnummer": "29500474120"
         },
         "adresse": {
-          "gyldigFraOgMed": "2020-08-01",
-          "adresse": "Grindbråtan 64A",
-          "postnummer": "1484",
-          "bySted": "HAKADAL",
+          "gyldigFraOgMed": "2004-10-29",
+          "adresse": "Hestehagen 2",
+          "postnummer": "2069",
+          "bySted": "JESSHEIM",
           "landkode": "NOR",
           "land": {
             "label": "Norge",
@@ -28,15 +28,20 @@
             "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
           }
         },
-        "arbeidsrettetAktivitet": "utdanningGodkjentAvNav"
+        "arbeidsrettetAktivitet": "tiltakArbeidsrettetUtredning"
       },
       "boligEllerOvernatting": {
         "typeUtgifter": "fastUtgift",
         "fasteUtgifter": {
-          "harUtgifterTilBoligToSteder": "ekstraBolig",
-          "harLeieinntekterSomDekkerUtgifteneTilBoligenPaHjemstedet": "nei"
+          "harUtgifterTilBoligToSteder": "nyBolig",
+          "utgifterNyBolig": {
+            "delerBoutgifter": "ja",
+            "andelUtgifterBolig": 1000,
+            "harHoyereUtgifterPaNyttBosted": "ja",
+            "mottarBostotte": "nei"
+          }
         },
-        "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "nei"
+        "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "ja"
       },
       "hovedytelse": {
         "arbeidsavklaringspenger": true,
@@ -53,7 +58,7 @@
     },
     "metadata": {
       "timezone": "Europe/Oslo",
-      "offset": 60,
+      "offset": 120,
       "origin": "https://skjemadelingslenke.ekstern.dev.nav.no",
       "referrer": "https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111219/paabegynt?sub=digital",
       "browserName": "Netscape",

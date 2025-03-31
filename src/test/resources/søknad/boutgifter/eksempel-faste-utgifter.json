@@ -29,7 +29,7 @@
               "maalgruppetype": "NEDSARBEVN",
               "gyldighetsperiode": {
                 "fom": "2025-03-01",
-                "tom": "2025-05-18"
+                "tom": "2025-05-31"
               },
               "maalgruppenavn": "Person med nedsatt arbeidsevne pga. sykdom"
             },
@@ -45,15 +45,19 @@
         "typeUtgifter": "fastUtgift",
         "fasteUtgifter": {
           "harUtgifterTilBoligToSteder": "nyBolig",
-          "harHoyereUtgifterPaNyttBosted": "ja",
-          "mottarBostotte": "ja"
+          "utgifterNyBolig": {
+            "delerBoutgifter": "ja",
+            "andelUtgifterBolig": 1000,
+            "harHoyereUtgifterPaNyttBosted": "ja",
+            "mottarBostotte": "nei"
+          }
         },
-        "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "ja"
+        "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "nei"
       },
       "hovedytelse": {
         "arbeidsavklaringspenger": true,
         "overgangsstonad": false,
-        "gjenlevendepensjon": true,
+        "gjenlevendepensjon": false,
         "uforetrygd": false,
         "tiltakspenger": false,
         "dagpenger": false,
@@ -65,7 +69,7 @@
     },
     "metadata": {
       "timezone": "Europe/Oslo",
-      "offset": 60,
+      "offset": 120,
       "origin": "https://skjemadelingslenke.ekstern.dev.nav.no",
       "referrer": "https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/nav111219/paabegynt?sub=digital",
       "browserName": "Netscape",

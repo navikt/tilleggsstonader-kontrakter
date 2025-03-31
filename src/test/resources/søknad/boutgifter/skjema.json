@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "205",
+  "revision" : "214",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "dinSituasjonPanel",
@@ -73,6 +73,7 @@
     }, {
       "key" : "alertstripe",
       "label" : "",
+      "content" : "<p>Hvis du ikke har nedsatt arbeidsevne, tror vi du vil få avslag. Du kan fortsatt søke.&nbsp;</p>",
       "type" : "alertstripe",
       "multiple" : false,
       "conditional" : {
@@ -95,6 +96,7 @@
         "components" : [ {
           "key" : "htmlelement",
           "label" : "",
+          "content" : "<p>For å finne ut om du oppfyller kravene til <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.nav.no/no/person/flere-tema/arbeid-og-opphold-i-norge/relatert-informasjon/medlemskap-i-folketrygden\">medlemskap i folketrygden</a> (åpnes i ny fane), trenger vi å vite om du har bodd eller jobbet i utlandet.</p>",
           "type" : "htmlelement",
           "multiple" : false,
           "conditional" : {
@@ -462,6 +464,7 @@
       }, {
         "key" : "alertstripe",
         "label" : "",
+        "content" : "<h4 style=\"margin-left:0px;\">Ingen arbeidsrettet aktivitet?</h4><p style=\"margin-left:0px;\">Du kan fortsatt søke, men du kan få avslag. Merk deg at medisinsk behandling ikke gir rett til denne pengestøtten.</p>",
         "type" : "alertstripe",
         "multiple" : false,
         "conditional" : {
@@ -507,7 +510,7 @@
           "label" : "Faste utgifter til bolig ved skole/tiltakssted",
           "value" : "fastUtgift"
         }, {
-          "label" : "Utgifter til overnatting i forbindelse med eksamen, opptaksprøve eller studiesamling",
+          "label" : "Utgifter til overnatting i forbindelse med studiesamling, kortvarig kurs, eksamen eller opptaksprøve",
           "value" : "midlertidigUtgift"
         } ],
         "multiple" : false,
@@ -553,7 +556,7 @@
             "type" : "container",
             "tree" : true,
             "components" : [ {
-              "key" : "delerDuUtgifterTilBoligMedAndre",
+              "key" : "delerBoutgifter",
               "label" : "Deler du utgifter til bolig med andre?",
               "type" : "selectboxes",
               "values" : [ {
@@ -570,7 +573,7 @@
               "multiple" : false,
               "conditional" : {
                 "eq" : "",
-                "when" : "",
+                "when" : null,
                 "isRequired" : true
               },
               "customConditional" : "",
@@ -583,13 +586,12 @@
               "multiple" : false,
               "conditional" : {
                 "eq" : "jaPaHjemstedet",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterFlereSteder.delerDuUtgifterTilBoligMedAndre",
+                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterFlereSteder.delerBoutgifter",
                 "isRequired" : false
               },
               "customConditional" : "",
               "validate" : {
-                "min" : 0,
-                "max" : 100
+                "min" : 0
               }
             }, {
               "key" : "andelUtgifterBoligAktivitetssted",
@@ -599,17 +601,16 @@
               "multiple" : false,
               "conditional" : {
                 "eq" : "jaPaAktivitetssted",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterFlereSteder.delerDuUtgifterTilBoligMedAndre",
+                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterFlereSteder.delerBoutgifter",
                 "isRequired" : false
               },
               "customConditional" : "",
               "validate" : {
-                "min" : 0,
-                "max" : 100
+                "min" : 0
               }
             }, {
               "key" : "harLeieinntekter",
-              "label" : "Har du leieinntekter til boligen på hjemstedet mens du bor på aktivitetsstedet?",
+              "label" : "Har du leieinntekter på boligen på hjemstedet mens du bor på aktivitetsstedet?",
               "type" : "radiopanel",
               "values" : [ {
                 "label" : "Ja",
@@ -621,7 +622,7 @@
               "multiple" : false,
               "conditional" : {
                 "eq" : "",
-                "when" : "",
+                "when" : null,
                 "isRequired" : true
               },
               "customConditional" : "",
@@ -638,7 +639,9 @@
                 "isRequired" : false
               },
               "customConditional" : "",
-              "validate" : { }
+              "validate" : {
+                "min" : 0
+              }
             } ],
             "multiple" : false,
             "conditional" : {
@@ -654,7 +657,7 @@
             "type" : "container",
             "tree" : true,
             "components" : [ {
-              "key" : "delerUtgifteneTilBoligMedAndre",
+              "key" : "delerBoutgifter",
               "label" : "Deler du utgiftene til bolig med andre?",
               "type" : "radiopanel",
               "values" : [ {
@@ -667,7 +670,7 @@
               "multiple" : false,
               "conditional" : {
                 "eq" : "",
-                "when" : "",
+                "when" : null,
                 "isRequired" : true
               },
               "customConditional" : "",
@@ -680,13 +683,12 @@
               "multiple" : false,
               "conditional" : {
                 "eq" : "ja",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterNyBolig.delerUtgifteneTilBoligMedAndre",
+                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterNyBolig.delerBoutgifter",
                 "isRequired" : false
               },
               "customConditional" : "",
               "validate" : {
-                "min" : 0,
-                "max" : 100
+                "min" : 0
               }
             }, {
               "key" : "harHoyereUtgifterPaNyttBosted",
@@ -710,6 +712,7 @@
             }, {
               "key" : "alertstripe1",
               "label" : "",
+              "content" : "<p>Hvis du ikke har høyere utgifter på ditt nye bosted, har du ikke rett på denne pengestøtten. Du kan fortsatt søke, men du vil mest sannsynlig få avslag.&nbsp;</p>",
               "type" : "alertstripe",
               "multiple" : false,
               "conditional" : {
@@ -741,6 +744,7 @@
             }, {
               "key" : "alertstripe2",
               "label" : "",
+              "content" : "<p>Du kan ikke få denne pengestøtten for en bolig du også mottar bostøtte for. Du kan fortsatt søke, men du vil mest sannsynlig få avslag.&nbsp;</p>",
               "type" : "alertstripe",
               "multiple" : false,
               "conditional" : {
@@ -916,6 +920,7 @@
           "when" : null,
           "isRequired" : true
         },
+        "customConditional" : "",
         "validate" : { }
       }, {
         "key" : "dokumentasjonUtgifterOvernattingSamlingEksamenOpptaksprove",
