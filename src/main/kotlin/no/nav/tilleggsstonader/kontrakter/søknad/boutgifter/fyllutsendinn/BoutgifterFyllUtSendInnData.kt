@@ -155,7 +155,7 @@ enum class HarUtgifterTilBoligToStederType {
 }
 
 enum class DelerBoutgifterType {
-    jaPaHjemstedet,
-    jaPaAktivitetssted,
+    hjemsted,
+    aktivitetssted,
     nei,
 }

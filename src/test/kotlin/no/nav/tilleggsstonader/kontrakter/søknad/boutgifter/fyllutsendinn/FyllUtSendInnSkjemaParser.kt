@@ -309,7 +309,7 @@ private class KotlinDataClassMapper(
             println("")
         }
         enumdefinisjoner.distinct().forEach {
-            println("enum class ${it.navn}{")
+            println("enum class ${it.navn} {")
             it.verdier.forEach { verdi ->
                 println("  $verdi,")
             }

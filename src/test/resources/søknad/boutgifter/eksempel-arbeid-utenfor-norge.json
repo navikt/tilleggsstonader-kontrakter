@@ -47,8 +47,8 @@
           "harUtgifterTilBoligToSteder": "ekstraBolig",
           "utgifterFlereSteder": {
             "delerBoutgifter": {
-              "jaPaHjemstedet": false,
-              "jaPaAktivitetssted": false,
+              "hjemsted": false,
+              "aktivitetssted": false,
               "nei": true
             },
             "harLeieinntekter": "nei"
