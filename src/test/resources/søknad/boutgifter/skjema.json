@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "223",
+  "revision" : "263",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "dinSituasjonPanel",
@@ -137,20 +137,28 @@
         }, {
           "key" : "harPengestotteAnnetLand",
           "label" : "Mottar du pengestøtte fra et annet land enn Norge?",
-          "type" : "radiopanel",
+          "type" : "selectboxes",
           "values" : [ {
-            "label" : "Ja",
-            "value" : "ja"
+            "label" : "Sykepenger",
+            "value" : "sykepenger"
           }, {
-            "label" : "Nei",
-            "value" : "nei"
+            "label" : "Pensjon",
+            "value" : "pensjon"
+          }, {
+            "label" : "Annen pengestøtte",
+            "value" : "annenPengestotte"
+          }, {
+            "label" : "Mottar ikke pengestøtte fra annet land",
+            "value" : "mottarIkkePengestotte"
           } ],
+          "inputType" : "radio",
           "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : { }
         }, {
           "key" : "pengestotteAnnetLand",
@@ -158,10 +166,11 @@
           "type" : "landvelger",
           "multiple" : false,
           "conditional" : {
-            "eq" : "ja",
-            "when" : "arbeidOgOpphold.harPengestotteAnnetLand",
-            "isRequired" : false
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
           },
+          "customConditional" : "show = (data.arbeidOgOpphold.harPengestotteAnnetLand.sykepenger === true || \ndata.arbeidOgOpphold.harPengestotteAnnetLand.pensjon === true || \ndata.arbeidOgOpphold.harPengestotteAnnetLand.annenPengestotte  === true ) \n;\n\n",
           "validate" : { }
         }, {
           "key" : "harOppholdUtenforNorgeSiste12mnd",
@@ -522,19 +531,6 @@
         "customConditional" : "",
         "validate" : { }
       }, {
-        "key" : "alertstripe",
-        "label" : "",
-        "content" : "<p>Du må dokumentere utgifter til:</p><ul><li>ny bolig</li><li>tidligere/nåværende hjemsted</li></ul>",
-        "type" : "alertstripe",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "fastUtgift",
-          "when" : "boligEllerOvernatting.typeUtgifter",
-          "isRequired" : false
-        },
-        "customConditional" : "",
-        "validate" : { }
-      }, {
         "key" : "fasteUtgifter",
         "label" : "Faste utgifter",
         "type" : "container",
@@ -552,7 +548,7 @@
               "label" : "Ja, jeg har utgifter til bolig to steder",
               "value" : "ekstraBolig"
             }, {
-              "label" : "Nei, jeg har flyttet og har utgifter til bolig ett sted",
+              "label" : "Nei, jeg har utgifter til bolig ett sted",
               "value" : "nyBolig"
             } ],
             "multiple" : false,
@@ -560,6 +556,19 @@
               "eq" : "",
               "when" : null,
               "isRequired" : true
+            },
+            "customConditional" : "",
+            "validate" : { }
+          }, {
+            "key" : "alertstripe",
+            "label" : "",
+            "content" : "<p>Du må dokumentere utgiftene du har til bolig på både hjemsted og aktivitetssted.</p>",
+            "type" : "alertstripe",
+            "multiple" : false,
+            "conditional" : {
+              "eq" : "ekstraBolig",
+              "when" : "boligEllerOvernatting.fasteUtgifter.harUtgifterTilBoligToSteder",
+              "isRequired" : false
             },
             "customConditional" : "",
             "validate" : { }
@@ -800,7 +809,7 @@
         "tree" : true,
         "components" : [ {
           "key" : "periodeForSamling",
-          "label" : "Når var samlingen, eksamen eller opptaksprøven din? ",
+          "label" : "Når var samlingen, kurset, eksamen eller opptaksprøven din? ",
           "type" : "datagrid",
           "tree" : true,
           "components" : [ {
@@ -813,6 +822,7 @@
               "when" : null,
               "isRequired" : true
             },
+            "customConditional" : "",
             "validate" : {
               "custom" : "valid = instance.validateDatePickerV2(input, data, component, row);"
             }
@@ -846,11 +856,10 @@
               "when" : null,
               "isRequired" : true
             },
-            "customConditional" : "",
             "validate" : { }
           }, {
             "key" : "utgifterTilOvernatting",
-            "label" : "Hvor mye hadde du i utgifter til overnatting totalt for denne samlingen?",
+            "label" : "Hvor mye hadde du i utgifter til overnatting totalt disse datoene?",
             "type" : "currency",
             "inputType" : "numeric",
             "multiple" : false,
@@ -859,6 +868,7 @@
               "when" : null,
               "isRequired" : true
             },
+            "customConditional" : "",
             "validate" : { }
           } ],
           "multiple" : false,
@@ -867,6 +877,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : { }
         } ],
         "multiple" : false,
@@ -919,35 +930,9 @@
     "type" : "panel",
     "tree" : false,
     "components" : [ {
-      "key" : "vedleggSamlinger",
-      "label" : "Utgifter til overnatting",
-      "type" : "container",
-      "tree" : true,
-      "components" : [ {
-        "key" : "bekreftelsePaAlleSamlingeneDuSkalDeltaPa",
-        "label" : "Dokumentasjon på samlinger, kurs, eksamen eller opptaksprøve du må delta på",
-        "type" : "attachment",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "customConditional" : "",
-        "validate" : { }
-      }, {
-        "key" : "dokumentasjonUtgifterOvernattingSamlingEksamenOpptaksprove",
-        "label" : "Dokumentasjon på utgifter til overnatting i forbindelse med samling, kurs, eksamen eller opptaksprøve",
-        "type" : "attachment",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "customConditional" : "",
-        "validate" : { }
-      } ],
+      "key" : "dokumentasjonUtgifterOvernattingSamlingEksamenOpptaksprove",
+      "label" : "Dokumentasjon på utgifter til overnatting i forbindelse med samling, kurs, eksamen eller opptaksprøve",
+      "type" : "attachment",
       "multiple" : false,
       "conditional" : {
         "eq" : "midlertidigUtgift",
@@ -957,35 +942,33 @@
       "customConditional" : "",
       "validate" : { }
     }, {
-      "key" : "dokumentasjonFasteUtgifter",
-      "label" : "Vedlegg utgifter til bolig",
-      "type" : "container",
-      "tree" : true,
-      "components" : [ {
-        "key" : "dokumentasjonAvBoutgifterPaHjemstedetDitt",
-        "label" : "Dokumentasjon av utgifter til boligen på nåværende/tidligere hjemsted",
-        "type" : "attachment",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "customConditional" : "",
-        "validate" : { }
-      }, {
-        "key" : "dokumentasjonAvBoutgifterNyBolig",
-        "label" : "Dokumentasjon av utgifter til ny bolig",
-        "type" : "attachment",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "customConditional" : "",
-        "validate" : { }
-      } ],
+      "key" : "bekreftelsePaAlleSamlingeneDuSkalDeltaPa",
+      "label" : "Dokumentasjon på samlinger, kurs, eksamen eller opptaksprøve du må delta på",
+      "type" : "attachment",
+      "multiple" : false,
+      "conditional" : {
+        "eq" : "midlertidigUtgift",
+        "when" : "boligEllerOvernatting.typeUtgifter",
+        "isRequired" : false
+      },
+      "customConditional" : "",
+      "validate" : { }
+    }, {
+      "key" : "dokumentasjonAvBoutgifterPaHjemstedetDitt",
+      "label" : "Dokumentasjon av utgifter til boligen på nåværende/tidligere hjemsted",
+      "type" : "attachment",
+      "multiple" : false,
+      "conditional" : {
+        "eq" : "fastUtgift",
+        "when" : "boligEllerOvernatting.typeUtgifter",
+        "isRequired" : false
+      },
+      "customConditional" : "",
+      "validate" : { }
+    }, {
+      "key" : "dokumentasjonAvBoutgifterNyBolig",
+      "label" : "Dokumentasjon av utgifter til ny bolig",
+      "type" : "attachment",
       "multiple" : false,
       "conditional" : {
         "eq" : "fastUtgift",

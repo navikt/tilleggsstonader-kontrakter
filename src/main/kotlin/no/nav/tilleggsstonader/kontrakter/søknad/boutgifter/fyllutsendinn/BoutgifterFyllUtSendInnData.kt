@@ -92,7 +92,7 @@ data class Periode(
 data class ArbeidOgOpphold(
     val jobberIAnnetLand: JaNeiType,
     val jobbAnnetLand: Landvelger?,
-    val harPengestotteAnnetLand: JaNeiType,
+    val harPengestotteAnnetLand: Map<HarPengestotteAnnetLandType, Boolean>,
     val pengestotteAnnetLand: Landvelger?,
     val harOppholdUtenforNorgeSiste12mnd: JaNeiType,
     val oppholdUtenforNorgeSiste12mnd: OppholdUtenforNorge?,
@@ -127,6 +127,13 @@ enum class HovedytelseType {
 enum class JaNeiType {
     ja,
     nei,
+}
+
+enum class HarPengestotteAnnetLandType {
+    sykepenger,
+    pensjon,
+    annenPengestotte,
+    mottarIkkePengestotte,
 }
 
 enum class ArsakOppholdUtenforNorgeType {
