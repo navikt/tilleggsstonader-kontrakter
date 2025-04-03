@@ -11,11 +11,11 @@ data class BoutgifterFyllUtSendInnData(
 )
 
 /**
- * [dineOpplysninger] er informasjon om person, navn, adress ets som ikke er så interessant å parsa
  * [jegBekrefterAtJegVilSvareSaRiktigSomJegKan] er ikke så interessant å mappe
  */
-@JsonIgnoreProperties("dineOpplysninger", "jegBekrefterAtJegVilSvareSaRiktigSomJegKan", ignoreUnknown = false)
+@JsonIgnoreProperties("jegBekrefterAtJegVilSvareSaRiktigSomJegKan", ignoreUnknown = false)
 data class SkjemaBoutgifter(
+    val dineOpplysninger: DineOpplysninger,
     val hovedytelse: Map<HovedytelseType, Boolean>,
     val harNedsattArbeidsevne: JaNeiType?,
     val arbeidOgOpphold: ArbeidOgOpphold?,
@@ -109,6 +109,22 @@ data class OppholdUtenforNorge(
 data class Landvelger(
     val value: String,
     val label: String,
+)
+
+@JsonIgnoreProperties("identitet")
+data class DineOpplysninger(
+    val fornavn: String,
+    val etternavn: String,
+    val adresse: NavAdresse?,
+)
+
+data class NavAdresse(
+    val gyldigFraOgMed: LocalDate,
+    val adresse: String,
+    val postnummer: String,
+    val bySted: String,
+    val landkode: String,
+    val land: Landvelger,
 )
 
 enum class HovedytelseType {

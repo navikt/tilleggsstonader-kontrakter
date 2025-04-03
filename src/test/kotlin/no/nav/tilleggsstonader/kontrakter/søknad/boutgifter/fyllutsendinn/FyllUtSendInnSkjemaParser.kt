@@ -113,7 +113,7 @@ class FyllUtSendInnSkjemaParser {
         if (response.statusCode() == 200) {
             println("Skriver response til skjema.json")
             try {
-                val ignorerteKeys = setOf("personopplysninger", "veiledning")
+                val ignorerteKeys = setOf("veiledning")
                 val parsedJson =
                     objectMapper
                         .readValue<FyllUtSendInnSkjema>(response.body())
@@ -175,7 +175,7 @@ private data class SkjemaKomponent(
     val customConditional: String?,
     val validate: Validate?,
 ) {
-    fun skalIgnoreres() = type == "alertstripe" || type == "htmlelement"
+    fun skalIgnoreres() = setOf("alertstripe", "htmlelement", "identity", "addressValidity").contains(type)
 
     fun erPåkrevd(): Boolean = conditional.isRequired() && customConditional.isNullOrBlank()
 
@@ -244,6 +244,7 @@ private class JsonStrukturGenerator(
             }
             // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
             type == "landvelger" -> mapOf("value" to "AF", "label" to "Afghanistan")
+            type == "navAddress" -> jsonStrukturNavAdresse()
             // Datagrid har en liste med svar {key: [{key: ...}]}
             type == "datagrid" -> listOf(genererJsonStruktur().toMap())
             // container wrapper andre deler
@@ -257,8 +258,24 @@ private class JsonStrukturGenerator(
             inputType == "numeric" -> 100
             type == "navDatepicker" -> "2025-01-01"
             type == "textfield" -> "EksempelSvar"
+            type == "firstName" -> "Fornavn"
+            type == "surname" -> "Etternavn"
             else -> error("Har ikke mapping for $this")
         }
+
+    private fun jsonStrukturNavAdresse(): Map<String, Any> =
+        mapOf(
+            "gyldigFraOgMed" to "2004-10-29",
+            "adresse" to "En vei 2",
+            "postnummer" to "2069",
+            "bySted" to "JESSHEIM",
+            "landkode" to "NOR",
+            "land" to
+                mapOf(
+                    "label" to "Norge",
+                    "value" to "NO",
+                ),
+        )
 
     private fun jsonStrukturAktivitet(): Map<String, Any> {
         val periode = mapOf("fom" to "2025-01-01", "tom" to "2025-01-01")
@@ -301,6 +318,9 @@ private class KotlinDataClassMapper(
 
     private fun print() {
         klassedefinisjoner.reversed().distinct().forEach {
+            if (it.navn == "DineOpplysninger") {
+                println("@JsonIgnoreProperties(\"identitet\")")
+            }
             println("data class ${it.navn}(")
             it.felter.forEach {
                 println("  val ${it.felt}: ${it.type.storFørsteBokstav()},")
@@ -360,6 +380,13 @@ private class KotlinDataClassMapper(
             inputType == "numeric" -> "Int"
             type == "textfield" -> "String"
             type == "navDatepicker" -> "LocalDate"
+            type == "firstName" -> "String"
+            type == "surname" -> "String"
+            type == "navAddress" -> {
+                leggTilKlassedefinisjonNavAdresse()
+                "NavAdresse"
+            }
+
             type == "landvelger" -> {
                 klassedefinisjoner.add(
                     Klassedefinisjon(
@@ -369,12 +396,27 @@ private class KotlinDataClassMapper(
                 )
                 "Landvelger"
             }
+
             type == "datagrid" || type == "container" || type == "navSkjemagruppe" -> {
                 this.leggTilDataClassMapping(key)
                 key
             }
+
             else -> error("Har ikke mapping for $this")
         }
+
+    private fun leggTilKlassedefinisjonNavAdresse() {
+        val felter =
+            listOf(
+                Felt(felt = "gyldigFraOgMed", type = "LocalDate"),
+                Felt(felt = "adresse", type = "String"),
+                Felt(felt = "postnummer", type = "String"),
+                Felt(felt = "bySted", type = "String"),
+                Felt(felt = "landkode", type = "String"),
+                Felt(felt = "land", type = "Landvelger"),
+            )
+        klassedefinisjoner.add(Klassedefinisjon("NavAdresse", felter))
+    }
 
     /**
      * Legger til AktiviteterOgMålgruppe med egne definisjoner av Skjemagruppe då denne ikke er definiert i skjema
