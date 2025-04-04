@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "263",
+  "revision" : "264",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "personopplysninger",
@@ -588,6 +588,25 @@
         "multiple" : false,
         "conditional" : {
           "eq" : "harIngenArbeidsrettetAktivitet",
+          "when" : "aktiviteter.arbeidsrettetAktivitet",
+          "isRequired" : false
+        },
+        "customConditional" : "",
+        "validate" : { }
+      }, {
+        "key" : "mottarLonnGjennomTiltak",
+        "label" : "Mottar du lønn gjennom et tiltak?",
+        "type" : "radiopanel",
+        "values" : [ {
+          "label" : "Ja",
+          "value" : "ja"
+        }, {
+          "label" : "Nei",
+          "value" : "nei"
+        } ],
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "tiltakArbeidsrettetUtredning",
           "when" : "aktiviteter.arbeidsrettetAktivitet",
           "isRequired" : false
         },

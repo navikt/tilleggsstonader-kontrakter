@@ -65,6 +65,7 @@ data class UtgifterFlereSteder(
 data class Aktiviteter(
     val aktiviteterOgMaalgruppe: AktiviteterOgMålgruppe,
     val arbeidsrettetAktivitet: ArbeidsrettetAktivitetType?,
+    val mottarLonnGjennomTiltak: JaNeiType?,
 )
 
 data class AktiviteterOgMålgruppe(
