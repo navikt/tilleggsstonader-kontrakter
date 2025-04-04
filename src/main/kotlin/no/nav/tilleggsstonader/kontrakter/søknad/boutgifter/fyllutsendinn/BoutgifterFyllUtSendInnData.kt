@@ -112,10 +112,10 @@ data class Landvelger(
     val label: String,
 )
 
-@JsonIgnoreProperties("identitet")
 data class DineOpplysninger(
     val fornavn: String,
     val etternavn: String,
+    val identitet: Identitet,
     val adresse: NavAdresse?,
 )
 
@@ -126,6 +126,10 @@ data class NavAdresse(
     val bySted: String,
     val landkode: String,
     val land: Landvelger,
+)
+
+data class Identitet(
+    val identitetsnummer: String,
 )
 
 enum class HovedytelseType {

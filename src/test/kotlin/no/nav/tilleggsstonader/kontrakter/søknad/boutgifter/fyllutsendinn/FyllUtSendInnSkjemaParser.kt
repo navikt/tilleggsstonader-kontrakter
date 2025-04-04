@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
+import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.KotlinDataClassMapper.Felt
+import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.KotlinDataClassMapper.Klassedefinisjon
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -175,7 +177,7 @@ private data class SkjemaKomponent(
     val customConditional: String?,
     val validate: Validate?,
 ) {
-    fun skalIgnoreres() = setOf("alertstripe", "htmlelement", "identity", "addressValidity").contains(type)
+    fun skalIgnoreres() = setOf("alertstripe", "htmlelement", "addressValidity").contains(type)
 
     fun erPåkrevd(): Boolean = conditional.isRequired() && customConditional.isNullOrBlank()
 
@@ -260,6 +262,7 @@ private class JsonStrukturGenerator(
             type == "textfield" -> "EksempelSvar"
             type == "firstName" -> "Fornavn"
             type == "surname" -> "Etternavn"
+            type == "identity" -> mapOf("identitetsnummer" to "1111111111")
             else -> error("Har ikke mapping for $this")
         }
 
@@ -318,9 +321,6 @@ private class KotlinDataClassMapper(
 
     private fun print() {
         klassedefinisjoner.reversed().distinct().forEach {
-            if (it.navn == "DineOpplysninger") {
-                println("@JsonIgnoreProperties(\"identitet\")")
-            }
             println("data class ${it.navn}(")
             it.felter.forEach {
                 println("  val ${it.felt}: ${it.type.storFørsteBokstav()},")
@@ -382,6 +382,11 @@ private class KotlinDataClassMapper(
             type == "navDatepicker" -> "LocalDate"
             type == "firstName" -> "String"
             type == "surname" -> "String"
+            type == "identity" -> {
+                val felter = listOf(Felt(felt = "identitetsnummer", type = "String"))
+                klassedefinisjoner.add(Klassedefinisjon("Identitet", felter))
+                "Identitet"
+            }
             type == "navAddress" -> {
                 leggTilKlassedefinisjonNavAdresse()
                 "NavAdresse"

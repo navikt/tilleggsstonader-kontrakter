@@ -2,6 +2,9 @@
   "dineOpplysninger" : {
     "fornavn" : "Fornavn",
     "etternavn" : "Etternavn",
+    "identitet" : {
+      "identitetsnummer" : "1111111111"
+    },
     "adresse" : {
       "gyldigFraOgMed" : "2004-10-29",
       "adresse" : "En vei 2",
