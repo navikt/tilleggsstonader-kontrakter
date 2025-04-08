@@ -92,6 +92,11 @@ fun <T, P> List<P>.mergeSammenhengende(
         acc
     }
 
+fun List<Datoperiode>.mergeSammenhengende() =
+    this
+        .sorted()
+        .mergeSammenhengende { a, b -> a.overlapperEllerPåfølgesAv(b) }
+
 /**
  * Splitter en datoperiode till verdi per måned,
  * eks 05.01.2023 - 08.02.2023 blir listOf(Pair(jan, verdi), Pair(feb, verdi))
