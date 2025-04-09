@@ -51,6 +51,8 @@
               "aktivitetssted": false,
               "nei": true
             },
+            "andelUtgifterBoligHjemsted" : 100,
+            "andelUtgifterBoligAktivitetssted" : 100,
             "harLeieinntekter": "nei"
           }
         },
