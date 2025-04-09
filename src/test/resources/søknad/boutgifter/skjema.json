@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "265",
+  "revision" : "304",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "personopplysninger",
@@ -606,8 +606,21 @@
         } ],
         "multiple" : false,
         "conditional" : {
-          "eq" : "tiltakArbeidsrettetUtredning",
-          "when" : "aktiviteter.arbeidsrettetAktivitet",
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "customConditional" : "show = (data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.text && \ndata.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId !== \"ingenAktivitet\" &&\n!data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.text.startsWith(\"Ordinær utdanning for enslige forsørgere mv\"))\n|| (data.aktiviteter.arbeidsrettetAktivitet === 'tiltakArbeidsrettetUtredning')\n;",
+        "validate" : { }
+      }, {
+        "key" : "alertstripe1",
+        "label" : "",
+        "content" : "<p style=\"margin-left:0px;\">Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.</p><p style=\"margin-left:0px;\">Som lærling kan du få støtte til pass av barn, selv om du mottar lønn.</p>",
+        "type" : "alertstripe",
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "ja",
+          "when" : "aktiviteter.mottarLonnGjennomTiltak",
           "isRequired" : false
         },
         "customConditional" : "",
@@ -645,7 +658,7 @@
         "label" : "Hva slags utgifter søker du om å få støtte til?",
         "type" : "radiopanel",
         "values" : [ {
-          "label" : "Faste utgifter til bolig ved skole/tiltakssted",
+          "label" : "Faste utgifter til bolig ved aktivitetssted",
           "value" : "fastUtgift"
         }, {
           "label" : "Utgifter til overnatting i forbindelse med studiesamling, kortvarig kurs, eksamen eller opptaksprøve",
@@ -671,7 +684,7 @@
           "tree" : false,
           "components" : [ {
             "key" : "harUtgifterTilBoligToSteder",
-            "label" : "Har du utgifter til bolig både på hjemstedet og aktivitetsstedet ditt?",
+            "label" : "Har du utgifter til bolig både på hjemstedet ditt og aktivitetsstedet?",
             "type" : "radiopanel",
             "values" : [ {
               "label" : "Ja, jeg har utgifter til bolig to steder",
@@ -685,19 +698,6 @@
               "eq" : "",
               "when" : null,
               "isRequired" : true
-            },
-            "customConditional" : "",
-            "validate" : { }
-          }, {
-            "key" : "alertstripe",
-            "label" : "",
-            "content" : "<p>Du må dokumentere utgiftene du har til bolig på både hjemsted og aktivitetssted.</p>",
-            "type" : "alertstripe",
-            "multiple" : false,
-            "conditional" : {
-              "eq" : "ekstraBolig",
-              "when" : "boligEllerOvernatting.fasteUtgifter.harUtgifterTilBoligToSteder",
-              "isRequired" : false
             },
             "customConditional" : "",
             "validate" : { }
@@ -731,14 +731,14 @@
               "validate" : { }
             }, {
               "key" : "andelUtgifterBoligHjemsted",
-              "label" : "Hvor mye er din andel (i kroner) av de månedlige utgiftene til boligen på hjemstedet?",
+              "label" : "Hvor mye har du i månedlige utgifter til boligen på hjemstedet?",
               "type" : "number",
               "inputType" : "numeric",
               "multiple" : false,
               "conditional" : {
-                "eq" : "hjemsted",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterFlereSteder.delerBoutgifter",
-                "isRequired" : false
+                "eq" : "",
+                "when" : null,
+                "isRequired" : true
               },
               "customConditional" : "",
               "validate" : {
@@ -746,14 +746,14 @@
               }
             }, {
               "key" : "andelUtgifterBoligAktivitetssted",
-              "label" : "Hvor mye er din andel (i kroner) av de månedlige utgiftene til bolig på aktivitetsstedet?",
+              "label" : "Hvor mye har du i månedlige utgifter til bolig på aktivitetsstedet?",
               "type" : "number",
               "inputType" : "numeric",
               "multiple" : false,
               "conditional" : {
-                "eq" : "aktivitetssted",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterFlereSteder.delerBoutgifter",
-                "isRequired" : false
+                "eq" : "",
+                "when" : null,
+                "isRequired" : true
               },
               "customConditional" : "",
               "validate" : {
@@ -809,7 +809,7 @@
             "tree" : true,
             "components" : [ {
               "key" : "delerBoutgifter",
-              "label" : "Deler du utgiftene til bolig med andre?",
+              "label" : "Deler du utgiftene til boligen på aktivitetsstedet med andre?",
               "type" : "radiopanel",
               "values" : [ {
                 "label" : "Ja",

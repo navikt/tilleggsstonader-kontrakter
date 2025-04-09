@@ -62,7 +62,7 @@ class FyllUtSendInnSkjemaParser {
      */
     @Test
     fun `printer ugyldige conditionals`() {
-        ConditionalsValidering.printUgyldigeConditionals(skjema.relevanteKomponenter())
+        ConditionalsValidering.printUgyldigeConditionals(skjema.relevanteKomponenterForConditionals())
     }
 
     /**
@@ -149,8 +149,12 @@ private data class FyllUtSendInnSkjema(
      */
     fun relevanteKomponenter(): List<SkjemaKomponent> = components.filterNot { it.key in ignorerteKeys }
 
+    fun relevanteKomponenterForConditionals(): List<SkjemaKomponent> =
+        components.filterNot { it.key in ignorerteKeys || it.key in ignorerteKeysConditionals }
+
     companion object {
         val ignorerteKeys = setOf("vedlegg")
+        val ignorerteKeysConditionals = setOf("vedlegg", "personopplysninger")
     }
 }
 
