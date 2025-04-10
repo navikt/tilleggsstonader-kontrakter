@@ -11,6 +11,7 @@ enum class BehandlingResultat {
 enum class BehandlingStatus {
     OPPRETTET,
     UTREDES,
+    SATT_PÅ_VENT,
     VENTER,
     FERDIGSTILT,
 }
