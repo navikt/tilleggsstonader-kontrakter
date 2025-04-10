@@ -7,6 +7,13 @@ import java.time.LocalDate
  */
 data class SettPåVentRequest(
     val oppgaveId: Long,
+    val kommentar: String?,
+    val frist: LocalDate,
+    val beholdOppgave: Boolean,
+)
+
+data class OppdaterPåVentRequest(
+    val oppgaveId: Long,
     val oppgaveVersjon: Int,
     val kommentar: String?,
     val frist: LocalDate,
