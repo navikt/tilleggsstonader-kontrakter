@@ -52,9 +52,7 @@
               "nei": false
             },
             "andelUtgifterBoligHjemsted": 2000,
-            "andelUtgifterBoligAktivitetssted": 4000,
-            "harLeieinntekter": "ja",
-            "leieinntekterPerManed": 3000
+            "andelUtgifterBoligAktivitetssted": 4000
           }
         },
         "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "ja"

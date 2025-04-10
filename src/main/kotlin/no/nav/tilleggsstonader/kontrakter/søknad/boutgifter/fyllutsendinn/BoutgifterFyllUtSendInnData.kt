@@ -58,8 +58,6 @@ data class UtgifterFlereSteder(
     val delerBoutgifter: Map<DelerBoutgifterType, Boolean>,
     val andelUtgifterBoligHjemsted: Int,
     val andelUtgifterBoligAktivitetssted: Int,
-    val harLeieinntekter: JaNeiType,
-    val leieinntekterPerManed: Int?,
 )
 
 data class Aktiviteter(

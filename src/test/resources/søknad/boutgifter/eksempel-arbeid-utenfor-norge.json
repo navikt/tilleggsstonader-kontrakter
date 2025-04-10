@@ -52,8 +52,7 @@
               "nei": true
             },
             "andelUtgifterBoligHjemsted" : 100,
-            "andelUtgifterBoligAktivitetssted" : 100,
-            "harLeieinntekter": "nei"
+            "andelUtgifterBoligAktivitetssted" : 100
           }
         },
         "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "ja"

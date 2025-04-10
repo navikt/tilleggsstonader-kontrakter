@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "304",
+  "revision" : "308",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "personopplysninger",
@@ -690,7 +690,7 @@
               "label" : "Ja, jeg har utgifter til bolig to steder",
               "value" : "ekstraBolig"
             }, {
-              "label" : "Nei, jeg har utgifter til bolig ett sted",
+              "label" : "Nei, jeg har utgift til bolig bare ved aktivitetsstedet",
               "value" : "nyBolig"
             } ],
             "multiple" : false,
@@ -754,40 +754,6 @@
                 "eq" : "",
                 "when" : null,
                 "isRequired" : true
-              },
-              "customConditional" : "",
-              "validate" : {
-                "min" : 0
-              }
-            }, {
-              "key" : "harLeieinntekter",
-              "label" : "Har du leieinntekter på boligen på hjemstedet mens du bor på aktivitetsstedet?",
-              "type" : "radiopanel",
-              "values" : [ {
-                "label" : "Ja",
-                "value" : "ja"
-              }, {
-                "label" : "Nei",
-                "value" : "nei"
-              } ],
-              "multiple" : false,
-              "conditional" : {
-                "eq" : "",
-                "when" : null,
-                "isRequired" : true
-              },
-              "customConditional" : "",
-              "validate" : { }
-            }, {
-              "key" : "leieinntekterPerManed",
-              "label" : "Hvor mye har du i leieinntekter per måned?",
-              "type" : "number",
-              "inputType" : "numeric",
-              "multiple" : false,
-              "conditional" : {
-                "eq" : "ja",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterFlereSteder.harLeieinntekter",
-                "isRequired" : false
               },
               "customConditional" : "",
               "validate" : {
