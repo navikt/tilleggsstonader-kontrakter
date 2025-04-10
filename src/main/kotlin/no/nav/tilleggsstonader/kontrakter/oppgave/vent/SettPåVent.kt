@@ -27,7 +27,6 @@ data class SettPåVentResponse(
 
 data class TaAvVentRequest(
     val oppgaveId: Long,
-    val oppgaveVersjon: Int,
     val kommentar: String?,
     val beholdOppgave: Boolean,
 )
