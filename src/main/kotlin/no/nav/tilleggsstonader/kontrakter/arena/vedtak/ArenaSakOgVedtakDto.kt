@@ -69,4 +69,7 @@ data class SpesialutbetalingDto(
     val datoUtbetaling: LocalDate,
     val fom: LocalDate,
     val tom: LocalDate,
+    val status: String,
+    val opprettetDato: LocalDate,
+    val endretDato: LocalDate,
 )
