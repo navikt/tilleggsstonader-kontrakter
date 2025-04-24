@@ -42,6 +42,7 @@ data class VedtakDto(
     val utfall: String?,
     val vedtakfakta: List<VedtakfaktaDto>,
     val vilkårsvurderinger: List<VilkårsvurderingDto>,
+    val spesialutbetalinger: List<SpesialutbetalingDto> = emptyList(),
     val datoMottatt: LocalDate?,
     val saksbehandler: String?,
     val beslutter: String?,
@@ -56,4 +57,14 @@ data class VilkårsvurderingDto(
     val vilkår: String,
     val vurdering: String,
     val vurdertAv: String?,
+)
+
+data class SpesialutbetalingDto(
+    val belop: Int,
+    val begrunnelse: String,
+    val saksbehandler: String,
+    val beslutter: String,
+    val datoUtbetaling: LocalDate,
+    val fom: LocalDate,
+    val tom: LocalDate,
 )
