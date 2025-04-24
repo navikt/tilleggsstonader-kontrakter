@@ -46,6 +46,7 @@ data class VedtakDto(
     val datoMottatt: LocalDate?,
     val saksbehandler: String?,
     val beslutter: String?,
+    val begrunnelse: String? = null,
 )
 
 data class VedtakfaktaDto(
