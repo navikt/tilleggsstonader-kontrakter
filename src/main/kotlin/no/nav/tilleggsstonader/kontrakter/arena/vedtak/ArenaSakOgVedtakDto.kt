@@ -63,9 +63,9 @@ data class VilkårsvurderingDto(
 data class SpesialutbetalingDto(
     val spesialutbetalingId: Int,
     val belop: Int,
-    val begrunnelse: String,
+    val begrunnelse: String?,
     val saksbehandler: String,
-    val beslutter: String,
+    val beslutter: String?,
     val datoUtbetaling: LocalDate,
     val fom: LocalDate,
     val tom: LocalDate,
