@@ -61,6 +61,7 @@ data class VilkårsvurderingDto(
 )
 
 data class SpesialutbetalingDto(
+    val spesialutbetalingId: Int,
     val belop: Int,
     val begrunnelse: String,
     val saksbehandler: String,
