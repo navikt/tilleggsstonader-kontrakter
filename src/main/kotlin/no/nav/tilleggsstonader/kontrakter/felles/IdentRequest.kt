@@ -16,6 +16,14 @@ data class IdentStønadstype(
 )
 
 /**
+ * Kan brukes til oppslag på ident og gitt fagsystem
+ */
+data class IdentFagsystem(
+    val ident: String,
+    val fagsystem: Fagsystem,
+)
+
+/**
  * Ved oppslag mot arena burde vi sende alle identene til en person,
  * i tilfelle identen har blitt oppdatert i PDL men ikke i Arena
  */
