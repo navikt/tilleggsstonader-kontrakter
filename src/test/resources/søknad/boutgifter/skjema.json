@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "310",
+  "revision" : "314",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "personopplysninger",
@@ -22,7 +22,9 @@
           "when" : null,
           "isRequired" : true
         },
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "etternavn",
         "label" : "Etternavn",
@@ -33,7 +35,9 @@
           "when" : null,
           "isRequired" : true
         },
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "identitet",
         "label" : "Identitet",
@@ -44,7 +48,9 @@
           "when" : null,
           "isRequired" : true
         },
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "adresse",
         "label" : "Adresse",
@@ -56,7 +62,9 @@
           "isRequired" : true
         },
         "customConditional" : "show = row.identitet.harDuFodselsnummer === \"nei\" || (row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer)",
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "adresseVarighet",
         "label" : "Adresse varighet",
@@ -68,7 +76,9 @@
           "isRequired" : true
         },
         "customConditional" : "show = row.adresse.borDuINorge === \"nei\" || (row.adresse.borDuINorge === \"ja\" && row.adresse.vegadresseEllerPostboksadresse)",
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "alertstripe",
         "label" : "Alertstripe",
@@ -81,7 +91,9 @@
           "isRequired" : true
         },
         "customConditional" : "show = row.identitet.harDuFodselsnummer === \"ja\"",
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       }, {
         "key" : "alertstripePrefill",
         "label" : "Alertstripe",
@@ -94,7 +106,9 @@
           "isRequired" : true
         },
         "customConditional" : "show = row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer",
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       } ],
       "multiple" : false,
       "conditional" : {
@@ -102,7 +116,9 @@
         "when" : null,
         "isRequired" : true
       },
-      "validate" : { }
+      "validate" : {
+        "required" : false
+      }
     } ],
     "multiple" : false,
     "conditional" : {
@@ -111,7 +127,9 @@
       "isRequired" : true
     },
     "customConditional" : "",
-    "validate" : { }
+    "validate" : {
+      "required" : false
+    }
   }, {
     "key" : "dinSituasjonPanel",
     "label" : "Panel",
@@ -160,7 +178,9 @@
         "isRequired" : true
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : true
+      }
     }, {
       "key" : "harNedsattArbeidsevne",
       "label" : "Har du nedsatt arbeidsevne på grunn av sykdom, skade eller medfødt tilstand?",
@@ -179,7 +199,9 @@
         "isRequired" : true
       },
       "customConditional" : "show = (data.hovedytelse.tiltakspenger === true || \ndata.hovedytelse.kvalifiseringsstonad === true || \ndata.hovedytelse.dagpenger\n === true || \ndata.hovedytelse.sykepenger\n === true || \n data.hovedytelse.ingenAvAlternativenePasserForMeg === true) \n && \n (data.hovedytelse.arbeidsavklaringspenger === false && \n data.hovedytelse.overgangsstonad === false && \n data.hovedytelse.gjenlevendepensjon === false &&\n data.hovedytelse.mottarIngenPengestotte === false &&\n data.hovedytelse.uforetrygd === false) \n ;\n",
-      "validate" : { }
+      "validate" : {
+        "required" : true
+      }
     }, {
       "key" : "alertstripe",
       "label" : "",
@@ -192,7 +214,9 @@
         "isRequired" : false
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : false
+      }
     }, {
       "key" : "arbeidOgOpphold",
       "label" : "Beholder medlemsskap spørsmål",
@@ -214,7 +238,9 @@
             "when" : null,
             "isRequired" : true
           },
-          "validate" : { }
+          "validate" : {
+            "required" : false
+          }
         }, {
           "key" : "jobberIAnnetLand",
           "label" : "Jobber du i et annet land enn Norge?",
@@ -232,7 +258,9 @@
             "when" : null,
             "isRequired" : true
           },
-          "validate" : { }
+          "validate" : {
+            "required" : true
+          }
         }, {
           "key" : "jobbAnnetLand",
           "label" : "Hvilket land jobber du i?",
@@ -243,7 +271,9 @@
             "when" : "arbeidOgOpphold.jobberIAnnetLand",
             "isRequired" : false
           },
-          "validate" : { }
+          "validate" : {
+            "required" : true
+          }
         }, {
           "key" : "harPengestotteAnnetLand",
           "label" : "Mottar du pengestøtte fra et annet land enn Norge?",
@@ -269,7 +299,9 @@
             "isRequired" : true
           },
           "customConditional" : "",
-          "validate" : { }
+          "validate" : {
+            "required" : true
+          }
         }, {
           "key" : "pengestotteAnnetLand",
           "label" : "Hvilket land mottar du pengestøtte fra?",
@@ -281,7 +313,9 @@
             "isRequired" : true
           },
           "customConditional" : "show = (data.arbeidOgOpphold.harPengestotteAnnetLand.sykepenger === true || \ndata.arbeidOgOpphold.harPengestotteAnnetLand.pensjon === true || \ndata.arbeidOgOpphold.harPengestotteAnnetLand.annenPengestotte  === true ) \n;\n\n",
-          "validate" : { }
+          "validate" : {
+            "required" : true
+          }
         }, {
           "key" : "harOppholdUtenforNorgeSiste12mnd",
           "label" : "Har du oppholdt deg utenfor Norge i løpet av de siste 12 månedene?",
@@ -299,7 +333,9 @@
             "when" : null,
             "isRequired" : true
           },
-          "validate" : { }
+          "validate" : {
+            "required" : true
+          }
         }, {
           "key" : "oppholdUtenforNorgeSiste12mnd",
           "label" : "Opphold utenfor Norge siste 12 mnd",
@@ -315,7 +351,9 @@
               "when" : null,
               "isRequired" : true
             },
-            "validate" : { }
+            "validate" : {
+              "required" : true
+            }
           }, {
             "key" : "arsakOppholdUtenforNorge",
             "label" : "Hva gjorde du i dette landet?",
@@ -346,7 +384,9 @@
               "when" : null,
               "isRequired" : true
             },
-            "validate" : { }
+            "validate" : {
+              "required" : true
+            }
           }, {
             "key" : "periode",
             "label" : "Når var du i dette landet?",
@@ -362,7 +402,9 @@
                 "when" : null,
                 "isRequired" : true
               },
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             }, {
               "key" : "tom",
               "label" : "Til (dd.mm.åååå)",
@@ -373,7 +415,9 @@
                 "when" : null,
                 "isRequired" : true
               },
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             } ],
             "multiple" : false,
             "conditional" : {
@@ -381,7 +425,9 @@
               "when" : null,
               "isRequired" : true
             },
-            "validate" : { }
+            "validate" : {
+              "required" : false
+            }
           } ],
           "multiple" : false,
           "conditional" : {
@@ -389,7 +435,9 @@
             "when" : "arbeidOgOpphold.harOppholdUtenforNorgeSiste12mnd",
             "isRequired" : false
           },
-          "validate" : { }
+          "validate" : {
+            "required" : false
+          }
         }, {
           "key" : "harOppholdUtenforNorgeNeste12mnd",
           "label" : "Planlegger du å oppholde deg utenfor Norge de neste 12 månedene?",
@@ -407,7 +455,9 @@
             "when" : "arbeidOgOpphold.harOppholdUtenforNorgeSiste12mnd",
             "isRequired" : false
           },
-          "validate" : { }
+          "validate" : {
+            "required" : true
+          }
         }, {
           "key" : "oppholdUtenforNorgeNeste12mnd",
           "label" : "Opphold utenfor Norge neste 12mnd",
@@ -423,7 +473,9 @@
               "when" : null,
               "isRequired" : true
             },
-            "validate" : { }
+            "validate" : {
+              "required" : true
+            }
           }, {
             "key" : "arsakOppholdUtenforNorge",
             "label" : "Hva skal du gjøre i dette landet?",
@@ -454,7 +506,9 @@
               "when" : null,
               "isRequired" : true
             },
-            "validate" : { }
+            "validate" : {
+              "required" : true
+            }
           }, {
             "key" : "periode",
             "label" : "Når skal du være i dette landet?",
@@ -470,7 +524,9 @@
                 "when" : null,
                 "isRequired" : true
               },
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             }, {
               "key" : "tom",
               "label" : "Til (dd.mm.åååå)",
@@ -481,7 +537,9 @@
                 "when" : null,
                 "isRequired" : true
               },
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             } ],
             "multiple" : false,
             "conditional" : {
@@ -489,7 +547,9 @@
               "when" : null,
               "isRequired" : true
             },
-            "validate" : { }
+            "validate" : {
+              "required" : false
+            }
           } ],
           "multiple" : false,
           "conditional" : {
@@ -497,7 +557,9 @@
             "when" : "arbeidOgOpphold.harOppholdUtenforNorgeNeste12mnd",
             "isRequired" : false
           },
-          "validate" : { }
+          "validate" : {
+            "required" : false
+          }
         } ],
         "multiple" : false,
         "conditional" : {
@@ -505,7 +567,9 @@
           "when" : null,
           "isRequired" : true
         },
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       } ],
       "multiple" : false,
       "conditional" : {
@@ -514,7 +578,9 @@
         "isRequired" : true
       },
       "customConditional" : "show = (data.hovedytelse.tiltakspenger === true || \ndata.hovedytelse.kvalifiseringsstonad === true || \ndata.hovedytelse.mottarIngenPengestotte\n === true || \n data.hovedytelse.ingenAvAlternativenePasserForMeg === true) \n && \n (data.hovedytelse.arbeidsavklaringspenger === false && \n data.hovedytelse.overgangsstonad === false && \n data.hovedytelse.gjenlevendepensjon === false && \n data.hovedytelse.uforetrygd === false && \n  data.hovedytelse.dagpenger === false &&\n data.hovedytelse.sykepenger === false) \n ;",
-      "validate" : { }
+      "validate" : {
+        "required" : false
+      }
     } ],
     "multiple" : false,
     "conditional" : {
@@ -523,7 +589,9 @@
       "isRequired" : true
     },
     "customConditional" : "",
-    "validate" : { }
+    "validate" : {
+      "required" : false
+    }
   }, {
     "key" : "arbeidsrettetAktivitetPanel",
     "label" : "Page 5",
@@ -549,7 +617,9 @@
             "when" : null,
             "isRequired" : true
           },
-          "validate" : { }
+          "validate" : {
+            "required" : false
+          }
         } ],
         "multiple" : false,
         "conditional" : {
@@ -557,7 +627,9 @@
           "when" : null,
           "isRequired" : true
         },
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       }, {
         "key" : "arbeidsrettetAktivitet",
         "label" : "Hvilken arbeidsrettet aktivitet har du?",
@@ -579,7 +651,9 @@
           "isRequired" : true
         },
         "customConditional" : "show = data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId === \"ingenAktivitet\";",
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "alertstripe",
         "label" : "",
@@ -592,7 +666,9 @@
           "isRequired" : false
         },
         "customConditional" : "",
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       }, {
         "key" : "mottarLonnGjennomTiltak",
         "label" : "Mottar du lønn gjennom et tiltak?",
@@ -611,7 +687,9 @@
           "isRequired" : true
         },
         "customConditional" : "show = (data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.text && \ndata.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId !== \"ingenAktivitet\" &&\n!data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.text.startsWith(\"Ordinær utdanning for enslige forsørgere mv\"))\n|| (data.aktiviteter.arbeidsrettetAktivitet === 'tiltakArbeidsrettetUtredning')\n;",
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "alertstripe1",
         "label" : "",
@@ -624,7 +702,9 @@
           "isRequired" : false
         },
         "customConditional" : "",
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       } ],
       "multiple" : false,
       "conditional" : {
@@ -633,7 +713,9 @@
         "isRequired" : true
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : false
+      }
     } ],
     "multiple" : false,
     "conditional" : {
@@ -642,7 +724,9 @@
       "isRequired" : true
     },
     "customConditional" : "",
-    "validate" : { }
+    "validate" : {
+      "required" : false
+    }
   }, {
     "key" : "boligEllerOvernattingPanel",
     "label" : "Page 6",
@@ -671,7 +755,9 @@
           "isRequired" : true
         },
         "customConditional" : "",
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       }, {
         "key" : "fasteUtgifter",
         "label" : "Faste utgifter",
@@ -700,7 +786,9 @@
               "isRequired" : true
             },
             "customConditional" : "",
-            "validate" : { }
+            "validate" : {
+              "required" : true
+            }
           }, {
             "key" : "utgifterFlereSteder",
             "label" : "Utgifter flere steder",
@@ -728,7 +816,9 @@
                 "isRequired" : true
               },
               "customConditional" : "",
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             }, {
               "key" : "andelUtgifterBoligHjemsted",
               "label" : "Hvor mye har du i månedlige utgifter til boligen på hjemstedet?",
@@ -742,6 +832,7 @@
               },
               "customConditional" : "",
               "validate" : {
+                "required" : true,
                 "min" : 0
               }
             }, {
@@ -757,6 +848,7 @@
               },
               "customConditional" : "",
               "validate" : {
+                "required" : true,
                 "min" : 0
               }
             } ],
@@ -767,7 +859,9 @@
               "isRequired" : false
             },
             "customConditional" : "",
-            "validate" : { }
+            "validate" : {
+              "required" : false
+            }
           }, {
             "key" : "utgifterNyBolig",
             "label" : "Utgifter ny bolig",
@@ -791,7 +885,9 @@
                 "isRequired" : true
               },
               "customConditional" : "",
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             }, {
               "key" : "andelUtgifterBolig",
               "label" : "Hvor mye er din andel (i kroner) av de månedlige utgiftene til bolig?",
@@ -805,6 +901,7 @@
               },
               "customConditional" : "",
               "validate" : {
+                "required" : true,
                 "min" : 0
               }
             }, {
@@ -825,7 +922,9 @@
                 "isRequired" : true
               },
               "customConditional" : "",
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             }, {
               "key" : "alertstripe1",
               "label" : "",
@@ -838,7 +937,9 @@
                 "isRequired" : false
               },
               "customConditional" : "",
-              "validate" : { }
+              "validate" : {
+                "required" : false
+              }
             }, {
               "key" : "mottarBostotte",
               "label" : "Mottar du eller har du søkt om bostøtte? ",
@@ -857,7 +958,9 @@
                 "isRequired" : true
               },
               "customConditional" : "",
-              "validate" : { }
+              "validate" : {
+                "required" : true
+              }
             }, {
               "key" : "alertstripe2",
               "label" : "",
@@ -870,7 +973,9 @@
                 "isRequired" : false
               },
               "customConditional" : "",
-              "validate" : { }
+              "validate" : {
+                "required" : false
+              }
             } ],
             "multiple" : false,
             "conditional" : {
@@ -879,7 +984,9 @@
               "isRequired" : false
             },
             "customConditional" : "",
-            "validate" : { }
+            "validate" : {
+              "required" : false
+            }
           } ],
           "multiple" : false,
           "conditional" : {
@@ -887,7 +994,9 @@
             "when" : null,
             "isRequired" : true
           },
-          "validate" : { }
+          "validate" : {
+            "required" : false
+          }
         } ],
         "multiple" : false,
         "conditional" : {
@@ -896,7 +1005,9 @@
           "isRequired" : false
         },
         "customConditional" : "",
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       }, {
         "key" : "samling",
         "label" : "Utgifter i forbindelse med samling",
@@ -919,6 +1030,7 @@
             },
             "customConditional" : "",
             "validate" : {
+              "required" : true,
               "custom" : "valid = instance.validateDatePickerV2(input, data, component, row);"
             }
           }, {
@@ -932,6 +1044,7 @@
               "isRequired" : true
             },
             "validate" : {
+              "required" : true,
               "custom" : "valid = instance.validateDatePickerV2(input, data, component, row);"
             }
           }, {
@@ -951,7 +1064,9 @@
               "when" : null,
               "isRequired" : true
             },
-            "validate" : { }
+            "validate" : {
+              "required" : true
+            }
           }, {
             "key" : "utgifterTilOvernatting",
             "label" : "Hvor mye hadde du i utgifter til overnatting totalt disse datoene?",
@@ -964,7 +1079,9 @@
               "isRequired" : true
             },
             "customConditional" : "",
-            "validate" : { }
+            "validate" : {
+              "required" : false
+            }
           } ],
           "multiple" : false,
           "conditional" : {
@@ -973,7 +1090,9 @@
             "isRequired" : true
           },
           "customConditional" : "",
-          "validate" : { }
+          "validate" : {
+            "required" : false
+          }
         } ],
         "multiple" : false,
         "conditional" : {
@@ -982,7 +1101,9 @@
           "isRequired" : false
         },
         "customConditional" : "",
-        "validate" : { }
+        "validate" : {
+          "required" : false
+        }
       }, {
         "key" : "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse",
         "label" : "Trenger du tilpasset bolig på grunn av fysiske eller psykiske helseutfordringer?",
@@ -1001,7 +1122,9 @@
           "isRequired" : true
         },
         "customConditional" : "",
-        "validate" : { }
+        "validate" : {
+          "required" : true
+        }
       } ],
       "multiple" : false,
       "conditional" : {
@@ -1009,7 +1132,9 @@
         "when" : null,
         "isRequired" : true
       },
-      "validate" : { }
+      "validate" : {
+        "required" : false
+      }
     } ],
     "multiple" : false,
     "conditional" : {
@@ -1018,7 +1143,9 @@
       "isRequired" : true
     },
     "customConditional" : "",
-    "validate" : { }
+    "validate" : {
+      "required" : false
+    }
   }, {
     "key" : "vedlegg",
     "label" : "Panel",
@@ -1035,7 +1162,9 @@
         "isRequired" : false
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : true
+      }
     }, {
       "key" : "bekreftelsePaAlleSamlingeneDuSkalDeltaPa",
       "label" : "Dokumentasjon på samlinger, kurs, eksamen eller opptaksprøve du må delta på",
@@ -1047,7 +1176,9 @@
         "isRequired" : false
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : true
+      }
     }, {
       "key" : "dokumentasjonAvBoutgifterPaHjemstedetDitt",
       "label" : "Dokumentasjon av utgifter til boligen på nåværende/tidligere hjemsted",
@@ -1059,7 +1190,9 @@
         "isRequired" : false
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : true
+      }
     }, {
       "key" : "dokumentasjonAvBoutgifterNyBolig",
       "label" : "Dokumentasjon av utgifter til ny bolig",
@@ -1071,7 +1204,9 @@
         "isRequired" : false
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : true
+      }
     }, {
       "key" : "dokumentasjonAvMedisinskeForholdSomPavirkerUtgifteneDinePaAktivitetsstedet",
       "label" : "Uttalelse fra helsepersonell",
@@ -1083,7 +1218,9 @@
         "isRequired" : false
       },
       "customConditional" : "",
-      "validate" : { }
+      "validate" : {
+        "required" : true
+      }
     } ],
     "multiple" : false,
     "conditional" : {
@@ -1092,6 +1229,8 @@
       "isRequired" : true
     },
     "customConditional" : "",
-    "validate" : { }
+    "validate" : {
+      "required" : false
+    }
   } ]
 }

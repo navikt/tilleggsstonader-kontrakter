@@ -183,7 +183,12 @@ private data class SkjemaKomponent(
 ) {
     fun skalIgnoreres() = setOf("alertstripe", "htmlelement", "addressValidity").contains(type)
 
-    fun erPåkrevd(): Boolean = conditional.isRequired() && customConditional.isNullOrBlank()
+    /**
+     * Et felt et påkrevd hvis det vises, dvs at conditional er oppfylt eller validering er påkrevd.
+     * I tilfelle det er av typen tree (eks container) så inneholder den andre elementer og selve wrappern er påkrevd
+     */
+    fun erPåkrevd(): Boolean =
+        (conditional.isRequired() && customConditional.isNullOrBlank()) && (validate?.required == true || tree == true)
 
     /**
      * Brukes som alternativ i tilfelle det er en checkbox-group
@@ -210,6 +215,7 @@ private data class SkjemaKomponent(
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     data class Validate(
+        val required: Boolean?,
         val min: Any?,
         val max: Any?,
         val custom: String?,
