@@ -38,7 +38,7 @@ data class PeriodeForSamling(
     val fom: LocalDate,
     val tom: LocalDate,
     val trengteEkstraOvernatting: JaNeiType,
-    val utgifterTilOvernatting: Int,
+    val utgifterTilOvernatting: Int?,
 )
 
 data class FasteUtgifter(
