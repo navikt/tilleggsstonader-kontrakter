@@ -331,6 +331,9 @@ private class KotlinDataClassMapper(
 
     private fun print() {
         klassedefinisjoner.reversed().distinct().forEach {
+            if (it.navn == "NavAdresse") {
+                println("@JsonIgnoreProperties(ignoreUnknown = true)")
+            }
             println("data class ${it.navn}(")
             it.felter.forEach {
                 println("  val ${it.felt}: ${it.type.storFørsteBokstav()},")
@@ -425,6 +428,7 @@ private class KotlinDataClassMapper(
             listOf(
                 Felt(felt = "gyldigFraOgMed", type = "LocalDate"),
                 Felt(felt = "adresse", type = "String"),
+                Felt(felt = "co", type = "String?"),
                 Felt(felt = "postnummer", type = "String"),
                 Felt(felt = "bySted", type = "String"),
                 Felt(felt = "landkode", type = "String"),

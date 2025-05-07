@@ -117,6 +117,7 @@ data class DineOpplysninger(
     val adresse: NavAdresse?,
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class NavAdresse(
     val gyldigFraOgMed: LocalDate,
     val adresse: String,
