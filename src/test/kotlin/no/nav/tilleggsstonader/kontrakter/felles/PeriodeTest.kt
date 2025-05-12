@@ -119,6 +119,24 @@ internal class PeriodeTest {
             assertThat(periode1.inneholder(periode2)).isFalse()
             assertThat(periode2.inneholder(periode1)).isFalse()
         }
+
+        @Test
+        fun `DatoPeriode på en mnd inneholder dato 10 dager frem i tid`() {
+            val periode = Datoperiode(LocalDate.now(), LocalDate.now().plusMonths(1))
+            assertThat(periode.inneholder(LocalDate.now().plusDays(10))).isTrue
+        }
+
+        @Test
+        fun `DatoPeriode inneholder ikke dato før i tid`() {
+            val periode = Datoperiode(LocalDate.now(), LocalDate.now().plusMonths(1))
+            assertThat(periode.inneholder(LocalDate.now().minusDays(2))).isFalse
+        }
+
+        @Test
+        fun `DatoPeriode inneholder ikke dato frem i tid`() {
+            val periode = Datoperiode(LocalDate.now(), LocalDate.now().plusMonths(1))
+            assertThat(periode.inneholder(LocalDate.now().plusMonths(2))).isFalse
+        }
     }
 
     @Nested
