@@ -73,7 +73,7 @@ data class AktiviteterOgMålgruppe(
 data class Aktivitet(
     val aktivitetId: String,
     val text: String,
-    val periode: Periode?,
+    val periode: PeriodeAktivitet?,
     val maalgruppe: Målgruppe?,
 )
 
@@ -86,6 +86,11 @@ data class Målgruppe(
 data class Periode(
     val fom: LocalDate,
     val tom: LocalDate,
+)
+
+data class PeriodeAktivitet(
+    val fom: LocalDate,
+    val tom: LocalDate?,
 )
 
 data class ArbeidOgOpphold(

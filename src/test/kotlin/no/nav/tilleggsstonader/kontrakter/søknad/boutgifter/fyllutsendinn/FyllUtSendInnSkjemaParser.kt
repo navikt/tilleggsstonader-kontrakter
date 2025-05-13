@@ -428,7 +428,6 @@ private class KotlinDataClassMapper(
             listOf(
                 Felt(felt = "gyldigFraOgMed", type = "LocalDate"),
                 Felt(felt = "adresse", type = "String"),
-                Felt(felt = "co", type = "String?"),
                 Felt(felt = "postnummer", type = "String"),
                 Felt(felt = "bySted", type = "String"),
                 Felt(felt = "landkode", type = "String"),
@@ -445,7 +444,7 @@ private class KotlinDataClassMapper(
             listOf(
                 Felt(felt = "aktivitetId", type = "String"),
                 Felt(felt = "text", type = "String"),
-                Felt(felt = "periode", type = "Periode?"),
+                Felt(felt = "periode", type = "PeriodeAktivitet?"),
                 Felt(felt = "maalgruppe", type = "Målgruppe?"),
             )
         val felterMålgruppe =
@@ -454,6 +453,12 @@ private class KotlinDataClassMapper(
                 Felt(felt = "gyldighetsperiode", type = "Periode"),
                 Felt(felt = "maalgruppenavn", type = "String"),
             )
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "PeriodeAktivitet",
+                listOf(Felt(felt = "fom", type = "LocalDate"), Felt(felt = "tom", type = "LocalDate?")),
+            ),
+        )
         klassedefinisjoner.add(
             Klassedefinisjon(
                 navn = "Periode",
