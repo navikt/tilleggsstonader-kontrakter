@@ -13,12 +13,24 @@ data class YtelsePerioderRequest(
 )
 
 /**
- * @param hentetInformasjon populeres med alle typer som man har sendt med i requesten
+ * @param kildeResultat populeres med alle typer som man har sendt med i requesten
  */
 data class YtelsePerioderDto(
     val perioder: List<YtelsePeriode>,
+    @Deprecated("Bruk kildeResultat istedenfor")
     val hentetInformasjon: List<HentetInformasjon>,
-)
+    val kildeResultat: List<KildeResultatYtelse> = emptyList(),
+) {
+    data class KildeResultatYtelse(
+        val type: TypeYtelsePeriode,
+        val resultat: ResultatKilde,
+    )
+}
+
+enum class ResultatKilde {
+    OK,
+    FEILET,
+}
 
 /**
  * @param aapErFerdigAvklart hvis aktivitetsfasen == 'Ferdig avklart', man har då ikke rett på tilsyn barn
@@ -45,10 +57,7 @@ data class HentetInformasjon(
     val status: StatusHentetInformasjon,
 )
 
-enum class StatusHentetInformasjon {
-    OK,
-    FEILET,
-}
+typealias StatusHentetInformasjon = ResultatKilde
 
 enum class TypeYtelsePeriode {
     AAP,
