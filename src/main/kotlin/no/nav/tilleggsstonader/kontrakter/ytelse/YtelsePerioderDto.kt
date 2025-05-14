@@ -17,8 +17,6 @@ data class YtelsePerioderRequest(
  */
 data class YtelsePerioderDto(
     val perioder: List<YtelsePeriode>,
-    @Deprecated("Bruk kildeResultat istedenfor")
-    val hentetInformasjon: List<HentetInformasjon>,
     val kildeResultat: List<KildeResultatYtelse> = emptyList(),
 ) {
     data class KildeResultatYtelse(
@@ -51,13 +49,6 @@ data class YtelsePeriode(
         }
     }
 }
-
-data class HentetInformasjon(
-    val type: TypeYtelsePeriode,
-    val status: StatusHentetInformasjon,
-)
-
-typealias StatusHentetInformasjon = ResultatKilde
 
 enum class TypeYtelsePeriode {
     AAP,
