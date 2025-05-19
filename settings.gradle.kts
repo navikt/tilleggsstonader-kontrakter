@@ -5,3 +5,4 @@ plugins {
 }
 
 include("tilleggsstonader-kontrakter")
+include("pdl-personhendelser-avro")
