@@ -12,86 +12,101 @@ plugins {
     id("org.cyclonedx.bom") version "2.3.0"
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
+allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven(url = "https://packages.confluent.io/maven/")
 
-    maven {
-        url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
-    }
-}
-
-apply(plugin = "com.diffplug.spotless")
-
-spotless {
-    kotlin {
-        ktlint("1.5.0")
-    }
-}
-
-apply(plugin = "org.jetbrains.kotlin.jvm")
-apply(plugin = "maven-publish")
-apply(plugin = "java-library")
-
-configurations.all {
-    resolutionStrategy {
-        failOnNonReproducibleResolution()
-    }
-}
-
-dependencies {
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.4.5"))
-
-    implementation("com.fasterxml.jackson.core:jackson-core")
-    implementation("com.fasterxml.jackson.core:jackson-annotations")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.assertj:assertj-core")
-}
-
-kotlin {
-    jvmToolchain(javaVersion.asInt())
-
-    compilerOptions {
-        freeCompilerArgs.add("-Xjsr305=strict")
-    }
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
-
-if (project.hasProperty("skipLint")) {
-    gradle.startParameter.excludedTaskNames += "spotlessKotlinCheck"
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            artifactId = project.name
-            version = project.findProperty("version")?.toString() ?: "1.0-SNAPSHOT"
-            from(components["java"])
+        maven {
+            url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
         }
     }
 
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/navikt/tilleggsstonader-kontrakter")
-            credentials {
-                username = "x-access-token"
-                password = System.getenv("GITHUB_TOKEN")
+    apply(plugin = "com.diffplug.spotless")
+    apply(plugin = "com.github.ben-manes.versions")
+    apply(plugin = "se.patrikerdes.use-latest-versions")
+    spotless {
+        kotlin {
+            ktlint("1.5.0")
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            failOnNonReproducibleResolution()
+        }
+    }
+}
+
+subprojects {
+    group = "no.nav.tilleggsstonader.kontrakter"
+
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "maven-publish")
+    apply(plugin = "java-library")
+
+    kotlin {
+        jvmToolchain(javaVersion.asInt())
+
+        compilerOptions {
+            freeCompilerArgs.add("-Xjsr305=strict")
+        }
+    }
+
+    dependencies {
+        implementation(platform("org.springframework.boot:spring-boot-dependencies:3.4.5"))
+
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testImplementation("org.assertj:assertj-core")
+        testImplementation("io.mockk:mockk:1.14.0")
+
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testImplementation("org.assertj:assertj-core")
+    }
+
+    tasks.jar {
+        duplicatesStrategy = DuplicatesStrategy.WARN
+    }
+
+    tasks.test {
+        useJUnitPlatform()
+    }
+
+    java {
+        withSourcesJar()
+        withJavadocJar()
+    }
+
+    publishing {
+        publications {
+            create<MavenPublication>("mavenJava") {
+                artifactId = project.name
+                version = project.findProperty("version")?.toString() ?: "1.0-SNAPSHOT"
+                from(components["java"])
+            }
+        }
+
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/navikt/tilleggsstonader-kontrakter")
+                credentials {
+                    username = "x-access-token"
+                    password = System.getenv("GITHUB_TOKEN")
+                }
             }
         }
     }
+
+    if (project.hasProperty("skipLint")) {
+        gradle.startParameter.excludedTaskNames += "spotlessKotlinCheck"
+    }
+
+    kotlin.sourceSets["main"].kotlin.srcDirs("main/kotlin")
+    kotlin.sourceSets["test"].kotlin.srcDirs("test/kotlin")
+    sourceSets["main"].resources.srcDirs("main/resources")
+    sourceSets["test"].resources.srcDirs("test/resources")
 }
 
 tasks.cyclonedxBom {

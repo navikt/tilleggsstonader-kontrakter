@@ -1,0 +1,16 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  analyze:
+    uses: navikt/tilleggsstonader/.github/workflows/codeql.yml@main
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
