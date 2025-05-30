@@ -16,16 +16,14 @@ allprojects {
     repositories {
         mavenCentral()
         mavenLocal()
-        maven(url = "https://packages.confluent.io/maven/")
-
-        maven {
-            url = uri("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
-        }
+        maven("https://packages.confluent.io/maven/")
+        maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
     }
 
     apply(plugin = "com.diffplug.spotless")
     apply(plugin = "com.github.ben-manes.versions")
     apply(plugin = "se.patrikerdes.use-latest-versions")
+
     spotless {
         kotlin {
             ktlint("1.5.0")
@@ -55,22 +53,19 @@ subprojects {
     }
 
     dependencies {
-        implementation(platform("org.springframework.boot:spring-boot-dependencies:3.4.5"))
-
         testImplementation("org.junit.jupiter:junit-jupiter")
         testImplementation("org.assertj:assertj-core")
         testImplementation("io.mockk:mockk:1.14.0")
-
-        testImplementation("org.junit.jupiter:junit-jupiter")
-        testImplementation("org.assertj:assertj-core")
     }
 
-    tasks.jar {
-        duplicatesStrategy = DuplicatesStrategy.WARN
-    }
+    tasks {
+        jar {
+            duplicatesStrategy = DuplicatesStrategy.WARN
+        }
 
-    tasks.test {
-        useJUnitPlatform()
+        test {
+            useJUnitPlatform()
+        }
     }
 
     java {
