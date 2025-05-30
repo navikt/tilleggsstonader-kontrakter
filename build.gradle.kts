@@ -53,8 +53,6 @@ subprojects {
     }
 
     dependencies {
-        testImplementation("org.junit.jupiter:junit-jupiter")
-        testImplementation("org.assertj:assertj-core")
         testImplementation("io.mockk:mockk:1.14.0")
     }
 
