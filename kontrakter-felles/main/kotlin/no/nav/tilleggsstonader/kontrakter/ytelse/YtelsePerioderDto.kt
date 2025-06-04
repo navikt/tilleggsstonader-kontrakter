@@ -52,6 +52,7 @@ data class YtelsePeriode(
 
 enum class TypeYtelsePeriode {
     AAP,
+    DAGPENGER,
     ENSLIG_FORSØRGER,
     OMSTILLINGSSTØNAD,
 }
