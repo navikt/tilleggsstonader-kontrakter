@@ -55,6 +55,7 @@ enum class TypeYtelsePeriode {
     DAGPENGER,
     ENSLIG_FORSØRGER,
     OMSTILLINGSSTØNAD,
+    TILTAKSPENGER,
 }
 
 enum class EnsligForsørgerStønadstype {
