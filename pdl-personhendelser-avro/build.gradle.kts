@@ -1,5 +1,5 @@
 val avroVersion = "1.12.0"
-val confluentVersion = "7.9.0"
+val confluentVersion = "7.9.1"
 
 plugins {
     id("io.github.androa.gradle.plugin.avro") version "0.0.12"
