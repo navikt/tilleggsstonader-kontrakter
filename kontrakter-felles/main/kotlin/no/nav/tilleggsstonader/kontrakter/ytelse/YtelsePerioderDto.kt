@@ -18,6 +18,8 @@ data class YtelsePerioderRequest(
 data class YtelsePerioderDto(
     val perioder: List<YtelsePeriode>,
     val kildeResultat: List<KildeResultatYtelse> = emptyList(),
+    val perioderHentetFom: LocalDate,
+    val perioderHentetTom: LocalDate,
 ) {
     data class KildeResultatYtelse(
         val type: TypeYtelsePeriode,
