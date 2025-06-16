@@ -1,6 +1,6 @@
 
 dependencies {
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.5.0"))
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:3.4.5"))
 
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-annotations")
