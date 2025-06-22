@@ -53,7 +53,7 @@ subprojects {
     }
 
     dependencies {
-        testImplementation("io.mockk:mockk:1.14.2")
+        testImplementation("io.mockk:mockk:1.14.3")
     }
 
     tasks {
