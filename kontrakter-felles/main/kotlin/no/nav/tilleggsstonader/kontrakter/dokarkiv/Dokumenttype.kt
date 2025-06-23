@@ -26,6 +26,22 @@ enum class Dokumenttype {
     BOUTGIFTER_INTERNT_VEDTAK,
     BOUTGIFTER_KLAGE_VEDTAKSBREV,
     BOUTGIFTER_KLAGE_INTERNT_VEDTAK,
+
+    DAGLIG_REISE_TSO_SØKNAD,
+    DAGLIG_REISE_TSO_VEDLEGG,
+    DAGLIG_REISE_TSO_VEDTAKSBREV,
+    DAGLIG_REISE_TSO_FRITTSTÅENDE_BREV,
+    DAGLIG_REISE_TSO_INTERNT_VEDTAK,
+    DAGLIG_REISE_TSO_KLAGE_VEDTAKSBREV,
+    DAGLIG_REISE_TSO_KLAGE_INTERNT_VEDTAK,
+
+    DAGLIG_REISE_TSR_SØKNAD,
+    DAGLIG_REISE_TSR_VEDLEGG,
+    DAGLIG_REISE_TSR_VEDTAKSBREV,
+    DAGLIG_REISE_TSR_FRITTSTÅENDE_BREV,
+    DAGLIG_REISE_TSR_INTERNT_VEDTAK,
+    DAGLIG_REISE_TSR_KLAGE_VEDTAKSBREV,
+    DAGLIG_REISE_TSR_KLAGE_INTERNT_VEDTAK,
 }
 
 data class Dokumentyper(
@@ -71,6 +87,26 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     klageVedtaksbrev = Dokumenttype.BOUTGIFTER_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.BOUTGIFTER_KLAGE_INTERNT_VEDTAK,
                 )
+            Stønadstype.DAGLIG_REISE_TSO ->
+                Dokumentyper(
+                    søknad = null,
+                    søknadVedlegg = null,
+                    vedtaksbrev = Dokumenttype.DAGLIG_REISE_TSO_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.DAGLIG_REISE_TSO_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.DAGLIG_REISE_TSO_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.DAGLIG_REISE_TSO_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.DAGLIG_REISE_TSO_KLAGE_INTERNT_VEDTAK,
+                )
+            Stønadstype.DAGLIG_REISE_TSR ->
+                Dokumentyper(
+                    søknad = null,
+                    søknadVedlegg = null,
+                    vedtaksbrev = Dokumenttype.DAGLIG_REISE_TSR_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.DAGLIG_REISE_TSR_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.DAGLIG_REISE_TSR_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.DAGLIG_REISE_TSR_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.DAGLIG_REISE_TSR_KLAGE_INTERNT_VEDTAK,
+                )
         }
 
 fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype =
@@ -78,4 +114,6 @@ fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype =
         Stønadstype.BARNETILSYN -> Dokumenttype.BARNETILSYN_INTERNT_VEDTAK
         Stønadstype.LÆREMIDLER -> Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK
         Stønadstype.BOUTGIFTER -> Dokumenttype.BOUTGIFTER_INTERNT_VEDTAK
+        Stønadstype.DAGLIG_REISE_TSO -> Dokumenttype.DAGLIG_REISE_TSO_VEDTAKSBREV
+        Stønadstype.DAGLIG_REISE_TSR -> Dokumenttype.DAGLIG_REISE_TSR_VEDTAKSBREV
     }

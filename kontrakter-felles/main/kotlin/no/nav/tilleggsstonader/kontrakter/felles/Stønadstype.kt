@@ -20,4 +20,12 @@ enum class Stønadstype(
         visningsnavn = "støtte til bolig eller overnatting",
         grunnlagAntallMånederBakITiden = 6,
     ),
+    DAGLIG_REISE_TSO(
+        visningsnavn = "støtte til daglig reise for TSO",
+        grunnlagAntallMånederBakITiden = 3
+    ),
+    DAGLIG_REISE_TSR(
+        visningsnavn = "støtte til daglig reise for TSR",
+        grunnlagAntallMånederBakITiden = 3
+    )
 }
