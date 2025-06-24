@@ -22,10 +22,10 @@ enum class Stønadstype(
     ),
     DAGLIG_REISE_TSO(
         visningsnavn = "støtte til daglig reise for folketrygdloven",
-        grunnlagAntallMånederBakITiden = 3
+        grunnlagAntallMånederBakITiden = 3,
     ),
     DAGLIG_REISE_TSR(
         visningsnavn = "støtte til daglig reise for arbeidsmarkedsloven",
-        grunnlagAntallMånederBakITiden = 3
-    )
+        grunnlagAntallMånederBakITiden = 3,
+    ),
 }
