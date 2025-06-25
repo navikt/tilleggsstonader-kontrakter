@@ -29,6 +29,7 @@ import java.util.Locale
  * * Hent skjema [hentSkjema]
  * * Print eksempel-json [printEksempelJson]
  * * Print data classes [printDataClasses] og kopier til [SkjemaBoutgifter]
+ *
  */
 @Disabled
 class FyllUtSendInnSkjemaParser {
