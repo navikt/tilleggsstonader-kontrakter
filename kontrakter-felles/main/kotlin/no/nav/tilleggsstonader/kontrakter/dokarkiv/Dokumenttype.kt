@@ -72,10 +72,3 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     klageInterntVedtak = Dokumenttype.BOUTGIFTER_KLAGE_INTERNT_VEDTAK,
                 )
         }
-
-fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype =
-    when (this) {
-        Stønadstype.BARNETILSYN -> Dokumenttype.BARNETILSYN_INTERNT_VEDTAK
-        Stønadstype.LÆREMIDLER -> Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK
-        Stønadstype.BOUTGIFTER -> Dokumenttype.BOUTGIFTER_INTERNT_VEDTAK
-    }
