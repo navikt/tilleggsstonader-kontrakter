@@ -1,10 +1,11 @@
-package no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn
+package no.nav.tilleggsstonader.kontrakter.søknad.fyllutsendinn
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
+import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -14,10 +15,14 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
 import java.util.Locale
+import kotlin.reflect.KClass
 
 /**
  * Endre [søknad] for å velge hvilken søknad man ønsker å kjøre tester for.
- *
+ */
+private val søknad = Søknadstype.BOUTGIFTER
+
+/**
  * Hjelpemetoder for å hente skjema-struktur og generere eksempel-json og kotlin data-klasser
  * for å enkelt kunne oppdatere kontrakter
  *
@@ -28,13 +33,11 @@ import java.util.Locale
  * * Sett [FileUtil.SKAL_SKRIVE_TIL_FIL] til true
  * * Hent skjema [hentSkjema]
  * * Print eksempel-json [printEksempelJson]
- * * Print data classes [printDataClasses] og kopier til [SkjemaBoutgifter]
+ * * Print data classes [printDataClasses] og kopier til [Søknadstype.klasse]
  *
  */
 @Disabled
 class FyllUtSendInnSkjemaParser {
-    private val søknad = Søknadstype.BOUTGIFTER
-
     private val skjema =
         objectMapper
             .readValue<FyllUtSendInnSkjema>(FileUtil.readFile("søknad/${søknad.søknadMappe}/skjema.json"))
@@ -52,7 +55,7 @@ class FyllUtSendInnSkjemaParser {
     }
 
     /**
-     * Printer data classes for å erstatte alt under [SkjemaBoutgifter]
+     * Printer data classes for å erstatte alt under [Søknadstype.klasse]
      */
     @Test
     fun printDataClasses() {
@@ -102,7 +105,7 @@ class FyllUtSendInnSkjemaParser {
      * Skriver ut hela skjemat i console i tilfelle det er noen andre felt som kan være interessante
      *
      * Filtrer vekk personopplysninger då den delen ikke er så interessant då den er ifylt automatisk
-     * Personopplysninger ignoreres i [SkjemaBoutgifter] då man ignorerer "dineOpplysninger" som grupperer personopplysninger
+     * Personopplysninger ignoreres i [Søknadstype.klasse] då man ignorerer "dineOpplysninger" som grupperer personopplysninger
      */
     @Test
     fun hentSkjema() {
@@ -140,10 +143,12 @@ class FyllUtSendInnSkjemaParser {
 private enum class Søknadstype(
     val søknadMappe: String,
     val skjema: String,
+    val klasse: KClass<*>,
 ) {
     BOUTGIFTER(
         søknadMappe = "boutgifter",
         skjema = "nav111219",
+        klasse = SkjemaBoutgifter::class,
     ),
 }
 
@@ -320,7 +325,7 @@ private class JsonStrukturGenerator(
 }
 
 /**
- * Mapper skjema til Kotlin data class for å kunne oppdatere klasser under [SkjemaBoutgifter]
+ * Mapper skjema til Kotlin data class for å kunne oppdatere klasser under [Søknadstype.klasse]
  */
 private class KotlinDataClassMapper(
     private val components: List<SkjemaKomponent>,
@@ -336,7 +341,7 @@ private class KotlinDataClassMapper(
     private fun generer() {
         klassedefinisjoner.add(
             Klassedefinisjon(
-                navn = "SkjemaBoutgifter",
+                navn = søknad.klasse.simpleName!!,
                 felter = components.flatMap { it.genererDataClasses() },
             ),
         )
