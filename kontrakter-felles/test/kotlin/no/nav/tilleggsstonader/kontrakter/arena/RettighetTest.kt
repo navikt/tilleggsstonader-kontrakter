@@ -32,4 +32,12 @@ class RettighetTest {
         assertThat(Rettighet.fraStønadstype(Stønadstype.BARNETILSYN))
             .containsExactlyInAnyOrder(Rettighet.TILSYN_BARN, Rettighet.TILSYN_BARN_ARBEIDSSSØKERE)
     }
+
+    @Test
+    fun `arenakoder skal være unike, då enumen skal ha en til en mapping mellom navn og arenakode`() {
+        val koder = Rettighet.entries.map { it.kodeArena }
+        val values: List<String> = koder.distinct()
+        assertThat(values).containsExactlyInAnyOrderElementsOf(koder)
+        assertThat(values).hasSize(values.size)
+    }
 }
