@@ -1,0 +1,157 @@
+{
+  "dineOpplysninger" : {
+    "fornavn" : "Fornavn",
+    "etternavn" : "Etternavn",
+    "identitet" : {
+      "identitetsnummer" : "1111111111"
+    },
+    "adresse" : {
+      "gyldigFraOgMed" : "2004-10-29",
+      "adresse" : "En vei 2",
+      "postnummer" : "2069",
+      "bySted" : "JESSHEIM",
+      "landkode" : "NOR",
+      "land" : {
+        "label" : "Norge",
+        "value" : "NO"
+      }
+    }
+  },
+  "hovedytelse" : {
+    "arbeidsavklaringspenger" : true,
+    "overgangsstonad" : true,
+    "gjenlevendepensjon" : true,
+    "uforetrygd" : true,
+    "tiltakspenger" : true,
+    "dagpenger" : true,
+    "sykepenger" : true,
+    "kvalifiseringsstonad" : true,
+    "mottarIngenPengestotte" : true,
+    "ingenAvAlternativenePasserForMeg" : true
+  },
+  "arbeidOgOpphold" : {
+    "jobberIAnnetLand" : "ja",
+    "jobbAnnetLand" : {
+      "value" : "AF",
+      "label" : "Afghanistan"
+    },
+    "harPengestotteAnnetLand" : {
+      "sykepenger" : true,
+      "pensjon" : true,
+      "annenPengestotte" : true,
+      "mottarIkkePengestotte" : true
+    },
+    "pengestotteAnnetLand" : {
+      "value" : "AF",
+      "label" : "Afghanistan"
+    },
+    "harOppholdUtenforNorgeSiste12mnd" : "ja",
+    "oppholdUtenforNorgeSiste12mnd" : {
+      "land" : {
+        "value" : "AF",
+        "label" : "Afghanistan"
+      },
+      "arsakOppholdUtenforNorge" : {
+        "jobbet" : true,
+        "studerte" : true,
+        "fikkMedisinskBehandling" : true,
+        "varPaFerie" : true,
+        "besokteFamilie" : true,
+        "annet" : true
+      },
+      "periode" : {
+        "fom" : "2025-01-01",
+        "tom" : "2025-01-01"
+      }
+    },
+    "harOppholdUtenforNorgeNeste12mnd" : "ja",
+    "oppholdUtenforNorgeNeste12mnd" : {
+      "land" : {
+        "value" : "AF",
+        "label" : "Afghanistan"
+      },
+      "arsakOppholdUtenforNorge" : {
+        "jobbet" : true,
+        "studerte" : true,
+        "fikkMedisinskBehandling" : true,
+        "varPaFerie" : true,
+        "besokteFamilie" : true,
+        "annet" : true
+      },
+      "periode" : {
+        "fom" : "2025-01-01",
+        "tom" : "2025-01-01"
+      }
+    }
+  },
+  "aktiviteter" : {
+    "aktiviteterOgMaalgruppe" : {
+      "aktivitet" : {
+        "aktivitetId" : "123",
+        "periode" : {
+          "fom" : "2025-01-01",
+          "tom" : "2025-01-01"
+        },
+        "maalgruppe" : {
+          "maalgruppetype" : "NEDSARBEVN",
+          "gyldighetsperiode" : {
+            "fom" : "2025-01-01",
+            "tom" : "2025-01-01"
+          },
+          "maalgruppenavn" : "maalgruppenavn"
+        },
+        "text" : "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
+      }
+    },
+    "arbeidsrettetAktivitet" : "tiltakArbeidsrettetUtredning",
+    "reiseperiode2" : {
+      "fraOgMedDdMmAaaa1" : "2025-01-01",
+      "fraOgMedDdMmAaaa2" : "2025-01-01"
+    },
+    "mottarLonnGjennomTiltak" : "ja",
+    "skalDuMoteOppPaAktivitetsstedetIHelePeriodenAktivitetenVarer" : "ja",
+    "reiseperiode1" : {
+      "fraOgMedDdMmAaaa1" : "2025-01-01",
+      "fraOgMedDdMmAaaa2" : "2025-01-01"
+    }
+  },
+  "adresseOgReisemate" : [ {
+    "gateadresse" : "EksempelSvar",
+    "postnr" : "EksempelSvar",
+    "poststed" : "EksempelSvar",
+    "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet1" : {
+      "label" : "1",
+      "value" : "1"
+    },
+    "harDu6KmReisevei" : "ja",
+    "hvorLangErReiseveienDin" : 100,
+    "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde" : "ja",
+    "kanDuReiseMedOffentligTransport" : "ja",
+    "hvaSlagsTypeBillettMaDuKjope" : {
+      "enkeltbillett" : true,
+      "ukeskort" : true,
+      "manedskort" : true
+    },
+    "manedskort3" : 100,
+    "manedskort2" : 100,
+    "manedskort1" : 100,
+    "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport" : {
+      "helsemessigeArsaker" : true,
+      "darligTransporttilbud" : true,
+      "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks" : true,
+      "annet" : true
+    },
+    "kanDuKjoreMedEgenBil" : "ja",
+    "utgifterTilKjoringMedBil" : {
+      "bompengerEnVei1" : 100,
+      "bompengerEnVei" : 100,
+      "bompengerEnVei2" : 100,
+      "bompengerEnVei3" : 100
+    },
+    "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport1" : {
+      "helsemessigeArsaker" : true,
+      "darligTransporttilbud" : true,
+      "annet" : true
+    }
+  } ]
+}

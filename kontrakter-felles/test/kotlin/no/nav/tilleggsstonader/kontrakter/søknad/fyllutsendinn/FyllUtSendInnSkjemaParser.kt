@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
 import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
+import no.nav.tilleggsstonader.kontrakter.søknad.dagligReise.fyllutsendinn.SkjemaDagligReise
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -20,7 +21,7 @@ import kotlin.reflect.KClass
 /**
  * Endre [søknad] for å velge hvilken søknad man ønsker å kjøre tester for.
  */
-private val søknad = Søknadstype.BOUTGIFTER
+private val søknad = Søknadstype.DAGLIG_REISE
 
 /**
  * Hjelpemetoder for å hente skjema-struktur og generere eksempel-json og kotlin data-klasser
@@ -150,6 +151,11 @@ private enum class Søknadstype(
         skjema = "nav111219",
         klasse = SkjemaBoutgifter::class,
     ),
+    DAGLIG_REISE(
+        søknadMappe = "dagligReise",
+        skjema = "nav111221",
+        klasse = SkjemaDagligReise::class,
+    ),
 }
 
 /**
@@ -193,6 +199,7 @@ private data class SkjemaKomponent(
     val tree: Boolean?,
     val components: List<SkjemaKomponent>?,
     val values: List<Value>?,
+    val data: Data?,
     val inputType: Any?,
     val multiple: Boolean,
     val conditional: Conditional,
@@ -207,6 +214,10 @@ private data class SkjemaKomponent(
      */
     fun erPåkrevd(): Boolean =
         (conditional.isRequired() && customConditional.isNullOrBlank()) && (validate?.required == true || tree == true)
+
+    data class Data(
+        val values: List<Value>?,
+    )
 
     /**
      * Brukes som alternativ i tilfelle det er en checkbox-group
@@ -285,6 +296,7 @@ private class JsonStrukturGenerator(
             type == "radiopanel" -> values!!.first().value
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
             type == "selectboxes" -> values!!.associate { it.value to true }
+            type == "navSelect" -> mapOf("label" to "1", "value" to "1")
             inputType == "numeric" -> 100
             type == "navDatepicker" -> "2025-01-01"
             type == "textfield" -> "EksempelSvar"
@@ -407,6 +419,15 @@ private class KotlinDataClassMapper(
                 leggTilEnumDefinisjon(type)
                 "Map<${type.klassenavn()}, Boolean>"
             }
+            type == "navSelect" -> {
+                val felter =
+                    listOf(
+                        Felt(felt = "label", type = "String"),
+                        Felt(felt = "value", type = "String"),
+                    )
+                klassedefinisjoner.add(Klassedefinisjon("Valgfelt", felter))
+                "Valgfelt"
+            }
 
             inputType == "numeric" -> "Int"
             type == "textfield" -> "String"
@@ -498,6 +519,10 @@ private class KotlinDataClassMapper(
     }
 
     private fun SkjemaKomponent.leggTilDataClassMapping(klassenavn: String) {
+        klassedefinisjoner.add(Klassedefinisjon(navn = klassenavn.klassenavn(), felter = genererDataClasses()))
+    }
+
+    private fun SkjemaKomponent.leggTilSelect(klassenavn: String) {
         klassedefinisjoner.add(Klassedefinisjon(navn = klassenavn.klassenavn(), felter = genererDataClasses()))
     }
 
