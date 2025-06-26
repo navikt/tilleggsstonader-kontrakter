@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
-import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.KotlinDataClassMapper.Felt
-import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.KotlinDataClassMapper.Klassedefinisjon
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -18,6 +16,8 @@ import java.time.Duration
 import java.util.Locale
 
 /**
+ * Endre [søknad] for å velge hvilken søknad man ønsker å kjøre tester for.
+ *
  * Hjelpemetoder for å hente skjema-struktur og generere eksempel-json og kotlin data-klasser
  * for å enkelt kunne oppdatere kontrakter
  *
@@ -33,9 +33,11 @@ import java.util.Locale
  */
 @Disabled
 class FyllUtSendInnSkjemaParser {
+    private val søknad = Søknadstype.BOUTGIFTER
+
     private val skjema =
         objectMapper
-            .readValue<FyllUtSendInnSkjema>(FileUtil.readFile("søknad/boutgifter/skjema.json"))
+            .readValue<FyllUtSendInnSkjema>(FileUtil.readFile("søknad/${søknad.søknadMappe}/skjema.json"))
     private val om = objectMapper.writerWithDefaultPrettyPrinter()
 
     /**
@@ -46,7 +48,7 @@ class FyllUtSendInnSkjemaParser {
         val jsonStruktur = JsonStrukturGenerator(skjema.relevanteKomponenter()).genererJsonStruktur()
         val json = om.writeValueAsString(jsonStruktur)
         assertThat(FileUtil.SKAL_SKRIVE_TIL_FIL).isTrue()
-        FileUtil.skrivTilFil("søknad/boutgifter/skjema-eksempel.json", json)
+        FileUtil.skrivTilFil("søknad/${søknad.søknadMappe}/skjema-eksempel.json", json)
     }
 
     /**
@@ -108,7 +110,7 @@ class FyllUtSendInnSkjemaParser {
         val request =
             HttpRequest
                 .newBuilder()
-                .uri(URI("https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/api/forms/nav111219"))
+                .uri(URI("https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/api/forms/${søknad.skjema}"))
                 .timeout(Duration.ofSeconds(3))
                 .GET()
                 .build()
@@ -122,7 +124,7 @@ class FyllUtSendInnSkjemaParser {
                         .readValue<FyllUtSendInnSkjema>(response.body())
                         .let { it.copy(components = it.components.filterNot { it.key in ignorerteKeys }) }
 
-                FileUtil.skrivTilFil("søknad/boutgifter/skjema.json", om.writeValueAsString(parsedJson))
+                FileUtil.skrivTilFil("søknad/${søknad.søknadMappe}/skjema.json", om.writeValueAsString(parsedJson))
                 // Printer hela skjemat i console
                 println(om.writeValueAsString(objectMapper.readTree(response.body())))
             } catch (e: Exception) {
@@ -133,6 +135,16 @@ class FyllUtSendInnSkjemaParser {
             error("Feilet henting av skjema response=$response")
         }
     }
+}
+
+private enum class Søknadstype(
+    val søknadMappe: String,
+    val skjema: String,
+) {
+    BOUTGIFTER(
+        søknadMappe = "boutgifter",
+        skjema = "nav111219",
+    ),
 }
 
 /**
