@@ -114,6 +114,4 @@ fun Stønadstype.dokumentTypeInterntVedtak(): Dokumenttype =
         Stønadstype.BARNETILSYN -> Dokumenttype.BARNETILSYN_INTERNT_VEDTAK
         Stønadstype.LÆREMIDLER -> Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK
         Stønadstype.BOUTGIFTER -> Dokumenttype.BOUTGIFTER_INTERNT_VEDTAK
-        Stønadstype.DAGLIG_REISE_TSO -> Dokumenttype.DAGLIG_REISE_TSO_INTERNT_VEDTAK
-        Stønadstype.DAGLIG_REISE_TSR -> Dokumenttype.DAGLIG_REISE_TSR_INTERNT_VEDTAK
     }
