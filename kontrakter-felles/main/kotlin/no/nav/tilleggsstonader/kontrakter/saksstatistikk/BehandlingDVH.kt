@@ -183,8 +183,8 @@ enum class SakYtelseDvh {
                 Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
                 Stønadstype.LÆREMIDLER -> TILLEGG_LÆREMIDLER
                 Stønadstype.BOUTGIFTER -> TILLEGG_BOUTGIFTER
-                Stønadstype.DAGLIG_REISE_TSO -> TILLEGG_DAGLIG_REISE_TSO
-                Stønadstype.DAGLIG_REISE_TSR -> TILLEGG_DAGLIG_REISE_TSR
+                Stønadstype.DAGLIG_REISE_TSO -> TODO()
+                Stønadstype.DAGLIG_REISE_TSR -> TODO()
             }
     }
 }

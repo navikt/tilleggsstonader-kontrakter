@@ -9,8 +9,8 @@ enum class Behandlingstema(
     TilsynBarn("ab0300"), // Tilsyn av barn tilleggsstønad
     Læremidler("ab0292"), // Læremidler tilleggsstønad
     Boutgifter("ab0286"), // Boutgifter tilleggsstønad
-    DagligReiseTSO("ab0217"), // Daglig reise TSO
-    DagligReiseTSR("ab0217"), // Daglig reise TSR
+    DagligReiseTSO("ab0288"), // Daglig reise TSO
+    DagligReiseTSR("ab0287"), // Daglig reise TSR
     Feilutbetaling("ab0006"),
     Tilbakebetaling("ab0007"),
     ;
