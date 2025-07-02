@@ -172,8 +172,6 @@ enum class SakYtelseDvh {
     TILLEGG_BARNETILSYN, // For pass av barn er kun "Tilleggsstønad" relevant
     TILLEGG_LÆREMIDLER, // For læremidler er kun "Tilleggsstønad" relevant
     TILLEGG_BOUTGIFTER, // For læremidler er kun "Tilleggsstønad" relevant
-    TILLEGG_DAGLIG_REISE_TSO,
-    TILLEGG_DAGLIG_REISE_TSR,
     ;
 
     companion object {
