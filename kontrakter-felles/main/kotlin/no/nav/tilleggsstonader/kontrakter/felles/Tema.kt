@@ -23,4 +23,6 @@ fun Stønadstype.tilTema(): Tema =
         Stønadstype.BARNETILSYN -> Tema.TSO
         Stønadstype.LÆREMIDLER -> Tema.TSO
         Stønadstype.BOUTGIFTER -> Tema.TSO
+        Stønadstype.DAGLIG_REISE_TSO -> Tema.TSO
+        Stønadstype.DAGLIG_REISE_TSR -> Tema.TSR
     }

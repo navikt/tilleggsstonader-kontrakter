@@ -40,8 +40,8 @@ enum class Rettighet(
 ) : KodeArena {
     BOUTGIFTER_ARBEIDSSØKERE("TSRBOUTG", "Boutgifter arbeidssøkere", Stønadstype.BOUTGIFTER),
     BOUTGIFTER("TSOBOUTG", "Boutgifter tilleggsstønad", Stønadstype.BOUTGIFTER),
-    DAGLIG_REISE_ARBEIDSSØKERE("TSRDAGREIS", "Daglig reise arbeidssøkere"),
-    DAGLIG_REISE("TSODAGREIS", "Daglig reise tilleggsstønad"),
+    DAGLIG_REISE_ARBEIDSSØKERE("TSRDAGREIS", "Daglig reise arbeidssøkere", Stønadstype.DAGLIG_REISE_TSR),
+    DAGLIG_REISE("TSODAGREIS", "Daglig reise tilleggsstønad", Stønadstype.DAGLIG_REISE_TSO),
     FLYTTING_ARBEIDSSSØKERE("TSRFLYTT", "Flytting arbeidssøkere"),
     FLYTTING("TSOFLYTT", "Flytting tilleggsstønad"),
     LÆREMIDLER_ARBEIDSSSØKERE("TSRLMIDLER", "Læremidler arbeidssøkere", Stønadstype.LÆREMIDLER),
