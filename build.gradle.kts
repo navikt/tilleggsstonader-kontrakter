@@ -3,7 +3,7 @@ val javaVersion = JavaLanguageVersion.of(21)
 group = "no.nav.tilleggsstonader.kontrakter"
 
 plugins {
-    kotlin("jvm") version "2.1.21"
+    kotlin("jvm") version "2.2.0"
     `maven-publish`
     `java-library`
     id("com.diffplug.spotless") version "7.0.4"
@@ -53,7 +53,7 @@ subprojects {
     }
 
     dependencies {
-        testImplementation("io.mockk:mockk:1.14.2")
+        testImplementation("io.mockk:mockk:1.14.4")
     }
 
     tasks {
