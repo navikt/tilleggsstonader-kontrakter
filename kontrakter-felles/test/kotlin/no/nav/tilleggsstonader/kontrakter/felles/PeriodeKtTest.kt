@@ -60,6 +60,52 @@ class PeriodeKtTest {
         }
     }
 
+    @Nested
+    inner class FørsteTreffFraOgMedDato {
+        @Test
+        fun `dato midt i første periode`() {
+            val perioder =
+                listOf(
+                    Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
+                )
+            val dato = LocalDate.now().plusDays(5)
+            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isEqualTo(dato)
+        }
+
+        @Test
+        fun `dato mellom to perioder`() {
+            val perioder =
+                listOf(
+                    Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
+                    Datoperiode(LocalDate.now().plusDays(20), LocalDate.now().plusDays(30)),
+                )
+            val dato = LocalDate.now().plusDays(15)
+            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isEqualTo(perioder.last().fom)
+        }
+
+        @Test
+        fun `dato før alle perioder`() {
+            val perioder =
+                listOf(
+                    Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
+                    Datoperiode(LocalDate.now().plusDays(20), LocalDate.now().plusDays(30)),
+                )
+            val dato = LocalDate.now().minusDays(10)
+            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isEqualTo(perioder.first().fom)
+        }
+
+        @Test
+        fun `dato etter alle perioder`() {
+            val perioder =
+                listOf(
+                    Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
+                    Datoperiode(LocalDate.now().plusDays(20), LocalDate.now().plusDays(30)),
+                )
+            val dato = LocalDate.now().plusDays(100)
+            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isNull()
+        }
+    }
+
     private data class Datoperiode(
         override val fom: LocalDate,
         override val tom: LocalDate,

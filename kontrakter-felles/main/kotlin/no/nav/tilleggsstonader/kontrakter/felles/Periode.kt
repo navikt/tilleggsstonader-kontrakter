@@ -58,6 +58,9 @@ fun <T> List<Periode<T>>.overlapper(): Boolean where T : Comparable<T>, T : Temp
 fun <T> List<Periode<T>>.førsteOverlappendePeriode(): Pair<Periode<T>, Periode<T>>? where T : Comparable<T>, T : Temporal =
     this.sortedBy { it.fom }.zipWithNext().firstOrNull { it.first.overlapper(it.second) }
 
+fun <T> List<Periode<T>>.førstePeriodeEtter(punkt: T): Periode<T>? where T : Comparable<T>, T : Temporal =
+    this.filter { it.fom > punkt }.minByOrNull { it.fom }
+
 /**
  * Interface for å slå sammen 2 perioder
  */
@@ -166,4 +169,17 @@ fun Periode<LocalDate>.alleDatoer(): List<LocalDate> {
         dato = dato.plusDays(1)
     }
     return perioder
+}
+
+fun finnFørsteTreffFraOgMedDato(
+    perioder: List<Periode<LocalDate>>,
+    dato: LocalDate,
+): LocalDate? {
+    val perioderInneholderDato = perioder.any { it.inneholder(dato) }
+
+    if (perioderInneholderDato) {
+        return dato
+    }
+
+    return perioder.førstePeriodeEtter(dato)?.fom
 }
