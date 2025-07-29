@@ -170,16 +170,3 @@ fun Periode<LocalDate>.alleDatoer(): List<LocalDate> {
     }
     return perioder
 }
-
-fun finnFørsteTreffFraOgMedDato(
-    perioder: List<Periode<LocalDate>>,
-    dato: LocalDate,
-): LocalDate? {
-    val perioderInneholderDato = perioder.any { it.inneholder(dato) }
-
-    if (perioderInneholderDato) {
-        return dato
-    }
-
-    return perioder.førstePeriodeEtter(dato)?.fom
-}

@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
+import no.nav.tilleggsstonader.kontrakter.felles.PeriodeTest.Datoperiode
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -61,48 +62,38 @@ class PeriodeKtTest {
     }
 
     @Nested
-    inner class FørsteTreffFraOgMedDato {
+    inner class FørstePeriodeEtter {
         @Test
-        fun `dato midt i første periode`() {
-            val perioder =
-                listOf(
-                    Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
-                )
-            val dato = LocalDate.now().plusDays(5)
-            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isEqualTo(dato)
-        }
-
-        @Test
-        fun `dato mellom to perioder`() {
+        fun `dato mellom to perioder, periode etter er siste periode`() {
             val perioder =
                 listOf(
                     Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
                     Datoperiode(LocalDate.now().plusDays(20), LocalDate.now().plusDays(30)),
                 )
-            val dato = LocalDate.now().plusDays(15)
-            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isEqualTo(perioder.last().fom)
+
+            assertThat(perioder.førstePeriodeEtter(LocalDate.now().plusDays(11))).isEqualTo(perioder.last())
         }
 
         @Test
-        fun `dato før alle perioder`() {
+        fun `dato etter to perioder, periode etter er null`() {
             val perioder =
                 listOf(
                     Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
                     Datoperiode(LocalDate.now().plusDays(20), LocalDate.now().plusDays(30)),
                 )
-            val dato = LocalDate.now().minusDays(10)
-            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isEqualTo(perioder.first().fom)
+
+            assertThat(perioder.førstePeriodeEtter(LocalDate.now().plusDays(21))).isNull()
         }
 
         @Test
-        fun `dato etter alle perioder`() {
+        fun `dato midt i første periode, periode etter er siste periode`() {
             val perioder =
                 listOf(
                     Datoperiode(LocalDate.now(), LocalDate.now().plusDays(10)),
                     Datoperiode(LocalDate.now().plusDays(20), LocalDate.now().plusDays(30)),
                 )
-            val dato = LocalDate.now().plusDays(100)
-            assertThat(finnFørsteTreffFraOgMedDato(perioder, dato)).isNull()
+
+            assertThat(perioder.førstePeriodeEtter(LocalDate.now().plusDays(5))).isEqualTo(perioder.last())
         }
     }
 
