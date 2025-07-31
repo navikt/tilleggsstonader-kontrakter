@@ -53,7 +53,9 @@ subprojects {
     }
 
     dependencies {
-        testImplementation("io.mockk:mockk:1.14.2")
+        testImplementation(platform("org.junit:junit-bom:5.13.4"))
+        testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
 
     tasks {
