@@ -29,5 +29,5 @@ data class TaAvVentRequest(
     val oppgaveId: Long,
     val kommentar: String?,
     val beholdOppgave: Boolean,
-    val frist: LocalDate = LocalDate.now(),
+    val frist: LocalDate,
 )
