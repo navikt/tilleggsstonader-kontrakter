@@ -462,12 +462,12 @@ private class KotlinDataClassMapper(
     private fun leggTilKlassedefinisjonNavAdresse() {
         val felter =
             listOf(
-                Felt(felt = "gyldigFraOgMed", type = "LocalDate"),
-                Felt(felt = "adresse", type = "String"),
-                Felt(felt = "postnummer", type = "String"),
-                Felt(felt = "bySted", type = "String"),
-                Felt(felt = "landkode", type = "String"),
-                Felt(felt = "land", type = "Landvelger"),
+                Felt(felt = "gyldigFraOgMed", type = "LocalDate?"),
+                Felt(felt = "adresse", type = "String?"),
+                Felt(felt = "postnummer", type = "String?"),
+                Felt(felt = "bySted", type = "String?"),
+                Felt(felt = "landkode", type = "String?"),
+                Felt(felt = "land", type = "Landvelger?"),
             )
         klassedefinisjoner.add(Klassedefinisjon("NavAdresse", felter))
     }

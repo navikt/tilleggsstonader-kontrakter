@@ -128,12 +128,12 @@ data class DineOpplysninger(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class NavAdresse(
-    val gyldigFraOgMed: LocalDate,
-    val adresse: String,
-    val postnummer: String,
-    val bySted: String,
-    val landkode: String,
-    val land: Landvelger,
+    val gyldigFraOgMed: LocalDate?,
+    val adresse: String?,
+    val postnummer: String?,
+    val bySted: String?,
+    val landkode: String?,
+    val land: Landvelger?,
 )
 
 data class Identitet(
