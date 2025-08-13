@@ -6,6 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
 import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
+import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligreise
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -20,7 +21,7 @@ import kotlin.reflect.KClass
 /**
  * Endre [søknad] for å velge hvilken søknad man ønsker å kjøre tester for.
  */
-private val søknad = Søknadstype.BOUTGIFTER
+private val søknad = Søknadstype.DAGLIG_REIESE
 
 /**
  * Hjelpemetoder for å hente skjema-struktur og generere eksempel-json og kotlin data-klasser
@@ -149,6 +150,11 @@ private enum class Søknadstype(
         søknadMappe = "boutgifter",
         skjema = "nav111219",
         klasse = SkjemaBoutgifter::class,
+    ),
+    DAGLIG_REIESE(
+        søknadMappe = "dagligreise",
+        skjema = "nav111221",
+        klasse = SkjemaDagligreise::class,
     ),
 }
 
@@ -291,6 +297,7 @@ private class JsonStrukturGenerator(
             type == "firstName" -> "Fornavn"
             type == "surname" -> "Etternavn"
             type == "identity" -> mapOf("identitetsnummer" to "1111111111")
+            type == "navSelect" -> mapOf("label" to "3", "value" to "3")
             else -> error("Har ikke mapping for $this")
         }
 
@@ -418,6 +425,7 @@ private class KotlinDataClassMapper(
                 klassedefinisjoner.add(Klassedefinisjon("Identitet", felter))
                 "Identitet"
             }
+
             type == "navAddress" -> {
                 leggTilKlassedefinisjonNavAdresse()
                 "NavAdresse"
@@ -436,6 +444,16 @@ private class KotlinDataClassMapper(
             type == "datagrid" || type == "container" || type == "navSkjemagruppe" -> {
                 this.leggTilDataClassMapping(key)
                 key
+            }
+
+            type == "navSelect" -> {
+                val felter =
+                    listOf(
+                        Felt(felt = "label", type = "String"),
+                        Felt(felt = "value", type = "String"),
+                    )
+                klassedefinisjoner.add(Klassedefinisjon("Valgfelt", felter))
+                "Valgfelt"
             }
 
             else -> error("Har ikke mapping for $this")
