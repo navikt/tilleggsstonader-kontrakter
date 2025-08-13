@@ -49,7 +49,7 @@
       },
       "reise": [
         {
-          "adresse": {
+          "reiseAdresse": {
             "gateadresse": "Oslogate 42",
             "postnr": "0482",
             "poststed": "Olso"
@@ -70,7 +70,7 @@
           "manedskort": 788
         },
         {
-          "adresse": {
+          "reiseAdresse": {
             "gateadresse": "Drammensveien 42",
             "postnr": "0482",
             "poststed": "Oslo"

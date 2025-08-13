@@ -51,7 +51,7 @@
         {
           "kanDuReiseMedOffentligTransport": "nei",
           "harDu6KmReisevei": "ja",
-          "adresse": {
+          "reiseAdresse": {
             "gateadresse": "Osloveien 42",
             "postnr": "0482",
             "poststed": "Oslo"

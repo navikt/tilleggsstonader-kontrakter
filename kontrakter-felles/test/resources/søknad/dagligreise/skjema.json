@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til daglig reise",
-  "revision" : "157",
+  "revision" : "158",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
     "key" : "personopplysninger",
@@ -791,7 +791,7 @@
       "type" : "datagrid",
       "tree" : true,
       "components" : [ {
-        "key" : "adresse",
+        "key" : "reiseAdresse",
         "label" : "Hva er adressen til aktiviteten din?",
         "type" : "container",
         "tree" : true,

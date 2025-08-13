@@ -27,7 +27,7 @@ data class SkjemaDagligreise(
 )
 
 data class Reise(
-    val adresse: Adresse,
+    val reiseAdresse: ReiseAdresse,
     val hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet: Valgfelt,
     val harDu6KmReisevei: JaNeiType,
     val hvorLangErReiseveienDin: Int?,
@@ -61,7 +61,7 @@ data class Valgfelt(
     val value: String,
 )
 
-data class Adresse(
+data class ReiseAdresse(
     val gateadresse: String,
     val postnr: String,
     val poststed: String,

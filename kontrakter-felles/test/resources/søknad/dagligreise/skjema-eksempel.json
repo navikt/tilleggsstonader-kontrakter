@@ -112,7 +112,7 @@
     }
   },
   "reise" : [ {
-    "adresse" : {
+    "reiseAdresse" : {
       "gateadresse" : "EksempelSvar",
       "postnr" : "EksempelSvar",
       "poststed" : "EksempelSvar"
