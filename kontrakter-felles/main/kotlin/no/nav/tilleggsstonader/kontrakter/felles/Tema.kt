@@ -1,10 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
 /**
- * Vi har valgt å kun bruke [TSO] for nye søknader
- * TODO - Gjelder dette fortsatt eller skal vi bruke TSR for Tiltak som tidligere?
- * [TSO] historiskt ble denne brukt for NAY
- * [TSR] historiskt ble denne brukt for Tiltak
+ * Brukes i Nav for å klassifisere dokumenter og oppgaver etter fagområde eller forretningsfunksjon på tvers av fagområder
  */
 enum class Tema {
     TSO,
