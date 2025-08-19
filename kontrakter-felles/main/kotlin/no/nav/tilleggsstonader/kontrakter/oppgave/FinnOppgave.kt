@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.oppgave
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import no.nav.tilleggsstonader.kontrakter.felles.Behandlingstema
 import no.nav.tilleggsstonader.kontrakter.felles.Tema
 import java.time.LocalDate
@@ -14,7 +15,8 @@ data class FinnOppgaveResponseDto(
  * [enhetsmappe] finnes, men har ulike verdier i ulike miljøer
  */
 data class FinnOppgaveRequest(
-    val tema: Tema,
+    @JsonFormat(with = [JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY])
+    val tema: List<Tema>,
     val behandlingstema: Behandlingstema? = null,
     val behandlingstype: Behandlingstype? = null,
     val erUtenMappe: Boolean? = null,
