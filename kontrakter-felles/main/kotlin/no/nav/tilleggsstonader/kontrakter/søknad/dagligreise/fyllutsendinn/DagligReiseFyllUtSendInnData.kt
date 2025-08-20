@@ -6,19 +6,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.time.LocalDate
 
 /**
- * Feltene i [SkjemaDagligreise] kan genereres automatisk fra [FyllUtSendInnSkjemaParser] i test
+ * Feltene i [SkjemaDagligReise] kan genereres automatisk fra [FyllUtSendInnSkjemaParser] i test
  * Felter som ikke er definierte vil feile, for å unngå at man ikke plukker opp nye felter hvis det blir lagt till i søknadsdialogen.
  */
 @JsonIgnoreProperties("metadata", "state", "_vnote", ignoreUnknown = false)
-data class DagligreiseFyllUtSendInnData(
-    val data: SkjemaDagligreise,
+data class DagligReiseFyllUtSendInnData(
+    val data: SkjemaDagligReise,
 )
 
 /**
  * [jegBekrefterAtJegVilSvareSaRiktigSomJegKan] er ikke så interessant å mappe
  */
 @JsonIgnoreProperties("jegBekrefterAtJegVilSvareSaRiktigSomJegKan", ignoreUnknown = false)
-data class SkjemaDagligreise(
+data class SkjemaDagligReise(
     val dineOpplysninger: DineOpplysninger,
     val hovedytelse: Map<HovedytelseType, Boolean>,
     val arbeidOgOpphold: ArbeidOgOpphold?,
