@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
 import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
-import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligreise
+import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligReise
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -154,7 +154,7 @@ private enum class Søknadstype(
     DAGLIG_REIESE(
         søknadMappe = "dagligreise",
         skjema = "nav111221",
-        klasse = SkjemaDagligreise::class,
+        klasse = SkjemaDagligReise::class,
     ),
 }
 

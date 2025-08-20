@@ -3,7 +3,7 @@ package no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn
 import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapperFailOnUnknownProperties
-import no.nav.tilleggsstonader.kontrakter.søknad.SøknadsskjemaDagligreiseFyllUtSendInn
+import no.nav.tilleggsstonader.kontrakter.søknad.SøknadsskjemaDagligReiseFyllUtSendInn
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
@@ -17,7 +17,7 @@ class SøknadsskjemaDagligReiseFyllUtSendInnTest {
         val json = FileUtil.readFile("søknad/dagligreise/$filename")
         assertDoesNotThrow {
             objectMapperFailOnUnknownProperties
-                .readValue<SøknadsskjemaDagligreiseFyllUtSendInn>(json)
+                .readValue<SøknadsskjemaDagligReiseFyllUtSendInn>(json)
         }
     }
 
@@ -29,7 +29,7 @@ class SøknadsskjemaDagligReiseFyllUtSendInnTest {
         val json = FileUtil.readFile("søknad/dagligreise/skjema-eksempel.json")
         assertDoesNotThrow {
             objectMapperFailOnUnknownProperties
-                .readValue<SkjemaDagligreise>(json)
+                .readValue<SkjemaDagligReise>(json)
         }
     }
 
