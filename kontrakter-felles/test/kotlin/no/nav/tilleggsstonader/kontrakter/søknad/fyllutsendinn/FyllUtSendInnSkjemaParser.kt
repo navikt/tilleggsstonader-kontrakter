@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
 import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
 import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
-import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligreise
+import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligReise
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -21,7 +21,7 @@ import kotlin.reflect.KClass
 /**
  * Endre [søknad] for å velge hvilken søknad man ønsker å kjøre tester for.
  */
-private val søknad = Søknadstype.DAGLIG_REIESE
+private val søknad = Søknadstype.DAGLIG_REISE
 
 /**
  * Hjelpemetoder for å hente skjema-struktur og generere eksempel-json og kotlin data-klasser
@@ -151,10 +151,10 @@ private enum class Søknadstype(
         skjema = "nav111219",
         klasse = SkjemaBoutgifter::class,
     ),
-    DAGLIG_REIESE(
+    DAGLIG_REISE(
         søknadMappe = "dagligreise",
         skjema = "nav111221",
-        klasse = SkjemaDagligreise::class,
+        klasse = SkjemaDagligReise::class,
     ),
 }
 

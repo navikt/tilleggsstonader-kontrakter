@@ -29,7 +29,7 @@ class SøknadsskjemaDagligReiseFyllUtSendInnTest {
         val json = FileUtil.readFile("søknad/dagligreise/skjema-eksempel.json")
         assertDoesNotThrow {
             objectMapperFailOnUnknownProperties
-                .readValue<SkjemaDagligreise>(json)
+                .readValue<SkjemaDagligReise>(json)
         }
     }
 
