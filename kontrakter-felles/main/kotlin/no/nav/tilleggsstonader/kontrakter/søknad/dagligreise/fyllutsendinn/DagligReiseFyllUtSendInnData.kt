@@ -139,9 +139,9 @@ data class DineOpplysninger(
 )
 
 data class AdresseJegSkalReiseFra(
-    val gateadresse: String?,
-    val postnr: String?,
-    val poststed: String?,
+    val gateadresse: String,
+    val postnr: String,
+    val poststed: String,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
