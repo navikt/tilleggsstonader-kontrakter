@@ -19,6 +19,12 @@
             "label": "Norge",
             "value": "NO"
           }
+        },
+        "reiseFraAnnetEnnFolkeregistrertAdr": "ja",
+        "adresseJegSkalReiseFra": {
+          "gateadresse": "Osloveien 1",
+          "postnr": "0482",
+          "poststed": "Oslo"
         }
       },
       "hovedytelse": {
@@ -69,7 +75,7 @@
           },
           "kanDuKjoreMedEgenBil": "ja",
           "utgifterBil": {
-            "parkering": 100,
+            "harDu6KmReisevei": "ja",
             "bompenger": 43,
             "ferge": 0,
             "piggdekkavgift": 22

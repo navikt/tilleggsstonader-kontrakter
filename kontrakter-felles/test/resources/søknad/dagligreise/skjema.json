@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til daglig reise",
-  "revision" : "158",
+  "revision" : "170",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
     "key" : "personopplysninger",
@@ -106,6 +106,85 @@
           "isRequired" : true
         },
         "customConditional" : "show = row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer",
+        "validate" : {
+          "required" : false
+        }
+      }, {
+        "key" : "reiseFraAnnetEnnFolkeregistrertAdr",
+        "label" : "Skal du reise fra din folkeregisterte adresse?",
+        "type" : "radiopanel",
+        "values" : [ {
+          "label" : "Ja",
+          "value" : "ja"
+        }, {
+          "label" : "Nei",
+          "value" : "nei"
+        } ],
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "customConditional" : "",
+        "validate" : {
+          "required" : true
+        }
+      }, {
+        "key" : "adresseJegSkalReiseFra",
+        "label" : "Adresse jeg skal reise fra:",
+        "type" : "container",
+        "tree" : true,
+        "components" : [ {
+          "key" : "gateadresse",
+          "label" : "Gateadresse",
+          "type" : "textfield",
+          "inputType" : "text",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "postnr",
+          "label" : "Postnummer",
+          "type" : "textfield",
+          "inputType" : "text",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "poststed",
+          "label" : "Poststed",
+          "type" : "textfield",
+          "inputType" : "text",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        } ],
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "nei",
+          "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+          "isRequired" : false
+        },
+        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -858,7 +937,6 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -872,7 +950,6 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -907,7 +984,6 @@
           "when" : "reise.harDu6KmReisevei",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -928,7 +1004,6 @@
           "when" : "reise.harDu6KmReisevei",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -943,7 +1018,6 @@
           "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -958,7 +1032,6 @@
           "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -1003,7 +1076,6 @@
           "when" : "reise.kanDuReiseMedOffentligTransport",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -1018,7 +1090,6 @@
           "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -1033,7 +1104,6 @@
           "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -1048,7 +1118,6 @@
           "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -1076,9 +1145,22 @@
           "when" : "reise.kanDuReiseMedOffentligTransport",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
+        }
+      }, {
+        "key" : "alertstripe3",
+        "label" : "",
+        "content" : "<p>Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell.</p>",
+        "type" : "alertstripe",
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "helsemessigeArsaker",
+          "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
+          "isRequired" : false
+        },
+        "validate" : {
+          "required" : false
         }
       }, {
         "key" : "kanDuKjoreMedEgenBil",
@@ -1097,7 +1179,6 @@
           "when" : "reise.kanDuReiseMedOffentligTransport",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -1121,10 +1202,16 @@
             "required" : false
           }
         }, {
-          "key" : "parkering",
-          "label" : "Utgifter til parkering per dag",
-          "type" : "number",
-          "inputType" : "numeric",
+          "key" : "harDu6KmReisevei",
+          "label" : "Må du betale for parkering på aktivitetsstedet?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
           "multiple" : false,
           "conditional" : {
             "eq" : "",
@@ -1133,7 +1220,7 @@
           },
           "customConditional" : "",
           "validate" : {
-            "required" : false
+            "required" : true
           }
         }, {
           "key" : "bompenger",
@@ -1146,7 +1233,6 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : false
           }
@@ -1161,13 +1247,12 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : false
           }
         }, {
           "key" : "piggdekkavgift",
-          "label" : "Piggdekkavgift én vei",
+          "label" : "Piggdekkavgift per dag ",
           "type" : "number",
           "inputType" : "numeric",
           "multiple" : false,
@@ -1201,7 +1286,6 @@
           "when" : "reise.kanDuKjoreMedEgenBil",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -1231,7 +1315,6 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1252,7 +1335,6 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1263,7 +1345,6 @@
           "when" : "reise.kanDuKjoreMedEgenBil",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -1278,7 +1359,6 @@
           "when" : "reise.drosje.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi1",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -1293,7 +1373,6 @@
           "when" : "reise.drosje.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi1",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }

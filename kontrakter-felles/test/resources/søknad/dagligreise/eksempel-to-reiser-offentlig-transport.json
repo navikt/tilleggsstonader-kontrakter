@@ -19,6 +19,12 @@
             "label": "Norge",
             "value": "NO"
           }
+        },
+        "reiseFraAnnetEnnFolkeregistrertAdr": "ja",
+        "adresseJegSkalReiseFra": {
+          "gateadresse": "Osloveien 1",
+          "postnr": "0482",
+          "poststed": "Oslo"
         }
       },
       "aktiviteter": {

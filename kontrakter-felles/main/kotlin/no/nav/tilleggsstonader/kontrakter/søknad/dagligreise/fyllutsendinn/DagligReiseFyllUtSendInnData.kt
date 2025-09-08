@@ -50,7 +50,7 @@ data class Drosje(
 )
 
 data class UtgifterBil(
-    val parkering: Int?,
+    val harDu6KmReisevei: JaNeiType,
     val bompenger: Int?,
     val ferge: Int?,
     val piggdekkavgift: Int?,
@@ -134,6 +134,14 @@ data class DineOpplysninger(
     val etternavn: String,
     val identitet: Identitet,
     val adresse: NavAdresse?,
+    val reiseFraAnnetEnnFolkeregistrertAdr: JaNeiType,
+    val adresseJegSkalReiseFra: AdresseJegSkalReiseFra?,
+)
+
+data class AdresseJegSkalReiseFra(
+    val gateadresse: String?,
+    val postnr: String?,
+    val poststed: String?,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -15,6 +15,12 @@
         "label" : "Norge",
         "value" : "NO"
       }
+    },
+    "reiseFraAnnetEnnFolkeregistrertAdr" : "ja",
+    "adresseJegSkalReiseFra" : {
+      "gateadresse" : "EksempelSvar",
+      "postnr" : "EksempelSvar",
+      "poststed" : "EksempelSvar"
     }
   },
   "hovedytelse" : {
@@ -141,7 +147,7 @@
     },
     "kanDuKjoreMedEgenBil" : "ja",
     "utgifterBil" : {
-      "parkering" : 100,
+      "harDu6KmReisevei" : "ja",
       "bompenger" : 100,
       "ferge" : 100,
       "piggdekkavgift" : 100
