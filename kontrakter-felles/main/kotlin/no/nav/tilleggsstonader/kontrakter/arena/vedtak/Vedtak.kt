@@ -77,5 +77,7 @@ enum class Rettighet(
 
         fun fraStønadstype(stønadstype: Stønadstype): List<Rettighet> =
             rettigheterPerStønadstype[stønadstype] ?: error("Finner ikke mapping for $stønadstype")
+
+        fun Set<Stønadstype>.tilArenaKoder() = this.flatMap { Rettighet.fraStønadstype(it) }.map { it.kodeArena }
     }
 }
