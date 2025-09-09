@@ -29,3 +29,5 @@ enum class Stønadstype(
         grunnlagAntallMånederBakITiden = 3,
     ),
 }
+
+fun Stønadstype.gjelderDagligReise() = Stønadstype.DAGLIG_REISE_TSO == this || Stønadstype.DAGLIG_REISE_TSR == this
