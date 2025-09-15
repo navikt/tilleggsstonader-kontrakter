@@ -45,6 +45,7 @@ enum class KlageinstansUtfall(
     STADFESTELSE("Stadfestelse KA"),
     UGUNST("Ugunst (Ugyldig) KA"),
     AVVIST("Avvist KA"),
+    HENLAGT("Henlagt KA"),
     INNSTILLING_STADFESTELSE("Innstilling om stadfestelse til trygderetten fra KA"),
     INNSTILLING_AVVIST("Innstilling om avist til trygderetten fra KA"),
     HENVIST("Henvist KA"),
