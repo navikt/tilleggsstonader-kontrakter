@@ -21,11 +21,11 @@ enum class Stønadstype(
         grunnlagAntallMånederBakITiden = 6,
     ),
     DAGLIG_REISE_TSO(
-        visningsnavn = "støtte til daglig reise",
+        visningsnavn = "støtte til daglig reise Nay",
         grunnlagAntallMånederBakITiden = 3,
     ),
     DAGLIG_REISE_TSR(
-        visningsnavn = "støtte til daglig reise",
+        visningsnavn = "støtte til daglig reise tiltaksenheten",
         grunnlagAntallMånederBakITiden = 3,
     ),
 }

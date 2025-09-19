@@ -171,7 +171,8 @@ data class VilkårsprøvingDVH(
 enum class SakYtelseDvh {
     TILLEGG_BARNETILSYN, // For pass av barn er kun "Tilleggsstønad" relevant
     TILLEGG_LÆREMIDLER, // For læremidler er kun "Tilleggsstønad" relevant
-    TILLEGG_BOUTGIFTER, // For læremidler er kun "Tilleggsstønad" relevant
+    TILLEGG_BOUTGIFTER, // For boutgifter er kun "Tilleggsstønad" relevant
+    TILLEGG_DAGLIG_REISE, // For daglig reise er kun "Tilleggsstønad" relevant
     ;
 
     companion object {
@@ -181,8 +182,8 @@ enum class SakYtelseDvh {
                 Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
                 Stønadstype.LÆREMIDLER -> TILLEGG_LÆREMIDLER
                 Stønadstype.BOUTGIFTER -> TILLEGG_BOUTGIFTER
-                Stønadstype.DAGLIG_REISE_TSO -> TODO()
-                Stønadstype.DAGLIG_REISE_TSR -> TODO()
+                Stønadstype.DAGLIG_REISE_TSO -> TILLEGG_DAGLIG_REISE
+                Stønadstype.DAGLIG_REISE_TSR -> TILLEGG_DAGLIG_REISE
             }
     }
 }

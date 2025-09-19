@@ -15,6 +15,8 @@ class RettighetTest {
 
         assertThat(Rettighet.LÆREMIDLER.stønadstype).isEqualTo(Stønadstype.LÆREMIDLER)
         assertThat(Rettighet.LÆREMIDLER.stønadstype).isEqualTo(Stønadstype.LÆREMIDLER)
+        assertThat(Rettighet.DAGLIG_REISE.stønadstype).isEqualTo(Stønadstype.DAGLIG_REISE_TSO)
+        assertThat(Rettighet.DAGLIG_REISE_ARBEIDSSØKERE.stønadstype).isEqualTo(Stønadstype.DAGLIG_REISE_TSR)
     }
 
     @ParameterizedTest

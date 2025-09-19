@@ -1,5 +1,8 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
+import no.nav.tilleggsstonader.kontrakter.felles.Tema.TSO
+import no.nav.tilleggsstonader.kontrakter.felles.Tema.TSR
+
 /**
  * Brukes i Nav for å klassifisere dokumenter og oppgaver etter fagområde eller forretningsfunksjon på tvers av fagområder
  */

@@ -9,8 +9,7 @@ enum class Behandlingstema(
     TilsynBarn("ab0300"), // Tilsyn av barn tilleggsstønad
     Læremidler("ab0292"), // Læremidler tilleggsstønad
     Boutgifter("ab0286"), // Boutgifter tilleggsstønad
-    DagligReiseTSO("ab0288"), // Daglig reise TSO
-    DagligReiseTSR("ab0287"), // Daglig reise TSR
+    DagligReise("ab0288"), // Daglig reise tilleggsstønad
     Feilutbetaling("ab0006"),
     Tilbakebetaling("ab0007"),
     ;
@@ -29,6 +28,6 @@ fun Stønadstype.tilBehandlingstema(): Behandlingstema =
         Stønadstype.BARNETILSYN -> Behandlingstema.TilsynBarn
         Stønadstype.LÆREMIDLER -> Behandlingstema.Læremidler
         Stønadstype.BOUTGIFTER -> Behandlingstema.Boutgifter
-        Stønadstype.DAGLIG_REISE_TSO -> Behandlingstema.DagligReiseTSO
-        Stønadstype.DAGLIG_REISE_TSR -> Behandlingstema.DagligReiseTSR
+        Stønadstype.DAGLIG_REISE_TSO -> Behandlingstema.DagligReise
+        Stønadstype.DAGLIG_REISE_TSR -> Behandlingstema.DagligReise
     }
