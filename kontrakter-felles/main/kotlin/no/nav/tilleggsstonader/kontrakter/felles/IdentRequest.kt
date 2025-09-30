@@ -8,6 +8,14 @@ data class IdentRequest(
 )
 
 /**
+ * Brukes på oppslag med ident og skjematype, eksempelvis nyttig når soknad-api skal snakke med sak
+ */
+data class IdentSkjematype(
+    val ident: String,
+    val skjeamtype: Skjematype,
+)
+
+/**
  * Kan brukes til oppslag på ident og gitt stønadstype
  */
 data class IdentStønadstype(
