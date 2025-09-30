@@ -12,7 +12,7 @@ data class IdentRequest(
  */
 data class IdentSkjematype(
     val ident: String,
-    val skjeamtype: Skjematype,
+    val skjematype: Skjematype,
 )
 
 /**
