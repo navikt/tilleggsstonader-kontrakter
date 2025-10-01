@@ -18,4 +18,6 @@ enum class Vedleggstype(
     // Læremidler
     DOKUMENTASJON_FUNKSJONSNEDSETTELSE("Dokumentasjon på funksjonsnedsettelse"),
     UTGIFTER_LÆREMIDLER("Dokumentasjon på utgifter til læremidler"),
+
+    PARKERINGSUTGIFT("Dokumentasjon på parkeringsutgift"),
 }

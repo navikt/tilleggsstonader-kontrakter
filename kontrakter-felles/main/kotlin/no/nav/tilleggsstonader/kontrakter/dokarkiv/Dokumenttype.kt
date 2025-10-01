@@ -34,6 +34,8 @@ enum class Dokumenttype {
     DAGLIG_REISE_TSO_INTERNT_VEDTAK,
     DAGLIG_REISE_TSO_KLAGE_VEDTAKSBREV,
     DAGLIG_REISE_TSO_KLAGE_INTERNT_VEDTAK,
+    DAGLIG_REISE_TSO_KJØRELISTE,
+    DAGLIG_REISE_TSO_KJØRELISTE_VEDLEGG,
 
     // DAGLIG_REISE_TSR_SØKNAD,
     // DAGLIG_REISE_TSR_SØKNAD_VEDLEGG,
@@ -42,6 +44,8 @@ enum class Dokumenttype {
     DAGLIG_REISE_TSR_INTERNT_VEDTAK,
     DAGLIG_REISE_TSR_KLAGE_VEDTAKSBREV,
     DAGLIG_REISE_TSR_KLAGE_INTERNT_VEDTAK,
+    DAGLIG_REISE_TSR_KJØRELISTE,
+    DAGLIG_REISE_TSR_KJØRELISTE_VEDLEGG,
 }
 
 data class Dokumentyper(
@@ -52,6 +56,8 @@ data class Dokumentyper(
     val interntVedtak: Dokumenttype,
     val klageVedtaksbrev: Dokumenttype,
     val klageInterntVedtak: Dokumenttype,
+    val kjøreliste: Dokumenttype?,
+    val kjørelisteVedlegg: Dokumenttype?,
 )
 
 val Stønadstype.dokumenttyper: Dokumentyper
@@ -66,6 +72,8 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     interntVedtak = Dokumenttype.BARNETILSYN_INTERNT_VEDTAK,
                     klageVedtaksbrev = Dokumenttype.BARNETILSYN_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.BARNETILSYN_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = null,
+                    kjørelisteVedlegg = null,
                 )
             Stønadstype.LÆREMIDLER ->
                 Dokumentyper(
@@ -76,6 +84,8 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     interntVedtak = Dokumenttype.LÆREMIDLER_INTERNT_VEDTAK,
                     klageVedtaksbrev = Dokumenttype.LÆREMIDLER_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.LÆREMIDLER_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = null,
+                    kjørelisteVedlegg = null,
                 )
             Stønadstype.BOUTGIFTER ->
                 Dokumentyper(
@@ -86,6 +96,8 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     interntVedtak = Dokumenttype.BOUTGIFTER_INTERNT_VEDTAK,
                     klageVedtaksbrev = Dokumenttype.BOUTGIFTER_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.BOUTGIFTER_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = null,
+                    kjørelisteVedlegg = null,
                 )
             Stønadstype.DAGLIG_REISE_TSO ->
                 Dokumentyper(
@@ -96,6 +108,8 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     interntVedtak = Dokumenttype.DAGLIG_REISE_TSO_INTERNT_VEDTAK,
                     klageVedtaksbrev = Dokumenttype.DAGLIG_REISE_TSO_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.DAGLIG_REISE_TSO_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = Dokumenttype.DAGLIG_REISE_TSO_KJØRELISTE,
+                    kjørelisteVedlegg = Dokumenttype.DAGLIG_REISE_TSO_KJØRELISTE_VEDLEGG,
                 )
             Stønadstype.DAGLIG_REISE_TSR ->
                 Dokumentyper(
@@ -106,5 +120,7 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     interntVedtak = Dokumenttype.DAGLIG_REISE_TSR_INTERNT_VEDTAK,
                     klageVedtaksbrev = Dokumenttype.DAGLIG_REISE_TSR_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.DAGLIG_REISE_TSR_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = Dokumenttype.DAGLIG_REISE_TSR_KJØRELISTE,
+                    kjørelisteVedlegg = Dokumenttype.DAGLIG_REISE_TSR_KJØRELISTE_VEDLEGG,
                 )
         }

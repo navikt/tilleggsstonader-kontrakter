@@ -9,6 +9,11 @@ data class TekstFelt(
     val verdi: String,
 )
 
+data class NumeriskFelt(
+    val label: String,
+    val verdi: Int,
+)
+
 data class EnumFelt<T>(
     val label: String,
     val verdi: T,
