@@ -5,6 +5,7 @@ enum class Skjematype {
     LÆREMIDLER,
     BOUTGIFTER,
     DAGLIG_REISE,
+    DAGLIG_REISE_KJØRELISTE,
 }
 
 fun Stønadstype.tilSkjematype() =
@@ -17,7 +18,7 @@ fun Stønadstype.tilSkjematype() =
 
 fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
     when (this) {
-        Skjematype.DAGLIG_REISE ->
+        Skjematype.DAGLIG_REISE, Skjematype.DAGLIG_REISE_KJØRELISTE ->
             setOf(
                 Stønadstype.DAGLIG_REISE_TSO,
                 Stønadstype.DAGLIG_REISE_TSR,

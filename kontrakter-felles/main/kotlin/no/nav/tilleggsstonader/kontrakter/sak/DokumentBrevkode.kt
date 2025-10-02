@@ -7,6 +7,7 @@ enum class DokumentBrevkode(
     LÆREMIDLER("NAV 11-12.16"),
     BOUTGIFTER("NAV 11-12.19"),
     DAGLIG_REISE("NAV 11-12.21"),
+    DAGLIG_REISE_KJØRELISTE("NAV 11-12.24"),
     ;
 
     companion object {
