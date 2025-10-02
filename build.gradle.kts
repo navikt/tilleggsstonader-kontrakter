@@ -3,13 +3,13 @@ val javaVersion = JavaLanguageVersion.of(21)
 group = "no.nav.tilleggsstonader.kontrakter"
 
 plugins {
-    kotlin("jvm") version "2.2.10"
+    kotlin("jvm") version "2.2.20"
     `maven-publish`
     `java-library`
-    id("com.diffplug.spotless") version "7.2.1"
-    id("com.github.ben-manes.versions") version "0.52.0"
+    id("com.diffplug.spotless") version "8.0.0"
+    id("com.github.ben-manes.versions") version "0.53.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.19"
-    id("org.cyclonedx.bom") version "2.3.1"
+    id("org.cyclonedx.bom") version "2.4.1"
 }
 
 allprojects {
