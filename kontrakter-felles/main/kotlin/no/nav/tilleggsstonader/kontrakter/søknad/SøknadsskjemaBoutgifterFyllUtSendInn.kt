@@ -4,10 +4,10 @@ import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.Boutg
 
 /**
  * Søknadskjema som sendes inn fra FyllUt/SendInn
- * @param dokumentasjon fylles ikke i, men er påkrevd av [Skjema]
+ * @param dokumentasjon fylles ikke i, men er påkrevd av [Skjemadata]
  */
 data class SøknadsskjemaBoutgifterFyllUtSendInn(
     val language: String,
     val data: BoutgifterFyllUtSendInnData,
     override val dokumentasjon: List<DokumentasjonFelt> = emptyList(),
-) : Skjema
+) : Skjemadata

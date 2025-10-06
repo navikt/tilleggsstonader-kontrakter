@@ -3,13 +3,13 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import java.time.LocalDateTime
 
-data class Søknadsskjema<T : Skjema>(
+data class Søknadsskjema<T : Skjemadata>(
     val ident: String,
     val mottattTidspunkt: LocalDateTime,
     val språk: Språkkode,
     val skjema: T,
 )
 
-sealed interface Skjema {
+sealed interface Skjemadata {
     val dokumentasjon: List<DokumentasjonFelt>
 }

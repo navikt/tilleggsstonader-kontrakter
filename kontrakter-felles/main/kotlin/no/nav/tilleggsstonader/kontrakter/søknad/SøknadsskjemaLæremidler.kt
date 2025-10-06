@@ -7,4 +7,4 @@ data class SøknadsskjemaLæremidler(
     val hovedytelse: HovedytelseAvsnitt,
     val utdanning: UtdanningAvsnitt,
     override val dokumentasjon: List<DokumentasjonFelt>,
-) : Skjema
+) : Skjemadata
