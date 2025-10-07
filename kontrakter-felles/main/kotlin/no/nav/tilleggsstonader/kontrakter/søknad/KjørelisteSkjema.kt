@@ -3,7 +3,7 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 data class KjørelisteSkjema(
     val reisedagerPerUkeAvsnitt: List<UkeMedReisedager>,
     override val dokumentasjon: List<DokumentasjonFelt>,
-) : Skjema
+) : Skjemadata
 
 data class UkeMedReisedager(
     val ukeLabel: String,
