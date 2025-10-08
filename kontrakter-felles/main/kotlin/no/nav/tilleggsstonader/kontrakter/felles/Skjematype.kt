@@ -6,6 +6,9 @@ enum class Skjematype {
     SØKNAD_BOUTGIFTER,
     SØKNAD_DAGLIG_REISE,
     DAGLIG_REISE_KJØRELISTE,
+    ;
+
+    fun erSøknad() = this in listOf(SØKNAD_BARNETILSYN, SØKNAD_LÆREMIDLER, SØKNAD_BOUTGIFTER, SØKNAD_DAGLIG_REISE)
 }
 
 fun Stønadstype.tilSkjematype() =
