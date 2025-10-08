@@ -2,9 +2,13 @@ package no.nav.tilleggsstonader.kontrakter.felles
 
 enum class Skjematype {
     BARNETILSYN,
+    SØKNAD_BARNETILSYN,
     LÆREMIDLER,
+    SØKNAD_LÆREMIDLER,
     BOUTGIFTER,
+    SØKNAD_BOUTGIFTER,
     DAGLIG_REISE,
+    SØKNAD_DAGLIG_REISE,
     DAGLIG_REISE_KJØRELISTE,
 }
 
@@ -18,13 +22,13 @@ fun Stønadstype.tilSkjematype() =
 
 fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
     when (this) {
-        Skjematype.DAGLIG_REISE, Skjematype.DAGLIG_REISE_KJØRELISTE ->
+        Skjematype.DAGLIG_REISE, Skjematype.SØKNAD_DAGLIG_REISE, Skjematype.DAGLIG_REISE_KJØRELISTE ->
             setOf(
                 Stønadstype.DAGLIG_REISE_TSO,
                 Stønadstype.DAGLIG_REISE_TSR,
             )
 
-        Skjematype.BOUTGIFTER -> setOf(Stønadstype.BOUTGIFTER)
-        Skjematype.LÆREMIDLER -> setOf(Stønadstype.LÆREMIDLER)
-        Skjematype.BARNETILSYN -> setOf(Stønadstype.BARNETILSYN)
+        Skjematype.BOUTGIFTER, Skjematype.SØKNAD_BOUTGIFTER -> setOf(Stønadstype.BOUTGIFTER)
+        Skjematype.LÆREMIDLER, Skjematype.SØKNAD_LÆREMIDLER -> setOf(Stønadstype.LÆREMIDLER)
+        Skjematype.BARNETILSYN, Skjematype.SØKNAD_BARNETILSYN -> setOf(Stønadstype.BARNETILSYN)
     }
