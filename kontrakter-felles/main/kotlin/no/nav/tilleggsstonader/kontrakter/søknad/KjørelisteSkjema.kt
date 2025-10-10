@@ -7,10 +7,12 @@ data class KjørelisteSkjema(
 
 data class UkeMedReisedager(
     val ukeLabel: String,
+    val spørsmål: String,
     val reisedager: List<Reisedag>,
 )
 
 data class Reisedag(
     val dato: DatoFelt,
+    val harKjørt: Boolean,
     val parkeringsutgift: NumeriskFelt? = null,
 )
