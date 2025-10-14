@@ -14,5 +14,5 @@ data class UkeMedReisedager(
 data class Reisedag(
     val dato: DatoFelt,
     val harKjørt: Boolean,
-    val parkeringsutgift: NumeriskFelt? = null,
+    val parkeringsutgift: VerdiFelt<Number?>,
 )
