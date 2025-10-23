@@ -298,6 +298,7 @@ private class JsonStrukturGenerator(
             type == "surname" -> "Etternavn"
             type == "identity" -> mapOf("identitetsnummer" to "1111111111")
             type == "navSelect" -> mapOf("label" to "3", "value" to "3")
+            type == "navCheckbox" -> "true"
             else -> error("Har ikke mapping for $this")
         }
 
@@ -455,6 +456,8 @@ private class KotlinDataClassMapper(
                 klassedefinisjoner.add(Klassedefinisjon("Valgfelt", felter))
                 "Valgfelt"
             }
+
+            type == "navCheckbox" -> "Boolean"
 
             else -> error("Har ikke mapping for $this")
         }
