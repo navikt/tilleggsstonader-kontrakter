@@ -62,7 +62,7 @@ data class Valgfelt(
 )
 
 data class Aktiviteter(
-    val aktiviteterOgMaalgruppe: AktiviteterOgMålgruppe,
+    val aktiviteterOgMaalgruppe: AktiviteterOgMålgruppe?,
     val arbeidsrettetAktivitet: ArbeidsrettetAktivitetType?,
     val faktiskeUtgifter: DekkesUtgiftenAvAndre,
 )
