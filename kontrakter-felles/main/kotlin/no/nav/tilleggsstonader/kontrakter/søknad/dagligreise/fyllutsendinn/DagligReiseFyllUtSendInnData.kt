@@ -27,30 +27,30 @@ data class SkjemaDagligReise(
 )
 
 data class Reise(
-    val reiseAdresse: ReiseAdresse,
+    val gateadresse: String,
+    val postnr: String,
+    val poststed: String,
+    val fom: LocalDate,
+    val tom: LocalDate,
     val hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet: Valgfelt,
     val harDu6KmReisevei: JaNeiType,
-    val hvorLangErReiseveienDin: Int?,
     val harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde: JaNeiType?,
-    val kanDuReiseMedOffentligTransport: JaNeiType,
+    val hvorLangErReiseveienDin: Int,
+    val kanDuReiseMedOffentligTransport: KanDuReiseMedOffentligTransportType,
+    val hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport:
+        Map<HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType, Boolean>?,
+    val kanKjoreMedEgenBil: JaNeiType?,
+    val mottarDuGrunnstonadFraNav: JaNeiType?,
+    val hvorforIkkeBil: Map<HvorforIkkeBilType, Boolean>?,
+    val reiseMedTaxi: JaNeiType?,
+    val ttKort: JaNeiType?,
     val hvaSlagsTypeBillettMaDuKjope: Map<HvaSlagsTypeBillettMaDuKjopeType, Boolean>?,
     val enkeltbilett: Int?,
     val syvdagersbilett: Int?,
     val manedskort: Int?,
-    val hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport:
-        Map<HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType, Boolean>?,
-    val kanDuKjoreMedEgenBil: JaNeiType?,
-    val utgifterBil: UtgifterBil?,
-    val drosje: Drosje?,
-)
-
-data class Drosje(
-    val hvaErViktigsteGrunnerTilAtDuIkkeKanKjoreBil: Map<HvaErViktigsteGrunnerTilAtDuIkkeKanKjoreBilType, Boolean>,
-    val onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi: JaNeiType,
-)
-
-data class UtgifterBil(
-    val harDu6KmReisevei: JaNeiType,
+    val hvorSkalDuKjoreMedEgenBil: Map<HvorSkalDuKjoreMedEgenBilType, Boolean>?,
+    val hvorLangErReiseveienDinMedBil: Int?,
+    val parkering: JaNeiType?,
     val bompenger: Int?,
     val ferge: Int?,
     val piggdekkavgift: Int?,
@@ -61,23 +61,18 @@ data class Valgfelt(
     val value: String,
 )
 
-data class ReiseAdresse(
-    val gateadresse: String,
-    val postnr: String,
-    val poststed: String,
-)
-
 data class Aktiviteter(
     val aktiviteterOgMaalgruppe: AktiviteterOgMålgruppe,
     val arbeidsrettetAktivitet: ArbeidsrettetAktivitetType?,
-    val mottarLonnGjennomTiltak: JaNeiType?,
-    val reiseTilAktivitetsstedHelePerioden: JaNeiType?,
-    val reiseperiode: Reiseperiode?,
+    val faktiskeUtgifter: DekkesUtgiftenAvAndre,
 )
 
-data class Reiseperiode(
-    val fom: LocalDate,
-    val tom: LocalDate,
+data class DekkesUtgiftenAvAndre(
+    val garDuPaVideregaendeEllerGrunnskole: TypeUtdanning,
+    val erDuLaerling: JaNeiType?,
+    val arbeidsgiverDekkerUtgift: JaNeiType?,
+    val bekreftelsemottarIkkeSkoleskyss: Boolean?,
+    val lonnGjennomTiltak: JaNeiType?,
 )
 
 data class AktiviteterOgMålgruppe(
@@ -133,6 +128,7 @@ data class DineOpplysninger(
     val fornavn: String,
     val etternavn: String,
     val identitet: Identitet,
+    val fodselsdato2: String?,
     val adresse: NavAdresse?,
     val reiseFraAnnetEnnFolkeregistrertAdr: JaNeiType,
     val adresseJegSkalReiseFra: AdresseJegSkalReiseFra?,
@@ -195,13 +191,20 @@ enum class ArsakOppholdUtenforNorgeType {
 enum class ArbeidsrettetAktivitetType {
     tiltakArbeidsrettetUtredning,
     utdanningGodkjentAvNav,
+    jegErArbeidssoker,
     harIngenArbeidsrettetAktivitet,
 }
 
-enum class HvaSlagsTypeBillettMaDuKjopeType {
-    enkeltbillett,
-    ukeskort,
-    manedskort,
+enum class TypeUtdanning {
+    videregaendeSkole,
+    opplaeringForVoksne,
+    annetTiltak,
+}
+
+enum class KanDuReiseMedOffentligTransportType {
+    ja,
+    nei,
+    kombinertTogBil,
 }
 
 enum class HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType {
@@ -211,8 +214,20 @@ enum class HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType {
     annet,
 }
 
-enum class HvaErViktigsteGrunnerTilAtDuIkkeKanKjoreBilType {
+enum class HvorforIkkeBilType {
     helsemessigeArsaker,
-    darligTransporttilbud,
+    harIkkeBilEllerForerkort,
     annet,
+}
+
+enum class HvaSlagsTypeBillettMaDuKjopeType {
+    enkeltbillett,
+    ukeskort,
+    manedskort,
+}
+
+enum class HvorSkalDuKjoreMedEgenBilType {
+    togstasjon,
+    busstopp,
+    fergeBatkai,
 }

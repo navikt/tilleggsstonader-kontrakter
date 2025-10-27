@@ -27,87 +27,149 @@
           "poststed": "Oslo"
         }
       },
+      "hovedytelse": {
+        "arbeidsavklaringspenger": true,
+        "overgangsstonad": true,
+        "gjenlevendepensjon": true,
+        "uforetrygd": true,
+        "tiltakspenger": true,
+        "dagpenger": true,
+        "sykepenger": true,
+        "kvalifiseringsstonad": true,
+        "mottarIngenPengestotte": true,
+        "ingenAvAlternativenePasserForMeg": true
+      },
+      "arbeidOgOpphold": {
+        "jobberIAnnetLand": "ja",
+        "jobbAnnetLand": {
+          "value": "AF",
+          "label": "Afghanistan"
+        },
+        "harPengestotteAnnetLand": {
+          "sykepenger": true,
+          "pensjon": true,
+          "annenPengestotte": true,
+          "mottarIkkePengestotte": true
+        },
+        "pengestotteAnnetLand": {
+          "value": "AF",
+          "label": "Afghanistan"
+        },
+        "harOppholdUtenforNorgeSiste12mnd": "ja",
+        "oppholdUtenforNorgeSiste12mnd": {
+          "land": {
+            "value": "AF",
+            "label": "Afghanistan"
+          },
+          "arsakOppholdUtenforNorge": {
+            "jobbet": true,
+            "studerte": true,
+            "fikkMedisinskBehandling": true,
+            "varPaFerie": true,
+            "besokteFamilie": true,
+            "annet": true
+          },
+          "periode": {
+            "fom": "2025-01-01",
+            "tom": "2025-01-01"
+          }
+        },
+        "harOppholdUtenforNorgeNeste12mnd": "ja",
+        "oppholdUtenforNorgeNeste12mnd": {
+          "land": {
+            "value": "AF",
+            "label": "Afghanistan"
+          },
+          "arsakOppholdUtenforNorge": {
+            "jobbet": true,
+            "studerte": true,
+            "fikkMedisinskBehandling": true,
+            "varPaFerie": true,
+            "besokteFamilie": true,
+            "annet": true
+          },
+          "periode": {
+            "fom": "2025-01-01",
+            "tom": "2025-01-01"
+          }
+        }
+      },
       "aktiviteter": {
         "aktiviteterOgMaalgruppe": {
           "aktivitet": {
-            "aktivitetId": "134120740",
+            "aktivitetId": "123",
+            "periode": {
+              "fom": "2025-01-01",
+              "tom": "2025-01-01"
+            },
             "maalgruppe": {
               "maalgruppetype": "NEDSARBEVN",
               "gyldighetsperiode": {
-                "fom": "2025-03-01",
-                "tom": "2025-10-06"
+                "fom": "2025-01-01",
+                "tom": "2025-01-01"
               },
-              "maalgruppenavn": "Person med nedsatt arbeidsevne pga. sykdom"
+              "maalgruppenavn": "maalgruppenavn"
             },
-            "periode": {
-              "fom": "2025-03-11",
-              "tom": "2025-09-30"
-            },
-            "text": "Arbeidstrening: 11. mars 2025 - 30. september 2025"
+            "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
           }
         },
-        "mottarLonnGjennomTiltak": "nei",
-        "reiseTilAktivitetsstedHelePerioden": "nei",
-        "reiseperiode": {
-          "fom": "2025-04-01",
-          "tom": "2025-09-30"
+        "arbeidsrettetAktivitet": "tiltakArbeidsrettetUtredning",
+        "faktiskeUtgifter": {
+          "garDuPaVideregaendeEllerGrunnskole": "videregaendeSkole",
+          "erDuLaerling": "ja",
+          "arbeidsgiverDekkerUtgift": "ja",
+          "bekreftelsemottarIkkeSkoleskyss": "true",
+          "lonnGjennomTiltak": "ja"
         }
       },
       "reise": [
         {
-          "reiseAdresse": {
-            "gateadresse": "Oslogate 42",
-            "postnr": "0482",
-            "poststed": "Olso"
-          },
-          "kanDuReiseMedOffentligTransport": "ja",
+          "gateadresse": "EksempelSvar",
+          "postnr": "EksempelSvar",
+          "poststed": "EksempelSvar",
+          "fom": "2025-01-01",
+          "tom": "2025-01-01",
           "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet": {
-            "label": "4",
-            "value": "4"
+            "label": "3",
+            "value": "3"
           },
           "harDu6KmReisevei": "ja",
-          "hvorLangErReiseveienDin": 18,
+          "hvorLangErReiseveienDin": 100,
+          "kanDuReiseMedOffentligTransport": "ja",
           "hvaSlagsTypeBillettMaDuKjope": {
             "enkeltbillett": true,
-            "ukeskort": false,
+            "ukeskort": true,
+            "manedskort": true
+          },
+          "enkeltbilett": 100,
+          "syvdagersbilett": 100,
+          "manedskort": 100
+        },
+        {
+          "gateadresse": "EksempelSvar2",
+          "postnr": "EksempelSvar2",
+          "poststed": "EksempelSvar2",
+          "fom": "2025-10-02",
+          "tom": "2025-12-14",
+          "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet": {
+            "label": "2",
+            "value": "2"
+          },
+          "harDu6KmReisevei": "ja",
+          "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde": "ja",
+          "hvorLangErReiseveienDin": 99,
+          "kanDuReiseMedOffentligTransport": "ja",
+          "hvaSlagsTypeBillettMaDuKjope": {
+            "enkeltbillett": true,
+            "ukeskort": true,
             "manedskort": true
           },
           "enkeltbilett": 44,
-          "manedskort": 788
-        },
-        {
-          "reiseAdresse": {
-            "gateadresse": "Drammensveien 42",
-            "postnr": "0482",
-            "poststed": "Oslo"
-          },
-          "harDu6KmReisevei": "nei",
-          "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde": "nei",
-          "kanDuReiseMedOffentligTransport": "ja",
-          "hvaSlagsTypeBillettMaDuKjope": {
-            "enkeltbillett": false,
-            "ukeskort": true,
-            "manedskort": false
-          },
-          "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet": {
-            "label": "1",
-            "value": "1"
-          },
-          "syvdagersbilett": 233
+          "syvdagersbilett": 200,
+          "manedskort": 780
+
         }
-      ],
-      "hovedytelse": {
-        "arbeidsavklaringspenger": true,
-        "overgangsstonad": false,
-        "gjenlevendepensjon": false,
-        "uforetrygd": false,
-        "tiltakspenger": false,
-        "dagpenger": false,
-        "sykepenger": false,
-        "kvalifiseringsstonad": false,
-        "mottarIngenPengestotte": false,
-        "ingenAvAlternativenePasserForMeg": false
-      }
+      ]
     }
   }
 }

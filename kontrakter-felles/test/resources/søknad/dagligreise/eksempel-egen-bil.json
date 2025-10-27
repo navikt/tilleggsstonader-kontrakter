@@ -42,44 +42,58 @@
       "aktiviteter": {
         "aktiviteterOgMaalgruppe": {
           "aktivitet": {
-            "aktivitetId": "ingenAktivitet",
-            "text": "Ingen relevant aktivitet registrert på meg"
+            "aktivitetId": "123",
+            "periode": {
+              "fom": "2025-01-01",
+              "tom": "2025-01-01"
+            },
+            "maalgruppe": {
+              "maalgruppetype": "NEDSARBEVN",
+              "gyldighetsperiode": {
+                "fom": "2025-01-01",
+                "tom": "2025-01-01"
+              },
+              "maalgruppenavn": "maalgruppenavn"
+            },
+            "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
           }
         },
         "arbeidsrettetAktivitet": "tiltakArbeidsrettetUtredning",
-        "reiseperiode": {
-          "fom": "2025-07-01",
-          "tom": "2025-09-30"
-        },
-        "mottarLonnGjennomTiltak": "ja"
+        "faktiskeUtgifter": {
+          "garDuPaVideregaendeEllerGrunnskole": "videregaendeSkole",
+          "erDuLaerling": "ja",
+          "arbeidsgiverDekkerUtgift": "ja",
+          "bekreftelsemottarIkkeSkoleskyss": "true",
+          "lonnGjennomTiltak": "ja"
+        }
       },
       "reise": [
         {
-          "kanDuReiseMedOffentligTransport": "nei",
-          "harDu6KmReisevei": "ja",
-          "reiseAdresse": {
-            "gateadresse": "Osloveien 42",
-            "postnr": "0482",
-            "poststed": "Oslo"
-          },
+          "gateadresse": "EksempelSvar",
+          "postnr": "EksempelSvar",
+          "poststed": "EksempelSvar",
+          "fom": "2025-01-01",
+          "tom": "2025-01-01",
           "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet": {
-            "label": "4",
-            "value": "4"
+            "label": "3",
+            "value": "3"
           },
-          "hvorLangErReiseveienDin": 14,
+          "harDu6KmReisevei": "ja",
+          "hvorLangErReiseveienDin": 30,
+          "kanDuReiseMedOffentligTransport": "nei",
           "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport": {
             "helsemessigeArsaker": false,
             "darligTransporttilbud": true,
             "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks": false,
             "annet": false
           },
-          "kanDuKjoreMedEgenBil": "ja",
-          "utgifterBil": {
-            "harDu6KmReisevei": "ja",
-            "bompenger": 43,
-            "ferge": 0,
-            "piggdekkavgift": 22
-          }
+          "kanKjoreMedEgenBil": "ja",
+          "mottarDuGrunnstonadFraNav": "nei",
+          "hvorLangErReiseveienDinMedBil": 100,
+          "parkering": "ja",
+          "bompenger": 100,
+          "ferge": 100,
+          "piggdekkavgift": 100
         }
       ]
     }
