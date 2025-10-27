@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til daglig reise",
-  "revision" : "170",
+  "revision" : "371",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
     "key" : "personopplysninger",
@@ -52,6 +52,20 @@
           "required" : true
         }
       }, {
+        "key" : "fodselsdato2",
+        "label" : "Fødselsdato (dd.mm.åååå)",
+        "type" : "navDatepicker",
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "customConditional" : "var hide = row.identitet.harDuFodselsnummer === \"nei\";\nshow = !hide;",
+        "validate" : {
+          "required" : true
+        }
+      }, {
         "key" : "adresse",
         "label" : "Adresse",
         "type" : "navAddress",
@@ -61,7 +75,7 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "show = row.identitet.harDuFodselsnummer === \"nei\" || (row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer)",
+        "customConditional" : "show = row.identitet.harDuFodselsnummer === \"nei\" || (row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer);",
         "validate" : {
           "required" : true
         }
@@ -126,7 +140,6 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -184,7 +197,6 @@
           "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
           "isRequired" : false
         },
-        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -195,6 +207,7 @@
         "when" : null,
         "isRequired" : true
       },
+      "customConditional" : "",
       "validate" : {
         "required" : false
       }
@@ -271,7 +284,6 @@
         "when" : "hovedytelse",
         "isRequired" : false
       },
-      "customConditional" : "",
       "validate" : {
         "required" : false
       }
@@ -645,44 +657,46 @@
       "when" : null,
       "isRequired" : true
     },
+    "customConditional" : "",
     "validate" : {
       "required" : false
     }
   }, {
-    "key" : "arbeidsrettetAktivitetPanel",
-    "label" : "Page 5",
+    "key" : "arbeidsrettetAktivitet",
+    "label" : "Page 8",
     "type" : "panel",
     "tree" : false,
     "components" : [ {
       "key" : "aktiviteter",
-      "label" : "Beholder",
+      "label" : "Aktiviteter",
       "type" : "container",
       "tree" : true,
       "components" : [ {
         "key" : "aktiviteterOgMaalgruppe",
-        "label" : "Aktiviteter",
-        "type" : "container",
-        "tree" : true,
-        "components" : [ {
-          "key" : "aktivitet",
-          "label" : "Velg hvilken aktivitet du vil søke om stønad for",
-          "type" : "activities",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
-          },
-          "validate" : {
-            "required" : false
-          }
-        } ],
+        "label" : "Hvilken aktivitet søker du om støtte i forbindelse med?",
+        "type" : "dataFetcher",
         "multiple" : false,
         "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
         },
+        "customConditional" : "",
+        "validate" : {
+          "required" : true
+        }
+      }, {
+        "key" : "alertstripe1",
+        "label" : "",
+        "content" : "<p><span style=\"color:rgb(35,38,42);\">Vi fant dessverre ingen arbeidsrettede aktiviteter som er registrert på deg.</span></p>",
+        "type" : "alertstripe",
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "customConditional" : "show = utils.dataFetcher('aktiviteter.aktiviteterOgMaalgruppe', submission).empty || utils.dataFetcher('aktiviteter.aktiviteterOgMaalgruppe', submission).failure;",
         "validate" : {
           "required" : false
         }
@@ -697,6 +711,9 @@
           "label" : "Utdanning godkjent av Nav",
           "value" : "utdanningGodkjentAvNav"
         }, {
+          "label" : "Jeg er arbeidssøker",
+          "value" : "jegErArbeidssoker"
+        }, {
           "label" : "Har ingen arbeidsrettet aktivitet",
           "value" : "harIngenArbeidsrettetAktivitet"
         } ],
@@ -706,7 +723,7 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "show = data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId === \"ingenAktivitet\";",
+        "customConditional" : "show = utils.dataFetcher('aktiviteter.aktiviteterOgMaalgruppe', submission).fetchDisabled || utils.dataFetcher('aktiviteter.aktiviteterOgMaalgruppe', submission).empty || utils.dataFetcher('aktiviteter.aktiviteterOgMaalgruppe', submission).failure || data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId === \"ingenAktivitet\";",
         "validate" : {
           "required" : true
         }
@@ -717,116 +734,173 @@
         "type" : "alertstripe",
         "multiple" : false,
         "conditional" : {
-          "eq" : "harIngenArbeidsrettetAktivitet",
-          "when" : "aktiviteter.arbeidsrettetAktivitet",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : false
-        }
-      }, {
-        "key" : "mottarLonnGjennomTiltak",
-        "label" : "Mottar du lønn gjennom et tiltak?",
-        "type" : "radiopanel",
-        "values" : [ {
-          "label" : "Ja",
-          "value" : "ja"
-        }, {
-          "label" : "Nei",
-          "value" : "nei"
-        } ],
-        "multiple" : false,
-        "conditional" : {
           "eq" : "",
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "show = (\n(data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.text && \ndata.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId !== \"ingenAktivitet\" &&\n!data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.text.startsWith(\"Ordinær utdanning for enslige forsørgere mv\"))\n|| (data.aktiviteter.arbeidsrettetAktivitet === 'tiltakArbeidsrettetUtredning')\n) \n&& \n(!data.hovedytelse.tiltakspenger && !data.hovedytelse.dagpenger && !data.hovedytelse.kvalifiseringsstonad)\n;\n",
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "alertstripe1",
-        "label" : "",
-        "content" : "<p style=\"margin-left:0px;\">Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende du får avslag.</p><p style=\"margin-left:0px;\">Som lærling kan du få støtte til daglig reise, selv om du mottar lønn.</p>",
-        "type" : "alertstripe",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "ja",
-          "when" : "aktiviteter.mottarLonnGjennomTiltak",
-          "isRequired" : false
-        },
-        "customConditional" : "",
+        "customConditional" : "show = (data.aktiviteter.hvilkenArbeidsrettetAktivitetHarDu === 'harIngenArbeidsrettetAktivitet');",
         "validate" : {
           "required" : false
         }
       }, {
-        "key" : "reiseTilAktivitetsstedHelePerioden",
-        "label" : "Skal du reise til aktivitetsstedet i hele perioden aktiviteten varer?",
-        "type" : "radiopanel",
-        "values" : [ {
-          "label" : "Ja",
-          "value" : "ja"
-        }, {
-          "label" : "Nei",
-          "value" : "nei"
-        } ],
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "customConditional" : "show = (data.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.text && \ndata.aktiviteter.aktiviteterOgMaalgruppe.aktivitet.aktivitetId !== \"ingenAktivitet\")\n;\n",
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "reiseperiode",
-        "label" : "Reiseperiode",
+        "key" : "faktiskeUtgifter",
+        "label" : "Faktiske utgifter",
         "type" : "container",
         "tree" : true,
         "components" : [ {
-          "key" : "htmlelement",
-          "label" : "",
-          "content" : "<p><strong>I hvilken periode skal du reise til aktivitetsstedet?</strong></p>",
-          "type" : "htmlelement",
+          "key" : "garDuPaVideregaendeEllerGrunnskole",
+          "label" : "Hva slags type tiltak går du på?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Videregående skole",
+            "value" : "videregaendeSkole"
+          }, {
+            "label" : "Forberedende opplæring for voksne",
+            "value" : "opplaeringForVoksne"
+          }, {
+            "label" : "Annet tiltak",
+            "value" : "annetTiltak"
+          } ],
           "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe1",
+          "label" : "",
+          "content" : "<p>Siden du går på forberedende opplæring for voksne, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynligvis få avslag.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "opplaeringForVoksne",
+            "when" : "aktiviteter.faktiskeUtgifter.garDuPaVideregaendeEllerGrunnskole",
+            "isRequired" : false
           },
           "validate" : {
             "required" : false
           }
         }, {
-          "key" : "fom",
-          "label" : "Fra og med (dd.mm.åååå)",
-          "type" : "navDatepicker",
+          "key" : "erDuLaerling",
+          "label" : "Er du lærling, lærekandidat, praksisbrevkandidat eller kandidat for fagbrev på jobb?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
           "multiple" : false,
           "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
+            "eq" : "videregaendeSkole",
+            "when" : "aktiviteter.faktiskeUtgifter.garDuPaVideregaendeEllerGrunnskole",
+            "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
         }, {
-          "key" : "tom",
-          "label" : "Til og med (dd.mm.åååå)",
-          "type" : "navDatepicker",
+          "key" : "arbeidsgiverDekkerUtgift",
+          "label" : "Får du dekket reisen til aktivitetsstedet av arbeidsgiveren din?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "aktiviteter.faktiskeUtgifter.erDuLaerling",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe3",
+          "label" : "",
+          "content" : "<p>Siden du får dekket kostnader for daglig reise av arbeidsgiveren, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynligvis få avslag.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "aktiviteter.faktiskeUtgifter.arbeidsgiverDekkerUtgift",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "alertstripe4",
+          "label" : "",
+          "content" : "<p>Du har mest sannsynlig rett til skoleskyss, og da er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke, men det kan hende at du får avslag.</p>",
+          "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
+          "customConditional" : "show = ((utils.getAge('dineOpplysninger.fodselsdato2', submission) <= 24) || (utils.getAge('dineOpplysninger.identitet.fodselsdato', submission) <= 24)) && data.aktiviteter.faktiskeUtgifter.erDuLaerling === 'nei';",
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "bekreftelsemottarIkkeSkoleskyss",
+          "label" : "Jeg bekrefter at jeg ikke mottar og heller ikke har rett på gratis skoleskyss.",
+          "type" : "navCheckbox",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "customConditional" : "show = ((utils.getAge('dineOpplysninger.fodselsdato2', submission) <= 24) || (utils.getAge('dineOpplysninger.identitet.fodselsdato', submission) <= 24)) && data.aktiviteter.faktiskeUtgifter.erDuLaerling === 'nei';",
           "validate" : {
             "required" : true
+          }
+        }, {
+          "key" : "lonnGjennomTiltak",
+          "label" : "Mottar du ordinær lønn gjennom tiltaket?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "customConditional" : "show = (data.hovedytelse.arbeidsavklaringspenger === true || data.hovedytelse.uforetrygd === true || data.hovedytelse.sykepenger === true || data.hovedytelse.mottarIngenPengestotte === true || data.hovedytelse.ingenAvAlternativenePasserForMeg === true) && data.aktiviteter.faktiskeUtgifter.garDuPaVideregaendeEllerGrunnskole === 'annetTiltak';",
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe2",
+          "label" : "",
+          "content" : "<p style=\"margin-left:0px;\">Hvis du mottar lønn i tiltaket kan du fortsatt søke, men det kan hende at du får avslag.</p><p style=\"margin-left:0px;\">Som lærling kan du få støtte selv om du mottar lønn.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "aktiviteter.faktiskeUtgifter.lonnGjennomTiltak",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
           }
         } ],
         "multiple" : false,
@@ -835,7 +909,6 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "show = \n    data.aktiviteter.reiseTilAktivitetsstedHelePerioden === \"nei\"||\n    data.aktiviteter.arbeidsrettetAktivitet === 'tiltakArbeidsrettetUtredning' ||\n    data.aktiviteter.arbeidsrettetAktivitet === 'utdanningGodkjentAvNav' \n",
         "validate" : {
           "required" : false
         }
@@ -846,6 +919,7 @@
         "when" : null,
         "isRequired" : true
       },
+      "customConditional" : "",
       "validate" : {
         "required" : false
       }
@@ -856,12 +930,13 @@
       "when" : null,
       "isRequired" : true
     },
+    "customConditional" : "",
     "validate" : {
       "required" : false
     }
   }, {
-    "key" : "page6",
-    "label" : "Page 6",
+    "key" : "dinReise",
+    "label" : "Page 7",
     "type" : "panel",
     "tree" : false,
     "components" : [ {
@@ -871,24 +946,10 @@
       "tree" : true,
       "components" : [ {
         "key" : "reiseAdresse",
-        "label" : "Hva er adressen til aktiviteten din?",
-        "type" : "container",
-        "tree" : true,
+        "label" : "Skjemagruppe",
+        "type" : "navSkjemagruppe",
+        "tree" : false,
         "components" : [ {
-          "key" : "htmlelement",
-          "label" : "",
-          "content" : "<p><strong>Hva er adressen til aktiviteten din?</strong></p>",
-          "type" : "htmlelement",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
-          },
-          "validate" : {
-            "required" : false
-          }
-        }, {
           "key" : "gateadresse",
           "label" : "Gateadresse",
           "type" : "textfield",
@@ -941,257 +1002,14 @@
           "required" : false
         }
       }, {
-        "key" : "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet",
-        "label" : "Hvor mange dager i uken skal du reise hit?",
-        "type" : "navSelect",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "harDu6KmReisevei",
-        "label" : "Er reiseavstanden mellom der du bor og aktivitetsstedet 6 kilometer eller mer én vei?",
-        "type" : "radiopanel",
-        "values" : [ {
-          "label" : "Ja",
-          "value" : "ja"
-        }, {
-          "label" : "Nei",
-          "value" : "nei"
-        } ],
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "hvorLangErReiseveienDin",
-        "label" : "Hvor lang er reiseveien din?",
-        "type" : "number",
-        "inputType" : "numeric",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "ja",
-          "when" : "reise.harDu6KmReisevei",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
-        "label" : "Har du funksjonsnedsettelse, midlertidig skade eller sykdom som gjør at du må ha transport til aktivitetsstedet?",
-        "type" : "radiopanel",
-        "values" : [ {
-          "label" : "Ja",
-          "value" : "ja"
-        }, {
-          "label" : "Nei",
-          "value" : "nei"
-        } ],
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "nei",
-          "when" : "reise.harDu6KmReisevei",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "alertstripe",
-        "label" : "",
-        "content" : "<p>Hvis reiseavstand er under 6 kilometer dekker vi bare reiseutgifter hvis du kan dokumentere at du har særskilt behov for transport på grunn av funksjonsnedsettelse, midlertidig skade eller sykdom. Hvis dette ikke gjelder deg, vil søknaden normalt bli avslått – men du står fritt til å søke.</p>",
-        "type" : "alertstripe",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "nei",
-          "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : false
-        }
-      }, {
-        "key" : "alertstripe1",
-        "label" : "",
-        "content" : "<p>Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell.</p>",
-        "type" : "alertstripe",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "ja",
-          "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : false
-        }
-      }, {
-        "key" : "kanDuReiseMedOffentligTransport",
-        "label" : "Kan du reise med offentlig transport?",
-        "type" : "radiopanel",
-        "values" : [ {
-          "label" : "Ja",
-          "value" : "ja"
-        }, {
-          "label" : "Nei",
-          "value" : "nei"
-        } ],
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "hvaSlagsTypeBillettMaDuKjope",
-        "label" : "Hva slags type billett må du kjøpe for å reise til aktiviteten din?",
-        "type" : "selectboxes",
-        "values" : [ {
-          "label" : " Enkeltbillett",
-          "value" : "enkeltbillett"
-        }, {
-          "label" : " Ukeskort / 7-dagersbillett",
-          "value" : "ukeskort"
-        }, {
-          "label" : "Månedskort / 30-dagersbillett",
-          "value" : "manedskort"
-        } ],
-        "inputType" : "radio",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "ja",
-          "when" : "reise.kanDuReiseMedOffentligTransport",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "enkeltbilett",
-        "label" : "Hvor mye må du betale for en enkeltbillett?",
-        "type" : "number",
-        "inputType" : "numeric",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "enkeltbillett",
-          "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "syvdagersbilett",
-        "label" : "Hvor mye må du betale for et ukeskort / 7-dagersbillett?",
-        "type" : "number",
-        "inputType" : "numeric",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "ukeskort",
-          "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "manedskort",
-        "label" : "Hvor mye må du betale for et månedskort / 30-dagersbillett?",
-        "type" : "number",
-        "inputType" : "numeric",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "manedskort",
-          "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
-        "label" : "Hvorfor kan du ikke reise med offentlig transport?",
-        "type" : "selectboxes",
-        "values" : [ {
-          "label" : "Helsemessige årsaker",
-          "value" : "helsemessigeArsaker"
-        }, {
-          "label" : "Dårlig transporttilbud",
-          "value" : "darligTransporttilbud"
-        }, {
-          "label" : "Levering/henting i barnehage eller skolefritidsordning  (SFO/AKS)",
-          "value" : "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks"
-        }, {
-          "label" : "Annet",
-          "value" : "annet"
-        } ],
-        "inputType" : "radio",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "nei",
-          "when" : "reise.kanDuReiseMedOffentligTransport",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "alertstripe3",
-        "label" : "",
-        "content" : "<p>Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell.</p>",
-        "type" : "alertstripe",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "helsemessigeArsaker",
-          "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : false
-        }
-      }, {
-        "key" : "kanDuKjoreMedEgenBil",
-        "label" : "Kan du kjøre bil til aktivitetsstedet? ",
-        "type" : "radiopanel",
-        "values" : [ {
-          "label" : "Ja",
-          "value" : "ja"
-        }, {
-          "label" : "Nei",
-          "value" : "nei"
-        } ],
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "nei",
-          "when" : "reise.kanDuReiseMedOffentligTransport",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "utgifterBil",
-        "label" : "Utgifter til kjøring med bil",
-        "type" : "container",
-        "tree" : true,
+        "key" : "reisePeriode",
+        "label" : "Skjemagruppe",
+        "type" : "navSkjemagruppe",
+        "tree" : false,
         "components" : [ {
-          "key" : "htmlelement",
-          "label" : "",
-          "content" : "<h4>Hvilke utgifter har du til kjøring?</h4><p>Du trenger bare fylle inn det som gjelder for din reise.&nbsp;</p>",
-          "type" : "htmlelement",
+          "key" : "fom",
+          "label" : "Fra og med (dd.mm.åååå)",
+          "type" : "navDatepicker",
           "multiple" : false,
           "conditional" : {
             "eq" : "",
@@ -1199,11 +1017,52 @@
             "isRequired" : true
           },
           "validate" : {
-            "required" : false
+            "required" : true
+          }
+        }, {
+          "key" : "tom",
+          "label" : "Til og med (dd.mm.åååå)",
+          "type" : "navDatepicker",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "validate" : {
+            "required" : true
+          }
+        } ],
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "validate" : {
+          "required" : false
+        }
+      }, {
+        "key" : "reiseavstand",
+        "label" : "Skjemagruppe",
+        "type" : "navSkjemagruppe",
+        "tree" : false,
+        "components" : [ {
+          "key" : "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet",
+          "label" : "Hvor mange dager i uken skal du reise hit?",
+          "type" : "navSelect",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "validate" : {
+            "required" : true
           }
         }, {
           "key" : "harDu6KmReisevei",
-          "label" : "Må du betale for parkering på aktivitetsstedet?",
+          "label" : "Er reiseavstanden mellom der du bor og aktivitetsstedet 6 kilometer eller mer én vei?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -1218,7 +1077,481 @@
             "when" : null,
             "isRequired" : true
           },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
+          "label" : "Har du funksjonsnedsettelse, midlertidig skade eller sykdom som gjør at du må ha transport til aktivitetsstedet?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.harDu6KmReisevei",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe",
+          "label" : "",
+          "content" : "<p>Hvis reiseavstand er under 6 kilometer dekker vi bare reiseutgifter hvis du kan dokumentere at du har særskilt behov for transport på grunn av funksjonsnedsettelse, midlertidig skade eller sykdom. Hvis dette ikke gjelder deg, vil søknaden normalt bli avslått – men du står fritt til å søke.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "alertstripe1",
+          "label" : "",
+          "content" : "<p>Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "hvorLangErReiseveienDin",
+          "label" : "Hvor lang er reiseveien din?",
+          "type" : "number",
+          "inputType" : "numeric",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "validate" : {
+            "required" : true
+          }
+        } ],
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "validate" : {
+          "required" : false
+        }
+      }, {
+        "key" : "reisemate",
+        "label" : "Skjemagruppe",
+        "type" : "navSkjemagruppe",
+        "tree" : false,
+        "components" : [ {
+          "key" : "kanDuReiseMedOffentligTransport",
+          "label" : "Kan du reise med offentlig transport?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          }, {
+            "label" : "Jeg må kombinere offentlig transport med kjøring av egen bil",
+            "value" : "kombinertTogBil"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
+          "label" : "Hvorfor kan du ikke reise med offentlig transport?",
+          "type" : "selectboxes",
+          "values" : [ {
+            "label" : "Helsemessige årsaker",
+            "value" : "helsemessigeArsaker"
+          }, {
+            "label" : "Dårlig transporttilbud",
+            "value" : "darligTransporttilbud"
+          }, {
+            "label" : "Levering/henting i barnehage eller skolefritidsordning  (SFO/AKS)",
+            "value" : "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks"
+          }, {
+            "label" : "Annet",
+            "value" : "annet"
+          } ],
+          "inputType" : "radio",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "customConditional" : "show = row.kanDuReiseMedOffentligTransport === 'nei' || row.kanDuReiseMedOffentligTransport === 'kombinertTogBil';",
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe3",
+          "label" : "",
+          "content" : "<p>Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "helsemessigeArsaker",
+            "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "kanKjoreMedEgenBil",
+          "label" : "Kan du kjøre bil til aktivitetsstedet? ",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.kanDuReiseMedOffentligTransport",
+            "isRequired" : false
+          },
           "customConditional" : "",
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe4",
+          "label" : "",
+          "content" : "<p>Vær oppmerksom på at for å få dekket utgifter til bruk av egen bil, må du fylle ut kjørelister. Mer informasjon vil du få i et eventuelt vedtaksbrev, og du kan også lese mer på nav.no.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "reise.kanKjoreMedEgenBil",
+            "isRequired" : false
+          },
+          "customConditional" : "show = row.kanDuKjoreMedEgenBil === 'ja'",
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "mottarDuGrunnstonadFraNav",
+          "label" : "Mottar du grunnstønad fra nav?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "customConditional" : "show = (row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true && row.kanKjoreMedEgenBil === 'ja')\n|| (row.kanDuReiseMedOffentligTransport === 'kombinertTogBil' && row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true);",
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "hvorforIkkeBil",
+          "label" : "Hvorfor kan du ikke kjøre bil til aktivitetsstedet?",
+          "type" : "selectboxes",
+          "values" : [ {
+            "label" : "Helsemessige årsaker",
+            "value" : "helsemessigeArsaker"
+          }, {
+            "label" : "Har ikke bil eller førerkort",
+            "value" : "harIkkeBilEllerForerkort"
+          }, {
+            "label" : "Annet",
+            "value" : "annet"
+          } ],
+          "inputType" : "radio",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.kanKjoreMedEgenBil",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe5",
+          "label" : "",
+          "content" : "<p>Du må dokumentere din helsetilstand med legeerklæring eller annen uttalelse fra helsepersonell.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "customConditional" : "show = row.hvorforIkkeBil === 'helsemessigeArsaker';",
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "reiseMedTaxi",
+          "label" : "Ønsker du å søke om få dekket utgifter til reise med taxi?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.kanKjoreMedEgenBil",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe6",
+          "label" : "",
+          "content" : "<p>Vi kan dekke utgifter til taxi hvis du oppfyller kravene til dette. Hvis du har hatt utgifter til taxi og ønsker å få disse dekket, må du legge ved kvitteringene i søknaden.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "reise.reiseMedTaxi",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "ttKort",
+          "label" : "Har du et TT-kort som du kan bruke til aktiviteter i tiltak?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "helsemessigeArsaker",
+            "when" : "reise.hvorforIkkeBil",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe2",
+          "label" : "",
+          "content" : "<p>Hvis du har et TT-kort er det sannsynlig at du ikke har rett til denne stønaden. Hvis du må betale for egenandel ved bruk av TT-kort, vil dette dekkes av denne stønaden.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "reise.ttKort",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "alertstripe7",
+          "label" : "",
+          "content" : "<p>Du har ikke valgt hvilken type transport du ønsker å søke om. Du må velge om du ønsker å få dekket utgifter til reise med offentlig transport, bil eller taxi.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.reiseMedTaxi",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        } ],
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "validate" : {
+          "required" : false
+        }
+      }, {
+        "key" : "navSkjemagruppe1",
+        "label" : "Skjemagruppe",
+        "type" : "navSkjemagruppe",
+        "tree" : false,
+        "components" : [ {
+          "key" : "hvaSlagsTypeBillettMaDuKjope",
+          "label" : "Hva koster reisen med offentlig transport?",
+          "type" : "selectboxes",
+          "values" : [ {
+            "label" : " Enkeltbillett",
+            "value" : "enkeltbillett"
+          }, {
+            "label" : " Ukeskort / 7-dagersbillett",
+            "value" : "ukeskort"
+          }, {
+            "label" : "Månedskort / 30-dagersbillett",
+            "value" : "manedskort"
+          } ],
+          "inputType" : "radio",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "enkeltbilett",
+          "label" : "Hvor mye koster én enkeltbillett?",
+          "type" : "number",
+          "inputType" : "numeric",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "enkeltbillett",
+            "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "syvdagersbilett",
+          "label" : "Hvor mye koster ett ukeskort / 7-dagersbillett?",
+          "type" : "number",
+          "inputType" : "numeric",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ukeskort",
+            "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "manedskort",
+          "label" : "Hvor mye koster ett månedskort / 30-dagersbillett?",
+          "type" : "number",
+          "inputType" : "numeric",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "manedskort",
+            "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        } ],
+        "multiple" : false,
+        "conditional" : {
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
+        },
+        "customConditional" : "show = row.kanDuReiseMedOffentligTransport === 'ja' || row.kanDuReiseMedOffentligTransport === 'kombinertTogBil';",
+        "validate" : {
+          "required" : false
+        }
+      }, {
+        "key" : "navSkjemagruppe3",
+        "label" : "Skjemagruppe",
+        "type" : "navSkjemagruppe",
+        "tree" : false,
+        "components" : [ {
+          "key" : "hvorSkalDuKjoreMedEgenBil",
+          "label" : "Hvor skal du kjøre med egen bil?",
+          "type" : "selectboxes",
+          "values" : [ {
+            "label" : "Togstasjon",
+            "value" : "togstasjon"
+          }, {
+            "label" : "Busstasjon",
+            "value" : "busstopp"
+          }, {
+            "label" : "Båt/fergekai",
+            "value" : "fergeBatkai"
+          } ],
+          "inputType" : "radio",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "kombinertTogBil",
+            "when" : "reise.kanDuReiseMedOffentligTransport",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "hvorLangErReiseveienDinMedBil",
+          "label" : "Hvor lang er reiseveien din med egen bil?",
+          "type" : "number",
+          "inputType" : "numeric",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "parkering",
+          "label" : "Må du betale for parkering med egen bil?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
           "validate" : {
             "required" : true
           }
@@ -1261,118 +1594,17 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
-          "validate" : {
-            "required" : false
-          }
-        }, {
-          "key" : "alertstripe3",
-          "label" : "",
-          "content" : "<p>Vær oppmerksom på at for å få dekket utgifter til bruk av egen bil, må du fylle ut kjørelister. Mer informasjon vil du få i et eventuelt vedtaksbrev, og du kan også lese mer på nav.no.</p>",
-          "type" : "alertstripe",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
-          },
           "validate" : {
             "required" : false
           }
         } ],
         "multiple" : false,
         "conditional" : {
-          "eq" : "ja",
-          "when" : "reise.kanDuKjoreMedEgenBil",
-          "isRequired" : false
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
         },
-        "validate" : {
-          "required" : false
-        }
-      }, {
-        "key" : "drosje",
-        "label" : "Drosje",
-        "type" : "container",
-        "tree" : true,
-        "components" : [ {
-          "key" : "hvaErViktigsteGrunnerTilAtDuIkkeKanKjoreBil",
-          "label" : "Hvorfor kan du ikke kjøre bil til aktivitetsstedet?",
-          "type" : "selectboxes",
-          "values" : [ {
-            "label" : "Helsemessige årsaker",
-            "value" : "helsemessigeArsaker"
-          }, {
-            "label" : "Har ikke bil eller førerkort",
-            "value" : "darligTransporttilbud"
-          }, {
-            "label" : "Annet",
-            "value" : "annet"
-          } ],
-          "inputType" : "radio",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
-          },
-          "validate" : {
-            "required" : true
-          }
-        }, {
-          "key" : "onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi",
-          "label" : "Ønsker du å søke om få dekket utgifter til reise med taxi?",
-          "type" : "radiopanel",
-          "values" : [ {
-            "label" : "Ja",
-            "value" : "ja"
-          }, {
-            "label" : "Nei",
-            "value" : "nei"
-          } ],
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
-          },
-          "validate" : {
-            "required" : true
-          }
-        } ],
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "nei",
-          "when" : "reise.kanDuKjoreMedEgenBil",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : false
-        }
-      }, {
-        "key" : "alertstripe2",
-        "label" : "",
-        "content" : "<p>Vi kan dekke utgifter til drosje hvis du oppfyller kravene til dette. Hvis du har hatt utgifter til drosje og ønsker å få disse dekket, må du legge ved kvitteringene i søknaden.</p>",
-        "type" : "alertstripe",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "ja",
-          "when" : "reise.drosje.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi1",
-          "isRequired" : false
-        },
-        "validate" : {
-          "required" : false
-        }
-      }, {
-        "key" : "alertstripe4",
-        "label" : "",
-        "content" : "<p>Du må søke om å få dekket utgifter til reise med offentlig transport, bil eller taxi. Nå har du ikke valgt noe.&nbsp;</p>",
-        "type" : "alertstripe",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "nei",
-          "when" : "reise.drosje.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi1",
-          "isRequired" : false
-        },
+        "customConditional" : "show = row.kanDuReiseMedOffentligTransport === 'kombinertTogBil' || row.kanKjoreMedEgenBil === 'ja';",
         "validate" : {
           "required" : false
         }
@@ -1413,7 +1645,7 @@
         "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
         "isRequired" : false
       },
-      "customConditional" : "",
+      "customConditional" : "show = row.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde === 'ja';",
       "validate" : {
         "required" : true
       }
@@ -1427,7 +1659,7 @@
         "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
         "isRequired" : false
       },
-      "customConditional" : "",
+      "customConditional" : "show = row.hvaErViktigsteGrunnerTilAtDuIkkeKanReiseMedOffentligTransport === 'helsemessigeArsaker';",
       "validate" : {
         "required" : true
       }
@@ -1441,7 +1673,7 @@
         "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport1",
         "isRequired" : false
       },
-      "customConditional" : "",
+      "customConditional" : "show = row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport1 === 'helsemessigeArsaker';",
       "validate" : {
         "required" : true
       }
@@ -1455,7 +1687,7 @@
         "when" : "reise.drosje.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi1",
         "isRequired" : false
       },
-      "customConditional" : "",
+      "customConditional" : "show = row.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi === 'ja';",
       "validate" : {
         "required" : true
       }
