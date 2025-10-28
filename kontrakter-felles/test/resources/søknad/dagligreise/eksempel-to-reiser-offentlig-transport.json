@@ -141,8 +141,8 @@
             "ukeskort": true,
             "manedskort": true
           },
-          "enkeltbilett": 100,
-          "syvdagersbilett": 100,
+          "enkeltbillett": 100,
+          "syvdagersbillett": 100,
           "manedskort": 100
         },
         {
@@ -164,8 +164,8 @@
             "ukeskort": true,
             "manedskort": true
           },
-          "enkeltbilett": 44,
-          "syvdagersbilett": 200,
+          "enkeltbillett": 44,
+          "syvdagersbillett": 200,
           "manedskort": 780
 
         }
