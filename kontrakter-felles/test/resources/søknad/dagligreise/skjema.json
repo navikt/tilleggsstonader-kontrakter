@@ -124,7 +124,7 @@
           "required" : false
         }
       }, {
-        "key" : "reiseFraAnnetEnnFolkeregistrertAdr",
+        "key" : "reiseFraFolkeregistrertAdr",
         "label" : "Skal du reise fra din folkeregisterte adresse?",
         "type" : "radiopanel",
         "values" : [ {

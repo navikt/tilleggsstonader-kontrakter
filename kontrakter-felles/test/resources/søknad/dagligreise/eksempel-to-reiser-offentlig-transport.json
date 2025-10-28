@@ -20,7 +20,7 @@
             "value": "NO"
           }
         },
-        "reiseFraAnnetEnnFolkeregistrertAdr": "ja",
+        "reiseFraFolkeregistrertAdr": "ja",
         "adresseJegSkalReiseFra": {
           "gateadresse": "Osloveien 1",
           "postnr": "0482",
