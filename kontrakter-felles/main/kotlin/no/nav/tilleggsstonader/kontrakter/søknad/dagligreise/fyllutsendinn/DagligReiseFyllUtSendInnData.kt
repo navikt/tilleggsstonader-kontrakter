@@ -130,7 +130,7 @@ data class DineOpplysninger(
     val identitet: Identitet,
     val fodselsdato2: String?,
     val adresse: NavAdresse?,
-    val reiseFraAnnetEnnFolkeregistrertAdr: JaNeiType,
+    val reiseFraFolkeregistrertAdr: JaNeiType,
     val adresseJegSkalReiseFra: AdresseJegSkalReiseFra?,
 )
 
