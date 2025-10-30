@@ -24,6 +24,7 @@ data class SkjemaDagligReise(
     val arbeidOgOpphold: ArbeidOgOpphold?,
     val aktiviteter: Aktiviteter,
     val reise: List<Reise>,
+    val metadata: MetadataDagligReise,
 )
 
 data class Reise(
@@ -62,7 +63,7 @@ data class Valgfelt(
 )
 
 data class Aktiviteter(
-    val aktiviteterOgMaalgruppe: AktiviteterOgMålgruppe?,
+    val aktiviteterOgMaalgruppe: Map<String, Boolean>?,
     val arbeidsrettetAktivitet: ArbeidsrettetAktivitetType?,
     val faktiskeUtgifter: DekkesUtgiftenAvAndre,
 )
@@ -73,10 +74,6 @@ data class DekkesUtgiftenAvAndre(
     val arbeidsgiverDekkerUtgift: JaNeiType?,
     val bekreftelsemottarIkkeSkoleskyss: Boolean?,
     val lonnGjennomTiltak: JaNeiType?,
-)
-
-data class AktiviteterOgMålgruppe(
-    val aktivitet: Aktivitet,
 )
 
 data class Aktivitet(
@@ -152,6 +149,28 @@ data class NavAdresse(
 
 data class Identitet(
     val identitetsnummer: String,
+)
+
+data class MetadataDagligReise(
+    val dataFetcher: DataFetcher,
+)
+
+data class DataFetcher(
+    val aktiviteter: AktiviteterMetadata,
+)
+
+data class AktiviteterMetadata(
+    val aktiviteterOgMaalgruppe: AktiviteterOgMålgruppeMetadata,
+)
+
+data class AktiviteterOgMålgruppeMetadata(
+    val data: List<AktivitetMetadata>,
+)
+
+data class AktivitetMetadata(
+    val value: String,
+    val label: String,
+    val type: String?,
 )
 
 enum class HovedytelseType {
