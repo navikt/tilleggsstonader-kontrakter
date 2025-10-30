@@ -155,28 +155,28 @@
           "syvdagersbillett": 200,
           "manedskort": 780
         }
-      ],
-      "metadata": {
-        "dataFetcher": {
-          "aktiviteter": {
-            "aktiviteterOgMaalgruppe": {
-              "data": [
-                {
-                  "value": "134125430",
-                  "label": "Høyere utdanning: 10. september 2025 - 30. juni 2026",
-                  "type": "TILTAK"
-                },
-                {
-                  "value": "134124111",
-                  "label": "Arbeidstrening: 16. juni 2025 - 31. juli 2025",
-                  "type": "TILTAK"
-                },
-                {
-                  "label": "Annet",
-                  "value": "annet"
-                }
-              ]
-            }
+      ]
+    },
+    "metadata": {
+      "dataFetcher": {
+        "aktiviteter": {
+          "aktiviteterOgMaalgruppe": {
+            "data": [
+              {
+                "value": "134125430",
+                "label": "Høyere utdanning: 10. september 2025 - 30. juni 2026",
+                "type": "TILTAK"
+              },
+              {
+                "value": "134124111",
+                "label": "Arbeidstrening: 16. juni 2025 - 31. juli 2025",
+                "type": "TILTAK"
+              },
+              {
+                "label": "Annet",
+                "value": "annet"
+              }
+            ]
           }
         }
       }
