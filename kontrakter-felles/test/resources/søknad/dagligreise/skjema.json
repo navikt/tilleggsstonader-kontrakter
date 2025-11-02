@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til daglig reise",
-  "revision" : "371",
+  "revision" : "399",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
     "key" : "personopplysninger",
@@ -48,20 +48,6 @@
           "when" : null,
           "isRequired" : true
         },
-        "validate" : {
-          "required" : true
-        }
-      }, {
-        "key" : "fodselsdato2",
-        "label" : "Fødselsdato (dd.mm.åååå)",
-        "type" : "navDatepicker",
-        "multiple" : false,
-        "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
-        },
-        "customConditional" : "var hide = row.identitet.harDuFodselsnummer === \"nei\";\nshow = !hide;",
         "validate" : {
           "required" : true
         }
@@ -140,6 +126,7 @@
           "when" : null,
           "isRequired" : true
         },
+        "customConditional" : "",
         "validate" : {
           "required" : true
         }
@@ -156,9 +143,10 @@
           "multiple" : false,
           "conditional" : {
             "eq" : "nei",
-            "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+            "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -170,9 +158,10 @@
           "multiple" : false,
           "conditional" : {
             "eq" : "nei",
-            "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+            "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -184,9 +173,10 @@
           "multiple" : false,
           "conditional" : {
             "eq" : "nei",
-            "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+            "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -194,9 +184,10 @@
         "multiple" : false,
         "conditional" : {
           "eq" : "nei",
-          "when" : "dineOpplysninger.reiseFraAnnetEnnFolkeregistrertAdr",
+          "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
           "isRequired" : false
         },
+        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -749,7 +740,7 @@
         "tree" : true,
         "components" : [ {
           "key" : "garDuPaVideregaendeEllerGrunnskole",
-          "label" : "Hva slags type tiltak går du på?",
+          "label" : "Hva slags type arbeidsrettet aktivitet går du på?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Videregående skole",
@@ -767,6 +758,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -781,6 +773,7 @@
             "when" : "aktiviteter.faktiskeUtgifter.garDuPaVideregaendeEllerGrunnskole",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }
@@ -827,7 +820,7 @@
         }, {
           "key" : "alertstripe3",
           "label" : "",
-          "content" : "<p>Siden du får dekket kostnader for daglig reise av arbeidsgiveren, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynligvis få avslag.</p>",
+          "content" : "<p>Siden du får dekket kostnader for daglig reise av arbeidsgiveren, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.</p>",
           "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
@@ -839,33 +832,74 @@
             "required" : false
           }
         }, {
+          "key" : "under25",
+          "label" : "Er/var du under 25 år ved starten av skoleåret?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "aktiviteter.faktiskeUtgifter.erDuLaerling",
+            "isRequired" : false
+          },
+          "customConditional" : "",
+          "validate" : {
+            "required" : true
+          }
+        }, {
           "key" : "alertstripe4",
           "label" : "",
-          "content" : "<p>Du har mest sannsynlig rett til skoleskyss, og da er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke, men det kan hende at du får avslag.</p>",
+          "content" : "<p>Vi tror at du har rett til gratis skoleskyss fordi du går på videregående skole og er under 25 år hele skoleåret. I det tilfellet vil du ikke være kvalifisert for å motta pengestøtte til daglig reise. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.</p>",
           "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
+            "eq" : "ja",
+            "when" : "aktiviteter.faktiskeUtgifter.under25",
+            "isRequired" : false
           },
-          "customConditional" : "show = ((utils.getAge('dineOpplysninger.fodselsdato2', submission) <= 24) || (utils.getAge('dineOpplysninger.identitet.fodselsdato', submission) <= 24)) && data.aktiviteter.faktiskeUtgifter.erDuLaerling === 'nei';",
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }
         }, {
-          "key" : "bekreftelsemottarIkkeSkoleskyss",
-          "label" : "Jeg bekrefter at jeg ikke mottar og heller ikke har rett på gratis skoleskyss.",
-          "type" : "navCheckbox",
+          "key" : "betalerForReisenTilSkolenSelv",
+          "label" : "Må du betale for reisen til skolen selv?",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          } ],
           "multiple" : false,
           "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
+            "eq" : "ja",
+            "when" : "aktiviteter.faktiskeUtgifter.under25",
+            "isRequired" : false
           },
-          "customConditional" : "show = ((utils.getAge('dineOpplysninger.fodselsdato2', submission) <= 24) || (utils.getAge('dineOpplysninger.identitet.fodselsdato', submission) <= 24)) && data.aktiviteter.faktiskeUtgifter.erDuLaerling === 'nei';",
           "validate" : {
             "required" : true
+          }
+        }, {
+          "key" : "alertstripe",
+          "label" : "",
+          "content" : "<p>Siden du ikke må betale for reisen til skolen selv, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "aktiviteter.faktiskeUtgifter.betalerForReisenTilSkolenSelv",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
           }
         }, {
           "key" : "lonnGjennomTiltak",
@@ -909,6 +943,7 @@
           "when" : null,
           "isRequired" : true
         },
+        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -960,6 +995,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1260,7 +1296,7 @@
           }
         }, {
           "key" : "mottarDuGrunnstonadFraNav",
-          "label" : "Mottar du grunnstønad fra nav?",
+          "label" : "Mottar du grunnstønad til transport eller drift av bil?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -1300,6 +1336,7 @@
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1335,6 +1372,7 @@
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1354,7 +1392,7 @@
           }
         }, {
           "key" : "ttKort",
-          "label" : "Har du et TT-kort som du kan bruke til aktiviteter i tiltak?",
+          "label" : "Har du TT-kort?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -1369,13 +1407,14 @@
             "when" : "reise.hvorforIkkeBil",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
         }, {
           "key" : "alertstripe2",
           "label" : "",
-          "content" : "<p>Hvis du har et TT-kort er det sannsynlig at du ikke har rett til denne stønaden. Hvis du må betale for egenandel ved bruk av TT-kort, vil dette dekkes av denne stønaden.</p>",
+          "content" : "<p>Hvis du har et TT-kort må vi undersøke om du kan bruke til å reise til aktivitetsstedet.</p><p>Hvis du fortsatt må betale for egenandel ved bruk av TT-kort, vil dette dekkes av denne stønaden.</p>",
           "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
@@ -1383,6 +1422,7 @@
             "when" : "reise.ttKort",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }
@@ -1440,7 +1480,7 @@
             "required" : true
           }
         }, {
-          "key" : "enkeltbilett",
+          "key" : "enkeltbillett",
           "label" : "Hvor mye koster én enkeltbillett?",
           "type" : "number",
           "inputType" : "numeric",
@@ -1450,11 +1490,12 @@
             "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
         }, {
-          "key" : "syvdagersbilett",
+          "key" : "syvdagersbillett",
           "label" : "Hvor mye koster ett ukeskort / 7-dagersbillett?",
           "type" : "number",
           "inputType" : "numeric",
@@ -1464,6 +1505,7 @@
             "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1645,7 +1687,7 @@
         "when" : "reise.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde",
         "isRequired" : false
       },
-      "customConditional" : "show = row.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde === 'ja';",
+      "customConditional" : "show = _.some(data.reise, (r) => r.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde === 'ja');",
       "validate" : {
         "required" : true
       }
@@ -1659,7 +1701,7 @@
         "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
         "isRequired" : false
       },
-      "customConditional" : "show = row.hvaErViktigsteGrunnerTilAtDuIkkeKanReiseMedOffentligTransport === 'helsemessigeArsaker';",
+      "customConditional" : "show = _.some(data.reise, (r) => r.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true);",
       "validate" : {
         "required" : true
       }
@@ -1670,10 +1712,10 @@
       "multiple" : false,
       "conditional" : {
         "eq" : "helsemessigeArsaker",
-        "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport1",
+        "when" : "reise.hvorforIkkeBil",
         "isRequired" : false
       },
-      "customConditional" : "show = row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport1 === 'helsemessigeArsaker';",
+      "customConditional" : "show = _.some(data.reise, (r) => r.hvorforIkkeBil.helsemessigeArsaker === true);",
       "validate" : {
         "required" : true
       }
@@ -1684,10 +1726,10 @@
       "multiple" : false,
       "conditional" : {
         "eq" : "ja",
-        "when" : "reise.drosje.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi1",
+        "when" : "reise.reiseMedTaxi",
         "isRequired" : false
       },
-      "customConditional" : "show = row.onskerDuASokeOmFaDekketUtgifterTilReiseMedTaxi === 'ja';",
+      "customConditional" : "show = _.some(data.reise, (r) => r.reiseMedTaxi === 'ja');",
       "validate" : {
         "required" : true
       }

@@ -65,39 +65,16 @@ data class Valgfelt(
 data class Aktiviteter(
     val aktiviteterOgMaalgruppe: Map<String, Boolean>?,
     val arbeidsrettetAktivitet: ArbeidsrettetAktivitetType?,
-    val faktiskeUtgifter: DekkesUtgiftenAvAndre,
+    val faktiskeUtgifter: FaktiskeUtgifter,
 )
 
-data class DekkesUtgiftenAvAndre(
-    val garDuPaVideregaendeEllerGrunnskole: TypeUtdanning,
+data class FaktiskeUtgifter(
+    val garDuPaVideregaendeEllerGrunnskole: GarDuPaVideregaendeEllerGrunnskoleType,
     val erDuLaerling: JaNeiType?,
     val arbeidsgiverDekkerUtgift: JaNeiType?,
+    val under25: JaNeiType?,
     val betalerForReisenTilSkolenSelv: JaNeiType?,
     val lonnGjennomTiltak: JaNeiType?,
-    val under25: JaNeiType?,
-)
-
-data class Aktivitet(
-    val aktivitetId: String,
-    val text: String,
-    val periode: PeriodeAktivitet?,
-    val maalgruppe: Målgruppe?,
-)
-
-data class Målgruppe(
-    val maalgruppetype: String,
-    val gyldighetsperiode: Periode,
-    val maalgruppenavn: String,
-)
-
-data class Periode(
-    val fom: LocalDate,
-    val tom: LocalDate,
-)
-
-data class PeriodeAktivitet(
-    val fom: LocalDate,
-    val tom: LocalDate?,
 )
 
 data class ArbeidOgOpphold(
@@ -115,6 +92,11 @@ data class OppholdUtenforNorge(
     val land: Landvelger,
     val arsakOppholdUtenforNorge: Map<ArsakOppholdUtenforNorgeType, Boolean>,
     val periode: Periode,
+)
+
+data class Periode(
+    val fom: LocalDate,
+    val tom: LocalDate,
 )
 
 data class Landvelger(
@@ -173,6 +155,11 @@ data class AktivitetMetadata(
     val type: String?,
 )
 
+enum class JaNeiType {
+    ja,
+    nei,
+}
+
 enum class HovedytelseType {
     arbeidsavklaringspenger,
     overgangsstonad,
@@ -184,11 +171,6 @@ enum class HovedytelseType {
     kvalifiseringsstonad,
     mottarIngenPengestotte,
     ingenAvAlternativenePasserForMeg,
-}
-
-enum class JaNeiType {
-    ja,
-    nei,
 }
 
 enum class HarPengestotteAnnetLandType {
@@ -214,7 +196,7 @@ enum class ArbeidsrettetAktivitetType {
     harIngenArbeidsrettetAktivitet,
 }
 
-enum class TypeUtdanning {
+enum class GarDuPaVideregaendeEllerGrunnskoleType {
     videregaendeSkole,
     opplaeringForVoksne,
     annetTiltak,

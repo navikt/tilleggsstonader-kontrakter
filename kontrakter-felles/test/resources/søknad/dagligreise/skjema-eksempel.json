@@ -1,185 +1,179 @@
 {
-  "language": "nb-NO",
-  "data": {
-    "data": {
-      "dineOpplysninger": {
-        "fornavn": "Fornavn",
-        "etternavn": "Etternavn",
-        "identitet": {
-          "identitetsnummer": "1111111111"
+  "language" : "nb-NO",
+  "data" : {
+    "data" : {
+      "dineOpplysninger" : {
+        "fornavn" : "Fornavn",
+        "etternavn" : "Etternavn",
+        "identitet" : {
+          "identitetsnummer" : "1111111111"
         },
-        "adresse": {
-          "gyldigFraOgMed": "2004-10-29",
-          "adresse": "En vei 2",
-          "postnummer": "2069",
-          "bySted": "JESSHEIM",
-          "landkode": "NOR",
-          "land": {
-            "label": "Norge",
-            "value": "NO"
+        "adresse" : {
+          "gyldigFraOgMed" : "2004-10-29",
+          "adresse" : "En vei 2",
+          "postnummer" : "2069",
+          "bySted" : "JESSHEIM",
+          "landkode" : "NOR",
+          "land" : {
+            "label" : "Norge",
+            "value" : "NO"
           }
         },
-        "reiseFraFolkeregistrertAdr": "ja",
-        "adresseJegSkalReiseFra": {
-          "gateadresse": "EksempelSvar",
-          "postnr": "EksempelSvar",
-          "poststed": "EksempelSvar"
+        "reiseFraFolkeregistrertAdr" : "ja",
+        "adresseJegSkalReiseFra" : {
+          "gateadresse" : "EksempelSvar",
+          "postnr" : "EksempelSvar",
+          "poststed" : "EksempelSvar"
         }
       },
-      "hovedytelse": {
-        "arbeidsavklaringspenger": true,
-        "overgangsstonad": true,
-        "gjenlevendepensjon": true,
-        "uforetrygd": true,
-        "tiltakspenger": true,
-        "dagpenger": true,
-        "sykepenger": true,
-        "kvalifiseringsstonad": true,
-        "mottarIngenPengestotte": true,
-        "ingenAvAlternativenePasserForMeg": true
+      "hovedytelse" : {
+        "arbeidsavklaringspenger" : true,
+        "overgangsstonad" : true,
+        "gjenlevendepensjon" : true,
+        "uforetrygd" : true,
+        "tiltakspenger" : true,
+        "dagpenger" : true,
+        "sykepenger" : true,
+        "kvalifiseringsstonad" : true,
+        "mottarIngenPengestotte" : true,
+        "ingenAvAlternativenePasserForMeg" : true
       },
-      "arbeidOgOpphold": {
-        "jobberIAnnetLand": "ja",
-        "jobbAnnetLand": {
-          "value": "AF",
-          "label": "Afghanistan"
+      "arbeidOgOpphold" : {
+        "jobberIAnnetLand" : "ja",
+        "jobbAnnetLand" : {
+          "value" : "AF",
+          "label" : "Afghanistan"
         },
-        "harPengestotteAnnetLand": {
-          "sykepenger": true,
-          "pensjon": true,
-          "annenPengestotte": true,
-          "mottarIkkePengestotte": true
+        "harPengestotteAnnetLand" : {
+          "sykepenger" : true,
+          "pensjon" : true,
+          "annenPengestotte" : true,
+          "mottarIkkePengestotte" : true
         },
-        "pengestotteAnnetLand": {
-          "value": "AF",
-          "label": "Afghanistan"
+        "pengestotteAnnetLand" : {
+          "value" : "AF",
+          "label" : "Afghanistan"
         },
-        "harOppholdUtenforNorgeSiste12mnd": "ja",
-        "oppholdUtenforNorgeSiste12mnd": {
-          "land": {
-            "value": "AF",
-            "label": "Afghanistan"
+        "harOppholdUtenforNorgeSiste12mnd" : "ja",
+        "oppholdUtenforNorgeSiste12mnd" : {
+          "land" : {
+            "value" : "AF",
+            "label" : "Afghanistan"
           },
-          "arsakOppholdUtenforNorge": {
-            "jobbet": true,
-            "studerte": true,
-            "fikkMedisinskBehandling": true,
-            "varPaFerie": true,
-            "besokteFamilie": true,
-            "annet": true
+          "arsakOppholdUtenforNorge" : {
+            "jobbet" : true,
+            "studerte" : true,
+            "fikkMedisinskBehandling" : true,
+            "varPaFerie" : true,
+            "besokteFamilie" : true,
+            "annet" : true
           },
-          "periode": {
-            "fom": "2025-01-01",
-            "tom": "2025-01-01"
+          "periode" : {
+            "fom" : "2025-01-01",
+            "tom" : "2025-01-01"
           }
         },
-        "harOppholdUtenforNorgeNeste12mnd": "ja",
-        "oppholdUtenforNorgeNeste12mnd": {
-          "land": {
-            "value": "AF",
-            "label": "Afghanistan"
+        "harOppholdUtenforNorgeNeste12mnd" : "ja",
+        "oppholdUtenforNorgeNeste12mnd" : {
+          "land" : {
+            "value" : "AF",
+            "label" : "Afghanistan"
           },
-          "arsakOppholdUtenforNorge": {
-            "jobbet": true,
-            "studerte": true,
-            "fikkMedisinskBehandling": true,
-            "varPaFerie": true,
-            "besokteFamilie": true,
-            "annet": true
+          "arsakOppholdUtenforNorge" : {
+            "jobbet" : true,
+            "studerte" : true,
+            "fikkMedisinskBehandling" : true,
+            "varPaFerie" : true,
+            "besokteFamilie" : true,
+            "annet" : true
           },
-          "periode": {
-            "fom": "2025-01-01",
-            "tom": "2025-01-01"
+          "periode" : {
+            "fom" : "2025-01-01",
+            "tom" : "2025-01-01"
           }
         }
       },
-      "aktiviteter": {
-        "aktiviteterOgMaalgruppe": {
-          "134124111": false,
-          "134125430": true,
-          "annet": false
+      "aktiviteter" : {
+        "aktiviteterOgMaalgruppe" : {
+          "134124111" : false,
+          "134125430" : true,
+          "annet" : false
         },
-        "arbeidsrettetAktivitet": "tiltakArbeidsrettetUtredning",
-        "faktiskeUtgifter": {
-          "garDuPaVideregaendeEllerGrunnskole": "videregaendeSkole",
-          "erDuLaerling": "ja",
-          "arbeidsgiverDekkerUtgift": "ja",
-          "under25": "ja",
-          "betalerForReisenTilSkolenSelv": "ja",
-          "lonnGjennomTiltak": "ja"
+        "arbeidsrettetAktivitet" : "tiltakArbeidsrettetUtredning",
+        "faktiskeUtgifter" : {
+          "garDuPaVideregaendeEllerGrunnskole" : "videregaendeSkole",
+          "erDuLaerling" : "ja",
+          "arbeidsgiverDekkerUtgift" : "ja",
+          "under25" : "ja",
+          "betalerForReisenTilSkolenSelv" : "ja",
+          "lonnGjennomTiltak" : "ja"
         }
       },
-      "reise": [
-        {
-          "gateadresse": "EksempelSvar",
-          "postnr": "EksempelSvar",
-          "poststed": "EksempelSvar",
-          "fom": "2025-01-01",
-          "tom": "2025-01-01",
-          "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet": {
-            "label": "3",
-            "value": "3"
-          },
-          "harDu6KmReisevei": "ja",
-          "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde": "ja",
-          "hvorLangErReiseveienDin": 100,
-          "kanDuReiseMedOffentligTransport": "ja",
-          "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport": {
-            "helsemessigeArsaker": true,
-            "darligTransporttilbud": true,
-            "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks": true,
-            "annet": true
-          },
-          "kanKjoreMedEgenBil": "ja",
-          "mottarDuGrunnstonadFraNav": "ja",
-          "hvorforIkkeBil": {
-            "helsemessigeArsaker": true,
-            "harIkkeBilEllerForerkort": true,
-            "annet": true
-          },
-          "reiseMedTaxi": "ja",
-          "ttKort": "ja",
-          "hvaSlagsTypeBillettMaDuKjope": {
-            "enkeltbillett": true,
-            "ukeskort": true,
-            "manedskort": true
-          },
-          "enkeltbillett": 100,
-          "syvdagersbillett": 100,
-          "manedskort": 100,
-          "hvorSkalDuKjoreMedEgenBil": {
-            "togstasjon": true,
-            "busstopp": true,
-            "fergeBatkai": true
-          },
-          "hvorLangErReiseveienDinMedBil": 100,
-          "parkering": "ja",
-          "bompenger": 100,
-          "ferge": 100,
-          "piggdekkavgift": 100
-        }
-      ]
+      "reise" : [ {
+        "gateadresse" : "EksempelSvar",
+        "postnr" : "EksempelSvar",
+        "poststed" : "EksempelSvar",
+        "fom" : "2025-01-01",
+        "tom" : "2025-01-01",
+        "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet" : {
+          "label" : "3",
+          "value" : "3"
+        },
+        "harDu6KmReisevei" : "ja",
+        "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde" : "ja",
+        "hvorLangErReiseveienDin" : 100,
+        "kanDuReiseMedOffentligTransport" : "ja",
+        "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport" : {
+          "helsemessigeArsaker" : true,
+          "darligTransporttilbud" : true,
+          "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks" : true,
+          "annet" : true
+        },
+        "kanKjoreMedEgenBil" : "ja",
+        "mottarDuGrunnstonadFraNav" : "ja",
+        "hvorforIkkeBil" : {
+          "helsemessigeArsaker" : true,
+          "harIkkeBilEllerForerkort" : true,
+          "annet" : true
+        },
+        "reiseMedTaxi" : "ja",
+        "ttKort" : "ja",
+        "hvaSlagsTypeBillettMaDuKjope" : {
+          "enkeltbillett" : true,
+          "ukeskort" : true,
+          "manedskort" : true
+        },
+        "enkeltbillett" : 100,
+        "syvdagersbillett" : 100,
+        "manedskort" : 100,
+        "hvorSkalDuKjoreMedEgenBil" : {
+          "togstasjon" : true,
+          "busstopp" : true,
+          "fergeBatkai" : true
+        },
+        "hvorLangErReiseveienDinMedBil" : 100,
+        "parkering" : "ja",
+        "bompenger" : 100,
+        "ferge" : 100,
+        "piggdekkavgift" : 100
+      } ]
     },
-    "metadata": {
-      "dataFetcher": {
-        "aktiviteter": {
-          "aktiviteterOgMaalgruppe": {
-            "data": [
-              {
-                "value": "134125430",
-                "label": "Høyere utdanning: 10. september 2025 - 30. juni 2026",
-                "type": "TILTAK"
-              },
-              {
-                "value": "134124111",
-                "label": "Arbeidstrening: 16. juni 2025 - 31. juli 2025",
-                "type": "TILTAK"
-              },
-              {
-                "label": "Annet",
-                "value": "annet"
-              }
-            ]
+    "metadata" : {
+      "dataFetcher" : {
+        "aktiviteter" : {
+          "aktiviteterOgMaalgruppe" : {
+            "data" : [ {
+              "value" : "134125430",
+              "label" : "Høyere utdanning: 10. september 2025 - 30. juni 2026",
+              "type" : "TILTAK"
+            }, {
+              "value" : "134124111",
+              "label" : "Arbeidstrening: 16. juni 2025 - 31. juli 2025",
+              "type" : "TILTAK"
+            }, {
+              "value" : "annet",
+              "label" : "Annet"
+            } ]
           }
         }
       }
