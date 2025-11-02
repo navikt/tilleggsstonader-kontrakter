@@ -212,7 +212,9 @@ private data class SkjemaKomponent(
      * I tilfelle det er av typen tree (eks container) så inneholder den andre elementer og selve wrappern er påkrevd
      */
     fun erPåkrevd(): Boolean =
-        (conditional.isRequired() && customConditional.isNullOrBlank()) && (validate?.required == true || tree == true)
+        (conditional.isRequired() && customConditional.isNullOrBlank()) &&
+            (validate?.required == true || tree == true || type == "navSkjemagruppe") &&
+            type != "dataFetcher"
 
     /**
      * Brukes som alternativ i tilfelle det er en checkbox-group
@@ -252,10 +254,24 @@ private data class SkjemaKomponent(
 private class JsonStrukturGenerator(
     private val components: List<SkjemaKomponent>,
 ) {
-    fun genererJsonStruktur(): Map<String, Any> =
-        components
-            .flatMap { it.genererJsonStruktur() }
-            .toMap()
+    fun genererJsonStruktur(): Map<String, Any> {
+        val data =
+            components
+                .flatMap { it.genererJsonStruktur() }
+                .toMap()
+        return if (søknad == Søknadstype.BOUTGIFTER) {
+            data
+        } else {
+            mapOf(
+                "language" to "nb-NO",
+                "data" to
+                    mapOf(
+                        "data" to data,
+                        "metadata" to jsonStrukturMetadata(),
+                    ),
+            )
+        }
+    }
 
     private fun SkjemaKomponent.genererJsonStruktur(): List<Pair<String, Any>> {
         require(components != null) {
@@ -275,9 +291,12 @@ private class JsonStrukturGenerator(
     private fun SkjemaKomponent.jsonStruktur(): Any =
         when {
             // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
-            key == "aktiviteterOgMaalgruppe" -> {
-                mapOf("aktivitet" to jsonStrukturAktivitet())
-            }
+            key == "aktiviteterOgMaalgruppe" ->
+                if (søknad == Søknadstype.BOUTGIFTER) {
+                    jsonStrukturAktivitetBoutgifter()
+                } else {
+                    jsonStrukturAktivitet()
+                }
             // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
             type == "landvelger" -> mapOf("value" to "AF", "label" to "Afghanistan")
             type == "navAddress" -> jsonStrukturNavAdresse()
@@ -302,6 +321,37 @@ private class JsonStrukturGenerator(
             else -> error("Har ikke mapping for $this")
         }
 
+    private fun jsonStrukturMetadata(): Map<String, Any> =
+        mapOf(
+            "dataFetcher" to
+                mapOf(
+                    "aktiviteter" to
+                        mapOf(
+                            "aktiviteterOgMaalgruppe" to
+                                mapOf(
+                                    "data" to
+                                        listOf(
+                                            mapOf(
+                                                "value" to "134125430",
+                                                "label" to
+                                                    "Høyere utdanning: 10. september 2025 - 30. juni 2026",
+                                                "type" to "TILTAK",
+                                            ),
+                                            mapOf(
+                                                "value" to "134124111",
+                                                "label" to "Arbeidstrening: 16. juni 2025 - 31. juli 2025",
+                                                "type" to "TILTAK",
+                                            ),
+                                            mapOf(
+                                                "value" to "annet",
+                                                "label" to "Annet",
+                                            ),
+                                        ),
+                                ),
+                        ),
+                ),
+        )
+
     private fun jsonStrukturNavAdresse(): Map<String, Any> =
         mapOf(
             "gyldigFraOgMed" to "2004-10-29",
@@ -316,7 +366,7 @@ private class JsonStrukturGenerator(
                 ),
         )
 
-    private fun jsonStrukturAktivitet(): Map<String, Any> {
+    private fun jsonStrukturAktivitetBoutgifter(): Map<String, Any> {
         val periode = mapOf("fom" to "2025-01-01", "tom" to "2025-01-01")
         return mapOf(
             "aktivitetId" to "123",
@@ -330,10 +380,18 @@ private class JsonStrukturGenerator(
             "text" to "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om",
         )
     }
+
+    private fun jsonStrukturAktivitet(): Map<String, Boolean> =
+        mapOf(
+            "134124111" to false,
+            "134125430" to true,
+            "annet" to false,
+        )
 }
 
 /**
  * Mapper skjema til Kotlin data class for å kunne oppdatere klasser under [Søknadstype.klasse]
+ * Obs metadata for aktivitetskomponenten er ikke en del av dette
  */
 private class KotlinDataClassMapper(
     private val components: List<SkjemaKomponent>,
@@ -347,10 +405,84 @@ private class KotlinDataClassMapper(
     }
 
     private fun generer() {
+        genererMetadataFelter()
         klassedefinisjoner.add(
             Klassedefinisjon(
                 navn = søknad.klasse.simpleName!!,
-                felter = components.flatMap { it.genererDataClasses() },
+                felter = components.flatMap { it.genererDataClasses(true) },
+            ),
+        )
+    }
+
+    private fun genererMetadataFelter() {
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "AktivitetMetadata",
+                felter =
+                    listOf(
+                        Felt(
+                            felt = "value",
+                            type = "String",
+                        ),
+                        Felt(
+                            felt = "label",
+                            type = "String",
+                        ),
+                        Felt(
+                            felt = "type",
+                            type = "String?",
+                        ),
+                    ),
+            ),
+        )
+
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "AktiviteterOgMålgruppeMetadata",
+                felter =
+                    listOf(
+                        Felt(
+                            felt = "data",
+                            type = "List<AktivitetMetadata>",
+                        ),
+                    ),
+            ),
+        )
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "AktiviteterMetadata",
+                felter =
+                    listOf(
+                        Felt(
+                            felt = "aktiviteterOgMaalgruppe",
+                            type = "AktiviteterOgMålgruppeMetadata",
+                        ),
+                    ),
+            ),
+        )
+
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "DataFetcher",
+                felter =
+                    listOf(
+                        Felt(
+                            felt = "aktiviteter",
+                            type = "AktiviteterMetadata",
+                        ),
+                    ),
+            ),
+        )
+        klassedefinisjoner.add(
+            Klassedefinisjon(
+                navn = "MetadataDagligReise",
+                felter =
+                    listOf(
+                        Felt(
+                            felt = "dataFetcher",
+                            type = "DataFetcher",
+                        ),
+                    ),
             ),
         )
     }
@@ -377,7 +509,7 @@ private class KotlinDataClassMapper(
         }
     }
 
-    private fun SkjemaKomponent.genererDataClasses(): List<Felt> {
+    private fun SkjemaKomponent.genererDataClasses(erParentPåkrevd: Boolean): List<Felt> {
         require(components != null) {
             "Feiler mapComponents for $this"
         }
@@ -385,9 +517,14 @@ private class KotlinDataClassMapper(
             .filterNot { it.skalIgnoreres() }
             .flatMap { component ->
                 if (component.type == "navSkjemagruppe") {
-                    component.genererDataClasses()
+                    component.genererDataClasses(component.erPåkrevd())
                 } else {
-                    listOf(Felt(felt = component.key, type = component.felttype(component.mapKlassNavnOgFelter())))
+                    listOf(
+                        Felt(
+                            felt = component.key,
+                            type = component.felttype(component.mapKlassNavnOgFelter(), erParentPåkrevd),
+                        ),
+                    )
                 }
             }
     }
@@ -395,8 +532,12 @@ private class KotlinDataClassMapper(
     private fun SkjemaKomponent.mapKlassNavnOgFelter(): String =
         when {
             key == "aktiviteterOgMaalgruppe" -> {
-                leggTilKlassedefinisjonerForAktiviteterOgMålgruppe()
-                "AktiviteterOgMålgruppe"
+                if (søknad == Søknadstype.BOUTGIFTER) {
+                    leggTilKlassedefinisjonerForAktiviteterOgMålgruppe()
+                    "AktiviteterOgMålgruppe"
+                } else {
+                    "Map<String, Boolean>"
+                }
             }
             // Radiopanel har 1 svar, {key: svar}
             type == "radiopanel" -> {
@@ -436,7 +577,11 @@ private class KotlinDataClassMapper(
                 klassedefinisjoner.add(
                     Klassedefinisjon(
                         navn = "Landvelger",
-                        felter = listOf(Felt(felt = "value", type = "String"), Felt(felt = "label", type = "String")),
+                        felter =
+                            listOf(
+                                Felt(felt = "value", type = "String"),
+                                Felt(felt = "label", type = "String"),
+                            ),
                     ),
                 )
                 "Landvelger"
@@ -519,7 +664,7 @@ private class KotlinDataClassMapper(
     }
 
     private fun SkjemaKomponent.leggTilDataClassMapping(klassenavn: String) {
-        klassedefinisjoner.add(Klassedefinisjon(navn = klassenavn.klassenavn(), felter = genererDataClasses()))
+        klassedefinisjoner.add(Klassedefinisjon(navn = klassenavn.klassenavn(), felter = genererDataClasses(true)))
     }
 
     private fun String.klassenavn(): String =
@@ -531,14 +676,17 @@ private class KotlinDataClassMapper(
             else -> this
         }.storFørsteBokstav()
 
-    private fun SkjemaKomponent.felttype(klassenavn: String): String {
+    private fun SkjemaKomponent.felttype(
+        klassenavn: String,
+        erContainerPåkrevd: Boolean,
+    ): String {
         var type = ""
         if (multiple || this.type == "datagrid") {
             type += "List<${klassenavn.klassenavn()}>"
         } else {
             type += klassenavn.klassenavn()
         }
-        if (!erPåkrevd()) {
+        if (!erPåkrevd() || !erContainerPåkrevd) {
             type += "?"
         }
         return type
