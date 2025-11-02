@@ -105,8 +105,9 @@
           "garDuPaVideregaendeEllerGrunnskole": "videregaendeSkole",
           "erDuLaerling": "ja",
           "arbeidsgiverDekkerUtgift": "ja",
-          "bekreftelsemottarIkkeSkoleskyss": "true",
-          "lonnGjennomTiltak": "ja"
+          "betalerForReisenTilSkolenSelv": "ja",
+          "lonnGjennomTiltak": "ja",
+          "under25": "nei"
         }
       },
       "reise": [

@@ -72,8 +72,9 @@ data class DekkesUtgiftenAvAndre(
     val garDuPaVideregaendeEllerGrunnskole: TypeUtdanning,
     val erDuLaerling: JaNeiType?,
     val arbeidsgiverDekkerUtgift: JaNeiType?,
-    val bekreftelsemottarIkkeSkoleskyss: Boolean?,
+    val betalerForReisenTilSkolenSelv: JaNeiType?,
     val lonnGjennomTiltak: JaNeiType?,
+    val under25: JaNeiType?,
 )
 
 data class Aktivitet(
@@ -125,7 +126,6 @@ data class DineOpplysninger(
     val fornavn: String,
     val etternavn: String,
     val identitet: Identitet,
-    val fodselsdato2: String?,
     val adresse: NavAdresse?,
     val reiseFraFolkeregistrertAdr: JaNeiType,
     val adresseJegSkalReiseFra: AdresseJegSkalReiseFra?,
