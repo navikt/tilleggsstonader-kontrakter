@@ -31,3 +31,14 @@ enum class Stønadstype(
 }
 
 fun Stønadstype.gjelderDagligReise() = Stønadstype.DAGLIG_REISE_TSO == this || Stønadstype.DAGLIG_REISE_TSR == this
+
+fun Stønadstype.behandlendeEnhet() =
+    when (this) {
+        Stønadstype.BARNETILSYN,
+        Stønadstype.LÆREMIDLER,
+        Stønadstype.BOUTGIFTER,
+        Stønadstype.DAGLIG_REISE_TSO,
+        -> Enhet.NAV_ARBEID_OG_YTELSER_TILLEGGSSTØNAD
+        Stønadstype.DAGLIG_REISE_TSR,
+        -> Enhet.NAV_TILTAK_OSLO
+    }
