@@ -37,6 +37,7 @@ private val søknad = Søknadstype.DAGLIG_REISE
  * * Print data classes [printDataClasses] og kopier til [Søknadstype.klasse]
  *
  */
+@Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
         objectMapper
