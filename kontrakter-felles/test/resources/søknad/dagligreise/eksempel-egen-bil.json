@@ -72,12 +72,10 @@
           "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport": {
             "helsemessigeArsaker": false,
             "darligTransporttilbud": true,
-            "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks": false,
-            "annet": false
+            "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks": false
           },
           "kanKjoreMedEgenBil": "ja",
           "mottarDuGrunnstonadFraNav": "nei",
-          "hvorLangErReiseveienDinMedBil": 100,
           "parkering": "ja",
           "bompenger": 100,
           "ferge": 100,

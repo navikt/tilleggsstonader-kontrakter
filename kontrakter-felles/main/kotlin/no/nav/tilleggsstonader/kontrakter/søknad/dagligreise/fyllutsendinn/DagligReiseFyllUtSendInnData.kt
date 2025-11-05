@@ -37,7 +37,7 @@ data class Reise(
     val harDu6KmReisevei: JaNeiType,
     val harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde: JaNeiType?,
     val hvorLangErReiseveienDin: Int,
-    val kanDuReiseMedOffentligTransport: KanDuReiseMedOffentligTransportType,
+    val kanDuReiseMedOffentligTransport: JaNeiType,
     val hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport:
         Map<HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType, Boolean>?,
     val kanKjoreMedEgenBil: JaNeiType?,
@@ -49,8 +49,6 @@ data class Reise(
     val enkeltbillett: Int?,
     val syvdagersbillett: Int?,
     val manedskort: Int?,
-    val hvorSkalDuKjoreMedEgenBil: Map<HvorSkalDuKjoreMedEgenBilType, Boolean>?,
-    val hvorLangErReiseveienDinMedBil: Int?,
     val parkering: JaNeiType?,
     val bompenger: Int?,
     val ferge: Int?,
@@ -69,7 +67,7 @@ data class Aktiviteter(
 )
 
 data class FaktiskeUtgifter(
-    val garDuPaVideregaendeEllerGrunnskole: GarDuPaVideregaendeEllerGrunnskoleType,
+    val garDuPaVideregaendeEllerGrunnskole: GarDuPaVideregaendeEllerGrunnskoleType?,
     val erDuLaerling: JaNeiType?,
     val arbeidsgiverDekkerUtgift: JaNeiType?,
     val under25: JaNeiType?,
@@ -114,9 +112,9 @@ data class DineOpplysninger(
 )
 
 data class AdresseJegSkalReiseFra(
-    val gateadresse: String,
-    val postnr: String,
-    val poststed: String,
+    val gateadresse: String?,
+    val postnr: String?,
+    val poststed: String?,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -202,17 +200,10 @@ enum class GarDuPaVideregaendeEllerGrunnskoleType {
     annetTiltak,
 }
 
-enum class KanDuReiseMedOffentligTransportType {
-    ja,
-    nei,
-    kombinertTogBil,
-}
-
 enum class HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType {
     helsemessigeArsaker,
     darligTransporttilbud,
     leveringHentingIBarnehageEllerSkolefritidsordningSfoAks,
-    annet,
 }
 
 enum class HvorforIkkeBilType {
@@ -225,10 +216,4 @@ enum class HvaSlagsTypeBillettMaDuKjopeType {
     enkeltbillett,
     ukeskort,
     manedskort,
-}
-
-enum class HvorSkalDuKjoreMedEgenBilType {
-    togstasjon,
-    busstopp,
-    fergeBatkai,
 }

@@ -126,8 +126,7 @@
         "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport" : {
           "helsemessigeArsaker" : true,
           "darligTransporttilbud" : true,
-          "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks" : true,
-          "annet" : true
+          "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks" : true
         },
         "kanKjoreMedEgenBil" : "ja",
         "mottarDuGrunnstonadFraNav" : "ja",
@@ -146,12 +145,6 @@
         "enkeltbillett" : 100,
         "syvdagersbillett" : 100,
         "manedskort" : 100,
-        "hvorSkalDuKjoreMedEgenBil" : {
-          "togstasjon" : true,
-          "busstopp" : true,
-          "fergeBatkai" : true
-        },
-        "hvorLangErReiseveienDinMedBil" : 100,
         "parkering" : "ja",
         "bompenger" : 100,
         "ferge" : 100,

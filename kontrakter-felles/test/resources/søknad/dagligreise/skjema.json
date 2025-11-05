@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til daglig reise",
-  "revision" : "399",
+  "revision" : "426",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
     "key" : "personopplysninger",
@@ -260,7 +260,6 @@
         "when" : null,
         "isRequired" : true
       },
-      "customConditional" : "",
       "validate" : {
         "required" : true
       }
@@ -725,11 +724,11 @@
         "type" : "alertstripe",
         "multiple" : false,
         "conditional" : {
-          "eq" : "",
-          "when" : null,
-          "isRequired" : true
+          "eq" : "harIngenArbeidsrettetAktivitet",
+          "when" : "aktiviteter.arbeidsrettetAktivitet",
+          "isRequired" : false
         },
-        "customConditional" : "show = (data.aktiviteter.hvilkenArbeidsrettetAktivitetHarDu === 'harIngenArbeidsrettetAktivitet');",
+        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -758,7 +757,7 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
+          "customConditional" : "show = utils.dataFetcher('aktiviteter.aktiviteterOgMaalgruppe', submission).selected('COUNT') > 0 || data.aktiviteter.arbeidsrettetAktivitet === 'tiltakArbeidsrettetUtredning' || data.aktiviteter.arbeidsrettetAktivitet === 'utdanningGodkjentAvNav';",
           "validate" : {
             "required" : true
           }
@@ -995,7 +994,6 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1034,6 +1032,7 @@
           "when" : null,
           "isRequired" : true
         },
+        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -1133,6 +1132,7 @@
             "when" : "reise.harDu6KmReisevei",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1195,7 +1195,7 @@
         "tree" : false,
         "components" : [ {
           "key" : "kanDuReiseMedOffentligTransport",
-          "label" : "Kan du reise med offentlig transport?",
+          "label" : "Kan du reise med offentlig transport hele veien?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -1203,9 +1203,6 @@
           }, {
             "label" : "Nei",
             "value" : "nei"
-          }, {
-            "label" : "Jeg må kombinere offentlig transport med kjøring av egen bil",
-            "value" : "kombinertTogBil"
           } ],
           "multiple" : false,
           "conditional" : {
@@ -1229,18 +1226,14 @@
           }, {
             "label" : "Levering/henting i barnehage eller skolefritidsordning  (SFO/AKS)",
             "value" : "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks"
-          }, {
-            "label" : "Annet",
-            "value" : "annet"
           } ],
           "inputType" : "radio",
           "multiple" : false,
           "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
+            "eq" : "nei",
+            "when" : "reise.kanDuReiseMedOffentligTransport",
+            "isRequired" : false
           },
-          "customConditional" : "show = row.kanDuReiseMedOffentligTransport === 'nei' || row.kanDuReiseMedOffentligTransport === 'kombinertTogBil';",
           "validate" : {
             "required" : true
           }
@@ -1252,6 +1245,20 @@
           "multiple" : false,
           "conditional" : {
             "eq" : "helsemessigeArsaker",
+            "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "alertstripe8",
+          "label" : "",
+          "content" : "<p>Siden du valgte at du ikke kan reise med offentlig transport grunnet dårlig transporttilbud, kommer vi til å gjøre en vurdering av dette.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "darligTransporttilbud",
             "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
             "isRequired" : false
           },
@@ -1275,7 +1282,6 @@
             "when" : "reise.kanDuReiseMedOffentligTransport",
             "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1347,11 +1353,10 @@
           "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
+            "eq" : "helsemessigeArsaker",
+            "when" : "reise.hvorforIkkeBil",
+            "isRequired" : false
           },
-          "customConditional" : "show = row.hvorforIkkeBil === 'helsemessigeArsaker';",
           "validate" : {
             "required" : false
           }
@@ -1372,7 +1377,6 @@
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1403,18 +1407,18 @@
           } ],
           "multiple" : false,
           "conditional" : {
-            "eq" : "helsemessigeArsaker",
-            "when" : "reise.hvorforIkkeBil",
-            "isRequired" : false
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
           },
-          "customConditional" : "",
+          "customConditional" : "show = (row.hvorforIkkeBil.helsemessigeArsaker === true || row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true || row.harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde === 'ja') && row.reiseMedTaxi === 'ja';",
           "validate" : {
             "required" : true
           }
         }, {
           "key" : "alertstripe2",
           "label" : "",
-          "content" : "<p>Hvis du har et TT-kort må vi undersøke om du kan bruke til å reise til aktivitetsstedet.</p><p>Hvis du fortsatt må betale for egenandel ved bruk av TT-kort, vil dette dekkes av denne stønaden.</p>",
+          "content" : "<p>Hvis du har et TT-kort, må vi vite om du kan benytte TT-kortet til å reise til/ fra aktivitetsstedet. Du må sende inn dokumentasjon som viser hvilke type reiser TT-kortet ditt kan brukes til og hva du eventuelt må betale i egenandel.&nbsp;</p><p style=\"margin-left:0.0px;\">Hvis du betaler egenandel, kan du få pengestøtte til å dekke denne utgiften.</p>",
           "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
@@ -1422,7 +1426,6 @@
             "when" : "reise.ttKort",
             "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : false
           }
@@ -1447,6 +1450,7 @@
           "when" : null,
           "isRequired" : true
         },
+        "customConditional" : "",
         "validate" : {
           "required" : false
         }
@@ -1540,44 +1544,6 @@
         "type" : "navSkjemagruppe",
         "tree" : false,
         "components" : [ {
-          "key" : "hvorSkalDuKjoreMedEgenBil",
-          "label" : "Hvor skal du kjøre med egen bil?",
-          "type" : "selectboxes",
-          "values" : [ {
-            "label" : "Togstasjon",
-            "value" : "togstasjon"
-          }, {
-            "label" : "Busstasjon",
-            "value" : "busstopp"
-          }, {
-            "label" : "Båt/fergekai",
-            "value" : "fergeBatkai"
-          } ],
-          "inputType" : "radio",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "kombinertTogBil",
-            "when" : "reise.kanDuReiseMedOffentligTransport",
-            "isRequired" : false
-          },
-          "validate" : {
-            "required" : true
-          }
-        }, {
-          "key" : "hvorLangErReiseveienDinMedBil",
-          "label" : "Hvor lang er reiseveien din med egen bil?",
-          "type" : "number",
-          "inputType" : "numeric",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "",
-            "when" : null,
-            "isRequired" : true
-          },
-          "validate" : {
-            "required" : true
-          }
-        }, {
           "key" : "parkering",
           "label" : "Må du betale for parkering med egen bil?",
           "type" : "radiopanel",
@@ -1721,6 +1687,20 @@
       }
     }, {
       "key" : "dokumentasjonAvDrosjeKvittering",
+      "label" : "Vedtaket for TT-kort",
+      "type" : "attachment",
+      "multiple" : false,
+      "conditional" : {
+        "eq" : "ja",
+        "when" : "reise.ttKort",
+        "isRequired" : false
+      },
+      "customConditional" : "show = _.some(data.reise, (r) => r.ttKort === 'ja');",
+      "validate" : {
+        "required" : true
+      }
+    }, {
+      "key" : "dokumentasjonAvDrosjeKvittering1",
       "label" : "Kvittering for drosje",
       "type" : "attachment",
       "multiple" : false,

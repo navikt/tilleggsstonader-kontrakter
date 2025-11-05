@@ -6,7 +6,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 object FileUtil {
-    const val SKAL_SKRIVE_TIL_FIL = false
+    const val SKAL_SKRIVE_TIL_FIL = true
 
     fun readFile(filnavn: String): String =
         FileUtil::class.java.classLoader
