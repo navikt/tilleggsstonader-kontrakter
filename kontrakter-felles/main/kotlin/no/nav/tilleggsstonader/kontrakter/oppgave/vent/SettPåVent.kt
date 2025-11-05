@@ -10,6 +10,7 @@ data class SettPåVentRequest(
     val kommentar: String?,
     val frist: LocalDate,
     val beholdOppgave: Boolean,
+    val endretAvEnhetsnr: String?,
 )
 
 data class OppdaterPåVentRequest(
@@ -18,6 +19,7 @@ data class OppdaterPåVentRequest(
     val kommentar: String?,
     val frist: LocalDate,
     val beholdOppgave: Boolean,
+    val endretAvEnhetsnr: String?,
 )
 
 data class SettPåVentResponse(
@@ -30,4 +32,5 @@ data class TaAvVentRequest(
     val kommentar: String?,
     val beholdOppgave: Boolean,
     val frist: LocalDate,
+    val endretAvEnhetsnr: String?,
 )
