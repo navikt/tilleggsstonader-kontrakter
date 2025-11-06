@@ -63,7 +63,7 @@ data class Valgfelt(
 data class Aktiviteter(
     val aktiviteterOgMaalgruppe: Map<String, Boolean>?,
     val arbeidsrettetAktivitet: ArbeidsrettetAktivitetType?,
-    val faktiskeUtgifter: FaktiskeUtgifter,
+    val faktiskeUtgifter: FaktiskeUtgifter?,
 )
 
 data class FaktiskeUtgifter(
