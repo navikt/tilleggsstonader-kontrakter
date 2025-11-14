@@ -36,7 +36,7 @@ data class Reise(
     val hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet: Valgfelt,
     val harDu6KmReisevei: JaNeiType,
     val harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde: JaNeiType?,
-    val hvorLangErReiseveienDin: Int,
+    val hvorLangErReiseveienDin: Double,
     val kanDuReiseMedOffentligTransport: JaNeiType,
     val hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport:
         Map<HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType, Boolean>?,
