@@ -16,6 +16,7 @@ enum class OppgaveMappe(
 ) {
     KLAR("TS-sak Klar"),
     PÅ_VENT("TS-sak På vent", "TS Sak På vent"),
+    TILBAKEKREVING("Tilbakekreving/Feilutbetaling"),
     ;
 
     override fun toString() = navn.joinToString(",")
