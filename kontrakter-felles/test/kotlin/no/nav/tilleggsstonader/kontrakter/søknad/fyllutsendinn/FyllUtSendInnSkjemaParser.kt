@@ -2,14 +2,14 @@ package no.nav.tilleggsstonader.kontrakter.søknad.fyllutsendinn
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
+import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.jsonMapper
 import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
 import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligReise
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.readValue
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -40,9 +40,9 @@ private val søknad = Søknadstype.DAGLIG_REISE
 @Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
-        objectMapper
+        jsonMapper
             .readValue<FyllUtSendInnSkjema>(FileUtil.readFile("søknad/${søknad.søknadMappe}/skjema.json"))
-    private val om = objectMapper.writerWithDefaultPrettyPrinter()
+    private val om = jsonMapper.writerWithDefaultPrettyPrinter()
 
     /**
      * Printer eksempel på hvordan json kan se ut med alle felter
@@ -124,13 +124,13 @@ class FyllUtSendInnSkjemaParser {
             try {
                 val ignorerteKeys = setOf("veiledning")
                 val parsedJson =
-                    objectMapper
+                    jsonMapper
                         .readValue<FyllUtSendInnSkjema>(response.body())
                         .let { it.copy(components = it.components.filterNot { it.key in ignorerteKeys }) }
 
                 FileUtil.skrivTilFil("søknad/${søknad.søknadMappe}/skjema.json", om.writeValueAsString(parsedJson))
                 // Printer hela skjemat i console
-                println(om.writeValueAsString(objectMapper.readTree(response.body())))
+                println(om.writeValueAsString(jsonMapper.readTree(response.body())))
             } catch (e: Exception) {
                 println(response.body())
                 throw e
@@ -291,35 +291,84 @@ private class JsonStrukturGenerator(
     private fun SkjemaKomponent.jsonStruktur(): Any =
         when {
             // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
-            key == "aktiviteterOgMaalgruppe" ->
+            key == "aktiviteterOgMaalgruppe" -> {
                 if (søknad == Søknadstype.BOUTGIFTER) {
                     jsonStrukturAktivitetBoutgifter()
                 } else {
                     jsonStrukturAktivitet()
                 }
+            }
+
             // spesialhåndtering for egen komponent som ikke vises tydelig i skjema.json
-            type == "landvelger" -> mapOf("value" to "AF", "label" to "Afghanistan")
-            type == "navAddress" -> jsonStrukturNavAdresse()
+            type == "landvelger" -> {
+                mapOf("value" to "AF", "label" to "Afghanistan")
+            }
+
+            type == "navAddress" -> {
+                jsonStrukturNavAdresse()
+            }
+
             // Datagrid har en liste med svar {key: [{key: ...}]}
-            type == "datagrid" -> listOf(genererJsonStruktur().toMap())
+            type == "datagrid" -> {
+                listOf(genererJsonStruktur().toMap())
+            }
+
             // container wrapper andre deler
-            type == "container" -> genererJsonStruktur().toMap()
+            type == "container" -> {
+                genererJsonStruktur().toMap()
+            }
+
             // navSkjemagruppe wrapper andre deler
-            type == "navSkjemagruppe" -> components!!.filterNot { it.skalIgnoreres() }.map { it.jsonStruktur() }
+            type == "navSkjemagruppe" -> {
+                components!!.filterNot { it.skalIgnoreres() }.map { it.jsonStruktur() }
+            }
+
             // Radiopanel har 1 svar, {key: svar}
-            type == "radiopanel" -> values!!.first().value
+            type == "radiopanel" -> {
+                values!!.first().value
+            }
+
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
-            type == "selectboxes" -> values!!.associate { it.value to true }
-            inputType == "numeric" -> 100
+            type == "selectboxes" -> {
+                values!!.associate { it.value to true }
+            }
+
+            inputType == "numeric" -> {
+                100
+            }
+
             inputType == "decimal" -> 10.4
-            type == "navDatepicker" -> "2025-01-01"
-            type == "textfield" -> "EksempelSvar"
-            type == "firstName" -> "Fornavn"
-            type == "surname" -> "Etternavn"
-            type == "identity" -> mapOf("identitetsnummer" to "1111111111")
-            type == "navSelect" -> mapOf("label" to "3", "value" to "3")
-            type == "navCheckbox" -> "true"
-            else -> error("Har ikke mapping for $this")
+            type == "navDatepicker" -> {
+                "2025-01-01"
+            }
+
+            type == "textfield" -> {
+                "EksempelSvar"
+            }
+
+            type == "firstName" -> {
+                "Fornavn"
+            }
+
+            type == "surname" -> {
+                "Etternavn"
+            }
+
+            type == "identity" -> {
+                mapOf("identitetsnummer" to "1111111111")
+            }
+
+            type == "navSelect" -> {
+                mapOf("label" to "3", "value" to "3")
+            }
+
+            type == "navCheckbox" -> {
+                "true"
+            }
+
+            else -> {
+                error("Har ikke mapping for $this")
+            }
         }
 
     private fun jsonStrukturMetadata(): Map<String, Any> =
@@ -540,6 +589,7 @@ private class KotlinDataClassMapper(
                     "Map<String, Boolean>"
                 }
             }
+
             // Radiopanel har 1 svar, {key: svar}
             type == "radiopanel" -> {
                 if (values!!.all { it.value == "ja" || it.value == "nei" }) {
@@ -551,6 +601,7 @@ private class KotlinDataClassMapper(
                     type
                 }
             }
+
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
             type == "selectboxes" -> {
                 val type = "${key}Type"
@@ -558,12 +609,26 @@ private class KotlinDataClassMapper(
                 "Map<${type.klassenavn()}, Boolean>"
             }
 
-            inputType == "numeric" -> "Int"
+            inputType == "numeric" -> {
+                "Int"
+            }
+
             inputType == "decimal" -> "Double"
-            type == "textfield" -> "String"
-            type == "navDatepicker" -> "LocalDate"
-            type == "firstName" -> "String"
-            type == "surname" -> "String"
+            type == "textfield" -> {
+                "String"
+            }
+
+            type == "navDatepicker" -> {
+                "LocalDate"
+            }
+
+            type == "firstName" -> {
+                "String"
+            }
+
+            type == "surname" -> {
+                "String"
+            }
             type == "identity" -> {
                 val felter = listOf(Felt(felt = "identitetsnummer", type = "String"))
                 klassedefinisjoner.add(Klassedefinisjon("Identitet", felter))
@@ -604,9 +669,13 @@ private class KotlinDataClassMapper(
                 "Valgfelt"
             }
 
-            type == "navCheckbox" -> "Boolean"
+            type == "navCheckbox" -> {
+                "Boolean"
+            }
 
-            else -> error("Har ikke mapping for $this")
+            else -> {
+                error("Har ikke mapping for $this")
+            }
         }
 
     private fun leggTilKlassedefinisjonNavAdresse() {
