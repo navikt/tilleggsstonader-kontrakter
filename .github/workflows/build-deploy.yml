@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'kontrakter-felles/**'
+      - 'pdl-personhendelser-avro/**'
+      - '.github/workflows/build-deploy.yml'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
   workflow_dispatch:
 
 jobs:
