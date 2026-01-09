@@ -311,6 +311,7 @@ private class JsonStrukturGenerator(
             // Selectboxes har flere svar som har et svar for hvert valg {key: {svar1: boolean, svar2: boolean}}
             type == "selectboxes" -> values!!.associate { it.value to true }
             inputType == "numeric" -> 100
+            inputType == "decimal" -> 10.4
             type == "navDatepicker" -> "2025-01-01"
             type == "textfield" -> "EksempelSvar"
             type == "firstName" -> "Fornavn"
@@ -558,6 +559,7 @@ private class KotlinDataClassMapper(
             }
 
             inputType == "numeric" -> "Int"
+            inputType == "decimal" -> "Double"
             type == "textfield" -> "String"
             type == "navDatepicker" -> "LocalDate"
             type == "firstName" -> "String"

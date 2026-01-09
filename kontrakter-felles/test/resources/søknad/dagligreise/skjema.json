@@ -1,8 +1,68 @@
 {
   "name" : "Pengestøtte til daglig reise",
-  "revision" : "426",
+  "revision" : "445",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
+    "key" : "veiledning1",
+    "label" : "Panel",
+    "type" : "panel",
+    "tree" : false,
+    "components" : [ {
+      "key" : "htmlelement",
+      "label" : "",
+      "content" : "<h4>Du skal sende søknaden på papir hvis du:</h4><ul><li>skal søke på vegne av noen andre (for eksempel som verge, fullmektig eller foresatt)</li><li>er under 18 år</li></ul>",
+      "type" : "htmlelement",
+      "multiple" : false,
+      "conditional" : {
+        "eq" : "",
+        "when" : null,
+        "isRequired" : true
+      },
+      "customConditional" : "show = instance.isSubmissionDigital();",
+      "validate" : {
+        "required" : false
+      }
+    }, {
+      "key" : "jegSokerPaVegneAvMegSelv",
+      "label" : "Jeg er over 18 år og søker på vegne av meg selv.",
+      "type" : "navCheckbox",
+      "multiple" : false,
+      "conditional" : {
+        "eq" : "",
+        "when" : null,
+        "isRequired" : true
+      },
+      "customConditional" : "show = instance.isSubmissionDigital();",
+      "validate" : {
+        "required" : true
+      }
+    }, {
+      "key" : "alertstripe1",
+      "label" : "",
+      "content" : "<h3>Fyller du ut søknaden på vegne av andre eller er under 18 år?</h3><p>Det er dessverre ikke mulig å sende søknad digitalt på vegne av andre. Dette gjelder også barnet ditt. Hvis du skal sende søknad på vegne av andre må du <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.nav.no/fyllut/nav111221b?sub=paper\">sende søknaden i posten (åpnes i ny fane)</a>.</p>",
+      "type" : "alertstripe",
+      "multiple" : false,
+      "conditional" : {
+        "eq" : "",
+        "when" : null,
+        "isRequired" : true
+      },
+      "customConditional" : "show = instance.isSubmissionDigital() && data.jegSokerPaVegneAvMegSelv === false;",
+      "validate" : {
+        "required" : false
+      }
+    } ],
+    "multiple" : false,
+    "conditional" : {
+      "eq" : "",
+      "when" : null,
+      "isRequired" : true
+    },
+    "customConditional" : "show = instance.isSubmissionDigital();",
+    "validate" : {
+      "required" : false
+    }
+  }, {
     "key" : "personopplysninger",
     "label" : "Panel",
     "type" : "panel",
@@ -745,10 +805,10 @@
             "label" : "Videregående skole",
             "value" : "videregaendeSkole"
           }, {
-            "label" : "Forberedende opplæring for voksne",
+            "label" : "Forberedende opplæring for voksne (Tidl. grunnskole for voksne)",
             "value" : "opplaeringForVoksne"
           }, {
-            "label" : "Annet tiltak",
+            "label" : "Annen arbeidsrettet aktivitet med mål om arbeid eller utdanning",
             "value" : "annetTiltak"
           } ],
           "multiple" : false,
@@ -1112,6 +1172,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1168,13 +1229,14 @@
           "key" : "hvorLangErReiseveienDin",
           "label" : "Hvor lang er reiseveien din?",
           "type" : "number",
-          "inputType" : "numeric",
+          "inputType" : "decimal",
           "multiple" : false,
           "conditional" : {
             "eq" : "",
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1296,7 +1358,7 @@
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
-          "customConditional" : "show = row.kanDuKjoreMedEgenBil === 'ja'",
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }

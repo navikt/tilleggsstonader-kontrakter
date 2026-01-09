@@ -2,6 +2,7 @@
   "language" : "nb-NO",
   "data" : {
     "data" : {
+      "jegSokerPaVegneAvMegSelv" : "true",
       "dineOpplysninger" : {
         "fornavn" : "Fornavn",
         "etternavn" : "Etternavn",
@@ -121,7 +122,7 @@
         },
         "harDu6KmReisevei" : "ja",
         "harDuAvMedisinskeArsakerBehovForTransportUavhengigAvReisensLengde" : "ja",
-        "hvorLangErReiseveienDin" : 100,
+        "hvorLangErReiseveienDin" : 10.4,
         "kanDuReiseMedOffentligTransport" : "ja",
         "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport" : {
           "helsemessigeArsaker" : true,
