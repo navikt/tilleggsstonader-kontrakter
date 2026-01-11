@@ -5,7 +5,7 @@ import tools.jackson.databind.json.JsonMapper
 import tools.jackson.module.kotlin.KotlinFeature
 import tools.jackson.module.kotlin.jacksonMapperBuilder
 
-object ObjectMapperProvider {
+object JsonMapperProvider {
     // Uten KotlinPropertyNameAsImplicitName så vil ikke properties som starter med non-ascii bokstaver bli serialisert til json'en
     private fun lagJsonMapper() =
         jacksonMapperBuilder { enable(KotlinFeature.KotlinPropertyNameAsImplicitName) }

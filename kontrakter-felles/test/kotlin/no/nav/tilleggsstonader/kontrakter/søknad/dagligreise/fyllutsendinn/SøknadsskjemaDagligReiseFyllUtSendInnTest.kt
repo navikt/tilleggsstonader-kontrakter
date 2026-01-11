@@ -1,7 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn
 
 import no.nav.tilleggsstonader.kontrakter.FileUtil
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.jsonMapperFailOnUnknownProperties
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapperFailOnUnknownProperties
 import no.nav.tilleggsstonader.kontrakter.søknad.SøknadsskjemaDagligReiseFyllUtSendInn
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow

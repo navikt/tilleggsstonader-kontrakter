@@ -3,7 +3,7 @@ package no.nav.tilleggsstonader.kontrakter.søknad.fyllutsendinn
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import no.nav.tilleggsstonader.kontrakter.FileUtil
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.jsonMapper
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapper
 import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
 import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligReise
 import org.assertj.core.api.Assertions.assertThat

@@ -1,8 +1,8 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.jsonMapper
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.jsonMapperFailOnUnknownProperties
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapper
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapperFailOnUnknownProperties
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Nested
@@ -13,7 +13,7 @@ import tools.jackson.module.kotlin.readValue
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class ObjectMapperProviderTest {
+class JsonMapperProviderTest {
     val expectedJson =
         """
         {

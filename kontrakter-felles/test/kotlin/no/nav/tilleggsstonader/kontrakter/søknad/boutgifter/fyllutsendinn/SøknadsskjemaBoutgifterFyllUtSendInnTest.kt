@@ -1,7 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn
 
 import no.nav.tilleggsstonader.kontrakter.FileUtil
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.jsonMapperFailOnUnknownProperties
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapperFailOnUnknownProperties
 import no.nav.tilleggsstonader.kontrakter.søknad.SøknadsskjemaBoutgifterFyllUtSendInn
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
