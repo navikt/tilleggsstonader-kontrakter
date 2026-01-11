@@ -6,9 +6,9 @@ import tools.jackson.module.kotlin.KotlinFeature
 import tools.jackson.module.kotlin.jacksonMapperBuilder
 
 object ObjectMapperProvider {
-    // Uten KotlinPropertyNameAsImplicitName så vil ikke properties som starter med non-ascii bokstaver blir fjernet
+    // Uten KotlinPropertyNameAsImplicitName så vil ikke properties som starter med non-ascii bokstaver bli serialisert til json'en
     private fun lagJsonMapper() =
-        jacksonMapperBuilder { configure(KotlinFeature.KotlinPropertyNameAsImplicitName, true) }
+        jacksonMapperBuilder { enable(KotlinFeature.KotlinPropertyNameAsImplicitName) }
             .enable(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES)
 
     val jsonMapper: JsonMapper =

@@ -26,7 +26,8 @@ class ObjectMapperProviderTest {
           } ],
           "set" : [ {
             "string" : "verdi"
-          } ]
+          } ],
+          "æøå" : "æøå"
         }
         """.trimIndent()
 
@@ -150,6 +151,7 @@ private data class Root(
     val tidspunkt: LocalDateTime = LocalDateTime.of(2023, 1, 1, 4, 4, 0),
     val liste: List<Element> = listOf(Element()),
     val set: Set<Element> = setOf(Element()),
+    val æøå: String = "æøå",
 )
 
 private data class Element(
