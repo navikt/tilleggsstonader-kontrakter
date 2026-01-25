@@ -1,4 +1,4 @@
-val avroVersion = "1.12.0"
+val avroVersion = "1.12.1"
 val confluentVersion = "8.0.2"
 
 plugins {
