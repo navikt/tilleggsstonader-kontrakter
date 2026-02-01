@@ -1,5 +1,5 @@
-val jacksonVersion = "2.20.0"
-val assertJVersion = "3.27.6"
+val jacksonVersion = "2.21.0"
+val assertJVersion = "3.27.7"
 
 dependencies {
     implementation(platform("com.fasterxml.jackson:jackson-bom:$jacksonVersion"))
