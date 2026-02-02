@@ -1,5 +1,5 @@
-val jacksonVersion = "3.0.3"
-val assertJVersion = "3.27.6"
+val jacksonVersion = "3.0.4"
+val assertJVersion = "3.27.7"
 
 dependencies {
     implementation(platform("tools.jackson:jackson-bom:$jacksonVersion"))

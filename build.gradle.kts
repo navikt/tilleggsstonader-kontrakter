@@ -3,7 +3,7 @@ val javaVersion = JavaLanguageVersion.of(21)
 group = "no.nav.tilleggsstonader.kontrakter"
 
 plugins {
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.3.0"
     `maven-publish`
     `java-library`
     id("com.diffplug.spotless") version "8.0.0"
@@ -52,7 +52,7 @@ subprojects {
     }
 
     dependencies {
-        testImplementation(platform("org.junit:junit-bom:6.0.0"))
+        testImplementation(platform("org.junit:junit-bom:6.0.2"))
         testImplementation("org.junit.jupiter:junit-jupiter")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
