@@ -2,14 +2,14 @@ package no.nav.tilleggsstonader.kontrakter.søknad.fyllutsendinn
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapper
 import no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn.SkjemaBoutgifter
 import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.SkjemaDagligReise
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.readValue
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -40,9 +40,9 @@ private val søknad = Søknadstype.DAGLIG_REISE
 @Disabled
 class FyllUtSendInnSkjemaParser {
     private val skjema =
-        objectMapper
+        jsonMapper
             .readValue<FyllUtSendInnSkjema>(FileUtil.readFile("søknad/${søknad.søknadMappe}/skjema.json"))
-    private val om = objectMapper.writerWithDefaultPrettyPrinter()
+    private val om = jsonMapper.writerWithDefaultPrettyPrinter()
 
     /**
      * Printer eksempel på hvordan json kan se ut med alle felter
@@ -124,13 +124,13 @@ class FyllUtSendInnSkjemaParser {
             try {
                 val ignorerteKeys = setOf("veiledning")
                 val parsedJson =
-                    objectMapper
+                    jsonMapper
                         .readValue<FyllUtSendInnSkjema>(response.body())
                         .let { it.copy(components = it.components.filterNot { it.key in ignorerteKeys }) }
 
                 FileUtil.skrivTilFil("søknad/${søknad.søknadMappe}/skjema.json", om.writeValueAsString(parsedJson))
                 // Printer hela skjemat i console
-                println(om.writeValueAsString(objectMapper.readTree(response.body())))
+                println(om.writeValueAsString(jsonMapper.readTree(response.body())))
             } catch (e: Exception) {
                 println(response.body())
                 throw e

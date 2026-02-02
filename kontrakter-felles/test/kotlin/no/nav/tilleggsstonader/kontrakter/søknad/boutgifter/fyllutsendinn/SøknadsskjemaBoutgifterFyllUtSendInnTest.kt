@@ -1,9 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.boutgifter.fyllutsendinn
 
-import com.fasterxml.jackson.databind.node.ObjectNode
-import com.fasterxml.jackson.module.kotlin.readValue
 import no.nav.tilleggsstonader.kontrakter.FileUtil
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapperFailOnUnknownProperties
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapperFailOnUnknownProperties
 import no.nav.tilleggsstonader.kontrakter.søknad.SøknadsskjemaBoutgifterFyllUtSendInn
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
@@ -12,6 +10,8 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import tools.jackson.databind.node.ObjectNode
+import tools.jackson.module.kotlin.readValue
 import java.nio.file.Path
 
 class SøknadsskjemaBoutgifterFyllUtSendInnTest {
@@ -38,7 +38,7 @@ class SøknadsskjemaBoutgifterFyllUtSendInnTest {
     fun `skal kunne parsea skjema`(filename: Path) {
         val json = FileUtil.readFile("søknad/boutgifter/$filename")
         assertDoesNotThrow {
-            objectMapperFailOnUnknownProperties
+            jsonMapperFailOnUnknownProperties
                 .readValue<SøknadsskjemaBoutgifterFyllUtSendInn>(json)
         }
     }
@@ -50,7 +50,7 @@ class SøknadsskjemaBoutgifterFyllUtSendInnTest {
     fun `skal kunne parsea eksempel fra skjema`() {
         val json = FileUtil.readFile("søknad/boutgifter/skjema-eksempel.json")
         assertDoesNotThrow {
-            objectMapperFailOnUnknownProperties
+            jsonMapperFailOnUnknownProperties
                 .readValue<SkjemaBoutgifter>(json)
         }
     }
@@ -59,57 +59,57 @@ class SøknadsskjemaBoutgifterFyllUtSendInnTest {
     inner class FeilVedManglendeFelter {
         @Test
         fun `skal feile hvis det finnes et ukjent felt med string`() {
-            val jsonMap = objectMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
+            val jsonMap = jsonMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
             jsonMap.put("ukjentFelt", "test")
-            val oppdatertJson = objectMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
+            val oppdatertJson = jsonMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
 
             assertThatThrownBy {
-                objectMapperFailOnUnknownProperties
+                jsonMapperFailOnUnknownProperties
                     .readValue<SøknadsskjemaBoutgifterFyllUtSendInn>(oppdatertJson)
-            }.hasMessageContaining("Unrecognized field \"ukjentFelt\" ")
+            }.hasMessageContaining("Unrecognized property \"ukjentFelt\" ")
         }
 
         @Test
         fun `skal feile hvis det finnes et ukjent felt med objekt`() {
-            val jsonMap = objectMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
+            val jsonMap = jsonMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
             val data = jsonMap.get("data") as ObjectNode
             data.putPOJO("ukjentObjekt", mapOf("felt" to "felt"))
-            val oppdatertJson = objectMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
+            val oppdatertJson = jsonMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
 
             assertThatThrownBy {
-                objectMapperFailOnUnknownProperties
+                jsonMapperFailOnUnknownProperties
                     .readValue<SøknadsskjemaBoutgifterFyllUtSendInn>(oppdatertJson)
-            }.hasMessageContaining("Unrecognized field \"ukjentObjekt\" ")
+            }.hasMessageContaining("Unrecognized property \"ukjentObjekt\" ")
         }
 
         @Test
         fun `objekt uten @JsonIgnore skal feile`() {
-            val jsonMap = objectMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
+            val jsonMap = jsonMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
             val data = jsonMap.get("data") as ObjectNode
             val innerData = data.get("data") as ObjectNode
             val aktiviteter = innerData.get("aktiviteter") as ObjectNode
             aktiviteter.put("ukjentFelt", "test")
-            val oppdatertJson = objectMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
+            val oppdatertJson = jsonMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
 
             assertThat(Aktiviteter::class.annotations).isEmpty()
 
             assertThatThrownBy {
-                objectMapperFailOnUnknownProperties
+                jsonMapperFailOnUnknownProperties
                     .readValue<SøknadsskjemaBoutgifterFyllUtSendInn>(oppdatertJson)
-            }.hasMessageContaining("Unrecognized field \"ukjentFelt\"")
+            }.hasMessageContaining("Unrecognized property \"ukjentFelt\"")
         }
 
         @Test
         fun `ukjent enum value feile`() {
-            val jsonMap = objectMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
+            val jsonMap = jsonMapperFailOnUnknownProperties.readValue<ObjectNode>(json)
             val data = jsonMap.get("data") as ObjectNode
             val innerData = data.get("data") as ObjectNode
             val hovedytelse = innerData.get("hovedytelse") as ObjectNode
             hovedytelse.put("ukjentFelt", "true")
-            val oppdatertJson = objectMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
+            val oppdatertJson = jsonMapperFailOnUnknownProperties.writeValueAsString(jsonMap)
 
             assertThatThrownBy {
-                objectMapperFailOnUnknownProperties
+                jsonMapperFailOnUnknownProperties
                     .readValue<SøknadsskjemaBoutgifterFyllUtSendInn>(oppdatertJson)
             }.hasMessageContaining("Cannot deserialize Map key of type")
         }

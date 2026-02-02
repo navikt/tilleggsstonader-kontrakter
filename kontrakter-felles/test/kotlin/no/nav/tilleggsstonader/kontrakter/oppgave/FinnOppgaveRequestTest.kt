@@ -1,9 +1,9 @@
 package no.nav.tilleggsstonader.kontrakter.oppgave
 
-import com.fasterxml.jackson.module.kotlin.readValue
-import no.nav.tilleggsstonader.kontrakter.felles.ObjectMapperProvider.objectMapper
+import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.readValue
 
 class FinnOppgaveRequestTest {
     @Test
@@ -37,8 +37,8 @@ class FinnOppgaveRequestTest {
             }
             """.trimIndent()
 
-        val request = objectMapper.readValue<FinnOppgaveRequest>(finnOppgaveRequestString)
-        val requestJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(request)
+        val request = jsonMapper.readValue<FinnOppgaveRequest>(finnOppgaveRequestString)
+        val requestJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(request)
 
         assertThat(requestJson).isEqualToIgnoringWhitespace(finnOppgaveRequestString)
     }
@@ -102,8 +102,8 @@ class FinnOppgaveRequestTest {
             }
             """.trimIndent()
 
-        val request = objectMapper.readValue<FinnOppgaveRequest>(finnOppgaveRequestString)
-        val requestJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(request)
+        val request = jsonMapper.readValue<FinnOppgaveRequest>(finnOppgaveRequestString)
+        val requestJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(request)
 
         assertThat(requestJson).isEqualToIgnoringWhitespace(finnOppgaveRequestForventetString)
     }
