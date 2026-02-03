@@ -151,7 +151,7 @@ data class AktiviteterOgMålgruppeMetadata(
 data class AktivitetMetadata(
     val value: String,
     val label: String,
-    val type: String?,
+    val type: String? = null,
 )
 
 enum class JaNeiType {
