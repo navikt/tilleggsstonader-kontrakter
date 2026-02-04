@@ -1,6 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.søknad
 
 data class KjørelisteSkjema(
+    val reiseId: String,
     val reisedagerPerUkeAvsnitt: List<UkeMedReisedager>,
     override val dokumentasjon: List<DokumentasjonFelt>,
 ) : Skjemadata
