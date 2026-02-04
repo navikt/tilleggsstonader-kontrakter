@@ -1,0 +1,77 @@
+{
+  "language": "nb-NO",
+  "data": {
+    "data": {
+      "jegBekrefterAtJegVilSvareSaRiktigSomJegKan": true,
+      "jegSokerPaVegneAvMegSelv": true,
+      "dineOpplysninger": {
+        "fornavn": "navn",
+        "etternavn": "navnesen",
+        "identitet": {
+          "identitetsnummer": "11111111111"
+        },
+        "adresse": {
+          "gyldigFraOgMed": "2026-01-12",
+          "adresse": "Testveien 1",
+          "postnummer": "0190",
+          "bySted": "OSLO",
+          "landkode": "NOR",
+          "land": {
+            "label": "Norge",
+            "value": "NO"
+          }
+        },
+        "reiseFraFolkeregistrertAdr": "ja"
+      },
+      "aktiviteter": {
+        "faktiskeUtgifter": {
+          "garDuPaVideregaendeEllerGrunnskole": "annetTiltak"
+        },
+        "arbeidsrettetAktivitet": "tiltakArbeidsrettetUtredning"
+      },
+      "reise": [
+        {
+          "gateadresse": "Tiltaksgata 1",
+          "postnr": "0978",
+          "poststed": "Oslo",
+          "hvorLangErReiseveienDin": 12,
+          "fom": "2026-01-20",
+          "tom": "2026-02-20",
+          "hvorMangeDagerIUkenSkalDuMoteOppPaAktivitetstedet": {
+            "label": "5",
+            "value": "5"
+          },
+          "harDu6KmReisevei": "ja",
+          "kanDuReiseMedOffentligTransport": "ja",
+          "hvaSlagsTypeBillettMaDuKjope": {
+            "enkeltbillett": false,
+            "ukeskort": false,
+            "manedskort": true
+          },
+          "manedskort": 805
+        }
+      ],
+      "hovedytelse": {
+        "arbeidsavklaringspenger": false,
+        "overgangsstonad": false,
+        "gjenlevendepensjon": false,
+        "uforetrygd": false,
+        "tiltakspenger": false,
+        "dagpenger": false,
+        "sykepenger": false,
+        "kvalifiseringsstonad": true,
+        "mottarIngenPengestotte": false,
+        "ingenAvAlternativenePasserForMeg": false
+      }
+    },
+    "metadata": {
+      "dataFetcher": {
+        "aktiviteter": {
+          "aktiviteterOgMaalgruppe": {
+            "fetchError": true
+          }
+        }
+      }
+    }
+  }
+}

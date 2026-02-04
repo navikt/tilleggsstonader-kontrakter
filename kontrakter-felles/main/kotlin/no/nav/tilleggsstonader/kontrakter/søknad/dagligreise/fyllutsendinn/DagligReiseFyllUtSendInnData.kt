@@ -145,7 +145,8 @@ data class AktiviteterMetadata(
 )
 
 data class AktiviteterOgMålgruppeMetadata(
-    val data: List<AktivitetMetadata>,
+    val data: List<AktivitetMetadata>?,
+    val fetchError: Boolean? = null,
 )
 
 data class AktivitetMetadata(
