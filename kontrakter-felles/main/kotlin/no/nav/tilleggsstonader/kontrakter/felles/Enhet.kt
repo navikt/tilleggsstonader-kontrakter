@@ -8,4 +8,10 @@ enum class Enhet(
     NAV_TILTAK_OSLO("0387"),
     NAV_EGNE_ANSATTE_OSLO("0383"),
     VIKAFOSSEN("2103"),
+    ;
+
+    companion object {
+        fun fraEnhetsnr(enhetsnr: String) =
+            entries.firstOrNull { it.enhetsnr == enhetsnr } ?: error("Finner ikke enhet med enhetsnr $enhetsnr")
+    }
 }
