@@ -41,6 +41,7 @@ data class YtelsePeriode(
     val tom: LocalDate?,
     val aapErFerdigAvklart: Boolean? = null,
     val ensligForsørgerStønadstype: EnsligForsørgerStønadstype? = null,
+    val gjennståendeDagerFraTelleverk: Int? = null,
 ) {
     init {
         if (type != TypeYtelsePeriode.AAP && aapErFerdigAvklart != null) {
