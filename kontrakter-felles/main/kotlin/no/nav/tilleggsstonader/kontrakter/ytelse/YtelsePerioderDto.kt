@@ -41,7 +41,7 @@ data class YtelsePeriode(
     val tom: LocalDate?,
     val aapErFerdigAvklart: Boolean? = null,
     val ensligForsørgerStønadstype: EnsligForsørgerStønadstype? = null,
-    val gjennståendeDagerFraTelleverk: Int? = null,
+    val gjennståendeDagerFraTelleverk: GjennståendeDagerFraTelleverk? = null,
 ) {
     init {
         if (type != TypeYtelsePeriode.AAP && aapErFerdigAvklart != null) {
@@ -52,6 +52,11 @@ data class YtelsePeriode(
         }
     }
 }
+
+data class GjennståendeDagerFraTelleverk(
+    val dato: LocalDate,
+    val antallDager: Int,
+)
 
 enum class TypeYtelsePeriode {
     AAP,
