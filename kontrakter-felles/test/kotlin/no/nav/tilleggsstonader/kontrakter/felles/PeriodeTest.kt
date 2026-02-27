@@ -171,6 +171,57 @@ internal class PeriodeTest {
     }
 
     @Nested
+    inner class AllePerioderErSammenhengende {
+        @Test
+        fun `tom liste returnerer true`() {
+            assertThat(emptyList<Datoperiode>().allePerioderErSammenhengende()).isTrue
+        }
+
+        @Test
+        fun `én periode returnerer true`() {
+            val periode = Datoperiode(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 31))
+            assertThat(listOf(periode).allePerioderErSammenhengende()).isTrue
+        }
+
+        @Test
+        fun `to sammenhengende perioder returnerer true`() {
+            val periode1 = Datoperiode(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 31))
+            val periode2 = Datoperiode(LocalDate.of(2023, 2, 1), LocalDate.of(2023, 2, 28))
+            assertThat(listOf(periode1, periode2).allePerioderErSammenhengende()).isTrue
+        }
+
+        @Test
+        fun `gap mellom to perioder returnerer false`() {
+            val periode1 = Datoperiode(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 31))
+            val periode2 = Datoperiode(LocalDate.of(2023, 3, 1), LocalDate.of(2023, 3, 31))
+            assertThat(listOf(periode1, periode2).allePerioderErSammenhengende()).isFalse
+        }
+
+        @Test
+        fun `tre sammenhengende perioder returnerer true`() {
+            val periode1 = Datoperiode(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 31))
+            val periode2 = Datoperiode(LocalDate.of(2023, 2, 1), LocalDate.of(2023, 2, 28))
+            val periode3 = Datoperiode(LocalDate.of(2023, 3, 1), LocalDate.of(2023, 3, 31))
+            assertThat(listOf(periode1, periode2, periode3).allePerioderErSammenhengende()).isTrue
+        }
+
+        @Test
+        fun `gap i en av tre perioder returnerer false`() {
+            val periode1 = Datoperiode(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 31))
+            val periode2 = Datoperiode(LocalDate.of(2023, 2, 1), LocalDate.of(2023, 2, 28))
+            val periode3 = Datoperiode(LocalDate.of(2023, 4, 1), LocalDate.of(2023, 4, 30))
+            assertThat(listOf(periode1, periode2, periode3).allePerioderErSammenhengende()).isFalse
+        }
+
+        @Test
+        fun `overlappende perioder regnes ikke som sammenhengende`() {
+            val periode1 = Datoperiode(LocalDate.of(2023, 1, 1), LocalDate.of(2023, 2, 15))
+            val periode2 = Datoperiode(LocalDate.of(2023, 2, 1), LocalDate.of(2023, 2, 28))
+            assertThat(listOf(periode1, periode2).allePerioderErSammenhengende()).isFalse
+        }
+    }
+
+    @Nested
     inner class SplitPerMåned {
         private val verdi = 1
 
