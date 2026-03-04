@@ -41,7 +41,8 @@ data class Reise(
     val kanDuReiseMedOffentligTransport: JaNeiType,
     val hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport:
         Map<HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType, Boolean>?,
-    val kanKjoreMedEgenBil: JaNeiType?,
+    val kanKjoreMedEgenBil: KanKjøreMedEgenBilType?,
+    val skalDuBetaleForReisenSelv: JaNeiType?,
     val mottarDuGrunnstonadFraNav: JaNeiType?,
     val hvorforIkkeBil: Map<HvorforIkkeBilType, Boolean>?,
     val reiseMedTaxi: JaNeiType?,
@@ -158,6 +159,12 @@ data class AktivitetMetadata(
 enum class JaNeiType {
     ja,
     nei,
+}
+
+enum class KanKjøreMedEgenBilType {
+    ja,
+    nei,
+    sitterPaMedAndre,
 }
 
 enum class HovedytelseType {
