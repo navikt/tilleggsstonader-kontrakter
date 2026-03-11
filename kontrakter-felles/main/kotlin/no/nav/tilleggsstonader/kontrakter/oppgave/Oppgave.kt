@@ -119,4 +119,5 @@ enum class OppgavePrioritet {
     HOY,
     NORM,
     LAV,
+    KRITISK,
 }
