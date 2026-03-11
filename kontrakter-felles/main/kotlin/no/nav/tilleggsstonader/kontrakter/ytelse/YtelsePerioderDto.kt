@@ -34,6 +34,8 @@ enum class ResultatKilde {
 
 /**
  * @param aapErFerdigAvklart hvis aktivitetsfasen == 'Ferdig avklart', man har då ikke rett på tilsyn barn
+ * @param gjenståendeDagerFraTelleverk for dagpenger er ikke alltid sluttdatoen for vedtaket kjent. Ettersom våre saksbehandlere må sette
+ *   en tom-dato på målgruppe, er det nyttig for dem å vite hvor mange gjenstående dager bruker har rett på ytelsen.
  */
 data class YtelsePeriode(
     val type: TypeYtelsePeriode,
@@ -41,7 +43,7 @@ data class YtelsePeriode(
     val tom: LocalDate?,
     val aapErFerdigAvklart: Boolean? = null,
     val ensligForsørgerStønadstype: EnsligForsørgerStønadstype? = null,
-    val gjennståendeDagerFraTelleverk: GjennståendeDagerFraTelleverk? = null,
+    val gjenståendeDagerFraTelleverk: `GjenståendeDagerFraTelleverk`? = null,
 ) {
     init {
         if (type != TypeYtelsePeriode.AAP && aapErFerdigAvklart != null) {
@@ -53,7 +55,7 @@ data class YtelsePeriode(
     }
 }
 
-data class GjennståendeDagerFraTelleverk(
+data class GjenståendeDagerFraTelleverk(
     val dato: LocalDate,
     val antallDager: Int,
 )
