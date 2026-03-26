@@ -9,7 +9,7 @@ import java.time.LocalDate
  * Feltene i [SkjemaDagligReise] kan genereres automatisk fra [FyllUtSendInnSkjemaParser] i test
  * Felter som ikke er definierte vil feile, for å unngå at man ikke plukker opp nye felter hvis det blir lagt till i søknadsdialogen.
  */
-@JsonIgnoreProperties("state", "_vnote", ignoreUnknown = false)
+@JsonIgnoreProperties("state", "_vnote", "selfDeclaration", ignoreUnknown = false)
 data class DagligReiseFyllUtSendInnData(
     val data: SkjemaDagligReise,
     val metadata: MetadataDagligReise,
