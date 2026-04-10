@@ -109,7 +109,7 @@ data class DineOpplysninger(
     val etternavn: String,
     val identitet: Identitet,
     val adresse: NavAdresse?,
-    val reiseFraFolkeregistrertAdr: JaNeiType,
+    val reiseFraFolkeregistrertAdr: JaNeiType?,
     val adresseJegSkalReiseFra: AdresseJegSkalReiseFra?,
 )
 
