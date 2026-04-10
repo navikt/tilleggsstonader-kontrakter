@@ -130,6 +130,7 @@
           "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks" : true
         },
         "kanKjoreMedEgenBil" : "ja",
+        "skalDuBetaleForReisenSelv" : "ja",
         "mottarDuGrunnstonadFraNav" : "ja",
         "hvorforIkkeBil" : {
           "helsemessigeArsaker" : true,

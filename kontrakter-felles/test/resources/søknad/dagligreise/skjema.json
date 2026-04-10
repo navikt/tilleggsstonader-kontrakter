@@ -1,6 +1,6 @@
 {
-  "name" : "Pengestøtte til daglig reise",
-  "revision" : "445",
+  "name" : "Pengestøtte til daglige reiser",
+  "revision" : "528",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
     "key" : "veiledning1",
@@ -165,7 +165,7 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "show = row.identitet.identitetsnummer && !row.identitet.harDuFodselsnummer",
+        "customConditional" : "show = instance.isSubmissionDigital() && data.dineOpplysninger.adresse.postnummer;",
         "validate" : {
           "required" : false
         }
@@ -186,7 +186,7 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "",
+        "customConditional" : "show = instance.isSubmissionDigital() && data.dineOpplysninger.adresse.postnummer;",
         "validate" : {
           "required" : true
         }
@@ -202,11 +202,11 @@
           "inputType" : "text",
           "multiple" : false,
           "conditional" : {
-            "eq" : "nei",
-            "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
-            "isRequired" : false
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
           },
-          "customConditional" : "",
+          "customConditional" : "show = !data.dineOpplysninger.adresse.postnummer || data.dineOpplysninger.reiseFraFolkeregistrertAdr === 'nei';",
           "validate" : {
             "required" : true
           }
@@ -217,11 +217,11 @@
           "inputType" : "text",
           "multiple" : false,
           "conditional" : {
-            "eq" : "nei",
-            "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
-            "isRequired" : false
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
           },
-          "customConditional" : "",
+          "customConditional" : "show = !data.dineOpplysninger.adresse.postnummer || data.dineOpplysninger.reiseFraFolkeregistrertAdr === 'nei';",
           "validate" : {
             "required" : true
           }
@@ -232,22 +232,22 @@
           "inputType" : "text",
           "multiple" : false,
           "conditional" : {
-            "eq" : "nei",
-            "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
-            "isRequired" : false
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
           },
-          "customConditional" : "",
+          "customConditional" : "show = !data.dineOpplysninger.adresse.postnummer || data.dineOpplysninger.reiseFraFolkeregistrertAdr === 'nei';",
           "validate" : {
             "required" : true
           }
         } ],
         "multiple" : false,
         "conditional" : {
-          "eq" : "nei",
-          "when" : "dineOpplysninger.reiseFraFolkeregistrertAdr",
-          "isRequired" : false
+          "eq" : "",
+          "when" : null,
+          "isRequired" : true
         },
-        "customConditional" : "",
+        "customConditional" : "show = !data.dineOpplysninger.adresse.postnummer || data.dineOpplysninger.reiseFraFolkeregistrertAdr === 'nei';",
         "validate" : {
           "required" : false
         }
@@ -761,9 +761,6 @@
           "label" : "Utdanning godkjent av Nav",
           "value" : "utdanningGodkjentAvNav"
         }, {
-          "label" : "Jeg er arbeidssøker",
-          "value" : "jegErArbeidssoker"
-        }, {
           "label" : "Har ingen arbeidsrettet aktivitet",
           "value" : "harIngenArbeidsrettetAktivitet"
         } ],
@@ -824,7 +821,7 @@
         }, {
           "key" : "alertstripe1",
           "label" : "",
-          "content" : "<p>Siden du går på forberedende opplæring for voksne, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynligvis få avslag.</p>",
+          "content" : "<p>Siden du går på forberedende for opplæring voksne, skal kommunen dekke dine utgifter til skoleskyss hvis reiseavstanden er over 4 km. Du kan søke om pengestøtte til daglige reiser, men du vil mest sannsynlig få avslag</p>",
           "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
@@ -892,7 +889,7 @@
           }
         }, {
           "key" : "under25",
-          "label" : "Er/var du under 25 år ved starten av skoleåret?",
+          "label" : "Er/var du under 25 år det kalenderåret skoleåret starter?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -914,7 +911,7 @@
         }, {
           "key" : "alertstripe4",
           "label" : "",
-          "content" : "<p>Vi tror at du har rett til gratis skoleskyss fordi du går på videregående skole og er under 25 år hele skoleåret. I det tilfellet vil du ikke være kvalifisert for å motta pengestøtte til daglig reise. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.</p>",
+          "content" : "<p>Vi tror du har rett til gratis skoleskyss fordi du går på videregående skole og ikke fyller 25 år i kalenderåret skoleåret starter. Da har du ikke rett til pengestøtte til daglige reiser. Hvis du likevel må betale for reisen til skolen selv, må du bekrefte dette i spørsmålet under.</p>",
           "type" : "alertstripe",
           "multiple" : false,
           "conditional" : {
@@ -943,6 +940,7 @@
             "when" : "aktiviteter.faktiskeUtgifter.under25",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1035,7 +1033,7 @@
     "tree" : false,
     "components" : [ {
       "key" : "reise",
-      "label" : "Adresse og reisemåte",
+      "label" : "Adresse og reisemåte til oppmøtestedet",
       "type" : "datagrid",
       "tree" : true,
       "components" : [ {
@@ -1045,7 +1043,7 @@
         "tree" : false,
         "components" : [ {
           "key" : "gateadresse",
-          "label" : "Gateadresse",
+          "label" : "Gateadresse til oppmøtestedet",
           "type" : "textfield",
           "inputType" : "text",
           "multiple" : false,
@@ -1054,6 +1052,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1124,6 +1123,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1172,7 +1172,6 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1193,7 +1192,6 @@
             "when" : "reise.harDu6KmReisevei",
             "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1236,7 +1234,6 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1276,6 +1273,21 @@
             "required" : true
           }
         }, {
+          "key" : "alertstripe10",
+          "label" : "",
+          "content" : "<p>Hvis du ikke skal reise med offentlig transport, må du søke på <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.nav.no/fyllut/nav111221b?sub=paper\">dette skjemaet (åpnes i ny fane)</a>.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.kanDuReiseMedOffentligTransport",
+            "isRequired" : false
+          },
+          "customConditional" : "",
+          "validate" : {
+            "required" : false
+          }
+        }, {
           "key" : "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
           "label" : "Hvorfor kan du ikke reise med offentlig transport?",
           "type" : "selectboxes",
@@ -1292,10 +1304,11 @@
           "inputType" : "radio",
           "multiple" : false,
           "conditional" : {
-            "eq" : "nei",
-            "when" : "reise.kanDuReiseMedOffentligTransport",
+            "eq" : "ja",
+            "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1329,7 +1342,31 @@
           }
         }, {
           "key" : "kanKjoreMedEgenBil",
-          "label" : "Kan du kjøre bil til aktivitetsstedet? ",
+          "label" : "Skal du kjøre bil til aktivitetsstedet? ",
+          "type" : "radiopanel",
+          "values" : [ {
+            "label" : "Ja",
+            "value" : "ja"
+          }, {
+            "label" : "Nei",
+            "value" : "nei"
+          }, {
+            "label" : "Nei, men jeg sitter på med andre",
+            "value" : "sitterPaMedAndre"
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "helsemessigeArsaker",
+            "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
+            "isRequired" : false
+          },
+          "customConditional" : "",
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "skalDuBetaleForReisenSelv",
+          "label" : "Skal du betale for reisen selv?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -1340,25 +1377,40 @@
           } ],
           "multiple" : false,
           "conditional" : {
-            "eq" : "nei",
-            "when" : "reise.kanDuReiseMedOffentligTransport",
-            "isRequired" : false
-          },
-          "validate" : {
-            "required" : true
-          }
-        }, {
-          "key" : "alertstripe4",
-          "label" : "",
-          "content" : "<p>Vær oppmerksom på at for å få dekket utgifter til bruk av egen bil, må du fylle ut kjørelister. Mer informasjon vil du få i et eventuelt vedtaksbrev, og du kan også lese mer på nav.no.</p>",
-          "type" : "alertstripe",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "ja",
+            "eq" : "sitterPaMedAndre",
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
           "customConditional" : "",
+          "validate" : {
+            "required" : true
+          }
+        }, {
+          "key" : "alertstripe9",
+          "label" : "",
+          "content" : "<p>Siden du ikke må betale for reisen til aktivitetsstedet selv, er ikke du kvalifisert for å motta denne stønaden. Du kan fortsatt søke - men du vil mest sannsynlig få avslag.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "nei",
+            "when" : "reise.skalDuBetaleForReisenSelv",
+            "isRequired" : false
+          },
+          "validate" : {
+            "required" : false
+          }
+        }, {
+          "key" : "alertstripe4",
+          "label" : "",
+          "content" : "<p>Vær oppmerksom på at for å få dekket utgifter til bruk av bil, må du fylle ut kjørelister. Mer informasjon vil du få i et eventuelt vedtaksbrev, og du kan også lese mer på nav.no.</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "",
+            "when" : null,
+            "isRequired" : true
+          },
+          "customConditional" : "show = row.kanKjoreMedEgenBil === 'ja' || row.skalDuBetaleForReisenSelv === 'ja';",
           "validate" : {
             "required" : false
           }
@@ -1404,7 +1456,6 @@
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1556,7 +1607,6 @@
             "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
             "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1571,7 +1621,6 @@
             "when" : "reise.hvaSlagsTypeBillettMaDuKjope",
             "isRequired" : false
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1607,7 +1656,7 @@
         "tree" : false,
         "components" : [ {
           "key" : "parkering",
-          "label" : "Må du betale for parkering med egen bil?",
+          "label" : "Må du betale for parkering med privat bil?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -1622,6 +1671,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
