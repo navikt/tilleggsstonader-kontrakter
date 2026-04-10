@@ -8,6 +8,7 @@ data class KjørelisteSkjema(
 
 data class UkeMedReisedager(
     val ukeLabel: String,
+    val reisedagerLabel: String,
     val spørsmål: String,
     val reisedager: List<Reisedag>,
 )
