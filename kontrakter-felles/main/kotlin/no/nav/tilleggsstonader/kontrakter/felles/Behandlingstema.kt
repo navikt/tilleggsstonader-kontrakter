@@ -11,6 +11,7 @@ enum class Behandlingstema(
     Boutgifter("ab0286"), // Boutgifter tilleggsstønad
     DagligReiseTSO("ab0288"), // Daglig reise TSO
     DagligReiseTSR("ab0287"), // Daglig reise TSR
+    ReiseTilSamlingTSO("ab0294"), // Reise til samling TSO
     Feilutbetaling("ab0006"),
     Tilbakebetaling("ab0007"),
     ;
@@ -31,4 +32,5 @@ fun Stønadstype.tilBehandlingstema(): Behandlingstema =
         Stønadstype.BOUTGIFTER -> Behandlingstema.Boutgifter
         Stønadstype.DAGLIG_REISE_TSO -> Behandlingstema.DagligReiseTSO
         Stønadstype.DAGLIG_REISE_TSR -> Behandlingstema.DagligReiseTSR
+        Stønadstype.REISE_TIL_SAMLING_TSO -> Behandlingstema.ReiseTilSamlingTSO
     }

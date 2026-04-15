@@ -28,6 +28,10 @@ enum class Stønadstype(
         visningsnavn = "støtte til daglige reiser",
         grunnlagAntallMånederBakITiden = 3,
     ),
+    REISE_TIL_SAMLING_TSO(
+        visningsnavn = "reise til samling",
+        grunnlagAntallMånederBakITiden = 6,
+    ),
 }
 
 fun Stønadstype.gjelderDagligReise() = Stønadstype.DAGLIG_REISE_TSO == this || Stønadstype.DAGLIG_REISE_TSR == this
@@ -38,6 +42,7 @@ fun Stønadstype.behandlendeEnhet() =
         Stønadstype.LÆREMIDLER,
         Stønadstype.BOUTGIFTER,
         Stønadstype.DAGLIG_REISE_TSO,
+        Stønadstype.REISE_TIL_SAMLING_TSO,
         -> Enhet.NAV_ARBEID_OG_YTELSER_TILLEGGSSTØNAD
         Stønadstype.DAGLIG_REISE_TSR,
         -> Enhet.NAV_TILTAK_OSLO
