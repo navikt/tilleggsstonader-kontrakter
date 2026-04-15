@@ -133,8 +133,8 @@ val Stønadstype.dokumenttyper: Dokumentyper
                 )
             Stønadstype.REISE_TIL_SAMLING_TSO ->
                 Dokumentyper(
-                    søknad = Dokumenttype.`REISE_TIL_SAMLING_TSO_SØKNAD`,
-                    søknadVedlegg = Dokumenttype.`REISE_TIL_SAMLING_TSO_SØKNAD_VEDLEGG`,
+                    søknad = Dokumenttype.REISE_TIL_SAMLING_TSO_SØKNAD,
+                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_TSO_SØKNAD_VEDLEGG,
                     vedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSO_VEDTAKSBREV,
                     frittståendeBrev = Dokumenttype.REISE_TIL_SAMLING_TSO_FRITTSTÅENDE_BREV,
                     interntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSO_INTERNT_VEDTAK,
