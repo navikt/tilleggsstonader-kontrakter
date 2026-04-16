@@ -88,6 +88,7 @@ enum class Oppgavetype(
     GodkjenneVedtak("GOD_VED"),
     BehandleUnderkjentVedtak("BEH_UND_VED"),
     Fordeling("FDR"),
+    BehandleKjøreliste("BEH_KJORELISTE"),
     BehandleReturpost("RETUR"),
     BehandleSED("BEH_SED"),
     FordelingSED("FDR_SED"),
