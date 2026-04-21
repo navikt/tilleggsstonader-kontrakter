@@ -29,7 +29,7 @@ enum class Stønadstype(
         grunnlagAntallMånederBakITiden = 3,
     ),
     REISE_TIL_SAMLING_TSO(
-        visningsnavn = "reise til samling",
+        visningsnavn = "støtte ved reise til samling",
         grunnlagAntallMånederBakITiden = 6,
     ),
 }
