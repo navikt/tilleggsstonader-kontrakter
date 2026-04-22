@@ -36,6 +36,8 @@ enum class Stønadstype(
 
 fun Stønadstype.gjelderDagligReise() = Stønadstype.DAGLIG_REISE_TSO == this || Stønadstype.DAGLIG_REISE_TSR == this
 
+fun Stønadstype.gjelderReiseTilSamling() = Stønadstype.REISE_TIL_SAMLING_TSO == this
+
 fun Stønadstype.behandlendeEnhet() =
     when (this) {
         Stønadstype.BARNETILSYN,
