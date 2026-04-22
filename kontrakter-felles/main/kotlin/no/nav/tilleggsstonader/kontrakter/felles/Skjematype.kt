@@ -6,6 +6,7 @@ enum class Skjematype {
     SØKNAD_BOUTGIFTER,
     SØKNAD_DAGLIG_REISE,
     DAGLIG_REISE_KJØRELISTE,
+    SØKNAD_REISE_TIL_SAMLING,
     ;
 
     fun erSøknad() = this in listOf(SØKNAD_BARNETILSYN, SØKNAD_LÆREMIDLER, SØKNAD_BOUTGIFTER, SØKNAD_DAGLIG_REISE)
@@ -17,6 +18,7 @@ fun Stønadstype.tilSkjematype() =
         Stønadstype.LÆREMIDLER -> Skjematype.SØKNAD_LÆREMIDLER
         Stønadstype.BOUTGIFTER -> Skjematype.SØKNAD_BOUTGIFTER
         Stønadstype.DAGLIG_REISE_TSO, Stønadstype.DAGLIG_REISE_TSR -> Skjematype.SØKNAD_DAGLIG_REISE
+        Stønadstype.REISE_TIL_SAMLING_TSO -> Skjematype.SØKNAD_REISE_TIL_SAMLING
     }
 
 fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
@@ -30,4 +32,5 @@ fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
         Skjematype.SØKNAD_BOUTGIFTER -> setOf(Stønadstype.BOUTGIFTER)
         Skjematype.SØKNAD_LÆREMIDLER -> setOf(Stønadstype.LÆREMIDLER)
         Skjematype.SØKNAD_BARNETILSYN -> setOf(Stønadstype.BARNETILSYN)
+        Skjematype.SØKNAD_REISE_TIL_SAMLING -> setOf(Stønadstype.REISE_TIL_SAMLING_TSO)
     }

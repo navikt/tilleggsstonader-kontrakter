@@ -22,4 +22,5 @@ fun Stønadstype.tilTema(): Tema =
         Stønadstype.BOUTGIFTER -> Tema.TSO
         Stønadstype.DAGLIG_REISE_TSO -> Tema.TSO
         Stønadstype.DAGLIG_REISE_TSR -> Tema.TSR
+        Stønadstype.REISE_TIL_SAMLING_TSO -> Tema.TSO
     }

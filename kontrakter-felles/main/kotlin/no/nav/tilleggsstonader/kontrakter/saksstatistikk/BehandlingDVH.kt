@@ -174,6 +174,7 @@ enum class SakYtelseDvh {
     TILLEGG_BOUTGIFTER, // For læremidler er kun "Tilleggsstønad" relevant
     TILLEGG_DAGLIG_REISE_TSO,
     TILLEGG_DAGLIG_REISE_TSR,
+    TILLEGG_REISE_TIL_SAMLING_TSO,
     ;
 
     companion object {
@@ -185,6 +186,7 @@ enum class SakYtelseDvh {
                 Stønadstype.BOUTGIFTER -> TILLEGG_BOUTGIFTER
                 Stønadstype.DAGLIG_REISE_TSO -> TILLEGG_DAGLIG_REISE_TSO
                 Stønadstype.DAGLIG_REISE_TSR -> TILLEGG_DAGLIG_REISE_TSR
+                Stønadstype.REISE_TIL_SAMLING_TSO -> TILLEGG_REISE_TIL_SAMLING_TSO
             }
     }
 }

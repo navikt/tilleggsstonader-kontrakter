@@ -15,6 +15,8 @@ enum class DokumentBrevkode(
     DAGLIG_REISE_GAMMEL("NAV 11-12.21B"),
     DAGLIG_REISE_KJØRELISTE("NAV 11-12.24"),
     DAGLIG_REISE_KJØRELISTE_GAMMEL("NAV 11-12.24B"),
+    REISE_TIL_SAMLING("NAV 11-12.17"),
+    REISE_TIL_SAMLING_GAMMEL("NAV 11-12.17B"),
     ;
 
     companion object {

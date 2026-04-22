@@ -47,7 +47,7 @@ enum class Rettighet(
     LÆREMIDLER_ARBEIDSSSØKERE("TSRLMIDLER", "Læremidler arbeidssøkere", Stønadstype.LÆREMIDLER),
     LÆREMIDLER("TSOLMIDLER", "Læremidler tilleggsstønad", Stønadstype.LÆREMIDLER),
     REISE_OBLIGATORISK_SAMLING_ARBEIDSSSØKERE("TSRREISOBL", "Reise til obligatorisk samling arbeidssøkere"),
-    REISE_OBLIGATORISK_SAMLING("TSOREISOBL", "Reise til obligatorisk samling tilleggsstønad"),
+    REISE_OBLIGATORISK_SAMLING("TSOREISOBL", "Reise til obligatorisk samling tilleggsstønad", Stønadstype.REISE_TIL_SAMLING_TSO),
     REISE_AKTIVITET_HJEMREISE_ARBEIDSSSØKERE(
         "TSRREISAKT",
         "Reise ved start/slutt aktivitet og hjemreiser arbeidssøkere",
