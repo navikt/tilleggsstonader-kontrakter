@@ -20,7 +20,6 @@ data class DagligReiseFyllUtSendInnData(
  */
 @JsonIgnoreProperties("jegBekrefterAtJegVilSvareSaRiktigSomJegKan", ignoreUnknown = false)
 data class SkjemaDagligReise(
-    val jegSokerPaVegneAvMegSelv: Boolean,
     val dineOpplysninger: DineOpplysninger,
     val hovedytelse: Map<HovedytelseType, Boolean>,
     val arbeidOgOpphold: ArbeidOgOpphold?,
