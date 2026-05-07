@@ -10,5 +10,5 @@ data class SøknadsskjemaBoutgifterFyllUtSendInn(
     val language: String,
     val data: BoutgifterFyllUtSendInnData,
     override val dokumentasjon: List<DokumentasjonFelt> = emptyList(),
-    val formRevision: Int?
+    val formRevision: Int?,
 ) : Skjemadata
