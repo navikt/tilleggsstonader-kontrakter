@@ -10,4 +10,5 @@ data class SøknadsskjemaDagligReiseFyllUtSendInn(
     val language: String,
     val data: DagligReiseFyllUtSendInnData,
     override val dokumentasjon: List<DokumentasjonFelt> = emptyList(),
+    val formRevision: Int?,
 ) : Skjemadata
