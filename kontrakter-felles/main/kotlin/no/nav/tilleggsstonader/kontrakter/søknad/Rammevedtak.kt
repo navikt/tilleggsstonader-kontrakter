@@ -9,6 +9,7 @@ data class RammevedtakDto(
     val aktivitetsadresse: String,
     val aktivitetsnavn: String,
     val uker: List<RammevedtakUkeDto>,
+    val helligdager: List<HelligdagDto>
 )
 
 data class RammevedtakUkeDto(
@@ -18,4 +19,9 @@ data class RammevedtakUkeDto(
     val reisedagerPerUke: Int,
     val innsendtDato: LocalDate?,
     val kanSendeInnKjøreliste: Boolean,
+)
+
+data class HelligdagDto(
+    val dato: LocalDate,
+    val navn: String,
 )
