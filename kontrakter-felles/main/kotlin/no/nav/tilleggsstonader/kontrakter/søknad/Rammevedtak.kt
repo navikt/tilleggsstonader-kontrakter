@@ -9,7 +9,7 @@ data class RammevedtakDto(
     val aktivitetsadresse: String,
     val aktivitetsnavn: String,
     val uker: List<RammevedtakUkeDto>,
-    val helligdager: List<HelligdagDto>
+    val helligdager: List<HelligdagDto>,
 )
 
 data class RammevedtakUkeDto(
