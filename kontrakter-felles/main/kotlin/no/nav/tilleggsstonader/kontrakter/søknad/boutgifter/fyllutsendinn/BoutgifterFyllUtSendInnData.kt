@@ -9,7 +9,7 @@ import java.time.LocalDate
  * Feltene i [SkjemaBoutgifter] kan genereres automatisk fra [FyllUtSendInnSkjemaParser] i test
  * Felter som ikke er definierte vil feile, for å unngå at man ikke plukker opp nye felter hvis det blir lagt till i søknadsdialogen.
  */
-@JsonIgnoreProperties("metadata", "state", "_vnote", ignoreUnknown = false)
+@JsonIgnoreProperties("metadata", "state", "_vnote", "attachments", ignoreUnknown = false)
 data class BoutgifterFyllUtSendInnData(
     val data: SkjemaBoutgifter,
 )
