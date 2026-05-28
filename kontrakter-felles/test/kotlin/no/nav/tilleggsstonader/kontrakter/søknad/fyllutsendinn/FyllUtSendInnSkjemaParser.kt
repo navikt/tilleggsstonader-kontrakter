@@ -25,7 +25,7 @@ private val søknad = Søknadstype.DAGLIG_REISE
 
 /**
  * Hjelpemetoder for å hente skjema-struktur og generere eksempel-json og kotlin data-klasser
- * for å enkelt kunne oppdatere kontrakter
+ * for å enkelt kunne oppdatere kontrakter.
  *
  * skjema.json inneholder FyllUt-skjemabygger-skjemaet fra
  * https://skjemadelingslenke.ekstern.dev.nav.no/fyllut/api/forms/nav111219
