@@ -20,4 +20,7 @@ enum class Vedleggstype(
     UTGIFTER_LÆREMIDLER("Dokumentasjon på utgifter til læremidler"),
 
     PARKERINGSUTGIFT("Dokumentasjon på parkeringsutgift"),
+
+    // Reise til samling
+    BEKREFTELSE_SAMLINGER("Bekreftelse på samlinger"),
 }
