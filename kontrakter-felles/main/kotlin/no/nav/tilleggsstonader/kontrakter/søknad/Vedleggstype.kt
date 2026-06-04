@@ -6,7 +6,6 @@ package no.nav.tilleggsstonader.kontrakter.søknad
 enum class Vedleggstype(
     val tittel: String,
 ) {
-    // TODO språk?
     // Pass av barn
     UTGIFTER_PASS_SFO_AKS_BARNEHAGE("Dokumentasjon av utgifter for pass av barn"),
     UTGIFTER_PASS_PRIVAT("Dokumentasjon av utgifter til privat pass"),
@@ -23,4 +22,5 @@ enum class Vedleggstype(
 
     // Reise til samling
     BEKREFTELSE_SAMLINGER("Bekreftelse på samlinger"),
+    UTGIFTER_OFFENTLIG_TRANSPORT("Dokumentasjon på utgifter til offentlig transport"),
 }
