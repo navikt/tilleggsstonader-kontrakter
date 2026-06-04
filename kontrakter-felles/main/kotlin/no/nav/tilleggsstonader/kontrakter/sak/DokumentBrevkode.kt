@@ -32,6 +32,7 @@ enum class DokumentBrevkode(
             BOUTGIFTER -> Skjematype.SØKNAD_BOUTGIFTER
             DAGLIG_REISE -> Skjematype.SØKNAD_DAGLIG_REISE
             DAGLIG_REISE_KJØRELISTE -> Skjematype.DAGLIG_REISE_KJØRELISTE
+            REISE_TIL_SAMLING -> Skjematype.SØKNAD_REISE_TIL_SAMLING
             else -> null
         }
 }
