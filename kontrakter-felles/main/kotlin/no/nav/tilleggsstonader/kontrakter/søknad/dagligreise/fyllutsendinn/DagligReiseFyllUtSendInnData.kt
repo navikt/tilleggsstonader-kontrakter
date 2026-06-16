@@ -40,6 +40,9 @@ data class Reise(
     val kanDuReiseMedOffentligTransport: JaNeiType,
     val hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport:
         Map<HvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransportType, Boolean>?,
+    // Vi tok i mot noen søknader hvor apinøkkelen for LeveringHentingIBarnehage var "container".
+    // Kan oppdateres til noe annet på et rolig tidspunkt etter vi har håndtert de vi har mottatt til nå
+    val container: LeveringHentingIBarnehage?,
     val kanKjoreMedEgenBil: KanKjøreMedEgenBilType?,
     val skalDuBetaleForReisenSelv: JaNeiType?,
     val mottarDuGrunnstonadFraNav: JaNeiType?,
@@ -126,6 +129,11 @@ data class NavAdresse(
     val bySted: String?,
     val landkode: String?,
     val land: Landvelger?,
+)
+
+data class LeveringHentingIBarnehage(
+    val gateadressenHvorDuHenterEllerLevererBarn: String,
+    val postnummerHvorDuHenterEllerLevererBarn: String,
 )
 
 data class Identitet(

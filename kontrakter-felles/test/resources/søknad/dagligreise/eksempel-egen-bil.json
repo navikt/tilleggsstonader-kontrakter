@@ -75,6 +75,10 @@
             "darligTransporttilbud": true,
             "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks": false
           },
+          "container" : {
+            "gateadressenHvorDuHenterEllerLevererBarn" : "EksempelAdresse",
+            "postnummerHvorDuHenterEllerLevererBarn" : "0126"
+          },
           "kanKjoreMedEgenBil": "ja",
           "mottarDuGrunnstonadFraNav": "nei",
           "parkering": "ja",

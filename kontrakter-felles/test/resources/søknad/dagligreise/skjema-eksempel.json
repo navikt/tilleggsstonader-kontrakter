@@ -1,6 +1,5 @@
 {
   "language" : "nb-NO",
-  "formRevision": 1,
   "data" : {
     "data" : {
       "dineOpplysninger" : {
@@ -128,6 +127,10 @@
           "helsemessigeArsaker" : true,
           "darligTransporttilbud" : true,
           "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks" : true
+        },
+        "container" : {
+          "gateadressenHvorDuHenterEllerLevererBarn" : "EksempelSvar",
+          "postnummerHvorDuHenterEllerLevererBarn" : "EksempelSvar"
         },
         "kanKjoreMedEgenBil" : "ja",
         "skalDuBetaleForReisenSelv" : "ja",

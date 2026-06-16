@@ -1,6 +1,6 @@
 {
   "name" : "Pengestøtte til daglige reiser",
-  "revision" : "536",
+  "revision" : "558",
   "skjemanummer" : "NAV 11-12.21",
   "components" : [ {
     "key" : "personopplysninger",
@@ -994,7 +994,8 @@
           },
           "customConditional" : "",
           "validate" : {
-            "required" : true
+            "required" : true,
+            "custom" : "valid = (input !== data.dineOpplysninger.adresse.adresse) ? true : 'Du har skrevet inn din egen hjemadresse. I dette feltet skal du fylle inn adressen til aktivitetens oppmøtested.';"
           }
         }, {
           "key" : "postnr",
@@ -1092,6 +1093,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1194,7 +1196,7 @@
         "tree" : false,
         "components" : [ {
           "key" : "kanDuReiseMedOffentligTransport",
-          "label" : "Kan du reise med offentlig transport hele veien?",
+          "label" : "Kan du reise med offentlig transport?",
           "type" : "radiopanel",
           "values" : [ {
             "label" : "Ja",
@@ -1209,23 +1211,9 @@
             "when" : null,
             "isRequired" : true
           },
-          "validate" : {
-            "required" : true
-          }
-        }, {
-          "key" : "alertstripe10",
-          "label" : "",
-          "content" : "<p>Hvis du ikke skal reise med offentlig transport, må du søke på <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.nav.no/fyllut/nav111221b?sub=paper\">dette skjemaet (åpnes i ny fane)</a>.</p>",
-          "type" : "alertstripe",
-          "multiple" : false,
-          "conditional" : {
-            "eq" : "nei",
-            "when" : "reise.kanDuReiseMedOffentligTransport",
-            "isRequired" : false
-          },
           "customConditional" : "",
           "validate" : {
-            "required" : false
+            "required" : true
           }
         }, {
           "key" : "hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
@@ -1244,13 +1232,57 @@
           "inputType" : "radio",
           "multiple" : false,
           "conditional" : {
-            "eq" : "ja",
-            "when" : "reise.kanKjoreMedEgenBil",
+            "eq" : "nei",
+            "when" : "reise.kanDuReiseMedOffentligTransport",
             "isRequired" : false
           },
           "customConditional" : "",
           "validate" : {
             "required" : true
+          }
+        }, {
+          "key" : "container",
+          "label" : "Levering/henting i barnehage eller skolefritidsordning  (SFO/AKS)",
+          "type" : "container",
+          "tree" : true,
+          "components" : [ {
+            "key" : "gateadressenHvorDuHenterEllerLevererBarn",
+            "label" : "Gateadressen hvor du henter eller leverer barn",
+            "type" : "textfield",
+            "inputType" : "text",
+            "multiple" : false,
+            "conditional" : {
+              "eq" : "",
+              "when" : null,
+              "isRequired" : true
+            },
+            "validate" : {
+              "required" : true
+            }
+          }, {
+            "key" : "postnummerHvorDuHenterEllerLevererBarn",
+            "label" : "Postnummer hvor du henter eller leverer barn",
+            "type" : "textfield",
+            "inputType" : "text",
+            "multiple" : false,
+            "conditional" : {
+              "eq" : "",
+              "when" : null,
+              "isRequired" : true
+            },
+            "validate" : {
+              "required" : true
+            }
+          } ],
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks",
+            "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
+            "isRequired" : false
+          },
+          "customConditional" : "",
+          "validate" : {
+            "required" : false
           }
         }, {
           "key" : "alertstripe3",
@@ -1277,6 +1309,7 @@
             "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }
@@ -1296,8 +1329,8 @@
           } ],
           "multiple" : false,
           "conditional" : {
-            "eq" : "helsemessigeArsaker",
-            "when" : "reise.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport",
+            "eq" : "nei",
+            "when" : "reise.kanDuReiseMedOffentligTransport",
             "isRequired" : false
           },
           "customConditional" : "",
@@ -1371,7 +1404,7 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "show = (row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true && row.kanKjoreMedEgenBil === 'ja')\n|| (row.kanDuReiseMedOffentligTransport === 'kombinertTogBil' && row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true);",
+          "customConditional" : "show = (row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true && row.kanKjoreMedEgenBil === 'ja')\n|| (row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true && row.kanKjoreMedEgenBil === 'sitterPaMedAndre')\n|| (row.kanDuReiseMedOffentligTransport === 'kombinertTogBil' && row.hvaErViktigsteGrunnerTilAtDuIkkeKanBrukeOffentligTransport.helsemessigeArsaker === true);",
           "validate" : {
             "required" : true
           }
@@ -1396,6 +1429,7 @@
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
           }
@@ -1430,8 +1464,24 @@
             "when" : "reise.kanKjoreMedEgenBil",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : true
+          }
+        }, {
+          "key" : "alertstripe10",
+          "label" : "",
+          "content" : "<p>Hvis du ønsker å få dekket utgifter for å reise med taxi, må du søke på <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://www.nav.no/fyllut/nav111221b?sub=paper\">dette skjemaet i stedet (åpnes i ny fane)</a>. Hvis du fortsetter med utfyllingen her og sende inn dette skjemaet, kan du få et avslag!</p>",
+          "type" : "alertstripe",
+          "multiple" : false,
+          "conditional" : {
+            "eq" : "ja",
+            "when" : "reise.reiseMedTaxi",
+            "isRequired" : false
+          },
+          "customConditional" : "",
+          "validate" : {
+            "required" : false
           }
         }, {
           "key" : "alertstripe6",
@@ -1444,6 +1494,7 @@
             "when" : "reise.reiseMedTaxi",
             "isRequired" : false
           },
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }
@@ -1611,13 +1662,12 @@
             "when" : null,
             "isRequired" : true
           },
-          "customConditional" : "",
           "validate" : {
             "required" : true
           }
         }, {
           "key" : "bompenger",
-          "label" : "Bompenger én vei",
+          "label" : "Bompenger per dag",
           "type" : "number",
           "inputType" : "numeric",
           "multiple" : false,
@@ -1626,12 +1676,13 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }
         }, {
           "key" : "ferge",
-          "label" : "Ferge én vei",
+          "label" : "Ferge per dag",
           "type" : "number",
           "inputType" : "numeric",
           "multiple" : false,
@@ -1640,6 +1691,7 @@
             "when" : null,
             "isRequired" : true
           },
+          "customConditional" : "",
           "validate" : {
             "required" : false
           }
@@ -1664,7 +1716,7 @@
           "when" : null,
           "isRequired" : true
         },
-        "customConditional" : "show = row.kanDuReiseMedOffentligTransport === 'kombinertTogBil' || row.kanKjoreMedEgenBil === 'ja';",
+        "customConditional" : "show = row.kanDuReiseMedOffentligTransport === 'kombinertTogBil' || row.kanKjoreMedEgenBil === 'ja' || row.kanKjoreMedEgenBil === 'sitterPaMedAndre';",
         "validate" : {
           "required" : false
         }
