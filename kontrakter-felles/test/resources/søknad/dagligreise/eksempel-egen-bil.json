@@ -75,16 +75,17 @@
             "darligTransporttilbud": true,
             "leveringHentingIBarnehageEllerSkolefritidsordningSfoAks": false
           },
-          "container" : {
-            "gateadressenHvorDuHenterEllerLevererBarn" : "EksempelAdresse",
-            "postnummerHvorDuHenterEllerLevererBarn" : "0126"
+          "container": {
+            "gateadressenHvorDuHenterEllerLevererBarn": "EksempelAdresse",
+            "postnummerHvorDuHenterEllerLevererBarn": "0126"
           },
           "kanKjoreMedEgenBil": "ja",
           "mottarDuGrunnstonadFraNav": "nei",
           "parkering": "ja",
           "bompenger": 100,
           "ferge": 100,
-          "piggdekkavgift": 100
+          "piggdekkavgift": 100,
+          "bilensDrivstofftype": "bensin"
         }
       ]
     },

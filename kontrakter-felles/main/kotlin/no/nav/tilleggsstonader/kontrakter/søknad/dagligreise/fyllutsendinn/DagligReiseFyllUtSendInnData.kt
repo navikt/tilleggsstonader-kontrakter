@@ -53,6 +53,7 @@ data class Reise(
     val enkeltbillett: Int?,
     val syvdagersbillett: Int?,
     val manedskort: Int?,
+    val bilensDrivstofftype: BilensDrivstofftypeType?,
     val parkering: JaNeiType?,
     val bompenger: Int?,
     val ferge: Int?,
@@ -232,4 +233,12 @@ enum class HvaSlagsTypeBillettMaDuKjopeType {
     enkeltbillett,
     ukeskort,
     manedskort,
+}
+
+enum class BilensDrivstofftypeType {
+    elbil,
+    hydrogen,
+    bensin,
+    hybrid,
+    diesel,
 }

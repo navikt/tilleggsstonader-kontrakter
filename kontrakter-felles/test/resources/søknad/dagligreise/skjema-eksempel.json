@@ -153,7 +153,8 @@
         "parkering" : "ja",
         "bompenger" : 100,
         "ferge" : 100,
-        "piggdekkavgift" : 100
+        "piggdekkavgift" : 100,
+        "bilensDrivstofftype": "bensin"
       } ]
     },
     "metadata" : {
