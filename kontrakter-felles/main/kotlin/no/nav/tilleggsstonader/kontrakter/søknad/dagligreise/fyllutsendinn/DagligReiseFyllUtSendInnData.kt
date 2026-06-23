@@ -53,7 +53,7 @@ data class Reise(
     val enkeltbillett: Int?,
     val syvdagersbillett: Int?,
     val manedskort: Int?,
-    val bilensDrivstofftype: BilensDrivstofftypeType?,
+    val bilensDrivstofftype: Valgfelt?,
     val parkering: JaNeiType?,
     val bompenger: Int?,
     val ferge: Int?,

@@ -85,7 +85,10 @@
           "bompenger": 100,
           "ferge": 100,
           "piggdekkavgift": 100,
-          "bilensDrivstofftype": "bensin"
+          "bilensDrivstofftype": {
+            "value": "bensin",
+            "label": "Bensin"
+          }
         }
       ]
     },
