@@ -19,7 +19,7 @@ data class Samling(
     val tom: DatoFelt?,
 )
 
-data class AktivitetsadresseAvsnitt(
+data class AdresseAvsnitt(
     val land: SelectFelt<String>?,
     val gateadresse: VerdiFelt<String>?,
     val postnummer: VerdiFelt<String>?,
@@ -27,8 +27,10 @@ data class AktivitetsadresseAvsnitt(
 )
 
 data class ReiseavstandAvsnitt(
+    val reiseFraFolkeregistrertAdr: EnumFelt<JaNei>,
+    val adresseDetSkalReisesFra: AdresseAvsnitt,
     val antallKilometerEnVei: VerdiFelt<String>?,
-    val aktivitetsadresse: AktivitetsadresseAvsnitt,
+    val aktivitetsadresse: AdresseAvsnitt,
 )
 
 data class ReisemåteAvsnitt(
