@@ -1,4 +1,4 @@
-val jacksonVersion = "3.1.4"
+val jacksonVersion = "3.2.0"
 val assertJVersion = "3.27.7"
 
 dependencies {
