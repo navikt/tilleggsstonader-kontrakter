@@ -28,8 +28,8 @@ data class AdresseAvsnitt(
 )
 
 data class ReiseavstandAvsnitt(
-    val reiseFraFolkeregistrertAdr: EnumFelt<JaNei>,
-    val adresseDetSkalReisesFra: AdresseAvsnitt,
+    val skalReiseFraFolkeregistrertAdresse: EnumFelt<JaNei>,
+    val adresseDetSkalReisesFra: AdresseAvsnitt?,
     val antallKilometerEnVei: VerdiFelt<String>?,
     val aktivitetsadresse: AdresseAvsnitt,
 )
