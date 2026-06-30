@@ -17,6 +17,7 @@ data class AktivitetAvsnitt(
 data class Samling(
     val fom: DatoFelt?,
     val tom: DatoFelt?,
+    val erObligatorisk: EnumFelt<JaNei>?,
 )
 
 data class AdresseAvsnitt(
