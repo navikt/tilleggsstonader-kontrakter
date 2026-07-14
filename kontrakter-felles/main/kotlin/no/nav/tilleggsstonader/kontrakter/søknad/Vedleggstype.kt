@@ -23,4 +23,7 @@ enum class Vedleggstype(
     // Reise til samling
     BEKREFTELSE_SAMLINGER("Bekreftelse på samlinger"),
     UTGIFTER_OFFENTLIG_TRANSPORT("Dokumentasjon på utgifter til offentlig transport"),
+    SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING("Dokumentasjon av uttalelse fra helsepersonell"),
+    UTGIFTER_TAXI("Utgifter i forbindelse med taxireise"),
+    TT_KORT("Dokumentasjon på TT-kort"),
 }

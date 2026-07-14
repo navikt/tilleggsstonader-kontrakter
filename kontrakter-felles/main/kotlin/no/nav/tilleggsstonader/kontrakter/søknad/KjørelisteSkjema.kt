@@ -1,10 +1,17 @@
 package no.nav.tilleggsstonader.kontrakter.søknad
 
+import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
+
 data class KjørelisteSkjema(
     val reiseId: String,
     val reisedagerPerUkeAvsnitt: List<UkeMedReisedager>,
     override val dokumentasjon: List<DokumentasjonFelt>,
-) : Skjemadata
+) : Skjemadata {
+    override fun getSpråkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Søknad om støtte til pass av barn",
+        )
+}
 
 data class UkeMedReisedager(
     val ukeLabel: String,
