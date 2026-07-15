@@ -13,7 +13,7 @@ data class SøknadsskjemaBoutgifterFyllUtSendInn(
     override val dokumentasjon: List<DokumentasjonFelt> = emptyList(),
     val formRevision: Int?,
 ) : Skjemadata {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Søknad om støtte til boutgifter",
         )

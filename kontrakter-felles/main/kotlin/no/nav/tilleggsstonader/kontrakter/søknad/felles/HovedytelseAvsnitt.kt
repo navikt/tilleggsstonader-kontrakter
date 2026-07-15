@@ -9,7 +9,7 @@ data class HovedytelseAvsnitt(
     val hovedytelse: EnumFlereValgFelt<Hovedytelse>,
     val arbeidOgOpphold: ArbeidOgOppholdAvsnitt?,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Hovedytelse",
         )

@@ -18,7 +18,7 @@ data class UtdanningAvsnitt(
     val harRettTilUtstyrsstipend: HarRettTilUtstyrsstipend? = null,
     val harFunksjonsnedsettelse: EnumFelt<JaNei>,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Utdanning",
         )

@@ -13,7 +13,7 @@ data class AktivitetAvsnitt(
     val annenAktivitet: EnumFelt<AnnenAktivitetType>?,
     val lønnetAktivitet: EnumFelt<JaNei>?,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Aktivitet",
         )
@@ -29,7 +29,7 @@ enum class AnnenAktivitetType {
 data class BarnAvsnitt(
     val barnMedBarnepass: List<BarnMedBarnepass>,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Barn",
         )
