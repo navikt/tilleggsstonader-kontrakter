@@ -15,7 +15,7 @@ data class SøknadsskjemaReiseTilSamling(
     val reisemåte: ReisemåteAvsnitt,
     override val dokumentasjon: List<DokumentasjonFelt>,
 ) : Skjemadata {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Søknad om støtte til reise til samling",
         )

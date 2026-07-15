@@ -11,7 +11,7 @@ data class SøknadsskjemaBarnetilsyn(
     val barn: BarnAvsnitt,
     override val dokumentasjon: List<DokumentasjonFelt>,
 ) : Skjemadata {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Søknad om støtte til pass av barn",
         )

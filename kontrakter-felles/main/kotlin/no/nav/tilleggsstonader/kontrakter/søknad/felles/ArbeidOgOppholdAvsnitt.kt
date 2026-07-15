@@ -18,7 +18,7 @@ data class ArbeidOgOppholdAvsnitt(
     val harOppholdUtenforNorgeNeste12mnd: EnumFelt<JaNei>?,
     val oppholdUtenforNorgeNeste12mnd: List<OppholdUtenforNorge>,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Arbeid og opphold",
         )

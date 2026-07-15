@@ -16,7 +16,7 @@ data class TilleggsopplysningerAnnenAktivitetAvsnitt(
     val erUnder25År: EnumFelt<JaNei>?,
     val måBetaleForReiseTilSkole: EnumFelt<JaNei>?,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Tillegssopplysninger om annen aktivitet",
         )
@@ -35,7 +35,7 @@ data class AktivitetAvsnitt(
     val tilleggsopplysningerAnnenAktivitet: TilleggsopplysningerAnnenAktivitetAvsnitt?,
     val annenAktivitetTypeUtdanning: EnumFelt<AktivitetTypeUtdanning>?,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Aktivitet",
         )
@@ -61,7 +61,7 @@ data class AvreiseadresseAvsnitt(
     val skalReiseFraFolkeregistrertAdresse: EnumFelt<JaNei>,
     val adresseDetSkalReisesFra: Adresse?,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Avreiseadresse",
         )
@@ -98,7 +98,7 @@ data class ReisemåteAvsnitt(
     val harTTKort: EnumFelt<JaNei>?,
     val reiseMedBilUtgifter: ReiseMedBilUtgifterAvsnitt?,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Reisemåte",
         )
@@ -118,7 +118,7 @@ data class ReiseMedBilUtgifterAvsnitt(
     val ferge: VerdiFelt<String>?,
     val piggdekkavgift: VerdiFelt<String>?,
 ) : Avsnitt {
-    override fun getSpråkMapper(): Map<Språkkode, String> =
+    override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Utgifter for reise med bil",
         )
