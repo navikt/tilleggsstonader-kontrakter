@@ -1,5 +1,6 @@
 package no.nav.tilleggsstonader.kontrakter.søknad
 
+import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import no.nav.tilleggsstonader.kontrakter.søknad.dagligreise.fyllutsendinn.DagligReiseFyllUtSendInnData
 
 /**
@@ -11,4 +12,9 @@ data class SøknadsskjemaDagligReiseFyllUtSendInn(
     val data: DagligReiseFyllUtSendInnData,
     override val dokumentasjon: List<DokumentasjonFelt> = emptyList(),
     val formRevision: Int?,
-) : Skjemadata
+) : Skjemadata {
+    override fun getSpråkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Søknad om støtte til daglig reise",
+        )
+}

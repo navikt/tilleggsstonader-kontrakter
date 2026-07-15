@@ -1,8 +1,10 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.læremidler
 
+import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
+import no.nav.tilleggsstonader.kontrakter.søknad.SpråkMappable
 
 data class UtdanningAvsnitt(
     val aktiviteter: EnumFlereValgFelt<String>? = null,
@@ -15,7 +17,12 @@ data class UtdanningAvsnitt(
     val harTidligereFullførtVgs: EnumFelt<JaNei>? = null,
     val harRettTilUtstyrsstipend: HarRettTilUtstyrsstipend? = null,
     val harFunksjonsnedsettelse: EnumFelt<JaNei>,
-)
+) : SpråkMappable {
+    override fun getSpråkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Utdanning",
+        )
+}
 
 data class HarRettTilUtstyrsstipend(
     val erLærlingEllerLiknende: EnumFelt<JaNei>? = null,

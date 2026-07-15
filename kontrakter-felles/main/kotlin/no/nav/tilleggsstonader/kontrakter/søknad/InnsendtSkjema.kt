@@ -10,6 +10,6 @@ data class InnsendtSkjema<T : Skjemadata>(
     val skjema: T,
 )
 
-sealed interface Skjemadata {
+sealed interface Skjemadata : SpråkMappable {
     val dokumentasjon: List<DokumentasjonFelt>
 }

@@ -1,5 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
 
+import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
+import no.nav.tilleggsstonader.kontrakter.søknad.Avsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.DatoFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
@@ -10,7 +12,12 @@ data class AktivitetAvsnitt(
     val aktiviteter: EnumFlereValgFelt<String>?,
     val annenAktivitet: EnumFelt<AnnenAktivitetType>?,
     val lønnetAktivitet: EnumFelt<JaNei>?,
-)
+) : Avsnitt {
+    override fun getSpråkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Aktivitet",
+        )
+}
 
 enum class AnnenAktivitetType {
     TILTAK,
@@ -21,7 +28,12 @@ enum class AnnenAktivitetType {
 
 data class BarnAvsnitt(
     val barnMedBarnepass: List<BarnMedBarnepass>,
-)
+) : Avsnitt {
+    override fun getSpråkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Barn",
+        )
+}
 
 data class BarnMedBarnepass(
     val navn: TekstFelt,
