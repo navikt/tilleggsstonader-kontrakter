@@ -1,12 +1,14 @@
 package no.nav.tilleggsstonader.kontrakter.søknad.felles
 
+import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
+import no.nav.tilleggsstonader.kontrakter.søknad.Avsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.DatoFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 
-data class ArbeidOgOpphold(
+data class ArbeidOgOppholdAvsnitt(
     val jobberIAnnetLand: EnumFelt<JaNei>?,
     val jobbAnnetLand: SelectFelt<String>?,
     val harPengestøtteAnnetLand: EnumFlereValgFelt<TypePengestøtte>?,
@@ -15,7 +17,12 @@ data class ArbeidOgOpphold(
     val oppholdUtenforNorgeSiste12mnd: List<OppholdUtenforNorge>,
     val harOppholdUtenforNorgeNeste12mnd: EnumFelt<JaNei>?,
     val oppholdUtenforNorgeNeste12mnd: List<OppholdUtenforNorge>,
-)
+) : Avsnitt {
+    override fun getSpråkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Arbeid og opphold",
+        )
+}
 
 data class OppholdUtenforNorge(
     val land: SelectFelt<String>,
