@@ -72,5 +72,5 @@ enum class TypeYtelsePeriode {
 enum class EnsligForsørgerStønadstype {
     OVERGANGSSTØNAD,
     SKOLEPENGER,
-    BARNETILSYN,
+    PASS_AV_BARN,
 }

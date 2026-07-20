@@ -17,7 +17,7 @@ enum class Tema {
 
 fun Stønadstype.tilTema(): Tema =
     when (this) {
-        Stønadstype.BARNETILSYN -> Tema.TSO
+        Stønadstype.PASS_AV_BARN -> Tema.TSO
         Stønadstype.LÆREMIDLER -> Tema.TSO
         Stønadstype.BOUTGIFTER -> Tema.TSO
         Stønadstype.DAGLIG_REISE_TSO -> Tema.TSO

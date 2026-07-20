@@ -1,7 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.felles
 
 enum class Skjematype {
-    SØKNAD_BARNETILSYN,
+    SØKNAD_PASS_AV_BARN,
     SØKNAD_LÆREMIDLER,
     SØKNAD_BOUTGIFTER,
     SØKNAD_DAGLIG_REISE,
@@ -9,12 +9,12 @@ enum class Skjematype {
     SØKNAD_REISE_TIL_SAMLING,
     ;
 
-    fun erSøknad() = this in listOf(SØKNAD_BARNETILSYN, SØKNAD_LÆREMIDLER, SØKNAD_BOUTGIFTER, SØKNAD_DAGLIG_REISE)
+    fun erSøknad() = this in listOf(SØKNAD_PASS_AV_BARN, SØKNAD_LÆREMIDLER, SØKNAD_BOUTGIFTER, SØKNAD_DAGLIG_REISE)
 }
 
 fun Stønadstype.tilSkjematype() =
     when (this) {
-        Stønadstype.BARNETILSYN -> Skjematype.SØKNAD_BARNETILSYN
+        Stønadstype.PASS_AV_BARN -> Skjematype.SØKNAD_PASS_AV_BARN
         Stønadstype.LÆREMIDLER -> Skjematype.SØKNAD_LÆREMIDLER
         Stønadstype.BOUTGIFTER -> Skjematype.SØKNAD_BOUTGIFTER
         Stønadstype.DAGLIG_REISE_TSO, Stønadstype.DAGLIG_REISE_TSR -> Skjematype.SØKNAD_DAGLIG_REISE
@@ -31,6 +31,6 @@ fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
 
         Skjematype.SØKNAD_BOUTGIFTER -> setOf(Stønadstype.BOUTGIFTER)
         Skjematype.SØKNAD_LÆREMIDLER -> setOf(Stønadstype.LÆREMIDLER)
-        Skjematype.SØKNAD_BARNETILSYN -> setOf(Stønadstype.BARNETILSYN)
+        Skjematype.SØKNAD_PASS_AV_BARN -> setOf(Stønadstype.PASS_AV_BARN)
         Skjematype.SØKNAD_REISE_TIL_SAMLING -> setOf(Stønadstype.REISE_TIL_SAMLING_TSO)
     }

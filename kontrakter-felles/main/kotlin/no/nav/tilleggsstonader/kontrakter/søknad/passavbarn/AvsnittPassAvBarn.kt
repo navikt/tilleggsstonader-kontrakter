@@ -1,4 +1,4 @@
-package no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn
+package no.nav.tilleggsstonader.kontrakter.søknad.passavbarn
 
 import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import no.nav.tilleggsstonader.kontrakter.søknad.Avsnitt
@@ -7,24 +7,14 @@ import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.TekstFelt
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.Aktivitet
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
 
-data class AktivitetAvsnitt(
-    val aktiviteter: EnumFlereValgFelt<String>?,
-    val annenAktivitet: EnumFelt<AnnenAktivitetType>?,
-    val lønnetAktivitet: EnumFelt<JaNei>?,
-) : Avsnitt {
-    override fun språkMapper(): Map<Språkkode, String> =
-        mapOf(
-            Språkkode.NB to "Aktivitet",
-        )
-}
-
-enum class AnnenAktivitetType {
-    TILTAK,
-    UTDANNING,
-    ARBEIDSSØKER,
-    INGEN_AKTIVITET,
-}
+data class PassAvBarnAktivitetAvsnitt(
+    override val aktiviteter: EnumFlereValgFelt<String>?,
+    override val annenAktivitet: EnumFelt<Aktivitet>?,
+    override val lønnetAktivitet: EnumFelt<JaNei>?,
+) : AktivitetAvsnitt
 
 data class BarnAvsnitt(
     val barnMedBarnepass: List<BarnMedBarnepass>,

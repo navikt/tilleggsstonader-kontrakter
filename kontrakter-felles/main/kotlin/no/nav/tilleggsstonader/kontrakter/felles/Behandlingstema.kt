@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue
 enum class Behandlingstema(
     @JsonValue val value: String,
 ) {
-    TilsynBarn("ab0300"), // Tilsyn av barn tilleggsstønad
+    PassAvBarn("ab0300"), // Pass av barn tilleggsstønad
     Læremidler("ab0292"), // Læremidler tilleggsstønad
     Boutgifter("ab0286"), // Boutgifter tilleggsstønad
     DagligReiseTSO("ab0288"), // Daglig reise TSO
@@ -27,7 +27,7 @@ enum class Behandlingstema(
 
 fun Stønadstype.tilBehandlingstema(): Behandlingstema =
     when (this) {
-        Stønadstype.BARNETILSYN -> Behandlingstema.TilsynBarn
+        Stønadstype.PASS_AV_BARN -> Behandlingstema.PassAvBarn
         Stønadstype.LÆREMIDLER -> Behandlingstema.Læremidler
         Stønadstype.BOUTGIFTER -> Behandlingstema.Boutgifter
         Stønadstype.DAGLIG_REISE_TSO -> Behandlingstema.DagligReiseTSO

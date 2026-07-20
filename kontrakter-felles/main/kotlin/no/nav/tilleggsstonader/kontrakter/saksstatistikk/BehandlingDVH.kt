@@ -169,7 +169,7 @@ data class VilkårsprøvingDVH(
  * "Tilleggsstønad" eller "Tilleggsstønad arbeidssøkere".
  */
 enum class SakYtelseDvh {
-    TILLEGG_BARNETILSYN, // For pass av barn er kun "Tilleggsstønad" relevant
+    TILLEGG_PASS_AV_BARN, // For pass av barn er kun "Tilleggsstønad" relevant
     TILLEGG_LÆREMIDLER, // For læremidler er kun "Tilleggsstønad" relevant
     TILLEGG_BOUTGIFTER, // For læremidler er kun "Tilleggsstønad" relevant
     TILLEGG_DAGLIG_REISE_TSO,
@@ -181,7 +181,7 @@ enum class SakYtelseDvh {
         @JvmStatic
         fun fraStønadstype(stønadstype: Stønadstype) =
             when (stønadstype) {
-                Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
+                Stønadstype.PASS_AV_BARN -> TILLEGG_PASS_AV_BARN
                 Stønadstype.LÆREMIDLER -> TILLEGG_LÆREMIDLER
                 Stønadstype.BOUTGIFTER -> TILLEGG_BOUTGIFTER
                 Stønadstype.DAGLIG_REISE_TSO -> TILLEGG_DAGLIG_REISE_TSO
