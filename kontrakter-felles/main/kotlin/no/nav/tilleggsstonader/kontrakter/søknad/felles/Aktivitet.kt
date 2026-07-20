@@ -6,7 +6,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 
-enum class Aktivitet {
+enum class AnnenAktivitetType {
     TILTAK,
     UTDANNING,
     ARBEIDSSØKER,
@@ -15,7 +15,7 @@ enum class Aktivitet {
 
 interface AktivitetAvsnitt : Avsnitt {
     val aktiviteter: EnumFlereValgFelt<String>?
-    val annenAktivitet: EnumFelt<Aktivitet>?
+    val annenAktivitet: EnumFelt<AnnenAktivitetType>?
     val lønnetAktivitet: EnumFelt<JaNei>?
 
     override fun språkMapper(): Map<Språkkode, String> =

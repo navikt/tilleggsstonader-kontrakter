@@ -8,8 +8,8 @@ import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
-import no.nav.tilleggsstonader.kontrakter.søknad.felles.Aktivitet
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.AnnenAktivitetType
 
 data class TilleggsopplysningerAnnenAktivitetAvsnitt(
     val erLærlingEllerLiknende: EnumFelt<JaNei>?,
@@ -31,7 +31,7 @@ enum class AktivitetTypeUtdanning {
 
 data class ReiseTilSamlingAktivitetAvsnitt(
     override val aktiviteter: EnumFlereValgFelt<String>?,
-    override val annenAktivitet: EnumFelt<Aktivitet>?,
+    override val annenAktivitet: EnumFelt<AnnenAktivitetType>?,
     override val lønnetAktivitet: EnumFelt<JaNei>?,
     val tilleggsopplysningerAnnenAktivitet: TilleggsopplysningerAnnenAktivitetAvsnitt?,
     val annenAktivitetTypeUtdanning: EnumFelt<AktivitetTypeUtdanning>?,
