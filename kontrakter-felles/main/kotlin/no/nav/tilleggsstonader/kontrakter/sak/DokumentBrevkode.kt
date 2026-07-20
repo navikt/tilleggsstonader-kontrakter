@@ -27,7 +27,7 @@ enum class DokumentBrevkode(
 
     fun tilSkjematype(): Skjematype? =
         when (this) {
-            PASS_AV_BARN -> Skjematype.SØKNAD_PASS_AV_BARN
+            PASS_AV_BARN -> Skjematype.SØKNAD_BARNETILSYN
             LÆREMIDLER -> Skjematype.SØKNAD_LÆREMIDLER
             BOUTGIFTER -> Skjematype.SØKNAD_BOUTGIFTER
             DAGLIG_REISE -> Skjematype.SØKNAD_DAGLIG_REISE

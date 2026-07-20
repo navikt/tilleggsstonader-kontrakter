@@ -3,13 +3,13 @@ package no.nav.tilleggsstonader.kontrakter.dokarkiv
 import no.nav.tilleggsstonader.kontrakter.felles.Stønadstype
 
 enum class Dokumenttype {
-    PASS_AV_BARN_SØKNAD,
-    PASS_AV_BARN_SØKNAD_VEDLEGG,
-    PASS_AV_BARN_VEDTAKSBREV,
-    PASS_AV_BARN_FRITTSTÅENDE_BREV,
-    PASS_AV_BARN_INTERNT_VEDTAK,
-    PASS_AV_BARN_KLAGE_VEDTAKSBREV,
-    PASS_AV_BARN_KLAGE_INTERNT_VEDTAK,
+    BARNETILSYN_SØKNAD,
+    BARNETILSYN_SØKNAD_VEDLEGG,
+    BARNETILSYN_VEDTAKSBREV,
+    BARNETILSYN_FRITTSTÅENDE_BREV,
+    BARNETILSYN_INTERNT_VEDTAK,
+    BARNETILSYN_KLAGE_VEDTAKSBREV,
+    BARNETILSYN_KLAGE_INTERNT_VEDTAK,
 
     LÆREMIDLER_SØKNAD,
     LÆREMIDLER_SØKNAD_VEDLEGG,
@@ -73,13 +73,13 @@ val Stønadstype.dokumenttyper: Dokumentyper
         when (this) {
             Stønadstype.BARNETILSYN ->
                 Dokumentyper(
-                    søknad = Dokumenttype.PASS_AV_BARN_SØKNAD,
-                    søknadVedlegg = Dokumenttype.PASS_AV_BARN_SØKNAD_VEDLEGG,
-                    vedtaksbrev = Dokumenttype.PASS_AV_BARN_VEDTAKSBREV,
-                    frittståendeBrev = Dokumenttype.PASS_AV_BARN_FRITTSTÅENDE_BREV,
-                    interntVedtak = Dokumenttype.PASS_AV_BARN_INTERNT_VEDTAK,
-                    klageVedtaksbrev = Dokumenttype.PASS_AV_BARN_KLAGE_VEDTAKSBREV,
-                    klageInterntVedtak = Dokumenttype.PASS_AV_BARN_KLAGE_INTERNT_VEDTAK,
+                    søknad = Dokumenttype.BARNETILSYN_SØKNAD,
+                    søknadVedlegg = Dokumenttype.BARNETILSYN_SØKNAD_VEDLEGG,
+                    vedtaksbrev = Dokumenttype.BARNETILSYN_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.BARNETILSYN_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.BARNETILSYN_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.BARNETILSYN_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.BARNETILSYN_KLAGE_INTERNT_VEDTAK,
                     kjøreliste = null,
                     kjørelisteVedlegg = null,
                 )
