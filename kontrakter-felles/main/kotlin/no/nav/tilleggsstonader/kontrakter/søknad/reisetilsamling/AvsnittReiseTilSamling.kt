@@ -8,7 +8,8 @@ import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
-import no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn.AnnenAktivitetType
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.Aktivitet
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
 
 data class TilleggsopplysningerAnnenAktivitetAvsnitt(
     val erLærlingEllerLiknende: EnumFelt<JaNei>?,
@@ -18,7 +19,7 @@ data class TilleggsopplysningerAnnenAktivitetAvsnitt(
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
-            Språkkode.NB to "Tillegssopplysninger om annen aktivitet",
+            Språkkode.NB to "Tilleggssopplysninger om annen aktivitet",
         )
 }
 
@@ -28,18 +29,13 @@ enum class AktivitetTypeUtdanning {
     ANNET_TILTAK,
 }
 
-data class AktivitetAvsnitt(
-    val aktiviteter: EnumFlereValgFelt<String>?,
-    val annenAktivitet: EnumFelt<AnnenAktivitetType>?,
-    val lønnetAktivitet: EnumFelt<JaNei>?,
+data class ReiseTilSamlingAktivitetAvsnitt(
+    override val aktiviteter: EnumFlereValgFelt<String>?,
+    override val annenAktivitet: EnumFelt<Aktivitet>?,
+    override val lønnetAktivitet: EnumFelt<JaNei>?,
     val tilleggsopplysningerAnnenAktivitet: TilleggsopplysningerAnnenAktivitetAvsnitt?,
     val annenAktivitetTypeUtdanning: EnumFelt<AktivitetTypeUtdanning>?,
-) : Avsnitt {
-    override fun språkMapper(): Map<Språkkode, String> =
-        mapOf(
-            Språkkode.NB to "Aktivitet",
-        )
-}
+) : AktivitetAvsnitt
 
 data class Samling(
     val fom: DatoFelt?,

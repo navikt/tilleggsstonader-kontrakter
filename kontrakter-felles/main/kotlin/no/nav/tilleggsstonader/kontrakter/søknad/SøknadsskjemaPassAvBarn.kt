@@ -1,13 +1,13 @@
 package no.nav.tilleggsstonader.kontrakter.søknad
 
 import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
-import no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn.AktivitetAvsnitt
-import no.nav.tilleggsstonader.kontrakter.søknad.barnetilsyn.BarnAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.HovedytelseAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.passavbarn.BarnAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.passavbarn.PassAvBarnAktivitetAvsnitt
 
-data class SøknadsskjemaBarnetilsyn(
+data class SøknadsskjemaPassAvBarn(
     val hovedytelse: HovedytelseAvsnitt,
-    val aktivitet: AktivitetAvsnitt,
+    val aktivitet: PassAvBarnAktivitetAvsnitt,
     val barn: BarnAvsnitt,
     override val dokumentasjon: List<DokumentasjonFelt>,
 ) : Skjemadata {

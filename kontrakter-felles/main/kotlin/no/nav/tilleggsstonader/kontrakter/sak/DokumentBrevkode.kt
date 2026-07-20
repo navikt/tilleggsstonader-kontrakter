@@ -5,8 +5,8 @@ import no.nav.tilleggsstonader.kontrakter.felles.Skjematype
 enum class DokumentBrevkode(
     val verdi: String,
 ) {
-    BARNETILSYN("NAV 11-12.15"),
-    BARNETILSYN_GAMMEL("NAV 11-12.15B"),
+    PASS_AV_BARN("NAV 11-12.15"),
+    PASS_AV_BARN_GAMMEL("NAV 11-12.15B"),
     LÆREMIDLER("NAV 11-12.16"),
     LÆREMIDLER_GAMMEL("NAV 11-12.16B"),
     BOUTGIFTER("NAV 11-12.19"),
@@ -27,7 +27,7 @@ enum class DokumentBrevkode(
 
     fun tilSkjematype(): Skjematype? =
         when (this) {
-            BARNETILSYN -> Skjematype.SØKNAD_BARNETILSYN
+            PASS_AV_BARN -> Skjematype.SØKNAD_BARNETILSYN
             LÆREMIDLER -> Skjematype.SØKNAD_LÆREMIDLER
             BOUTGIFTER -> Skjematype.SØKNAD_BOUTGIFTER
             DAGLIG_REISE -> Skjematype.SØKNAD_DAGLIG_REISE

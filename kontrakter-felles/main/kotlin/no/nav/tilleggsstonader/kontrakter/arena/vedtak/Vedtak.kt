@@ -55,8 +55,8 @@ enum class Rettighet(
     REISE_AKTIVITET_HJEMREISE("TSOREISAKT", "Reise ved start/slutt aktivitet og hjemreiser tilleggsstønad"),
     REISE_ARBEIDSSSØKERE("TSRREISARB", "Reisestønader til arbeidssøkere"),
     REISE("TSOREISARB", "Reisestønader til arbeidssøkere tilleggsstønad"),
-    TILSYN_BARN_ARBEIDSSSØKERE("TSRTILBARN", "Tilsyn av barn arbeidssøkere", Stønadstype.BARNETILSYN),
-    TILSYN_BARN("TSOTILBARN", "Tilsyn av barn tilleggsstønad", Stønadstype.BARNETILSYN),
+    PASS_AV_BARN_ARBEIDSSSØKERE("TSRTILBARN", "Pass av barn arbeidssøkere", Stønadstype.BARNETILSYN),
+    PASS_AV_BARN("TSOTILBARN", "Pass av barn tilleggsstønad", Stønadstype.BARNETILSYN),
     TILSYN_FAMILIEMEDLEMMER_ARBEIDSSSØKERE("TSRTILFAM", "Tilsyn av familiemedlemmer arbeidssøkere"),
     TILSYN_FAMILIEMEDLEMMER("TSOTILFAM", "Tilsyn av familiemedlemmer tilleggsstønad"),
     ;
