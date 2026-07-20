@@ -10,8 +10,8 @@ import org.junit.jupiter.params.provider.EnumSource
 class RettighetTest {
     @Test
     fun `skal mappe rettighet til stønadstype`() {
-        assertThat(Rettighet.PASS_AV_BARN.stønadstype).isEqualTo(Stønadstype.PASS_AV_BARN)
-        assertThat(Rettighet.PASS_AV_BARN_ARBEIDSSSØKERE.stønadstype).isEqualTo(Stønadstype.PASS_AV_BARN)
+        assertThat(Rettighet.PASS_AV_BARN.stønadstype).isEqualTo(Stønadstype.BARNETILSYN)
+        assertThat(Rettighet.PASS_AV_BARN_ARBEIDSSSØKERE.stønadstype).isEqualTo(Stønadstype.BARNETILSYN)
 
         assertThat(Rettighet.LÆREMIDLER.stønadstype).isEqualTo(Stønadstype.LÆREMIDLER)
         assertThat(Rettighet.LÆREMIDLER.stønadstype).isEqualTo(Stønadstype.LÆREMIDLER)
@@ -29,7 +29,7 @@ class RettighetTest {
 
     @Test
     fun `skal finne alle rettigheter for gitt stønadstype`() {
-        assertThat(Rettighet.fraStønadstype(Stønadstype.PASS_AV_BARN))
+        assertThat(Rettighet.fraStønadstype(Stønadstype.BARNETILSYN))
             .containsExactlyInAnyOrder(Rettighet.PASS_AV_BARN, Rettighet.PASS_AV_BARN_ARBEIDSSSØKERE)
     }
 

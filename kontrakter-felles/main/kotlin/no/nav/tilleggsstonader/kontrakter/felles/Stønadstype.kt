@@ -8,7 +8,7 @@ enum class Stønadstype(
     val visningsnavn: String,
     val grunnlagAntallMånederBakITiden: Int,
 ) {
-    PASS_AV_BARN(
+    BARNETILSYN(
         visningsnavn = "stønad til pass av barn",
         grunnlagAntallMånederBakITiden = 3,
     ),
@@ -40,7 +40,7 @@ fun Stønadstype.gjelderReiseTilSamling() = Stønadstype.REISE_TIL_SAMLING_TSO =
 
 fun Stønadstype.behandlendeEnhet() =
     when (this) {
-        Stønadstype.PASS_AV_BARN,
+        Stønadstype.BARNETILSYN,
         Stønadstype.LÆREMIDLER,
         Stønadstype.BOUTGIFTER,
         Stønadstype.DAGLIG_REISE_TSO,
