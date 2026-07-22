@@ -71,7 +71,7 @@ data class Dokumentyper(
 val Stønadstype.dokumenttyper: Dokumentyper
     get() =
         when (this) {
-            Stønadstype.BARNETILSYN ->
+            Stønadstype.PASS_AV_BARN ->
                 Dokumentyper(
                     søknad = Dokumenttype.PASS_AV_BARN_SØKNAD,
                     søknadVedlegg = Dokumenttype.PASS_AV_BARN_SØKNAD_VEDLEGG,

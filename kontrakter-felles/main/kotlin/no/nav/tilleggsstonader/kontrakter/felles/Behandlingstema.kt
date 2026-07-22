@@ -27,7 +27,7 @@ enum class Behandlingstema(
 
 fun Stønadstype.tilBehandlingstema(): Behandlingstema =
     when (this) {
-        Stønadstype.BARNETILSYN -> Behandlingstema.PassAvBarn
+        Stønadstype.PASS_AV_BARN -> Behandlingstema.PassAvBarn
         Stønadstype.LÆREMIDLER -> Behandlingstema.Læremidler
         Stønadstype.BOUTGIFTER -> Behandlingstema.Boutgifter
         Stønadstype.DAGLIG_REISE_TSO -> Behandlingstema.DagligReiseTSO

@@ -181,7 +181,7 @@ enum class SakYtelseDvh {
         @JvmStatic
         fun fraStønadstype(stønadstype: Stønadstype) =
             when (stønadstype) {
-                Stønadstype.BARNETILSYN -> TILLEGG_BARNETILSYN
+                Stønadstype.PASS_AV_BARN -> TILLEGG_BARNETILSYN
                 Stønadstype.LÆREMIDLER -> TILLEGG_LÆREMIDLER
                 Stønadstype.BOUTGIFTER -> TILLEGG_BOUTGIFTER
                 Stønadstype.DAGLIG_REISE_TSO -> TILLEGG_DAGLIG_REISE_TSO
