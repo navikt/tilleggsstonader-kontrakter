@@ -19,9 +19,14 @@ data class OppdatertOppgaveResponse(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Oppgave(
     val id: Long,
+    val tildeltEnhetsnr: String,
     val versjon: Int,
-    val identer: List<OppgaveIdentV2>? = null,
-    val tildeltEnhetsnr: String? = null,
+    val tema: Tema,
+    val oppgavetype: String,
+    val prioritet: OppgavePrioritet,
+    val status: StatusEnum,
+    val aktivDato: LocalDate,
+    val bruker: OppgaveBruker? = null,
     val endretAvEnhetsnr: String? = null,
     val opprettetAvEnhetsnr: String? = null,
     val journalpostId: String? = null,
@@ -36,24 +41,17 @@ data class Oppgave(
     val tilordnetRessurs: String? = null,
     val beskrivelse: String? = null,
     val temagruppe: String? = null,
-    val tema: Tema? = null,
     val behandlingstema: String? = null,
-    val oppgavetype: String? = null,
     val behandlingstype: String? = null,
     val mappeId: Optional<Long>? = null,
     val fristFerdigstillelse: LocalDate? = null,
-    val aktivDato: LocalDate? = null,
     val opprettetTidspunkt: String? = null,
     val opprettetAv: String? = null,
     val endretAv: String? = null,
     val ferdigstiltTidspunkt: String? = null,
     val endretTidspunkt: String? = null,
-    val prioritet: OppgavePrioritet? = null,
-    val status: StatusEnum? = null,
     private var metadata: MutableMap<String, String>? = null,
-) {
-    fun versjonEllerFeil(): Int = versjon ?: error("Mangler versjon på oppgave=$id")
-}
+)
 
 enum class StatusEnum {
     OPPRETTET,
@@ -62,6 +60,17 @@ enum class StatusEnum {
     FERDIGSTILT,
     FEILREGISTRERT,
 }
+
+enum class OppgaveBrukerType {
+    PERSON,
+    ARBIEDSGIVER,
+    SAMHANDLER,
+}
+
+data class OppgaveBruker(
+    val ident: String?,
+    val type: OppgaveBrukerType?,
+)
 
 data class OppgaveIdentV2(
     val ident: String?,
