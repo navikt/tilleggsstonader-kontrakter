@@ -69,7 +69,7 @@ sealed interface YtelsePeriode {
         override val fom: LocalDate,
         override val tom: LocalDate?,
         val ensligForsørgerStønadstype: EnsligForsørgerStønadstype,
-        val erNyttRegelverk2026: Boolean,
+        val erNyttRegelverk2026: Boolean?,
     ) : YtelsePeriode
 
     data class Omstillingsstønad(
