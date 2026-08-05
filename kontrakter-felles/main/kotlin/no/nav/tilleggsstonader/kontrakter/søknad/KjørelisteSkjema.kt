@@ -9,7 +9,7 @@ data class KjørelisteSkjema(
 ) : Skjemadata {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
-            Språkkode.NB to "Søknad om støtte til pass av barn",
+            Språkkode.NB to "Refusjon av utgifter til daglige reiser med bruk av bil",
         )
 }
 

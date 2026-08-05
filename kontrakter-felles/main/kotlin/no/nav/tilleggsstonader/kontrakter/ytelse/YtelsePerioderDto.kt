@@ -1,5 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.ytelse
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import java.time.LocalDate
 
 /**
@@ -32,27 +34,69 @@ enum class ResultatKilde {
     FEILET,
 }
 
-/**
- * @param aapErFerdigAvklart hvis aktivitetsfasen == 'Ferdig avklart', man har då ikke rett på tilsyn barn
- * @param gjenståendeDagerFraTelleverk for dagpenger er ikke alltid sluttdatoen for vedtaket kjent. Ettersom våre saksbehandlere må sette
- *   en tom-dato på målgruppe, er det nyttig for dem å vite hvor mange gjenstående dager bruker har rett på ytelsen.
- */
-data class YtelsePeriode(
-    val type: TypeYtelsePeriode,
-    val fom: LocalDate,
-    val tom: LocalDate?,
-    val aapErFerdigAvklart: Boolean? = null,
-    val ensligForsørgerStønadstype: EnsligForsørgerStønadstype? = null,
-    val gjenståendeDagerFraTelleverk: `GjenståendeDagerFraTelleverk`? = null,
-) {
-    init {
-        if (type != TypeYtelsePeriode.AAP && aapErFerdigAvklart != null) {
-            error("Kan ikke sette 'aapAktivitetsfase' for $type")
-        }
-        if (type != TypeYtelsePeriode.ENSLIG_FORSØRGER && ensligForsørgerStønadstype != null) {
-            error("Kan ikke sette 'ensligForsørgerStønadstype' for $type")
-        }
-    }
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+@JsonSubTypes(
+    JsonSubTypes.Type(value = YtelsePeriode.AAP::class, name = "AAP"),
+    JsonSubTypes.Type(value = YtelsePeriode.Dagpenger::class, name = "DAGPENGER"),
+    JsonSubTypes.Type(value = YtelsePeriode.EnsligForsørger::class, name = "ENSLIG_FORSØRGER"),
+    JsonSubTypes.Type(value = YtelsePeriode.Omstillingsstønad::class, name = "OMSTILLINGSSTØNAD"),
+    JsonSubTypes.Type(value = YtelsePeriode.TiltakspengerTPSak::class, name = "TILTAKSPENGER_TPSAK"),
+    JsonSubTypes.Type(value = YtelsePeriode.TiltakspengerArena::class, name = "TILTAKSPENGER_ARENA"),
+)
+sealed interface YtelsePeriode {
+    val fom: LocalDate
+    val tom: LocalDate?
+    val type: TypeYtelsePeriode
+        get() =
+            when (this) {
+                is AAP -> TypeYtelsePeriode.AAP
+                is Dagpenger -> TypeYtelsePeriode.DAGPENGER
+                is EnsligForsørger -> TypeYtelsePeriode.ENSLIG_FORSØRGER
+                is Omstillingsstønad -> TypeYtelsePeriode.OMSTILLINGSSTØNAD
+                is TiltakspengerArena -> TypeYtelsePeriode.TILTAKSPENGER_ARENA
+                is TiltakspengerTPSak -> TypeYtelsePeriode.TILTAKSPENGER_TPSAK
+            }
+
+    /**
+     * @param aapErFerdigAvklart hvis aktivitetsfasen == 'Ferdig avklart', man har då ikke rett på tilsyn barn
+     **/
+    data class AAP(
+        override val fom: LocalDate,
+        override val tom: LocalDate?,
+        val aapErFerdigAvklart: Boolean,
+    ) : YtelsePeriode
+
+    /**
+     * @param gjenståendeDagerFraTelleverk for dagpenger er ikke alltid sluttdatoen for vedtaket kjent. Ettersom våre saksbehandlere må sette
+     *   en tom-dato på målgruppe, er det nyttig for dem å vite hvor mange gjenstående dager bruker har rett på ytelsen.
+     **/
+    data class Dagpenger(
+        override val fom: LocalDate,
+        override val tom: LocalDate?,
+        val gjenståendeDagerFraTelleverk: GjenståendeDagerFraTelleverk?,
+    ) : YtelsePeriode
+
+    data class EnsligForsørger(
+        override val fom: LocalDate,
+        override val tom: LocalDate?,
+        val ensligForsørgerStønadstype: EnsligForsørgerStønadstype,
+        val erNyttRegelverk2026: Boolean?,
+    ) : YtelsePeriode
+
+    data class Omstillingsstønad(
+        override val fom: LocalDate,
+        override val tom: LocalDate?,
+    ) : YtelsePeriode
+
+    data class TiltakspengerTPSak(
+        override val fom: LocalDate,
+        override val tom: LocalDate?,
+    ) : YtelsePeriode
+
+    data class TiltakspengerArena(
+        override val fom: LocalDate,
+        override val tom: LocalDate?,
+    ) : YtelsePeriode
 }
 
 data class GjenståendeDagerFraTelleverk(
