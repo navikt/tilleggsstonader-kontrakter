@@ -1,5 +1,7 @@
 package no.nav.tilleggsstonader.kontrakter.ytelse
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import java.time.LocalDate
 
 /**
@@ -32,6 +34,15 @@ enum class ResultatKilde {
     FEILET,
 }
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type")
+@JsonSubTypes(
+    JsonSubTypes.Type(value = YtelsePeriode.AAP::class, name = "AAP"),
+    JsonSubTypes.Type(value = YtelsePeriode.Dagpenger::class, name = "DAGPENGER"),
+    JsonSubTypes.Type(value = YtelsePeriode.EnsligForsørger::class, name = "ENSLIG_FORSØRGER"),
+    JsonSubTypes.Type(value = YtelsePeriode.Omstillingsstønad::class, name = "OMSTILLINGSSTØNAD"),
+    JsonSubTypes.Type(value = YtelsePeriode.TiltakspengerTPSak::class, name = "TILTAKSPENGER_TPSAK"),
+    JsonSubTypes.Type(value = YtelsePeriode.TiltakspengerArena::class, name = "TILTAKSPENGER_ARENA"),
+)
 sealed interface YtelsePeriode {
     val fom: LocalDate
     val tom: LocalDate?
