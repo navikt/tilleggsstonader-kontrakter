@@ -7,7 +7,6 @@ import tools.jackson.module.kotlin.readValue
 import java.time.LocalDate
 
 class YtelsePerioderDtoTest {
-
     @Test
     fun `skal serialisere og deserialisere alle YtelsePeriode-subtyper`() {
         val perioder =
