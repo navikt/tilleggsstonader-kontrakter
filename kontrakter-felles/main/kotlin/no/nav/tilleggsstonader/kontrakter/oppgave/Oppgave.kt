@@ -72,19 +72,6 @@ data class OppgaveBruker(
     val type: OppgaveBrukerType?,
 )
 
-data class OppgaveIdentV2(
-    val ident: String?,
-    val gruppe: IdentGruppe?,
-)
-
-enum class IdentGruppe {
-    AKTOERID,
-    FOLKEREGISTERIDENT,
-    NPID,
-    ORGNR,
-    SAMHANDLERNR,
-}
-
 // Disse burde oppdateres til de som er gjeldende for våre temaer, finnes på swagger på https://oppgave.dev.intern.nav.no/
 // ev bestille de som mangler
 enum class Oppgavetype(
