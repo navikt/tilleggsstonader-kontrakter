@@ -26,6 +26,8 @@ data class Oppgave(
     val prioritet: OppgavePrioritet,
     val status: StatusEnum,
     val aktivDato: LocalDate,
+    @Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
+    val identer: List<OppgaveIdentV2>? = null,
     val bruker: OppgaveBruker? = null,
     val endretAvEnhetsnr: String? = null,
     val opprettetAvEnhetsnr: String? = null,
@@ -52,6 +54,21 @@ data class Oppgave(
     val endretTidspunkt: String? = null,
     private var metadata: MutableMap<String, String>? = null,
 )
+
+@Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
+data class OppgaveIdentV2(
+    val ident: String?,
+    val gruppe: IdentGruppe?,
+)
+
+@Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
+enum class IdentGruppe {
+    AKTOERID,
+    FOLKEREGISTERIDENT,
+    NPID,
+    ORGNR,
+    SAMHANDLERNR,
+}
 
 enum class StatusEnum {
     OPPRETTET,

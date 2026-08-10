@@ -16,6 +16,8 @@ value class PersonIdent(
 
 data class OpprettOppgaveRequest(
     val personident: PersonIdent,
+    @Deprecated("Skal ikke brukes, foretrekk personident")
+    val ident: OppgaveIdentV2?,
     val tema: Tema,
     val oppgavetype: Oppgavetype,
     val prioritet: OppgavePrioritet = OppgavePrioritet.NORM,
