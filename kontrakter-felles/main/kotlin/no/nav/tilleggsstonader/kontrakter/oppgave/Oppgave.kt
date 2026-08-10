@@ -19,9 +19,16 @@ data class OppdatertOppgaveResponse(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Oppgave(
     val id: Long,
+    val tildeltEnhetsnr: String,
     val versjon: Int,
+    val tema: Tema,
+    val oppgavetype: String,
+    val prioritet: OppgavePrioritet,
+    val status: StatusEnum,
+    val aktivDato: LocalDate,
+    @Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
     val identer: List<OppgaveIdentV2>? = null,
-    val tildeltEnhetsnr: String? = null,
+    val bruker: OppgaveBruker? = null,
     val endretAvEnhetsnr: String? = null,
     val opprettetAvEnhetsnr: String? = null,
     val journalpostId: String? = null,
@@ -36,23 +43,31 @@ data class Oppgave(
     val tilordnetRessurs: String? = null,
     val beskrivelse: String? = null,
     val temagruppe: String? = null,
-    val tema: Tema? = null,
     val behandlingstema: String? = null,
-    val oppgavetype: String? = null,
     val behandlingstype: String? = null,
     val mappeId: Optional<Long>? = null,
     val fristFerdigstillelse: LocalDate? = null,
-    val aktivDato: LocalDate? = null,
     val opprettetTidspunkt: String? = null,
     val opprettetAv: String? = null,
     val endretAv: String? = null,
     val ferdigstiltTidspunkt: String? = null,
     val endretTidspunkt: String? = null,
-    val prioritet: OppgavePrioritet? = null,
-    val status: StatusEnum? = null,
     private var metadata: MutableMap<String, String>? = null,
-) {
-    fun versjonEllerFeil(): Int = versjon ?: error("Mangler versjon på oppgave=$id")
+)
+
+@Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
+data class OppgaveIdentV2(
+    val ident: String?,
+    val gruppe: IdentGruppe?,
+)
+
+@Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
+enum class IdentGruppe {
+    AKTOERID,
+    FOLKEREGISTERIDENT,
+    NPID,
+    ORGNR,
+    SAMHANDLERNR,
 }
 
 enum class StatusEnum {
@@ -63,18 +78,16 @@ enum class StatusEnum {
     FEILREGISTRERT,
 }
 
-data class OppgaveIdentV2(
-    val ident: String?,
-    val gruppe: IdentGruppe?,
-)
-
-enum class IdentGruppe {
-    AKTOERID,
-    FOLKEREGISTERIDENT,
-    NPID,
-    ORGNR,
-    SAMHANDLERNR,
+enum class OppgaveBrukerType {
+    PERSON,
+    ARBIEDSGIVER,
+    SAMHANDLER,
 }
+
+data class OppgaveBruker(
+    val ident: String?,
+    val type: OppgaveBrukerType?,
+)
 
 // Disse burde oppdateres til de som er gjeldende for våre temaer, finnes på swagger på https://oppgave.dev.intern.nav.no/
 // ev bestille de som mangler
