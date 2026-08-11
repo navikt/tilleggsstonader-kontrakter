@@ -80,7 +80,7 @@ enum class StatusEnum {
 
 enum class OppgaveBrukerType {
     PERSON,
-    ARBIEDSGIVER,
+    ARBEIDSGIVER,
     SAMHANDLER,
 }
 
