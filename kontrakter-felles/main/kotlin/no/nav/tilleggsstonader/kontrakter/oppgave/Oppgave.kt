@@ -26,8 +26,6 @@ data class Oppgave(
     val prioritet: OppgavePrioritet? = null,
     val status: StatusEnum? = null,
     val aktivDato: LocalDate? = null,
-    @Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
-    val identer: List<OppgaveIdentV2>? = null,
     val bruker: OppgaveBruker? = null,
     val endretAvEnhetsnr: String? = null,
     val opprettetAvEnhetsnr: String? = null,
