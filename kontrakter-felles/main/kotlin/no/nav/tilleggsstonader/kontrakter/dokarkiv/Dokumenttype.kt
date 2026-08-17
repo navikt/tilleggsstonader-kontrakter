@@ -47,14 +47,16 @@ enum class Dokumenttype {
     DAGLIG_REISE_TSR_KJØRELISTE,
     DAGLIG_REISE_TSR_KJØRELISTE_VEDLEGG,
 
-    REISE_TIL_SAMLING_SØKNAD,
-    REISE_TIL_SAMLING_SØKNAD_VEDLEGG,
+    REISE_TIL_SAMLING_TSO_SØKNAD,
+    REISE_TIL_SAMLING_TSO_SØKNAD_VEDLEGG,
     REISE_TIL_SAMLING_TSO_VEDTAKSBREV,
     REISE_TIL_SAMLING_TSO_FRITTSTÅENDE_BREV,
     REISE_TIL_SAMLING_TSO_INTERNT_VEDTAK,
     REISE_TIL_SAMLING_TSO_KLAGE_VEDTAKSBREV,
     REISE_TIL_SAMLING_TSO_KLAGE_INTERNT_VEDTAK,
 
+    REISE_TIL_SAMLING_TSR_SØKNAD,
+    REISE_TIL_SAMLING_TSR_SØKNAD_VEDLEGG,
     REISE_TIL_SAMLING_TSR_VEDTAKSBREV,
     REISE_TIL_SAMLING_TSR_FRITTSTÅENDE_BREV,
     REISE_TIL_SAMLING_TSR_INTERNT_VEDTAK,
@@ -155,8 +157,8 @@ val Stønadstype.dokumenttyper: Dokumentyper
                 )
             Stønadstype.REISE_TIL_SAMLING_TSO ->
                 Dokumentyper(
-                    søknad = Dokumenttype.REISE_TIL_SAMLING_SØKNAD,
-                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_SØKNAD_VEDLEGG,
+                    søknad = Dokumenttype.REISE_TIL_SAMLING_TSO_SØKNAD,
+                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_TSO_SØKNAD_VEDLEGG,
                     vedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSO_VEDTAKSBREV,
                     frittståendeBrev = Dokumenttype.REISE_TIL_SAMLING_TSO_FRITTSTÅENDE_BREV,
                     interntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSO_INTERNT_VEDTAK,
@@ -167,8 +169,8 @@ val Stønadstype.dokumenttyper: Dokumentyper
                 )
             Stønadstype.REISE_TIL_SAMLING_TSR ->
                 Dokumentyper(
-                    søknad = Dokumenttype.REISE_TIL_SAMLING_SØKNAD,
-                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_SØKNAD_VEDLEGG,
+                    søknad = Dokumenttype.REISE_TIL_SAMLING_TSR_SØKNAD,
+                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_TSR_SØKNAD_VEDLEGG,
                     vedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSR_VEDTAKSBREV,
                     frittståendeBrev = Dokumenttype.REISE_TIL_SAMLING_TSR_FRITTSTÅENDE_BREV,
                     interntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSR_INTERNT_VEDTAK,
