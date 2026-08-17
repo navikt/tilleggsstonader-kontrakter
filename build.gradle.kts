@@ -7,7 +7,7 @@ plugins {
     `maven-publish`
     `java-library`
     id("com.diffplug.spotless") version "8.9.0"
-    id("io.github.ben-manes.versions") version "0.59.0"
+    id("io.github.ben-manes.versions") version "0.60.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.19"
 }
 
@@ -52,7 +52,7 @@ subprojects {
     }
 
     dependencies {
-        testImplementation(platform("org.junit:junit-bom:6.1.2"))
+        testImplementation(platform("org.junit:junit-bom:6.1.3"))
         testImplementation("org.junit.jupiter:junit-jupiter")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
