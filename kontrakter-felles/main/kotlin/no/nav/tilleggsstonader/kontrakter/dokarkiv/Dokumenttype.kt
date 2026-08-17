@@ -55,6 +55,12 @@ enum class Dokumenttype {
     REISE_TIL_SAMLING_TSO_KLAGE_VEDTAKSBREV,
     REISE_TIL_SAMLING_TSO_KLAGE_INTERNT_VEDTAK,
 
+    REISE_TIL_SAMLING_TSR_VEDTAKSBREV,
+    REISE_TIL_SAMLING_TSR_FRITTSTÅENDE_BREV,
+    REISE_TIL_SAMLING_TSR_INTERNT_VEDTAK,
+    REISE_TIL_SAMLING_TSR_KLAGE_VEDTAKSBREV,
+    REISE_TIL_SAMLING_TSR_KLAGE_INTERNT_VEDTAK,
+
     FLYTTING_TSO_SØKNAD,
     FLYTTING_TSO_SØKNAD_VEDLEGG,
     FLYTTING_TSO_VEDTAKSBREV,
@@ -156,6 +162,18 @@ val Stønadstype.dokumenttyper: Dokumentyper
                     interntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSO_INTERNT_VEDTAK,
                     klageVedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSO_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSO_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = null,
+                    kjørelisteVedlegg = null,
+                )
+            Stønadstype.REISE_TIL_SAMLING_TSR ->
+                Dokumentyper(
+                    søknad = Dokumenttype.REISE_TIL_SAMLING_SØKNAD,
+                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_SØKNAD_VEDLEGG,
+                    vedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSR_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.REISE_TIL_SAMLING_TSR_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSR_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSR_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSR_KLAGE_INTERNT_VEDTAK,
                     kjøreliste = null,
                     kjørelisteVedlegg = null,
                 )

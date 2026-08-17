@@ -46,7 +46,11 @@ enum class Rettighet(
     FLYTTING("TSOFLYTT", "Flytting tilleggsstønad", Stønadstype.FLYTTING_TSO),
     LÆREMIDLER_ARBEIDSSSØKERE("TSRLMIDLER", "Læremidler arbeidssøkere", Stønadstype.LÆREMIDLER),
     LÆREMIDLER("TSOLMIDLER", "Læremidler tilleggsstønad", Stønadstype.LÆREMIDLER),
-    REISE_OBLIGATORISK_SAMLING_ARBEIDSSSØKERE("TSRREISOBL", "Reise til obligatorisk samling arbeidssøkere"),
+    REISE_OBLIGATORISK_SAMLING_ARBEIDSSSØKERE(
+        "TSRREISOBL",
+        "Reise til obligatorisk samling arbeidssøkere",
+        Stønadstype.REISE_TIL_SAMLING_TSR,
+    ),
     REISE_OBLIGATORISK_SAMLING("TSOREISOBL", "Reise til obligatorisk samling tilleggsstønad", Stønadstype.REISE_TIL_SAMLING_TSO),
     REISE_AKTIVITET_HJEMREISE_ARBEIDSSSØKERE(
         "TSRREISAKT",

@@ -21,7 +21,7 @@ fun Stønadstype.tilSkjematype() =
         Stønadstype.LÆREMIDLER -> Skjematype.SØKNAD_LÆREMIDLER
         Stønadstype.BOUTGIFTER -> Skjematype.SØKNAD_BOUTGIFTER
         Stønadstype.DAGLIG_REISE_TSO, Stønadstype.DAGLIG_REISE_TSR -> Skjematype.SØKNAD_DAGLIG_REISE
-        Stønadstype.REISE_TIL_SAMLING_TSO -> Skjematype.SØKNAD_REISE_TIL_SAMLING
+        Stønadstype.REISE_TIL_SAMLING_TSO, Stønadstype.REISE_TIL_SAMLING_TSR -> Skjematype.SØKNAD_REISE_TIL_SAMLING
         Stønadstype.FLYTTING_TSO, Stønadstype.FLYTTING_TSR -> Skjematype.SØKNAD_FLYTTING
     }
 
@@ -36,6 +36,6 @@ fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
         Skjematype.SØKNAD_BOUTGIFTER -> setOf(Stønadstype.BOUTGIFTER)
         Skjematype.SØKNAD_LÆREMIDLER -> setOf(Stønadstype.LÆREMIDLER)
         Skjematype.SØKNAD_BARNETILSYN -> setOf(Stønadstype.BARNETILSYN)
-        Skjematype.SØKNAD_REISE_TIL_SAMLING -> setOf(Stønadstype.REISE_TIL_SAMLING_TSO)
+        Skjematype.SØKNAD_REISE_TIL_SAMLING -> setOf(Stønadstype.REISE_TIL_SAMLING_TSO, Stønadstype.REISE_TIL_SAMLING_TSR)
         Skjematype.SØKNAD_FLYTTING -> setOf(Stønadstype.FLYTTING_TSO, Stønadstype.FLYTTING_TSR)
     }
