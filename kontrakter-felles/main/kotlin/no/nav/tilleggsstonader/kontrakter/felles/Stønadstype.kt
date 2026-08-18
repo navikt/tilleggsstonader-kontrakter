@@ -32,11 +32,25 @@ enum class Stønadstype(
         visningsnavn = "støtte ved reise til samling",
         grunnlagAntallMånederBakITiden = 6,
     ),
+    REISE_TIL_SAMLING_TSR(
+        visningsnavn = "støtte ved reise til samling",
+        grunnlagAntallMånederBakITiden = 6,
+    ),
+    FLYTTING_TSO(
+        visningsnavn = "støtte til flytting",
+        grunnlagAntallMånederBakITiden = 6,
+    ),
+    FLYTTING_TSR(
+        visningsnavn = "støtte til flytting",
+        grunnlagAntallMånederBakITiden = 6,
+    ),
 }
 
 fun Stønadstype.gjelderDagligReise() = Stønadstype.DAGLIG_REISE_TSO == this || Stønadstype.DAGLIG_REISE_TSR == this
 
-fun Stønadstype.gjelderReiseTilSamling() = Stønadstype.REISE_TIL_SAMLING_TSO == this
+fun Stønadstype.gjelderReiseTilSamling() = Stønadstype.REISE_TIL_SAMLING_TSO == this || Stønadstype.REISE_TIL_SAMLING_TSR == this
+
+fun Stønadstype.gjelderFlytting() = Stønadstype.FLYTTING_TSO == this || Stønadstype.FLYTTING_TSR == this
 
 fun Stønadstype.behandlendeEnhet() =
     when (this) {
@@ -45,7 +59,10 @@ fun Stønadstype.behandlendeEnhet() =
         Stønadstype.BOUTGIFTER,
         Stønadstype.DAGLIG_REISE_TSO,
         Stønadstype.REISE_TIL_SAMLING_TSO,
+        Stønadstype.REISE_TIL_SAMLING_TSR,
+        Stønadstype.FLYTTING_TSO,
         -> Enhet.NAV_ARBEID_OG_YTELSER_TILLEGGSSTØNAD
         Stønadstype.DAGLIG_REISE_TSR,
+        Stønadstype.FLYTTING_TSR,
         -> Enhet.NAV_TILTAK_OSLO
     }

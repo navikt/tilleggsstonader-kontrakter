@@ -47,13 +47,37 @@ enum class Dokumenttype {
     DAGLIG_REISE_TSR_KJØRELISTE,
     DAGLIG_REISE_TSR_KJØRELISTE_VEDLEGG,
 
-    REISE_TIL_SAMLING_SØKNAD,
-    REISE_TIL_SAMLING_SØKNAD_VEDLEGG,
+    REISE_TIL_SAMLING_TSO_SØKNAD,
+    REISE_TIL_SAMLING_TSO_SØKNAD_VEDLEGG,
     REISE_TIL_SAMLING_TSO_VEDTAKSBREV,
     REISE_TIL_SAMLING_TSO_FRITTSTÅENDE_BREV,
     REISE_TIL_SAMLING_TSO_INTERNT_VEDTAK,
     REISE_TIL_SAMLING_TSO_KLAGE_VEDTAKSBREV,
     REISE_TIL_SAMLING_TSO_KLAGE_INTERNT_VEDTAK,
+
+    REISE_TIL_SAMLING_TSR_SØKNAD,
+    REISE_TIL_SAMLING_TSR_SØKNAD_VEDLEGG,
+    REISE_TIL_SAMLING_TSR_VEDTAKSBREV,
+    REISE_TIL_SAMLING_TSR_FRITTSTÅENDE_BREV,
+    REISE_TIL_SAMLING_TSR_INTERNT_VEDTAK,
+    REISE_TIL_SAMLING_TSR_KLAGE_VEDTAKSBREV,
+    REISE_TIL_SAMLING_TSR_KLAGE_INTERNT_VEDTAK,
+
+    FLYTTING_TSO_SØKNAD,
+    FLYTTING_TSO_SØKNAD_VEDLEGG,
+    FLYTTING_TSO_VEDTAKSBREV,
+    FLYTTING_TSO_FRITTSTÅENDE_BREV,
+    FLYTTING_TSO_INTERNT_VEDTAK,
+    FLYTTING_TSO_KLAGE_VEDTAKSBREV,
+    FLYTTING_TSO_KLAGE_INTERNT_VEDTAK,
+
+    FLYTTING_TSR_SØKNAD,
+    FLYTTING_TSR_SØKNAD_VEDLEGG,
+    FLYTTING_TSR_VEDTAKSBREV,
+    FLYTTING_TSR_FRITTSTÅENDE_BREV,
+    FLYTTING_TSR_INTERNT_VEDTAK,
+    FLYTTING_TSR_KLAGE_VEDTAKSBREV,
+    FLYTTING_TSR_KLAGE_INTERNT_VEDTAK,
 }
 
 data class Dokumentyper(
@@ -133,13 +157,49 @@ val Stønadstype.dokumenttyper: Dokumentyper
                 )
             Stønadstype.REISE_TIL_SAMLING_TSO ->
                 Dokumentyper(
-                    søknad = Dokumenttype.REISE_TIL_SAMLING_SØKNAD,
-                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_SØKNAD_VEDLEGG,
+                    søknad = Dokumenttype.REISE_TIL_SAMLING_TSO_SØKNAD,
+                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_TSO_SØKNAD_VEDLEGG,
                     vedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSO_VEDTAKSBREV,
                     frittståendeBrev = Dokumenttype.REISE_TIL_SAMLING_TSO_FRITTSTÅENDE_BREV,
                     interntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSO_INTERNT_VEDTAK,
                     klageVedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSO_KLAGE_VEDTAKSBREV,
                     klageInterntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSO_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = null,
+                    kjørelisteVedlegg = null,
+                )
+            Stønadstype.REISE_TIL_SAMLING_TSR ->
+                Dokumentyper(
+                    søknad = Dokumenttype.REISE_TIL_SAMLING_TSR_SØKNAD,
+                    søknadVedlegg = Dokumenttype.REISE_TIL_SAMLING_TSR_SØKNAD_VEDLEGG,
+                    vedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSR_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.REISE_TIL_SAMLING_TSR_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSR_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.REISE_TIL_SAMLING_TSR_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.REISE_TIL_SAMLING_TSR_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = null,
+                    kjørelisteVedlegg = null,
+                )
+            Stønadstype.FLYTTING_TSO ->
+                Dokumentyper(
+                    søknad = Dokumenttype.FLYTTING_TSO_SØKNAD,
+                    søknadVedlegg = Dokumenttype.FLYTTING_TSO_SØKNAD_VEDLEGG,
+                    vedtaksbrev = Dokumenttype.FLYTTING_TSO_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.FLYTTING_TSO_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.FLYTTING_TSO_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.FLYTTING_TSO_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.FLYTTING_TSO_KLAGE_INTERNT_VEDTAK,
+                    kjøreliste = null,
+                    kjørelisteVedlegg = null,
+                )
+            Stønadstype.FLYTTING_TSR ->
+                Dokumentyper(
+                    søknad = Dokumenttype.FLYTTING_TSR_SØKNAD,
+                    søknadVedlegg = Dokumenttype.FLYTTING_TSR_SØKNAD_VEDLEGG,
+                    vedtaksbrev = Dokumenttype.FLYTTING_TSR_VEDTAKSBREV,
+                    frittståendeBrev = Dokumenttype.FLYTTING_TSR_FRITTSTÅENDE_BREV,
+                    interntVedtak = Dokumenttype.FLYTTING_TSR_INTERNT_VEDTAK,
+                    klageVedtaksbrev = Dokumenttype.FLYTTING_TSR_KLAGE_VEDTAKSBREV,
+                    klageInterntVedtak = Dokumenttype.FLYTTING_TSR_KLAGE_INTERNT_VEDTAK,
                     kjøreliste = null,
                     kjørelisteVedlegg = null,
                 )

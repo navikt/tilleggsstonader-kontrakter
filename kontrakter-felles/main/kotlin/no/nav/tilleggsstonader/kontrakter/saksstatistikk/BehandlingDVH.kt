@@ -175,6 +175,9 @@ enum class SakYtelseDvh {
     TILLEGG_DAGLIG_REISE_TSO,
     TILLEGG_DAGLIG_REISE_TSR,
     TILLEGG_REISE_TIL_SAMLING_TSO,
+    TILLEGG_REISE_TIL_SAMLING_TSR,
+    TILLEGG_FLYTTING_TSO,
+    TILLEGG_FLYTTING_TSR,
     ;
 
     companion object {
@@ -187,6 +190,9 @@ enum class SakYtelseDvh {
                 Stønadstype.DAGLIG_REISE_TSO -> TILLEGG_DAGLIG_REISE_TSO
                 Stønadstype.DAGLIG_REISE_TSR -> TILLEGG_DAGLIG_REISE_TSR
                 Stønadstype.REISE_TIL_SAMLING_TSO -> TILLEGG_REISE_TIL_SAMLING_TSO
+                Stønadstype.REISE_TIL_SAMLING_TSR -> TILLEGG_REISE_TIL_SAMLING_TSR
+                Stønadstype.FLYTTING_TSO -> TILLEGG_FLYTTING_TSO
+                Stønadstype.FLYTTING_TSR -> TILLEGG_FLYTTING_TSR
             }
     }
 }
