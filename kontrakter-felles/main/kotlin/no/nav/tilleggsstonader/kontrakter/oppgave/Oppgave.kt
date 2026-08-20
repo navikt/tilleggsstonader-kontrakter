@@ -53,21 +53,6 @@ data class Oppgave(
     private var metadata: MutableMap<String, String>? = null,
 )
 
-@Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
-data class OppgaveIdentV2(
-    val ident: String?,
-    val gruppe: IdentGruppe?,
-)
-
-@Deprecated("Skal ikke brukes, foretrekk bruker og OppgaveBruker")
-enum class IdentGruppe {
-    AKTOERID,
-    FOLKEREGISTERIDENT,
-    NPID,
-    ORGNR,
-    SAMHANDLERNR,
-}
-
 enum class StatusEnum {
     OPPRETTET,
     AAPNET,
