@@ -16,8 +16,6 @@ value class PersonIdent(
 
 data class OpprettOppgaveRequest(
     val personident: PersonIdent? = null,
-    @Deprecated("Skal ikke brukes, foretrekk personident")
-    val ident: OppgaveIdentV2? = null,
     val tema: Tema,
     val oppgavetype: Oppgavetype,
     val prioritet: OppgavePrioritet = OppgavePrioritet.NORM,
@@ -32,10 +30,4 @@ data class OpprettOppgaveRequest(
     val behandlesAvApplikasjon: String? = null,
     val mappeId: Long? = null,
     val saksreferanse: String? = null,
-) {
-    init {
-        require(ident != null || personident != null) {
-            "Enten ident eller personident må være satt"
-        }
-    }
-}
+)
