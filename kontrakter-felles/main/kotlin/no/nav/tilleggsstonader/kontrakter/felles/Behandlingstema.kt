@@ -15,6 +15,9 @@ enum class Behandlingstema(
     ReiseTilSamlingTSR("ab0293"), // Reise til samling TSR
     FlyttingTSO("ab0290"), // Flytting TSO
     FlyttingTSR("ab0289"), // Flytting TSR
+
+    StøtteTilReiseOppstartAvslutningHjemreiseTSO("ab0296"), // Støtte til reise oppstart/avslutning/hjemreise TSO
+    StøtteTilReiseOppstartAvslutningHjemreiseTSR("ab0295"), // Støtte til reise oppstart/avslutning/hjemreise TSR
     Feilutbetaling("ab0006"),
     Tilbakebetaling("ab0007"),
     ;
@@ -39,4 +42,6 @@ fun Stønadstype.tilBehandlingstema(): Behandlingstema =
         Stønadstype.REISE_TIL_SAMLING_TSR -> Behandlingstema.ReiseTilSamlingTSR
         Stønadstype.FLYTTING_TSO -> Behandlingstema.FlyttingTSO
         Stønadstype.FLYTTING_TSR -> Behandlingstema.FlyttingTSR
+        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO -> Behandlingstema.StøtteTilReiseOppstartAvslutningHjemreiseTSO
+        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR -> Behandlingstema.StøtteTilReiseOppstartAvslutningHjemreiseTSR
     }

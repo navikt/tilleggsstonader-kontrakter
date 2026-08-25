@@ -26,4 +26,6 @@ fun Stønadstype.tilTema(): Tema =
         Stønadstype.REISE_TIL_SAMLING_TSR -> Tema.TSR
         Stønadstype.FLYTTING_TSO -> Tema.TSO
         Stønadstype.FLYTTING_TSR -> Tema.TSR
+        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO -> Tema.TSO
+        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR -> Tema.TSR
     }
