@@ -9,12 +9,6 @@ import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 data class UtdanningAvsnitt(
     val aktiviteter: EnumFlereValgFelt<String>? = null,
     val annenUtdanning: EnumFelt<AnnenUtdanningType>? = null,
-    @Deprecated("Spørsmålet skal fjernes")
-    val mottarUtstyrsstipend: EnumFelt<JaNei>? = null,
-    @Deprecated("Spørsmålet skal samles i harRettTilUtstyrsstipend")
-    val erLærlingEllerLiknende: EnumFelt<JaNei>? = null,
-    @Deprecated("Spørsmålet skal samles i harRettTilUtstyrsstipend")
-    val harTidligereFullførtVgs: EnumFelt<JaNei>? = null,
     val harRettTilUtstyrsstipend: HarRettTilUtstyrsstipend? = null,
     val harFunksjonsnedsettelse: EnumFelt<JaNei>,
 ) : Avsnitt {
@@ -27,6 +21,7 @@ data class UtdanningAvsnitt(
 data class HarRettTilUtstyrsstipend(
     val erLærlingEllerLiknende: EnumFelt<JaNei>? = null,
     val harTidligereFullførtVgs: EnumFelt<JaNei>? = null,
+    val tarOpplæringVgsSamtidig: EnumFelt<JaNei>? = null,
 )
 
 enum class AnnenUtdanningType {
