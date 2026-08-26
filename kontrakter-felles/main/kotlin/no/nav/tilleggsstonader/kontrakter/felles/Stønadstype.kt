@@ -45,12 +45,10 @@ enum class Stønadstype(
         grunnlagAntallMånederBakITiden = 6,
     ),
     STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO(
-        // TODO: avklar visningsnavn
         visningsnavn = "støtte til reise ved oppstart, avslutning og hjemreise",
         grunnlagAntallMånederBakITiden = 6,
     ),
     STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR(
-        // TODO: avklar visningsnavn
         visningsnavn = "støtte til reise ved oppstart, avslutning og hjemreise",
         grunnlagAntallMånederBakITiden = 6,
     ),
