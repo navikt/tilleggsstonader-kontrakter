@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "2.4.10"
     `maven-publish`
     `java-library`
-    id("com.diffplug.spotless") version "8.9.0"
+    id("com.diffplug.spotless") version "8.10.0"
     id("io.github.ben-manes.versions") version "0.61.0"
     id("se.patrikerdes.use-latest-versions") version "0.2.19"
 }
