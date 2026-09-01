@@ -44,11 +44,11 @@ enum class Stønadstype(
         visningsnavn = "støtte til flytting",
         grunnlagAntallMånederBakITiden = 6,
     ),
-    STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO(
+    REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO(
         visningsnavn = "støtte til reise ved oppstart, avslutning og hjemreise",
         grunnlagAntallMånederBakITiden = 6,
     ),
-    STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR(
+    REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR(
         visningsnavn = "støtte til reise ved oppstart, avslutning og hjemreise",
         grunnlagAntallMånederBakITiden = 6,
     ),
@@ -60,9 +60,9 @@ fun Stønadstype.gjelderReiseTilSamling() = Stønadstype.REISE_TIL_SAMLING_TSO =
 
 fun Stønadstype.gjelderFlytting() = Stønadstype.FLYTTING_TSO == this || Stønadstype.FLYTTING_TSR == this
 
-fun Stønadstype.gjelderStøtteTilReiseOppstartAvslutningHjemreise() =
-    Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO == this ||
-        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR == this
+fun Stønadstype.gjelderReiseOppstartAvslutningHjemreise() =
+    Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO == this ||
+        Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR == this
 
 fun Stønadstype.behandlendeEnhet() =
     when (this) {
@@ -73,10 +73,10 @@ fun Stønadstype.behandlendeEnhet() =
         Stønadstype.REISE_TIL_SAMLING_TSO,
         Stønadstype.REISE_TIL_SAMLING_TSR,
         Stønadstype.FLYTTING_TSO,
-        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO,
+        Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO,
         -> Enhet.NAV_ARBEID_OG_YTELSER_TILLEGGSSTØNAD
         Stønadstype.DAGLIG_REISE_TSR,
         Stønadstype.FLYTTING_TSR,
-        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR,
+        Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR,
         -> Enhet.NAV_TILTAK_OSLO
     }

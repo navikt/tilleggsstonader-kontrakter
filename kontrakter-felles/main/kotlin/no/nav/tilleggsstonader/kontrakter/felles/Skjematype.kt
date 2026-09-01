@@ -8,7 +8,7 @@ enum class Skjematype {
     DAGLIG_REISE_KJØRELISTE,
     SØKNAD_REISE_TIL_SAMLING,
     SØKNAD_FLYTTING,
-    SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE,
+    SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE,
     ;
 
     fun erSøknad() =
@@ -20,7 +20,7 @@ enum class Skjematype {
                 SØKNAD_DAGLIG_REISE,
                 SØKNAD_REISE_TIL_SAMLING,
                 SØKNAD_FLYTTING,
-                SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE,
+                SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE,
             )
 }
 
@@ -32,9 +32,9 @@ fun Stønadstype.tilSkjematype() =
         Stønadstype.DAGLIG_REISE_TSO, Stønadstype.DAGLIG_REISE_TSR -> Skjematype.SØKNAD_DAGLIG_REISE
         Stønadstype.REISE_TIL_SAMLING_TSO, Stønadstype.REISE_TIL_SAMLING_TSR -> Skjematype.SØKNAD_REISE_TIL_SAMLING
         Stønadstype.FLYTTING_TSO, Stønadstype.FLYTTING_TSR -> Skjematype.SØKNAD_FLYTTING
-        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO,
-        Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR,
-        -> Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE
+        Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO,
+        Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR,
+        -> Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE
     }
 
 fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
@@ -50,9 +50,9 @@ fun Skjematype.tilStønadstyper(): Set<Stønadstype> =
         Skjematype.SØKNAD_BARNETILSYN -> setOf(Stønadstype.BARNETILSYN)
         Skjematype.SØKNAD_REISE_TIL_SAMLING -> setOf(Stønadstype.REISE_TIL_SAMLING_TSO, Stønadstype.REISE_TIL_SAMLING_TSR)
         Skjematype.SØKNAD_FLYTTING -> setOf(Stønadstype.FLYTTING_TSO, Stønadstype.FLYTTING_TSR)
-        Skjematype.SØKNAD_STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE ->
+        Skjematype.SØKNAD_REISE_OPPSTART_AVSLUTNING_HJEMREISE ->
             setOf(
-                Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO,
-                Stønadstype.STØTTE_TIL_REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR,
+                Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO,
+                Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR,
             )
     }
