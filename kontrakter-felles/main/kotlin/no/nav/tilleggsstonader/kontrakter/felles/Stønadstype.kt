@@ -71,11 +71,11 @@ fun Stønadstype.behandlendeEnhet() =
         Stønadstype.BOUTGIFTER,
         Stønadstype.DAGLIG_REISE_TSO,
         Stønadstype.REISE_TIL_SAMLING_TSO,
-        Stønadstype.REISE_TIL_SAMLING_TSR,
         Stønadstype.FLYTTING_TSO,
         Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSO,
         -> Enhet.NAV_ARBEID_OG_YTELSER_TILLEGGSSTØNAD
         Stønadstype.DAGLIG_REISE_TSR,
+        Stønadstype.REISE_TIL_SAMLING_TSR,
         Stønadstype.FLYTTING_TSR,
         Stønadstype.REISE_OPPSTART_AVSLUTNING_HJEMREISE_TSR,
         -> Enhet.NAV_TILTAK_OSLO
