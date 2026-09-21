@@ -56,6 +56,8 @@ data class UtgifterNyBolig(
     val andelUtgifterBolig: Int?,
     val harHoyereUtgifterPaNyttBosted: JaNeiType,
     val mottarBostotte: JaNeiType,
+    val andelUtgifterBoligHjemsted: Int?,
+    val andelUtgifterBoligAktivitetssted: Int?,
 )
 
 data class UtgifterFlereSteder(
