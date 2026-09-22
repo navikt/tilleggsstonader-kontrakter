@@ -162,7 +162,6 @@ private enum class Søknadstype(
  * Definisjon av skjema
  */
 private data class FyllUtSendInnSkjema(
-    val name: String,
     val revision: String,
     val skjemanummer: String,
     val components: List<SkjemaKomponent>,

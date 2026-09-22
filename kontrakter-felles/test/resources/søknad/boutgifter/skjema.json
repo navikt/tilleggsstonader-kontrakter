@@ -1,6 +1,5 @@
 {
-  "name" : "Pengestøtte til bolig eller overnatting",
-  "revision" : "314",
+  "revision" : "329",
   "skjemanummer" : "NAV 11-12.19",
   "components" : [ {
     "key" : "personopplysninger",
@@ -211,6 +210,21 @@
       "conditional" : {
         "eq" : "nei",
         "when" : "harNedsattArbeidsevne",
+        "isRequired" : false
+      },
+      "customConditional" : "",
+      "validate" : {
+        "required" : false
+      }
+    }, {
+      "key" : "alertstripe2",
+      "label" : "",
+      "content" : "<p>Fra 1. juli 2026 er reglene for enslig mor eller far endret.</p><p>Du kan fortsatt få tilleggsstønader hvis du har rett til overgangsstønad etter reglene som gjaldt før 1. juli 2026, eller etter overgangsreglene.</p><p>Hvis du har rett til overgangsstønad etter de nye reglene som gjelder fra 1. juli 2026, har du ikke rett til tilleggsstønader.</p>",
+      "type" : "alertstripe",
+      "multiple" : false,
+      "conditional" : {
+        "eq" : "overgangsstonad",
+        "when" : "hovedytelse",
         "isRequired" : false
       },
       "customConditional" : "",
@@ -868,43 +882,6 @@
             "type" : "container",
             "tree" : true,
             "components" : [ {
-              "key" : "delerBoutgifter",
-              "label" : "Deler du utgiftene til boligen på aktivitetsstedet med andre?",
-              "type" : "radiopanel",
-              "values" : [ {
-                "label" : "Ja",
-                "value" : "ja"
-              }, {
-                "label" : "Nei",
-                "value" : "nei"
-              } ],
-              "multiple" : false,
-              "conditional" : {
-                "eq" : "",
-                "when" : null,
-                "isRequired" : true
-              },
-              "customConditional" : "",
-              "validate" : {
-                "required" : true
-              }
-            }, {
-              "key" : "andelUtgifterBolig",
-              "label" : "Hvor mye er din andel (i kroner) av de månedlige utgiftene til bolig?",
-              "type" : "number",
-              "inputType" : "numeric",
-              "multiple" : false,
-              "conditional" : {
-                "eq" : "ja",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterNyBolig.delerBoutgifter",
-                "isRequired" : false
-              },
-              "customConditional" : "",
-              "validate" : {
-                "required" : true,
-                "min" : 0
-              }
-            }, {
               "key" : "harHoyereUtgifterPaNyttBosted",
               "label" : "Har du høyere utgifter til bolig på ditt nye bosted?",
               "type" : "radiopanel",
@@ -941,35 +918,103 @@
                 "required" : false
               }
             }, {
-              "key" : "mottarBostotte",
-              "label" : "Mottar du eller har du søkt om bostøtte? ",
-              "type" : "radiopanel",
-              "values" : [ {
-                "label" : "Ja",
-                "value" : "ja"
+              "key" : "fordelingUtgifter",
+              "label" : "Utgiftsfordeling",
+              "type" : "container",
+              "tree" : true,
+              "components" : [ {
+                "key" : "delerBoutgifter",
+                "label" : "Deler du utgifter til bolig med andre?",
+                "type" : "selectboxes",
+                "values" : [ {
+                  "label" : "Ja, på hjemstedet",
+                  "value" : "hjemsted"
+                }, {
+                  "label" : "Ja, på aktivitetssted",
+                  "value" : "aktivitetssted"
+                }, {
+                  "label" : "Nei, ingen av stedene",
+                  "value" : "nei"
+                } ],
+                "inputType" : "radio",
+                "multiple" : false,
+                "conditional" : {
+                  "eq" : "",
+                  "when" : null,
+                  "isRequired" : true
+                },
+                "validate" : {
+                  "required" : true
+                }
               }, {
-                "label" : "Nei",
-                "value" : "nei"
+                "key" : "andelUtgifterBoligHjemsted",
+                "label" : "Hvor mye hadde du i månedlige utgifter til boligen på hjemstedet?",
+                "type" : "number",
+                "inputType" : "numeric",
+                "multiple" : false,
+                "conditional" : {
+                  "eq" : "",
+                  "when" : null,
+                  "isRequired" : true
+                },
+                "validate" : {
+                  "required" : true,
+                  "min" : 0
+                }
+              }, {
+                "key" : "andelUtgifterBoligAktivitetssted",
+                "label" : "Hvor mye har du i månedlige utgifter til bolig på aktivitetsstedet?",
+                "type" : "number",
+                "inputType" : "numeric",
+                "multiple" : false,
+                "conditional" : {
+                  "eq" : "",
+                  "when" : null,
+                  "isRequired" : true
+                },
+                "validate" : {
+                  "required" : true,
+                  "min" : 0
+                }
+              }, {
+                "key" : "mottarBostotte",
+                "label" : "Mottar du eller har du søkt om bostøtte? ",
+                "type" : "radiopanel",
+                "values" : [ {
+                  "label" : "Ja",
+                  "value" : "ja"
+                }, {
+                  "label" : "Nei",
+                  "value" : "nei"
+                } ],
+                "multiple" : false,
+                "conditional" : {
+                  "eq" : "",
+                  "when" : null,
+                  "isRequired" : true
+                },
+                "validate" : {
+                  "required" : true
+                }
+              }, {
+                "key" : "alertstripe2",
+                "label" : "",
+                "content" : "<p>Du kan ikke få denne pengestøtten for en bolig du også mottar bostøtte for. Du kan fortsatt søke, men du vil mest sannsynlig få avslag.&nbsp;</p>",
+                "type" : "alertstripe",
+                "multiple" : false,
+                "conditional" : {
+                  "eq" : "ja",
+                  "when" : "boligEllerOvernatting.fasteUtgifter.utgifterNyBolig.mottarBostotte",
+                  "isRequired" : false
+                },
+                "validate" : {
+                  "required" : false
+                }
               } ],
               "multiple" : false,
               "conditional" : {
-                "eq" : "",
-                "when" : "",
-                "isRequired" : true
-              },
-              "customConditional" : "",
-              "validate" : {
-                "required" : true
-              }
-            }, {
-              "key" : "alertstripe2",
-              "label" : "",
-              "content" : "<p>Du kan ikke få denne pengestøtten for en bolig du også mottar bostøtte for. Du kan fortsatt søke, men du vil mest sannsynlig få avslag.&nbsp;</p>",
-              "type" : "alertstripe",
-              "multiple" : false,
-              "conditional" : {
                 "eq" : "ja",
-                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterNyBolig.mottarBostotte",
+                "when" : "boligEllerOvernatting.fasteUtgifter.utgifterNyBolig.harHoyereUtgifterPaNyttBosted",
                 "isRequired" : false
               },
               "customConditional" : "",
@@ -1181,7 +1226,7 @@
       }
     }, {
       "key" : "dokumentasjonAvBoutgifterPaHjemstedetDitt",
-      "label" : "Dokumentasjon av utgifter til boligen på nåværende/tidligere hjemsted",
+      "label" : "Dokumentasjon av utgifter til boligen på tidligere hjemsted",
       "type" : "attachment",
       "multiple" : false,
       "conditional" : {
@@ -1195,7 +1240,7 @@
       }
     }, {
       "key" : "dokumentasjonAvBoutgifterNyBolig",
-      "label" : "Dokumentasjon av utgifter til ny bolig",
+      "label" : "Dokumentasjon av utgifter til ny bolig på aktivitetssted",
       "type" : "attachment",
       "multiple" : false,
       "conditional" : {
