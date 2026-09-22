@@ -24,10 +24,8 @@
       },
       "aktiviteter": {
         "aktiviteterOgMaalgruppe": {
-          "aktivitet": {
-            "aktivitetId": "ingenAktivitet",
-            "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
-          }
+          "aktivitetId": "ingenAktivitet",
+          "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
         },
         "arbeidsrettetAktivitet": "tiltakArbeidsrettetUtredning"
       },
@@ -36,10 +34,17 @@
         "fasteUtgifter": {
           "harUtgifterTilBoligToSteder": "nyBolig",
           "utgifterNyBolig": {
-            "delerBoutgifter": "ja",
-            "andelUtgifterBolig": 1000,
             "harHoyereUtgifterPaNyttBosted": "ja",
-            "mottarBostotte": "nei"
+            "fordelingUtgifter": {
+              "delerBoutgifter": {
+                "hjemsted": true,
+                "aktivitetssted": true,
+                "nei": true
+              },
+              "andelUtgifterBoligHjemsted": 100,
+              "andelUtgifterBoligAktivitetssted": 100,
+              "mottarBostotte": "ja"
+            }
           }
         },
         "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "ja"

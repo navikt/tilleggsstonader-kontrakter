@@ -24,22 +24,20 @@
       },
       "aktiviteter": {
         "aktiviteterOgMaalgruppe": {
-          "aktivitet": {
-            "aktivitetId": "134120740",
-            "maalgruppe": {
-              "maalgruppetype": "NEDSARBEVN",
-              "gyldighetsperiode": {
-                "fom": "2025-03-01",
-                "tom": "2025-05-31"
-              },
-              "maalgruppenavn": "Person med nedsatt arbeidsevne pga. sykdom"
+          "aktivitetId": "134120740",
+          "maalgruppe": {
+            "maalgruppetype": "NEDSARBEVN",
+            "gyldighetsperiode": {
+              "fom": "2025-03-01",
+              "tom": "2025-05-31"
             },
-            "periode": {
-              "fom": "2025-03-11",
-              "tom": "2025-09-30"
-            },
-            "text": "Arbeidstrening: 11. mars 2025 - 30. september 2025"
-          }
+            "maalgruppenavn": "Person med nedsatt arbeidsevne pga. sykdom"
+          },
+          "periode": {
+            "fom": "2025-03-11",
+            "tom": "2025-09-30"
+          },
+          "text": "Arbeidstrening: 11. mars 2025 - 30. september 2025"
         }
       },
       "boligEllerOvernatting": {
@@ -47,10 +45,17 @@
         "fasteUtgifter": {
           "harUtgifterTilBoligToSteder": "nyBolig",
           "utgifterNyBolig": {
-            "delerBoutgifter": "ja",
-            "andelUtgifterBolig": 1000,
             "harHoyereUtgifterPaNyttBosted": "ja",
-            "mottarBostotte": "nei"
+            "fordelingUtgifter": {
+              "delerBoutgifter": {
+                "hjemsted": true,
+                "aktivitetssted": true,
+                "nei": true
+              },
+              "andelUtgifterBoligHjemsted": 100,
+              "andelUtgifterBoligAktivitetssted": 100,
+              "mottarBostotte": "ja"
+            }
           }
         },
         "harSaerligStoreUtgifterPaGrunnAvFunksjonsnedsettelse": "nei"

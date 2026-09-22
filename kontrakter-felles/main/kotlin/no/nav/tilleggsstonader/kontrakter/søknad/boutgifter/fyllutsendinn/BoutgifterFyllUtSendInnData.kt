@@ -52,12 +52,15 @@ data class FasteUtgifter(
 )
 
 data class UtgifterNyBolig(
-    val delerBoutgifter: JaNeiType,
-    val andelUtgifterBolig: Int?,
     val harHoyereUtgifterPaNyttBosted: JaNeiType,
-    val mottarBostotte: JaNeiType,
+    val fordelingUtgifter: FordelingUtgifter?,
+)
+
+data class FordelingUtgifter(
+    val delerBoutgifter: Map<DelerBoutgifterType, Boolean>,
     val andelUtgifterBoligHjemsted: Int?,
     val andelUtgifterBoligAktivitetssted: Int?,
+    val mottarBostotte: JaNeiType,
 )
 
 data class UtgifterFlereSteder(
@@ -73,10 +76,6 @@ data class Aktiviteter(
 )
 
 data class AktiviteterOgMålgruppe(
-    val aktivitet: Aktivitet,
-)
-
-data class Aktivitet(
     val aktivitetId: String,
     val text: String,
     val periode: PeriodeAktivitet?,
