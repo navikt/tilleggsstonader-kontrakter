@@ -369,15 +369,18 @@ private class JsonStrukturGenerator(
     private fun jsonStrukturAktivitetBoutgifter(): Map<String, Any> {
         val periode = mapOf("fom" to "2025-01-01", "tom" to "2025-01-01")
         return mapOf(
-            "aktivitetId" to "123",
-            "periode" to periode,
-            "maalgruppe" to
+            "aktivitet" to
                 mapOf(
-                    "maalgruppetype" to "NEDSARBEVN",
-                    "gyldighetsperiode" to periode,
-                    "maalgruppenavn" to "maalgruppenavn",
+                    "aktivitetId" to "123",
+                    "periode" to periode,
+                    "maalgruppe" to
+                        mapOf(
+                            "maalgruppetype" to "NEDSARBEVN",
+                            "gyldighetsperiode" to periode,
+                            "maalgruppenavn" to "maalgruppenavn",
+                        ),
+                    "text" to "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om",
                 ),
-            "text" to "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om",
         )
     }
 
