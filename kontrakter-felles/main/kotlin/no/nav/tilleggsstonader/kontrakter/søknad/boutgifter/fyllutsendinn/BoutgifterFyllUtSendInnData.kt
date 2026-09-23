@@ -76,6 +76,10 @@ data class Aktiviteter(
 )
 
 data class AktiviteterOgMålgruppe(
+    val aktivitet: Aktivitet,
+)
+
+data class Aktivitet(
     val aktivitetId: String,
     val text: String,
     val periode: PeriodeAktivitet?,
