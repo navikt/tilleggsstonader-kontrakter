@@ -54,6 +54,16 @@ data class FasteUtgifter(
 data class UtgifterNyBolig(
     val harHoyereUtgifterPaNyttBosted: JaNeiType,
     val fordelingUtgifter: FordelingUtgifter?,
+    @Deprecated("Skal fjernes så snart et sett med søknader er sendt inn - Feilaktig skjema publisert i FUSI")
+    val test: FordelingUtgifterMidlertidig? = null,
+)
+
+@Deprecated("Skal fjernes så snart et sett med søknader er sendt inn - Feilaktig skjema publisert i FUSI")
+data class FordelingUtgifterMidlertidig(
+    val delerBoutgifter1: Map<DelerBoutgifterType, Boolean>,
+    val andelUtgifterBoligHjemsted: Int?,
+    val andelUtgifterBoligAktivitetssted: Int?,
+    val mottarBostotte: JaNeiType,
 )
 
 data class FordelingUtgifter(
