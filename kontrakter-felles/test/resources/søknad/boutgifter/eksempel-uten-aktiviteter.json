@@ -24,10 +24,11 @@
       },
       "aktiviteter": {
         "aktiviteterOgMaalgruppe": {
-          "aktivitetId": "ingenAktivitet",
-          "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
-        },
-        "arbeidsrettetAktivitet": "tiltakArbeidsrettetUtredning"
+          "aktivitet": {
+            "aktivitetId": "ingenAktivitet",
+            "text": "Jeg får ikke opp noen aktiviteter her som stemmer med det jeg vil søke om"
+          }
+        }
       },
       "boligEllerOvernatting": {
         "typeUtgifter": "fastUtgift",
