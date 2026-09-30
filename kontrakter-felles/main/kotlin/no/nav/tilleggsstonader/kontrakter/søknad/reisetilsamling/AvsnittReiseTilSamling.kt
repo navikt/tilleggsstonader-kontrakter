@@ -44,6 +44,7 @@ data class Samling(
     val harBruktEkstraReiseDager: EnumFelt<JaNei>?,
     val adresse: Adresse?,
     val antallKilometerEnVei: VerdiFelt<String>?,
+    val reisemåte: ReisemåteAvsnitt? = null,
 )
 
 data class Adresse(
@@ -63,40 +64,87 @@ data class AvreiseadresseAvsnitt(
         )
 }
 
-enum class KanIkkeReiseMedOffentligTransportBegrunnelser {
+enum class Transportmiddel {
+    OFFENTLIG_TRANSPORT,
+    PRIVAT_BIL,
+    DROSJE,
+}
+
+enum class ÅrsakKanIkkeBenytteOffentligTransport {
     DÅRLIG_TRANSPORTTILBUD,
     HELSEMESSIGE_ÅRSAKER,
     LEVERING_HENTING_I_BARNEHAGE,
+    FRAKT_AV_NØDVENDIG_UTSTYR,
 }
 
-enum class KanBenytteEgenBil {
-    JA,
-    NEI,
-    NEI_SITTER_PÅ_MED_ANDRE,
-}
-
-enum class KanIkkeBenytteEgenBilBegrunnelser {
+enum class ÅrsakKanIkkeBenytteEgenBil {
     HAR_IKKE_BIL_ELLER_FØRERKORT,
     HELSEMESSIGE_ÅRSAKER,
+    FRAKT_AV_NØDVENDIG_UTSTYR,
     ANNET,
 }
 
 data class ReisemåteAvsnitt(
-    val kanReiseMedOffentligTransport: EnumFelt<JaNei>,
-    val totalUtgifterOffentligTransport: VerdiFelt<String>?,
-    val kanIkkeReiseMedOffentligTransportBegrunnelser: EnumFlereValgFelt<KanIkkeReiseMedOffentligTransportBegrunnelser>?,
-    val barnehageGateadresse: VerdiFelt<String>?,
-    val barnehagePostnummer: VerdiFelt<String>?,
-    val kanBenytteEgenBil: EnumFelt<KanBenytteEgenBil>?,
-    val kanIkkeBenytteEgenBilBegrunnelser: EnumFlereValgFelt<KanIkkeBenytteEgenBilBegrunnelser>?,
-    val ønskerDekketUtgifterForDrosje: EnumFelt<JaNei>?,
-    val betalerForReiseSelv: EnumFelt<JaNei>?,
-    val harTTKort: EnumFelt<JaNei>?,
-    val reiseMedBilUtgifter: ReiseMedBilUtgifterAvsnitt?,
+    val hvilkeTransportmidlerBleBenyttet: EnumFlereValgFelt<Transportmiddel>?,
+    val unntakFraOffentligTransport: UnntakFraOffentligTransport?,
+    val unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil>?,
+    val offentligTransport: OffentligTransportInfo?,
+    val privatBil: PrivatBilInfo?,
+    val drosje: DrosjeInfo?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Reisemåte",
+        )
+}
+
+data class OffentligTransportInfo(
+    val totalUtgifterOffentligTransport: VerdiFelt<String>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Offentlig transport",
+        )
+}
+
+data class PrivatBilInfo(
+    val benyttetEgenBil: EnumFelt<JaNei>?,
+    val betalteForReisen: EnumFelt<JaNei>?,
+    val infoBilKunDelerAvStrekning: InfoBilKunDelerAvStrekning?,
+    val utgifterPrivatBil: UtgifterPrivatBil?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Privat bil",
+        )
+}
+
+data class DrosjeInfo(
+    val harTTKort: EnumFelt<JaNei>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Drosje",
+        )
+}
+
+data class UnntakFraOffentligTransport(
+    val årsaker: EnumFlereValgFelt<ÅrsakKanIkkeBenytteOffentligTransport>?,
+    val leveringOgHentingIBarnehage: LeveringOgHentingIBarnehage?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Unntak fra offentlig transport",
+        )
+}
+
+data class LeveringOgHentingIBarnehage(
+    val gateadresse: VerdiFelt<String>?,
+    val postnummer: VerdiFelt<String>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Levering og henting i barnehage",
         )
 }
 
@@ -108,14 +156,25 @@ enum class DrivstoffType {
     HYDROGEN,
 }
 
-data class ReiseMedBilUtgifterAvsnitt(
-    val drivstoffType: EnumFelt<DrivstoffType>,
+data class UtgifterPrivatBil(
     val bompenger: VerdiFelt<String>?,
     val ferge: VerdiFelt<String>?,
     val piggdekkavgift: VerdiFelt<String>?,
+    val parkering: VerdiFelt<String>?,
+    val drivstoffType: EnumFelt<DrivstoffType>?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
-            Språkkode.NB to "Utgifter for reise med bil",
+            Språkkode.NB to "Utgifter privat bil",
+        )
+}
+
+data class InfoBilKunDelerAvStrekning(
+    val strekningHvorBilBleBenyttet: VerdiFelt<String>?,
+    val antallKilometerKjørt: VerdiFelt<String>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Bil kun deler av strekning",
         )
 }
