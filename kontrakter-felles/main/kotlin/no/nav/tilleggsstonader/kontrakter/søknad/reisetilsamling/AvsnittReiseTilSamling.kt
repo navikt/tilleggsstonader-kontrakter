@@ -41,7 +41,6 @@ data class Samling(
     val fom: DatoFelt?,
     val tom: DatoFelt?,
     val erObligatorisk: EnumFelt<JaNei>?,
-    val harBruktEkstraReiseDager: EnumFelt<JaNei>?,
     val adresse: Adresse?,
     val antallKilometerEnVei: VerdiFelt<String>?,
     val reisemåte: ReisemåteAvsnitt? = null,
