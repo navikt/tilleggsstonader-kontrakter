@@ -52,7 +52,7 @@ data class FasteUtgifter(
 )
 
 data class UtgifterNyBolig(
-    val harHoyereUtgifterPaNyttBosted: JaNeiType,
+    val harHoyereUtgifterPaNyttBosted: JaNeiType?,
     val fordelingUtgifter: FordelingUtgifter?,
 )
 
