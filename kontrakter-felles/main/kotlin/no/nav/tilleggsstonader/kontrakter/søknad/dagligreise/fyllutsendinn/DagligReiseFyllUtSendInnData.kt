@@ -176,6 +176,7 @@ enum class KanKjøreMedEgenBilType {
 }
 
 enum class HovedytelseType {
+    aktivitetspenger,
     arbeidsavklaringspenger,
     overgangsstonad,
     gjenlevendepensjon,

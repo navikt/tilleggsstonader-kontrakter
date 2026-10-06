@@ -146,6 +146,7 @@ data class Identitet(
 )
 
 enum class HovedytelseType {
+    aktivitetspenger,
     arbeidsavklaringspenger,
     overgangsstonad,
     gjenlevendepensjon,
