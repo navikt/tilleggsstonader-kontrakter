@@ -11,4 +11,5 @@ data class OpprettKlagebehandlingRequest(
     val fagsystem: Fagsystem,
     val klageMottatt: LocalDate,
     val behandlendeEnhet: String,
+    val gjelderAktivitetspenger: Boolean = false,
 )
