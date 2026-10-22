@@ -6,6 +6,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.Adresse
+import java.math.BigDecimal
 
 enum class Flytteårsak {
     NY_JOBB,
@@ -15,11 +16,6 @@ enum class Flytteårsak {
 enum class Flyttemåte {
     FLYTTER_SELV,
     FLYTTEBYRÅ,
-}
-
-enum class ValgtTilbud {
-    TILBUD_1,
-    TILBUD_2,
 }
 
 data class FlyttingDetaljer(
@@ -39,12 +35,12 @@ data class FlyttingDetaljer(
 }
 
 data class UtgifterEgenFlytting(
-    val avstand: VerdiFelt<String>?,
-    val hengerleie: VerdiFelt<String>?,
-    val bom: VerdiFelt<String>?,
-    val parkering: VerdiFelt<String>?,
-    val ferje: VerdiFelt<String>?,
-    val annet: VerdiFelt<String>?,
+    val avstand: VerdiFelt<BigDecimal>?,
+    val hengerleie: VerdiFelt<BigDecimal>?,
+    val bom: VerdiFelt<BigDecimal>?,
+    val parkering: VerdiFelt<BigDecimal>?,
+    val ferje: VerdiFelt<BigDecimal>?,
+    val annet: VerdiFelt<BigDecimal>?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
@@ -54,17 +50,24 @@ data class UtgifterEgenFlytting(
 
 data class Flyttebyrå(
     val tilbud: List<FlyttebyråTilbud>,
-    val valgtTilbud: EnumFelt<ValgtTilbud>?,
+    val valgtTilbudIndex: VerdiFelt<Int>,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Flyttebyrå",
         )
+
+    init {
+        require(tilbud.size == 2) { "Det skal alltid være to tilbud tilgjengelig" }
+        require(valgtTilbudIndex.verdi == 0 || valgtTilbudIndex.verdi == 1) {
+            "Man skal kun kunne velge tilbud 1 eller 2, da det ikke skal finnes flere tilbud"
+        }
+    }
 }
 
 data class FlyttebyråTilbud(
     val navn: VerdiFelt<String>?,
-    val beløp: VerdiFelt<String>?,
+    val beløp: VerdiFelt<BigDecimal>?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
