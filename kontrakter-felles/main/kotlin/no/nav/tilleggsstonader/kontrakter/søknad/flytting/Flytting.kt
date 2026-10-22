@@ -21,7 +21,6 @@ enum class Flyttemåte {
 data class FlyttingDetaljer(
     val årsak: EnumFelt<Flytteårsak>?,
     val flyttedato: VerdiFelt<String>?,
-    val førsteArbeidsdag: VerdiFelt<String>?,
     val adresse: Adresse?,
     val flyttemåte: EnumFelt<Flyttemåte>?,
     val utgifterDekketPåAnnenMåte: EnumFelt<JaNei>?,
@@ -50,7 +49,6 @@ data class UtgifterEgenFlytting(
 
 data class Flyttebyrå(
     val tilbud: List<FlyttebyråTilbud>,
-    val valgtTilbudIndex: VerdiFelt<Int>,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
@@ -59,9 +57,6 @@ data class Flyttebyrå(
 
     init {
         require(tilbud.size == 2) { "Det skal alltid være to tilbud tilgjengelig" }
-        require(valgtTilbudIndex.verdi == 0 || valgtTilbudIndex.verdi == 1) {
-            "Man skal kun kunne velge tilbud 1 eller 2, da det ikke skal finnes flere tilbud"
-        }
     }
 }
 
