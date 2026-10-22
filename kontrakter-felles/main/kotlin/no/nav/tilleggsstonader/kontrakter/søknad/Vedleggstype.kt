@@ -26,4 +26,9 @@ enum class Vedleggstype(
     SKRIFTLIG_UTTALELSE_HELSEPERSONELL_REISE_TIL_SAMLING("Dokumentasjon av uttalelse fra helsepersonell"),
     UTGIFTER_TAXI("Utgifter i forbindelse med taxireise"),
     TT_KORT("Dokumentasjon på TT-kort"),
+
+    // Flytting
+    UTGIFTER_EGEN_FLYTTING("Dokumentasjon av utgifter ved egen flytting"),
+    TILBUD_FLYTTEBYRÅ_1("Tilbud fra flyttebyrå 1"),
+    TILBUD_FLYTTEBYRÅ_2("Tilbud fra flyttebyrå 2"),
 }
