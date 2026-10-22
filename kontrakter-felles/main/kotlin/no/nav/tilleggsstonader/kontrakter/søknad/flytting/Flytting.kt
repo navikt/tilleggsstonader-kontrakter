@@ -53,8 +53,7 @@ data class UtgifterEgenFlytting(
 }
 
 data class Flyttebyrå(
-    val tilbud1: FlyttebyråTilbud?,
-    val tilbud2: FlyttebyråTilbud?,
+    val tilbud: List<FlyttebyråTilbud>,
     val valgtTilbud: EnumFelt<ValgtTilbud>?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
