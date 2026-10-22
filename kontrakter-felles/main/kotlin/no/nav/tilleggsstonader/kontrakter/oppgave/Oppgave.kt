@@ -110,6 +110,15 @@ enum class Behandlingstype(
     EØS("ae0120"),
     Tilbakekreving("ae0161"),
     Klage("ae0058"),
+    Aktivitetspenger("ae0298"),
+    AktivitetspengerKlage("ae0297"),
+    ;
+
+    fun erKlage(): Boolean = this == Klage || this == AktivitetspengerKlage
+
+    companion object {
+        fun erKlage(behandlingstype: String?): Boolean = entries.any { it.value == behandlingstype && it.erKlage() }
+    }
 }
 
 enum class OppgavePrioritet {
