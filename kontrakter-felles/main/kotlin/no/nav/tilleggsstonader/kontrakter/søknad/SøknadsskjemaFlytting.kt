@@ -1,9 +1,11 @@
 package no.nav.tilleggsstonader.kontrakter.søknad
 
 import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.HovedytelseAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.flytting.FlyttingDetaljer
 
 data class SøknadsskjemaFlytting(
+    val hovedytelse: HovedytelseAvsnitt,
     val flyttingDetaljer: FlyttingDetaljer?,
     override val dokumentasjon: List<DokumentasjonFelt>,
 ) : Skjemadata {
