@@ -28,6 +28,7 @@ enum class Vedleggstype(
     TT_KORT("Dokumentasjon på TT-kort"),
 
     // Flytting
+    ARBEIDSKONTRAKT_FLYTTING("Arbeidskontrakt"),
     UTGIFTER_EGEN_FLYTTING("Dokumentasjon av utgifter ved egen flytting"),
     TILBUD_FLYTTEBYRÅ_1("Tilbud fra flyttebyrå 1"),
     TILBUD_FLYTTEBYRÅ_2("Tilbud fra flyttebyrå 2"),
