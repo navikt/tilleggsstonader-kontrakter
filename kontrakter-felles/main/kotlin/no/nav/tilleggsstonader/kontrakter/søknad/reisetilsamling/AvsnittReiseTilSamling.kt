@@ -10,6 +10,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AnnenAktivitetType
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
 
 data class TilleggsopplysningerAnnenAktivitetAvsnitt(
     val erLærlingEllerLiknende: EnumFelt<JaNei>?,
@@ -82,8 +83,6 @@ enum class ÅrsakKanIkkeBenytteEgenBil {
     FRAKT_AV_NØDVENDIG_UTSTYR,
     ANNET,
 }
-
-typealias ReisemåteAvsnitt = no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
 
 data class OffentligTransportInfo(
     val totalUtgifterOffentligTransport: VerdiFelt<String>?,
