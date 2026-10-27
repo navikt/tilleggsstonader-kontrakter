@@ -26,6 +26,8 @@ data class FlyttingDetaljer(
     val utgifterDekketPåAnnenMåte: EnumFelt<JaNei>,
     val utgifterEgenFlytting: UtgifterEgenFlytting?,
     val flyttebyrå: Flyttebyrå?,
+    val skalFlytteFraFolkeregistrertAdresse: EnumFelt<JaNei>? = null,
+    val adresseDetSkalFlyttesFra: Adresse? = null,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
