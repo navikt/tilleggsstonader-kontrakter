@@ -10,6 +10,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AnnenAktivitetType
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
 
 data class TilleggsopplysningerAnnenAktivitetAvsnitt(
     val erLærlingEllerLiknende: EnumFelt<JaNei>?,
@@ -81,20 +82,6 @@ enum class ÅrsakKanIkkeBenytteEgenBil {
     HELSEMESSIGE_ÅRSAKER,
     FRAKT_AV_NØDVENDIG_UTSTYR,
     ANNET,
-}
-
-data class ReisemåteAvsnitt(
-    val hvilkeTransportmidlerBleBenyttet: EnumFlereValgFelt<Transportmiddel>?,
-    val unntakFraOffentligTransport: UnntakFraOffentligTransport?,
-    val unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil>?,
-    val offentligTransport: OffentligTransportInfo?,
-    val privatBil: PrivatBilInfo?,
-    val drosje: DrosjeInfo?,
-) : Avsnitt {
-    override fun språkMapper(): Map<Språkkode, String> =
-        mapOf(
-            Språkkode.NB to "Reisemåte",
-        )
 }
 
 data class OffentligTransportInfo(
