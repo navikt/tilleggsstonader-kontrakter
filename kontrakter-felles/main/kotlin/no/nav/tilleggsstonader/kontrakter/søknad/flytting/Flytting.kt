@@ -19,13 +19,15 @@ enum class Flyttemåte {
 }
 
 data class FlyttingDetaljer(
-    val årsak: EnumFelt<Flytteårsak>?,
-    val flyttedato: VerdiFelt<String>?,
-    val adresse: Adresse?,
-    val flyttemåte: EnumFelt<Flyttemåte>?,
-    val utgifterDekketPåAnnenMåte: EnumFelt<JaNei>?,
+    val årsak: EnumFelt<Flytteårsak>,
+    val flyttedato: VerdiFelt<String>,
+    val adresse: Adresse,
+    val flyttemåte: EnumFelt<Flyttemåte>,
+    val utgifterDekketPåAnnenMåte: EnumFelt<JaNei>,
     val utgifterEgenFlytting: UtgifterEgenFlytting?,
     val flyttebyrå: Flyttebyrå?,
+    val skalFlytteFraFolkeregistrertAdresse: EnumFelt<JaNei>,
+    val adresseDetSkalFlyttesFra: Adresse,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
@@ -34,7 +36,7 @@ data class FlyttingDetaljer(
 }
 
 data class UtgifterEgenFlytting(
-    val avstand: VerdiFelt<BigDecimal>?,
+    val avstand: VerdiFelt<BigDecimal>,
     val hengerleie: VerdiFelt<BigDecimal>?,
     val bom: VerdiFelt<BigDecimal>?,
     val parkering: VerdiFelt<BigDecimal>?,
@@ -61,8 +63,8 @@ data class Flyttebyrå(
 }
 
 data class FlyttebyråTilbud(
-    val navn: VerdiFelt<String>?,
-    val beløp: VerdiFelt<BigDecimal>?,
+    val navn: VerdiFelt<String>,
+    val beløp: VerdiFelt<BigDecimal>,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
