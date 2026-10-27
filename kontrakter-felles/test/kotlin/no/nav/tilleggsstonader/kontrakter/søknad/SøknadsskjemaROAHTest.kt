@@ -6,12 +6,15 @@ import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapperFa
 import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.HovedytelseAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.roah.AdresseMidlertidigBostedAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.roah.AdresseOriginaltBostedDetaljerAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.roah.AdresseOriginaltBostedAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.roah.PeriodeMidlertidigBostedAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHAdresseAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHAktivitetAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHBarnOgSærligeBehovAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHReiseInfo
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHTypeReise
-import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.Adresse
 import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.OffentligTransportInfo
 import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.Transportmiddel
 import org.assertj.core.api.Assertions.assertThat
@@ -87,17 +90,23 @@ class SøknadsskjemaROAHTest {
                                     "Ja",
                                     listOf("Ja", "Nei"),
                                 ),
-                            fomFlyttedato = DatoFelt("Fra dato", LocalDate.of(2026, 1, 10)),
-                            tomFlyttedato = DatoFelt("Til dato", LocalDate.of(2026, 3, 31)),
-                            skalReiseFraFolkeregistrertAdresse =
-                                EnumFelt(
-                                    "Skal du reise fra folkeregistrert adresse?",
-                                    JaNei.NEI,
-                                    "Nei",
-                                    listOf("Ja", "Nei"),
+                            periodeMidlertidigBosted =
+                                PeriodeMidlertidigBostedAvsnitt(
+                                    fomFlyttedato = DatoFelt("Fra dato", LocalDate.of(2026, 1, 10)),
+                                    tomFlyttedato = DatoFelt("Til dato", LocalDate.of(2026, 3, 31)),
                                 ),
-                            adresseOriginaltBosted = lagAdresse("Originalgata 1", "0123", "Oslo"),
-                            adresseMidlertidigBosted = lagAdresse("Midlertidig vei 2", "5003", "Bergen"),
+                            adresseOriginaltBosted =
+                                AdresseOriginaltBostedAvsnitt(
+                                    skalReiseFraFolkeregistrertAdresse =
+                                        EnumFelt(
+                                            "Skal du reise fra folkeregistrert adresse?",
+                                            JaNei.NEI,
+                                            "Nei",
+                                            listOf("Ja", "Nei"),
+                                        ),
+                                    adresseOriginaltBosted = lagAdresseOriginaltBosted("Originalgata 1", "0123", "Oslo"),
+                                ),
+                            adresseMidlertidigBosted = lagAdresseMidlertidigBosted("Midlertidig vei 2", "5003", "Bergen"),
                         ),
                     barnOgSærligeBehov =
                         ROAHBarnOgSærligeBehovAvsnitt(
@@ -155,12 +164,24 @@ class SøknadsskjemaROAHTest {
                 ),
         )
 
-    private fun lagAdresse(
+    private fun lagAdresseOriginaltBosted(
         gateadresse: String,
         postnummer: String,
         poststed: String,
-    ): Adresse =
-        Adresse(
+    ): AdresseOriginaltBostedDetaljerAvsnitt =
+        AdresseOriginaltBostedDetaljerAvsnitt(
+            land = SelectFelt(label = "Velg land", verdi = "NOR", svarTekst = "Norge"),
+            gateadresse = VerdiFelt(verdi = gateadresse, label = "Gateadresse"),
+            postnummer = VerdiFelt(verdi = postnummer, label = "Postnummer"),
+            poststed = VerdiFelt(verdi = poststed, label = "Poststed"),
+        )
+
+    private fun lagAdresseMidlertidigBosted(
+        gateadresse: String,
+        postnummer: String,
+        poststed: String,
+    ): AdresseMidlertidigBostedAvsnitt =
+        AdresseMidlertidigBostedAvsnitt(
             land = SelectFelt(label = "Velg land", verdi = "NOR", svarTekst = "Norge"),
             gateadresse = VerdiFelt(verdi = gateadresse, label = "Gateadresse"),
             postnummer = VerdiFelt(verdi = postnummer, label = "Postnummer"),

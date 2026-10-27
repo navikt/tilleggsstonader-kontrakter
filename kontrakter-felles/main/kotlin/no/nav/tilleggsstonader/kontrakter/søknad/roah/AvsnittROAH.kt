@@ -6,6 +6,8 @@ import no.nav.tilleggsstonader.kontrakter.søknad.DatoFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFlereValgFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
+import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
+import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AnnenAktivitetType
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
@@ -19,16 +21,52 @@ data class ROAHAktivitetAvsnitt(
 
 data class ROAHAdresseAvsnitt(
     val måBoBorteHjemmefra: EnumFelt<JaNei>?,
-    val fomFlyttedato: DatoFelt?,
-    val tomFlyttedato: DatoFelt?,
-    val skalReiseFraFolkeregistrertAdresse: EnumFelt<JaNei>?,
-    val adresseOriginaltBosted: Adresse?,
-    val adresseMidlertidigBosted: Adresse?,
+    val periodeMidlertidigBosted: PeriodeMidlertidigBostedAvsnitt?,
+    val adresseOriginaltBosted: AdresseOriginaltBostedAvsnitt?,
+    val adresseMidlertidigBosted: AdresseMidlertidigBostedAvsnitt?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
             Språkkode.NB to "Adresser",
         )
+}
+
+data class PeriodeMidlertidigBostedAvsnitt(
+    val fomFlyttedato: DatoFelt?,
+    val tomFlyttedato: DatoFelt?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "I hvilken periode må du midlertidig bo borte hjemmefra?",
+        )
+}
+
+data class AdresseOriginaltBostedAvsnitt(
+    val skalReiseFraFolkeregistrertAdresse: EnumFelt<JaNei>?,
+    val adresseOriginaltBosted: AdresseOriginaltBostedDetaljerAvsnitt?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Adressen du flyttet fra",
+        )
+}
+
+data class AdresseOriginaltBostedDetaljerAvsnitt(
+    val land: SelectFelt<String>?,
+    val gateadresse: VerdiFelt<String>?,
+    val postnummer: VerdiFelt<String>?,
+    val poststed: VerdiFelt<String>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> = mapOf(Språkkode.NB to "Oppgi adressen du flyttet fra")
+}
+
+data class AdresseMidlertidigBostedAvsnitt(
+    val land: SelectFelt<String>?,
+    val gateadresse: VerdiFelt<String>?,
+    val postnummer: VerdiFelt<String>?,
+    val poststed: VerdiFelt<String>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> = mapOf(Språkkode.NB to "Adressen du midlertidig bor på")
 }
 
 data class ROAHBarnOgSærligeBehovAvsnitt(
