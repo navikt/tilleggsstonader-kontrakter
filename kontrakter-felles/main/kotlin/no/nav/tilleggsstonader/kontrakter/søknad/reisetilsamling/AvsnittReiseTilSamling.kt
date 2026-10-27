@@ -83,19 +83,7 @@ enum class ÅrsakKanIkkeBenytteEgenBil {
     ANNET,
 }
 
-data class ReisemåteAvsnitt(
-    val hvilkeTransportmidlerBleBenyttet: EnumFlereValgFelt<Transportmiddel>?,
-    val unntakFraOffentligTransport: UnntakFraOffentligTransport?,
-    val unntakFraPrivatBil: EnumFlereValgFelt<ÅrsakKanIkkeBenytteEgenBil>?,
-    val offentligTransport: OffentligTransportInfo?,
-    val privatBil: PrivatBilInfo?,
-    val drosje: DrosjeInfo?,
-) : Avsnitt {
-    override fun språkMapper(): Map<Språkkode, String> =
-        mapOf(
-            Språkkode.NB to "Reisemåte",
-        )
-}
+typealias ReisemåteAvsnitt = no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
 
 data class OffentligTransportInfo(
     val totalUtgifterOffentligTransport: VerdiFelt<String>?,
