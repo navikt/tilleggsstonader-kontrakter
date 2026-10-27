@@ -6,17 +6,17 @@ import no.nav.tilleggsstonader.kontrakter.felles.JsonMapperProvider.jsonMapperFa
 import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.HovedytelseAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.OffentligTransportInfo
+import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.Transportmiddel
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.AdresseMidlertidigBostedAvsnitt
-import no.nav.tilleggsstonader.kontrakter.søknad.roah.AdresseOriginaltBostedDetaljerAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.AdresseOriginaltBostedAvsnitt
+import no.nav.tilleggsstonader.kontrakter.søknad.roah.AdresseOriginaltBostedDetaljerAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.PeriodeMidlertidigBostedAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHAdresseAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHAktivitetAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHBarnOgSærligeBehovAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHReiseInfo
 import no.nav.tilleggsstonader.kontrakter.søknad.roah.ROAHTypeReise
-import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.OffentligTransportInfo
-import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.Transportmiddel
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.node.ArrayNode
@@ -33,14 +33,20 @@ class SøknadsskjemaROAHTest {
         val json = jsonMapper.writeValueAsString(innsendtSkjema)
         val parsed =
             jsonMapperFailOnUnknownProperties.readValue<
-                InnsendtSkjema<SøknadsskjemaROAH>
+                InnsendtSkjema<SøknadsskjemaROAH>,
             >(json)
 
         assertThat(
-            parsed.skjema.barnOgSærligeBehov.harSærligeBehovForFlereHjemreiser?.verdi,
+            parsed.skjema.barnOgSærligeBehov.harSærligeBehovForFlereHjemreiser
+                ?.verdi,
         ).isEqualTo(JaNei.NEI)
         assertThat(parsed.skjema.reiser).hasSize(2)
-        assertThat(parsed.skjema.reiser.first().typeReise?.verdi).isEqualTo(ROAHTypeReise.OPPSTART)
+        assertThat(
+            parsed.skjema.reiser
+                .first()
+                .typeReise
+                ?.verdi,
+        ).isEqualTo(ROAHTypeReise.OPPSTART)
     }
 
     @Test
@@ -55,7 +61,11 @@ class SøknadsskjemaROAHTest {
                 jsonMapper.writeValueAsString(tree),
             )
 
-        assertThat(parsed.skjema.reiser.first().tom).isNull()
+        assertThat(
+            parsed.skjema.reiser
+                .first()
+                .tom,
+        ).isNull()
     }
 
     private fun lagInnsendtSkjema(): InnsendtSkjema<SøknadsskjemaROAH> =
