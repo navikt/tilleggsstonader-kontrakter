@@ -11,7 +11,6 @@ import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AnnenAktivitetType
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
-import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.Adresse
 
 data class ROAHAktivitetAvsnitt(
     override val aktiviteter: EnumFlereValgFelt<String>?,
