@@ -4,8 +4,8 @@ import no.nav.tilleggsstonader.kontrakter.felles.Språkkode
 import no.nav.tilleggsstonader.kontrakter.søknad.Avsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
+import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
-import no.nav.tilleggsstonader.kontrakter.søknad.reisetilsamling.Adresse
 import java.math.BigDecimal
 
 enum class Flytteårsak {
@@ -18,16 +18,16 @@ enum class Flyttemåte {
     FLYTTEBYRÅ,
 }
 
-data class FlyttingDetaljer(
+data class FlyttingDetaljerAvsnitt(
     val årsak: EnumFelt<Flytteårsak>,
     val flyttedato: VerdiFelt<String>,
-    val adresse: Adresse,
+    val adresse: TilAdresseAvsnitt,
+    val skalFlytteFraFolkeregistrertAdresse: EnumFelt<JaNei>,
+    val adresseDetSkalFlyttesFra: FraAdresseAvsnitt,
     val flyttemåte: EnumFelt<Flyttemåte>,
     val utgifterDekketPåAnnenMåte: EnumFelt<JaNei>,
-    val utgifterEgenFlytting: UtgifterEgenFlytting?,
-    val flyttebyrå: Flyttebyrå?,
-    val skalFlytteFraFolkeregistrertAdresse: EnumFelt<JaNei>,
-    val adresseDetSkalFlyttesFra: Adresse,
+    val utgifterEgenFlytting: UtgifterEgenFlyttingAvsnitt?,
+    val flyttebyrå: FlyttebyråAvsnitt?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
@@ -35,7 +35,31 @@ data class FlyttingDetaljer(
         )
 }
 
-data class UtgifterEgenFlytting(
+data class FraAdresseAvsnitt(
+    val land: SelectFelt<String>?,
+    val gateadresse: VerdiFelt<String>?,
+    val postnummer: VerdiFelt<String>?,
+    val poststed: VerdiFelt<String>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Adresse du flytter fra",
+        )
+}
+
+data class TilAdresseAvsnitt(
+    val land: SelectFelt<String>?,
+    val gateadresse: VerdiFelt<String>?,
+    val postnummer: VerdiFelt<String>?,
+    val poststed: VerdiFelt<String>?,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Adresse du flytter til",
+        )
+}
+
+data class UtgifterEgenFlyttingAvsnitt(
     val avstand: VerdiFelt<BigDecimal>,
     val hengerleie: VerdiFelt<BigDecimal>?,
     val bom: VerdiFelt<BigDecimal>?,
@@ -49,12 +73,12 @@ data class UtgifterEgenFlytting(
         )
 }
 
-data class Flyttebyrå(
+data class FlyttebyråAvsnitt(
     val tilbud: List<FlyttebyråTilbud>,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
-            Språkkode.NB to "Flyttebyrå",
+            Språkkode.NB to "Tilbud fra flyttebyrå",
         )
 
     init {
@@ -68,6 +92,6 @@ data class FlyttebyråTilbud(
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
         mapOf(
-            Språkkode.NB to "Tilbud fra flyttebyrå",
+            Språkkode.NB to "Flyttebyrå",
         )
 }
