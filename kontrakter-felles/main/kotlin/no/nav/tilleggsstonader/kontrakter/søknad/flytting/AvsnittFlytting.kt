@@ -62,6 +62,7 @@ data class TilAdresseAvsnitt(
 data class UtgifterEgenFlyttingAvsnitt(
     val avstand: VerdiFelt<BigDecimal>,
     val hengerleie: VerdiFelt<BigDecimal>?,
+    val leiebil: VerdiFelt<BigDecimal>?,
     val bom: VerdiFelt<BigDecimal>?,
     val parkering: VerdiFelt<BigDecimal>?,
     val ferje: VerdiFelt<BigDecimal>?,
