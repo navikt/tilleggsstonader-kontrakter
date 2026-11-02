@@ -25,7 +25,7 @@ data class FlyttingDetaljerAvsnitt(
     val skalFlytteFraFolkeregistrertAdresse: EnumFelt<JaNei>,
     val adresseDetSkalFlyttesFra: FraAdresseAvsnitt,
     val flyttemåte: EnumFelt<Flyttemåte>,
-    val utgifterDekketPåAnnenMåte: EnumFelt<JaNei>,
+    val utgifterDekketPåAnnenMåte: EnumFelt<UtgifterDekketPåAnnenMåte>,
     val utgifterEgenFlytting: UtgifterEgenFlyttingAvsnitt?,
     val flyttebyrå: FlyttebyråAvsnitt?,
 ) : Avsnitt {
