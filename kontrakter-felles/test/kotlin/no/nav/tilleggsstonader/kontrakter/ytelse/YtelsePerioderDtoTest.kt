@@ -47,6 +47,14 @@ class YtelsePerioderDtoTest {
                     fom = LocalDate.of(2026, 7, 1),
                     tom = LocalDate.of(2026, 7, 31),
                 ),
+                YtelsePeriode.Arbeidssøker(
+                    fom = LocalDate.of(2026, 8, 1),
+                    tom = LocalDate.of(2026, 8, 31),
+                ),
+                YtelsePeriode.Arbeidssøker(
+                    fom = LocalDate.of(2026, 9, 1),
+                    tom = null,
+                ),
             )
 
         perioder.forEach { periode ->
@@ -70,7 +78,8 @@ class YtelsePerioderDtoTest {
                 { "type": "OMSTILLINGSSTØNAD", "fom": "2026-04-01", "tom": "2026-04-30" },
                 { "type": "TILTAKSPENGER_TPSAK", "fom": "2026-05-01", "tom": null },
                 { "type": "TILTAKSPENGER_ARENA", "fom": "2026-06-01", "tom": "2026-06-30" },
-                { "type": "AKTIVITETSPENGER", "fom": "2026-07-01", "tom": "2026-07-31" }
+                { "type": "AKTIVITETSPENGER", "fom": "2026-07-01", "tom": "2026-07-31" },
+                { "type": "ARBEIDSSØKER", "fom": "2026-08-01", "tom": null }
               ],
               "perioderHentetFom": "2026-01-01",
               "perioderHentetTom": "2026-12-31"
@@ -86,5 +95,6 @@ class YtelsePerioderDtoTest {
         assertThat(dto.perioder[4]).isInstanceOf(YtelsePeriode.TiltakspengerTPSak::class.java)
         assertThat(dto.perioder[5]).isInstanceOf(YtelsePeriode.TiltakspengerArena::class.java)
         assertThat(dto.perioder[6]).isInstanceOf(YtelsePeriode.Aktivitetspenger::class.java)
+        assertThat(dto.perioder[7]).isEqualTo(YtelsePeriode.Arbeidssøker(LocalDate.of(2026, 8, 1), null))
     }
 }
