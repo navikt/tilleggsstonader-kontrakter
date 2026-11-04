@@ -43,6 +43,7 @@ enum class ResultatKilde {
     JsonSubTypes.Type(value = YtelsePeriode.TiltakspengerTPSak::class, name = "TILTAKSPENGER_TPSAK"),
     JsonSubTypes.Type(value = YtelsePeriode.TiltakspengerArena::class, name = "TILTAKSPENGER_ARENA"),
     JsonSubTypes.Type(value = YtelsePeriode.Aktivitetspenger::class, name = "AKTIVITETSPENGER"),
+    JsonSubTypes.Type(value = YtelsePeriode.Arbeidssøker::class, name = "ARBEIDSSØKER"),
 )
 sealed interface YtelsePeriode {
     val fom: LocalDate
@@ -57,6 +58,7 @@ sealed interface YtelsePeriode {
                 is TiltakspengerArena -> TypeYtelsePeriode.TILTAKSPENGER_ARENA
                 is TiltakspengerTPSak -> TypeYtelsePeriode.TILTAKSPENGER_TPSAK
                 is Aktivitetspenger -> TypeYtelsePeriode.AKTIVITETSPENGER
+                is Arbeidssøker -> TypeYtelsePeriode.ARBEIDSSØKER
             }
 
     /**
@@ -104,6 +106,11 @@ sealed interface YtelsePeriode {
         override val fom: LocalDate,
         override val tom: LocalDate?,
     ) : YtelsePeriode
+
+    data class Arbeidssøker(
+        override val fom: LocalDate,
+        override val tom: LocalDate?,
+    ) : YtelsePeriode
 }
 
 data class GjenståendeDagerFraTelleverk(
@@ -119,6 +126,7 @@ enum class TypeYtelsePeriode {
     TILTAKSPENGER_TPSAK,
     TILTAKSPENGER_ARENA,
     AKTIVITETSPENGER,
+    ARBEIDSSØKER,
 }
 
 enum class EnsligForsørgerStønadstype {
