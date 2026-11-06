@@ -110,7 +110,7 @@ data class Landvelger(
 data class DineOpplysninger(
     val fornavn: String,
     val etternavn: String,
-    val identitet: Identitet,
+    val identitet: Identitet?,
     val adresse: NavAdresse?,
     val reiseFraFolkeregistrertAdr: JaNeiType?,
     val adresseJegSkalReiseFra: AdresseJegSkalReiseFra?,
