@@ -1,0 +1,3 @@
+## Endringsomfang
+
+- Endring av klasser i dette repoet kan påvirke flere andre repositories. Dersom du gjør endringer på filer her, bør du sjekke om andre repositories du har i contexten din blir påvirket. Eksempelvis vil en endring i `kontrakter-felles/main/kotlin/no/nav/tilleggsstonader/kontrakter/søknad/InnsendtSkjema.kt` både påvirke ts-sak backend og ts-søknad backend. Hvis du mangler context for å undersøke, still bruker spørsmål om de kjenner til omfanget.
