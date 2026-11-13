@@ -6,6 +6,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.EnumFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.JaNei
 import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.DrivstoffType
 import java.math.BigDecimal
 
 enum class Flytteårsak {
@@ -61,6 +62,7 @@ data class TilAdresseAvsnitt(
 
 data class UtgifterEgenFlyttingAvsnitt(
     val avstand: VerdiFelt<BigDecimal>,
+    val drivstoffType: EnumFelt<DrivstoffType>,
     val hengerleie: VerdiFelt<BigDecimal>?,
     val leiebil: VerdiFelt<BigDecimal>?,
     val bom: VerdiFelt<BigDecimal>?,

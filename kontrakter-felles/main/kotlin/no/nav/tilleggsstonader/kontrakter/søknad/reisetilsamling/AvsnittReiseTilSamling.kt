@@ -10,6 +10,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.SelectFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.VerdiFelt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AktivitetAvsnitt
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.AnnenAktivitetType
+import no.nav.tilleggsstonader.kontrakter.søknad.felles.DrivstoffType
 import no.nav.tilleggsstonader.kontrakter.søknad.felles.ReisemåteAvsnitt
 
 data class TilleggsopplysningerAnnenAktivitetAvsnitt(
@@ -132,14 +133,6 @@ data class LeveringOgHentingIBarnehage(
         mapOf(
             Språkkode.NB to "Levering og henting i barnehage",
         )
-}
-
-enum class DrivstoffType {
-    BENSIN,
-    DIESEL,
-    ELBIL,
-    HYBRID,
-    HYDROGEN,
 }
 
 data class UtgifterPrivatBil(
