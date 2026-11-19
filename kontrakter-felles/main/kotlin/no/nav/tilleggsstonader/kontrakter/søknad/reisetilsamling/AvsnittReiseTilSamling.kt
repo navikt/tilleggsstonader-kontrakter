@@ -56,7 +56,7 @@ data class Adresse(
 )
 
 data class AvreiseadresseAvsnitt(
-    val skalReiseFraFolkeregistrertAdresse: EnumFelt<JaNei>,
+    val skalReiseFraFolkeregistrertAdresse: EnumFelt<JaNei>?,
     val adresseDetSkalReisesFra: Adresse?,
 ) : Avsnitt {
     override fun språkMapper(): Map<Språkkode, String> =
