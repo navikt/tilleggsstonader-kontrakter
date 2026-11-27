@@ -19,6 +19,15 @@ enum class Flyttemåte {
     FLYTTEBYRÅ,
 }
 
+data class ArbeidssøkerAvsnitt(
+    val erRegistrertSomArbeidssøker: EnumFelt<JaNei>,
+) : Avsnitt {
+    override fun språkMapper(): Map<Språkkode, String> =
+        mapOf(
+            Språkkode.NB to "Arbeidssøker",
+        )
+}
+
 data class FlyttingDetaljerAvsnitt(
     val årsak: EnumFelt<Flytteårsak>,
     val flyttedato: VerdiFelt<String>,
