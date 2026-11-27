@@ -7,8 +7,7 @@ import no.nav.tilleggsstonader.kontrakter.søknad.flytting.FlyttingDetaljerAvsni
 
 data class SøknadsskjemaFlytting(
     val hovedytelse: HovedytelseAvsnitt,
-    // Lagt inn etter produksjonssetting av søknad, nullable selv om spørsmål er obligatorisk
-    val arbeidssøker: ArbeidssøkerAvsnitt? = null,
+    val arbeidssøker: ArbeidssøkerAvsnitt,
     val flyttingDetaljer: FlyttingDetaljerAvsnitt?,
     override val dokumentasjon: List<DokumentasjonFelt>,
 ) : Skjemadata {
